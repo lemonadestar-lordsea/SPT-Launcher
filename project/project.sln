@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPTarkov.Launcher", "SPTarkov.Launcher\SPTarkov.Launcher.csproj", "{B2561FAB-6792-4D89-85DD-1E48844CD69F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2561FAB-6792-4D89-85DD-1E48844CD69F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2561FAB-6792-4D89-85DD-1E48844CD69F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2561FAB-6792-4D89-85DD-1E48844CD69F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2561FAB-6792-4D89-85DD-1E48844CD69F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D41F10D-B323-4A4A-917A-B0C063846413}
+	EndGlobalSection
+EndGlobal
