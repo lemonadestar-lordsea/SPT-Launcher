@@ -130,7 +130,6 @@ namespace SPTarkov.Launcher.Helpers
             englishLocale.server_url_exists = "Url already exists";
             englishLocale.server_name_exists = "Name already exists";
             englishLocale.minimize_action = "Minimize";
-            englishLocale.minimize_to_system_tray_action = "Minimize to system tray";
             englishLocale.do_nothing_action = "Do nothing";
             englishLocale.exit_action = "Close Launcher";
             englishLocale.launcher_start_game_action = "Launcher Start Game Action";
@@ -1082,22 +1081,6 @@ namespace SPTarkov.Launcher.Helpers
                 {
                     _minimize_action = value;
                     RaisePropertyChanged(nameof(minimize_action));
-                }
-            }
-        }
-        #endregion
-
-        #region minimize_to_system_tray_action
-        private string _minimize_to_system_tray_action;
-        public string minimize_to_system_tray_action
-        {
-            get => _minimize_to_system_tray_action;
-            set
-            {
-                if(_minimize_to_system_tray_action != value)
-                {
-                    _minimize_to_system_tray_action = value;
-                    RaisePropertyChanged(nameof(minimize_to_system_tray_action));
                 }
             }
         }

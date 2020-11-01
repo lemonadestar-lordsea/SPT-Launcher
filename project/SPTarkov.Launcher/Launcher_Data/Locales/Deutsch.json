@@ -57,7 +57,6 @@
     "server_name_exists": "Der Name existiert bereits",
     "registration_failed": "Registrierung fehlgeschlagen",
     "minimize_action": "Minimieren",
-    "minimize_to_system_tray_action": "In die Taskleiste minimieren",
     "do_nothing_action": "Nichts tun",
     "exit_action": "Launcher schließen",
     "launcher_start_game_action": "Launcher Spielaktion starten"

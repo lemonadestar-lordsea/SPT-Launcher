@@ -57,7 +57,6 @@
   "server_name_exists": "Name already exists",
   "registration_failed": "Registration Failed",
   "minimize_action": "Minimize",
-  "minimize_to_system_tray_action": "Minimize to system tray",
   "do_nothing_action": "Do nothing",
   "exit_action": "Close Launcher",
   "launcher_start_game_action": "Launcher Start Game Action"

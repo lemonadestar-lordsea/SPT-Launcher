@@ -233,7 +233,7 @@ namespace SPTarkov.Launcher.Helpers
         {
             if(!File.Exists(LauncherSettingsProvider.DefaultSettingsFileLocation))
             {
-                LauncherStartGameAction = LauncherAction.MinimizeToSystemTrayAction;
+                LauncherStartGameAction = LauncherAction.MinimizeAction;
                 UseAutoLogin = true;
                 GamePath = Environment.CurrentDirectory;
 

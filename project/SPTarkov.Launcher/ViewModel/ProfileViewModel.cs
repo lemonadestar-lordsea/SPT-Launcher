@@ -28,7 +28,6 @@ namespace SPTarkov.Launcher.ViewModel
         public AwaitableDelegateCommand StartGameCommand { get; set; }
         private NavigationViewModel navigationViewModel { get; set; }
         private GameStarter gameStarter = new GameStarter();
-        private System.Windows.Forms.NotifyIcon trayIcon = new System.Windows.Forms.NotifyIcon();
 
         private ProcessMonitor monitor { get; set; }
         public ProfileViewModel(NavigationViewModel viewModel)
@@ -43,24 +42,10 @@ namespace SPTarkov.Launcher.ViewModel
             CurrentEmail = AccountManager.SelectedAccount.email;
             CurrentEdition = AccountManager.SelectedAccount.edition;
             CurrentID = AccountManager.SelectedAccount.id;
-
-            trayIcon.Icon = Properties.Resources.icon;
-            trayIcon.Text = "SPTarkov Launcher";
-            trayIcon.Visible = false;
-            trayIcon.MouseDoubleClick += TrayIcon_MouseDoubleClick;
-            Application.Current.Exit += Current_Exit;
-        }
-
-        private void Current_Exit(object sender, ExitEventArgs e)
-        {
-            trayIcon.Visible = false;
-            trayIcon.Dispose();
         }
 
         public void OnLogoutCommand(object parameter)
         {
-            trayIcon.Visible = false;
-            trayIcon.Dispose();
 
             navigationViewModel.SelectedViewModel = new LoginViewModel(navigationViewModel);
         }
@@ -70,7 +55,6 @@ namespace SPTarkov.Launcher.ViewModel
         }
         public async Task OnStartGameCommand()
         {
-
             LauncherSettingsProvider.Instance.AllowSettings = false;
 
             int status = await AccountManager.LoginAsync(AccountManager.SelectedAccount.email, AccountManager.SelectedAccount.password);
@@ -80,14 +64,10 @@ namespace SPTarkov.Launcher.ViewModel
             switch (status)
             {
                 case -1:
-                    Current_Exit(null, null);
-
                     navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.incorrect_login);
                     return;
 
                 case -2:
-                    Current_Exit(null, null);
-
                     navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.login_failed);
                     navigationViewModel.SelectedViewModel = new ConnectServerViewModel(navigationViewModel);
                     return;
@@ -110,15 +90,10 @@ namespace SPTarkov.Launcher.ViewModel
                                 Application.Current.MainWindow.WindowState = WindowState.Minimized;
                                 break;
                             }
-                        case LauncherAction.MinimizeToSystemTrayAction:
-                            {
-                                trayIcon.Visible = true;
-                                Application.Current.MainWindow.Hide();
-                                break;
-                            }
                         case LauncherAction.ExitAction:
                             {
-                                Application.Current.Shutdown(0);
+                                Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+                                Application.Current.MainWindow.Close();
                                 break;
                             }
                     }
@@ -148,15 +123,6 @@ namespace SPTarkov.Launcher.ViewModel
             //Make sure the call to MainWindow happens on the UI thread.
             switch(LauncherSettingsProvider.Instance.LauncherStartGameAction)
             {
-                case LauncherAction.MinimizeToSystemTrayAction:
-                    {
-                        Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            Application.Current.MainWindow.Show();
-                        });
-
-                        break;
-                    }
                 case LauncherAction.MinimizeAction:
                     {
                         Application.Current.Dispatcher.Invoke(() =>

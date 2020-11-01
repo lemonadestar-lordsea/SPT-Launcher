@@ -16,7 +16,6 @@ namespace SPTarkov.Launcher.Models.Launcher
     public enum LauncherAction
     {
         MinimizeAction,
-        MinimizeToSystemTrayAction,
         DoNothingAction,
         ExitAction
     }
