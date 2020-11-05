@@ -82,7 +82,8 @@ if(Test-Path $buildDir)
 
 # publish the project
 Write-Host "Building launcher ..." -ForegroundColor Cyan
-Start-Process -FilePath $msbuild -NoNewWindow -Wait -ArgumentList "-nologo /verbosity:minimal -consoleloggerparameters:Summary /t:Restore;Rebuild;Publish /p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:Configuration=Release Launcher.sln"
+$buildProcess = Start-Process -FilePath $msbuild -NoNewWindow -ArgumentList "-nologo /verbosity:minimal -consoleloggerparameters:Summary /t:Restore;Rebuild;Publish /p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:Configuration=Release Launcher.sln" -PassThru
+Wait-Process -InputObject $buildProcess
 Write-Host ""
 Write-Host "Done" -ForegroundColor Cyan
 
