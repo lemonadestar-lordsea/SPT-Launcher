@@ -6,7 +6,6 @@ A custom game launcher allows the game to be launched offline.
 
 - Visual Studio 2017 (.NET desktop workload) or newer
 - .NET Core 3.1
-- Escape From Tarkov 0.12.8.9660
 
 ## Setup
 
@@ -21,10 +20,5 @@ All dependencies are provided, no additional setup required.
 ## Authors
 
 - InNoHurryToCode
-- Craink
-- PoloYolo
-- Ginja
 - waffle.lord
-- stx09
-- KruncyBite
-- BALIST0N
+- reider123
