@@ -43,7 +43,7 @@ namespace SPTarkov.Launcher.Helpers
 
             if (String.IsNullOrEmpty(localeRomanName))
             {
-                return;
+                localeRomanName = localeName;
             }
 
             LocaleData newLocale = Json.LoadClassWithoutSaving<LocaleData>($"{DefaultLocaleFolderPath}\\{localeRomanName}.json");
@@ -178,7 +178,19 @@ namespace SPTarkov.Launcher.Helpers
             return localeNames;
         }
 
-        public static LocaleData Instance { get; private set; } = Json.LoadClassWithoutSaving<LocaleData>($"{DefaultLocaleFolderPath}\\{RomanLocaleNames.GetKeyByValue(LauncherSettingsProvider.Instance.DefaultLocale)}.json") ?? GenerateEnglishLocale();
+        private static string GetDefaultName()
+        {
+            string name = RomanLocaleNames.GetKeyByValue(LauncherSettingsProvider.Instance.DefaultLocale);
+
+            if(String.IsNullOrEmpty(name))
+            {
+                name = LauncherSettingsProvider.Instance.DefaultLocale;
+            }
+
+            return name;
+        }
+
+        public static LocaleData Instance { get; private set; } = Json.LoadClassWithoutSaving<LocaleData>($"{DefaultLocaleFolderPath}\\{GetDefaultName()}.json") ?? GenerateEnglishLocale();
     }
 
     public class LocaleData : INotifyPropertyChanged
