@@ -8,6 +8,7 @@
 
 
 using SPTarkov.Launcher.Helpers;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -36,7 +37,7 @@ namespace SPTarkov.Launcher.Models.Launcher
 
         public LocaleCollection()
         {
-            SelectedLocale = LauncherSettingsProvider.Instance.DefaultLocale;
+            SelectedLocale = LocalizationProvider.LocaleNameDictionary.GetValueOrDefault(LauncherSettingsProvider.Instance.DefaultLocale, "English");
         }
 
         protected virtual void RaisePropertyChanged(string property)

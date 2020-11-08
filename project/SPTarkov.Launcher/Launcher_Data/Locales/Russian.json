@@ -1,4 +1,5 @@
 {
+  "native_name": "Русский",
   "retry": "Повторить",
   "server_connecting": "Подключение к серверу",
   "server_unavailable_format_1": "Сервер по умолчанию '{0}' недоступен.",

@@ -27,6 +27,7 @@ namespace SPTarkov.Launcher
 
             // run launcher
             MainWindow LauncherWindow = new MainWindow();
+
             LauncherWindow.ShowDialog();
         }
 
