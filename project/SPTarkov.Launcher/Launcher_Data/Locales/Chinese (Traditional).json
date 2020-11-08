@@ -1,4 +1,5 @@
 {
+  "native_name": "繁体中文",
   "retry": "重試",
   "server_connecting": "連接中",
   "server_unavailable_format_1": "服務器'{0}'不可用。",

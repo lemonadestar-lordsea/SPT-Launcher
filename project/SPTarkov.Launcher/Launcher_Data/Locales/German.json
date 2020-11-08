@@ -1,4 +1,5 @@
 {
+    "native_name": "Deutsch",
     "retry": "Erneut versuchen",
     "server_connecting": "Verbinden",
     "server_unavailable_format_1": "Der Server '{0}' ist nicht verfügbar.",

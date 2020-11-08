@@ -9,6 +9,8 @@
 
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.CodeDom;
 using System.IO;
 using System.Linq;
 
@@ -84,5 +86,30 @@ namespace SPTarkov.Launcher.MiniCommon
 			string json = File.ReadAllText(filepath);
 			return Deserialize<T>(json);
 		}
+
+		/// <summary>
+		/// Get a single property back from a json file.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="FilePath">Full Path to json file</param>
+		/// <param name="PropertyName">Name of property to return</param>
+		/// <returns></returns>
+		public static T GetPropertyByName<T>(string FilePath, string PropertyName)
+        {
+			using (StreamReader sr = new StreamReader(FilePath))
+			{
+				var tempData = JObject.Parse(sr.ReadToEnd());
+
+				if (tempData != null)
+				{
+                    if (tempData[PropertyName].Value<T>() is T requestedData)
+					{
+						return requestedData;
+					}
+				}
+			}
+
+			return default;
+        }
 	}
 }

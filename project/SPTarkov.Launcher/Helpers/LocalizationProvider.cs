@@ -24,22 +24,11 @@ namespace SPTarkov.Launcher.Helpers
     {
         public static string DefaultLocaleFolderPath = $"{Environment.CurrentDirectory}\\Launcher_Data\\Locales";
 
-        #region Roman Name Dictionary
-        public static Dictionary<string, string> RomanLocaleNames = new Dictionary<string, string>
-        {
-            { "English", "English" },
-            { "Chinese (Simplified)", "简体中文"},
-            { "Chinese (Traditional)", "繁体中文"},
-            { "German", "Deutsch"},
-            { "Dutch", "Nederlands" },
-            { "Japanese", "日本語" },
-            { "Russian", "Русский" }
-        };
-        #endregion
+        public static Dictionary<string, string> LocaleNameDictionary = GetLocaleDictionary();
 
         public static void LoadLocaleFromFile(string localeName)
         {
-            string localeRomanName = RomanLocaleNames.GetKeyByValue(localeName);
+            string localeRomanName = LocaleNameDictionary.GetKeyByValue(localeName);
 
             if (String.IsNullOrEmpty(localeRomanName))
             {
@@ -55,7 +44,7 @@ namespace SPTarkov.Launcher.Helpers
                     prop.SetValue(Instance, newLocale.GetType().GetProperty(prop.Name).GetValue(newLocale));
                 }
                 
-                LauncherSettingsProvider.Instance.DefaultLocale = localeName;
+                LauncherSettingsProvider.Instance.DefaultLocale = localeRomanName;
                 LauncherSettingsProvider.Instance.SaveSettings();
             }
 
@@ -70,7 +59,7 @@ namespace SPTarkov.Launcher.Helpers
 
             if(regexMatch.Groups.Count == 2)
             {
-                string localRomanName = RomanLocaleNames.GetValueOrDefault(regexMatch.Groups[1].Value, "");
+                string localRomanName = LocaleNameDictionary.GetValueOrDefault(regexMatch.Groups[1].Value, "");
 
                 bool localExists = GetAvailableLocales().Where(x => x == localRomanName).Count() > 0;
 
@@ -95,6 +84,7 @@ namespace SPTarkov.Launcher.Helpers
             LocaleData englishLocale = new LocaleData();
 
             #region Set All English Defaults
+            englishLocale.native_name = "English";
             englishLocale.retry = "Retry";
             englishLocale.server_connecting = "Connecting";
             englishLocale.server_unavailable_format_1 = "Default server '{0}' is not available.";
@@ -166,31 +156,24 @@ namespace SPTarkov.Launcher.Helpers
             return englishLocale;
         }
 
+        public static Dictionary<string, string> GetLocaleDictionary()
+        {
+            List<FileInfo> localeFiles = new List<FileInfo>(Directory.GetFiles(DefaultLocaleFolderPath).Select(x => new FileInfo(x)).ToList());
+            Dictionary<string, string> localeDictionary = new Dictionary<string, string>();
+
+            foreach(FileInfo file in localeFiles)
+            {
+                localeDictionary.Add(file.Name.Replace(".json",""), Json.GetPropertyByName<string>(file.FullName, "native_name"));
+            }
+
+            return localeDictionary;
+        }
         public static ObservableCollection<string> GetAvailableLocales()
         {
-            List<string> romanLocales = new List<string>(Directory.GetFiles(DefaultLocaleFolderPath).Select(x => new FileInfo(x).Name.Replace(".json", "")).ToList());
-            ObservableCollection<string> localeNames = new ObservableCollection<string>();
-            for(int i = 0; i < romanLocales.Count(); i++)
-            {
-                localeNames.Add(RomanLocaleNames.GetValueOrDefault(romanLocales[i], romanLocales[i]));
-            }
-
-            return localeNames;
+            return new ObservableCollection<string>(LocaleNameDictionary.Values);
         }
 
-        private static string GetDefaultName()
-        {
-            string name = RomanLocaleNames.GetKeyByValue(LauncherSettingsProvider.Instance.DefaultLocale);
-
-            if(String.IsNullOrEmpty(name))
-            {
-                name = LauncherSettingsProvider.Instance.DefaultLocale;
-            }
-
-            return name;
-        }
-
-        public static LocaleData Instance { get; private set; } = Json.LoadClassWithoutSaving<LocaleData>($"{DefaultLocaleFolderPath}\\{GetDefaultName()}.json") ?? GenerateEnglishLocale();
+        public static LocaleData Instance { get; private set; } = Json.LoadClassWithoutSaving<LocaleData>($"{DefaultLocaleFolderPath}\\{LauncherSettingsProvider.Instance.DefaultLocale}.json") ?? GenerateEnglishLocale();
     }
 
     public class LocaleData : INotifyPropertyChanged
@@ -198,6 +181,22 @@ namespace SPTarkov.Launcher.Helpers
         //this is going to be some pretty long boiler plate code. So I'm putting everything into regions.
 
         #region All Properties
+
+        #region native_name
+        private string _native_name;
+        public string native_name
+        {
+            get => _native_name;
+            set
+            {
+                if(_native_name != value)
+                {
+                    _native_name = value;
+                    RaisePropertyChanged(nameof(native_name));
+                }
+            }
+        }
+        #endregion
 
         #region retry
         private string _retry;
