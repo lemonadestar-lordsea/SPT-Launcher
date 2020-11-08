@@ -8,7 +8,6 @@
  */
 
 using SPTarkov.Launcher.Controllers;
-using SPTarkov.Launcher.Helpers;
 using System;
 using System.Windows;
 
@@ -29,7 +28,6 @@ namespace SPTarkov.Launcher
             // run launcher
             MainWindow LauncherWindow = new MainWindow();
 
-            LocalizationProvider.LoadLocaleFromFile(LauncherSettingsProvider.Instance.DefaultLocale);
             LauncherWindow.ShowDialog();
         }
 
