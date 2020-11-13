@@ -4,8 +4,9 @@ A custom game launcher allows the game to be launched offline.
 
 ## Requirements
 
-- Visual Studio 2017 (.NET desktop workload) or newer
-- .NET Core 3.1
+- Visual Studio 2019 (v16.8)
+  - .NET desktop workload
+  - .NET 5.0
 
 ## Setup
 
