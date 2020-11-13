@@ -4,13 +4,8 @@ A custom game launcher allows the game to be launched offline.
 
 ## Requirements
 
-- Visual Studio 2019 (v16.8)
-  - .NET desktop workload
-  - .NET 5.0
-
-## Setup
-
-All dependencies are provided, no additional setup required.
+- VSCodium
+- .NET 5.0 (windows)
 
 ## Build
 
