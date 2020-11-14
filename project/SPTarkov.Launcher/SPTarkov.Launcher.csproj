@@ -1,15 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
-    <UseWindowsForms>true</UseWindowsForms>
+	<OutputType>WinExe</OutputType>
+	<TargetFramework>net5.0-windows</TargetFramework>
+	<RuntimeIdentifiers>win10-x64</RuntimeIdentifiers>
+    <PublishSingleFile>true</PublishSingleFile>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <Company>SPTarkov</Company>
     <Product>Launcher</Product>
     <Copyright>Copyright @ SPTarkov 2020</Copyright>
     <AssemblyName>Launcher</AssemblyName>
+    <StartupObject>SPTarkov.Launcher.App</StartupObject>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -40,9 +43,6 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>References\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Forms">
-      <HintPath>References\System.Windows.Forms.dll</HintPath>
     </Reference>
     <Reference Include="zlib.net">
       <HintPath>References\zlib.net.dll</HintPath>
