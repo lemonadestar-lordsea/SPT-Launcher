@@ -9,14 +9,41 @@
 $buildDir = "Build/"
 $launcherData = "./SPTarkov.Launcher/Launcher_Data/"
 
+#removes the Obj and Bin directories and their contents
+function CleanBuild 
+{
+    [string[]]$delPaths = Get-ChildItem -Recurse | where {$_.FullName -like "*\bin" -or $_.FullName -like "*\obj"} | select -ExpandProperty FullName
+
+    foreach ($path in $delPaths)
+    {
+        Write-Host "  Delete: $($path)"
+        Remove-Item $path -Force -Recurse
+    }
+}
+
 # build the project
+
 Write-Host "Cleaning previous builds ..." -ForegroundColor Cyan
-$cleanProcess = Start-Process "dotnet" -PassThru -NoNewWindow -ArgumentList "clean --nologo --verbosity minimal"
+
+#remove build dir to avoid reminant data
+if(Test-Path $buildDir) 
+{
+    Remove-Item $buildDir -Recurse -Force
+}
+
+#make sure bin and obj don't exist before cleaning or errors may occur from previous builds ran from VS
+CleanBuild
+$cleanProcess = Start-Process "dotnet" -PassThru -NoNewWindow -ArgumentList "clean --nologo --runtime win10-x64 --verbosity quiet"
 Wait-Process -InputObject $cleanProcess
+$cleanProcess.Dispose()
+Write-Host "`nDone" -ForegroundColor Cyan
+
+
 
 Write-Host "`nBuilding launcher ..." -ForegroundColor Cyan
-$publishProcess = Start-Process "dotnet" -PassThru -NoNewWindow -ArgumentList "publish --nologo --verbosity minimal --runtime win10-x64 --configuration Release --output ${buildDir} --no-self-contained"
+$publishProcess = Start-Process "dotnet" -PassThru -NoNewWindow -ArgumentList "publish --nologo --verbosity minimal --runtime win10-x64 -p:PublishSingleFile=true --configuration Release --output ${buildDir} --no-self-contained"
 Wait-Process -InputObject $publishProcess
+$publishProcess.Dispose()
 Write-Host "`nDone" -ForegroundColor Cyan
 
 #copy launcher_data folder
@@ -36,13 +63,6 @@ else
 # delete build waste
 Write-Host "`nCleaning garbage produced by build..." -ForegroundColor Cyan
 
-[string[]]$delPaths = Get-ChildItem -Recurse -Path $rootPath | where {$_.FullName -like "*\bin"} | select -ExpandProperty FullName
-$delPaths += Get-ChildItem -Recurse -Path $rootPath | where {$_.FullName -like "*\obj"} | select -ExpandProperty FullName
-
-foreach ($path in $delPaths)
-{
-    Write-Host "  Delete: $($path)"
-    Remove-Item $path -Force -Recurse
-}
+CleanBuild
 
 Write-Host "`nDone" -ForegroundColor Cyan

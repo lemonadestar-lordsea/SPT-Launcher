@@ -1,10 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<OutputType>WinExe</OutputType>
-	<TargetFramework>net5.0-windows</TargetFramework>
-	<RuntimeIdentifiers>win10-x64</RuntimeIdentifiers>
-    <PublishSingleFile>true</PublishSingleFile>
+	  <OutputType>WinExe</OutputType>
+	  <TargetFramework>net5.0-windows</TargetFramework>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <Company>SPTarkov</Company>
     <Product>Launcher</Product>
