@@ -22,26 +22,24 @@ function CleanBuild
 }
 
 # build the project
-
 Write-Host "Cleaning previous builds ..." -ForegroundColor Cyan
 
 #remove build dir to avoid reminant data
-if(Test-Path $buildDir) 
+if (Test-Path $buildDir) 
 {
     Remove-Item $buildDir -Recurse -Force
 }
 
 #make sure bin and obj don't exist before cleaning or errors may occur from previous builds ran from VS
 CleanBuild
-$cleanProcess = Start-Process "dotnet" -PassThru -NoNewWindow -ArgumentList "clean --nologo --runtime win10-x64 --verbosity quiet"
+
+$cleanProcess = Start-Process "dotnet" -PassThru -NoNewWindow -ArgumentList "clean --nologo --verbosity quiet --runtime win10-x64"
 Wait-Process -InputObject $cleanProcess
 $cleanProcess.Dispose()
 Write-Host "`nDone" -ForegroundColor Cyan
 
-
-
 Write-Host "`nBuilding launcher ..." -ForegroundColor Cyan
-$publishProcess = Start-Process "dotnet" -PassThru -NoNewWindow -ArgumentList "publish --nologo --verbosity minimal --runtime win10-x64 -p:PublishSingleFile=true --configuration Release --output ${buildDir} --no-self-contained"
+$publishProcess = Start-Process "dotnet" -PassThru -NoNewWindow -ArgumentList "publish --nologo --verbosity minimal --runtime win10-x64 --configuration Release -p:PublishSingleFile=true --no-self-contained --output ${buildDir}"
 Wait-Process -InputObject $publishProcess
 $publishProcess.Dispose()
 Write-Host "`nDone" -ForegroundColor Cyan
