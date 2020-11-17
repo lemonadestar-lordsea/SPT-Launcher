@@ -55,7 +55,7 @@ namespace SPTarkov.Launcher
 			
 			ProcessStartInfo clientProcess = new ProcessStartInfo(clientExecutable)
 			{
-				Arguments = $"-bC5vLmcuaS5u={GenerateToken(account)} -token={account.id} -config={Json.Serialize(new ClientConfig(server.backendUrl))}",
+				Arguments = $"-force-gfx-jobs native -token={account.id} -config={Json.Serialize(new ClientConfig(server.backendUrl))}",
 				UseShellExecute = false,
 				WorkingDirectory = LauncherSettingsProvider.Instance.GamePath ?? Environment.CurrentDirectory
 			};
@@ -245,11 +245,6 @@ namespace SPTarkov.Launcher
             {
                 return false;
             }
-		}
-
-		private string GenerateToken(AccountInfo data)
-		{
-			return $"{Json.Serialize(new LoginToken(data.email, data.password))}=";
 		}
 	}
 }
