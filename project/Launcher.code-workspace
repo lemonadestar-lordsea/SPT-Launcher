@@ -27,12 +27,7 @@
 	},
 	"settings": {
 		"window.title": "SPT-AKI Launcher",
-		"git-graph.commitDetailsView.location": "Docked to Bottom",
+		"git-graph.commitDetailsViewLocation": "Docked to Bottom",
 		"terminal.integrated.shellArgs.windows": ["-ExecutionPolicy ByPass"],
-		"vsproj.enabled": true,
-		"vsproj.projExtension": "csproj",
-		"vsproj.encoding": "utf8",
-		"vsproj.itemType": {".cs": "Compile", "*": "Content"},
-		"vsproj.excludeRegex": "Scripts"
 	}
 }

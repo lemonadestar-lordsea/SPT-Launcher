@@ -4,12 +4,8 @@ A custom game launcher allows the game to be launched offline.
 
 ## Requirements
 
-- Visual Studio 2017 (.NET desktop workload) or newer
-- .NET Core 3.1
-
-## Setup
-
-All dependencies are provided, no additional setup required.
+- VSCodium
+- .NET 5.0 (windows)
 
 ## Build
 
