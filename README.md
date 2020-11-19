@@ -5,7 +5,7 @@ A custom game launcher allows the game to be launched offline.
 ## Requirements
 
 - VSCodium
-- .NET 5.0 (windows)
+- .NET 5 SDK (windows x64)
 
 ## Build
 
