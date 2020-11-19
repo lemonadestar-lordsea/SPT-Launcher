@@ -20,14 +20,12 @@
 	},
 	"extensions": {
 		"recommendations": [
-			"jRichardeau.vscode-vsproj",
-			"tintoy.msbuild-project-tools",
 			"mhutchie.git-graph"
 		]
 	},
 	"settings": {
 		"window.title": "SPT-AKI Launcher",
-		"git-graph.commitDetailsViewLocation": "Docked to Bottom",
+		"git-graph.commitDetailsView.location": "Docked to Bottom",
 		"terminal.integrated.shellArgs.windows": ["-ExecutionPolicy ByPass"],
 	}
 }
