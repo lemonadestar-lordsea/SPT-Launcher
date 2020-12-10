@@ -21,6 +21,11 @@ namespace SPTarkov.Launcher.Generics.AsyncCommand
         {
         }
 
+        public AwaitableDelegateCommand(Func<object, Task> executeMethod) 
+            : base(executeMethod)
+        {
+        }
+
         public AwaitableDelegateCommand(Func<Task> executeMethod, Func<bool> canExecuteMethod)
             : base(o => executeMethod(), o => canExecuteMethod())
         {

@@ -11,6 +11,7 @@
 using SPTarkov.Launcher.Generics;
 using SPTarkov.Launcher.Generics.AsyncCommand;
 using SPTarkov.Launcher.Helpers;
+using SPTarkov.Launcher.Interfaces;
 using SPTarkov.Launcher.Models.Launcher;
 using System.Threading.Tasks;
 
@@ -40,8 +41,18 @@ namespace SPTarkov.Launcher.ViewModel
             navigationViewModel.SelectedViewModel = new LoginViewModel(navigationViewModel);
         }
 
-        public async Task OnRegisterCommand()
+        public async Task OnRegisterCommand(object parameter)
         {
+            if(parameter is IHavePassword pass)
+            {
+                newProfile.Password = pass.Password;
+            }
+            else
+            {
+                navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.registration_failed);
+                return;
+            }
+
             LauncherSettingsProvider.Instance.AllowSettings = false;
 
             int status = await AccountManager.RegisterAsync(newProfile.Email ?? "", newProfile.Password ?? "", newProfile.EditionsCollection.SelectedEdition);

@@ -7,6 +7,7 @@
  */
 
 
+using SPTarkov.Launcher.Interfaces;
 using System.Windows.Controls;
 
 namespace SPTarkov.Launcher.Views
@@ -14,11 +15,13 @@ namespace SPTarkov.Launcher.Views
     /// <summary>
     /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class LoginView : UserControl
+    public partial class LoginView : UserControl, IHavePassword
     {
         public LoginView()
         {
             InitializeComponent();
         }
+
+        public string Password => passBox.Password;
     }
 }

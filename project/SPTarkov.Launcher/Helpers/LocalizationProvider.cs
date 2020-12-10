@@ -22,7 +22,7 @@ namespace SPTarkov.Launcher.Helpers
 {
     public static class LocalizationProvider
     {
-        public static string DefaultLocaleFolderPath = $"{Environment.CurrentDirectory}\\Launcher_Data\\Locales";
+        public static string DefaultLocaleFolderPath = $"{Environment.CurrentDirectory}\\Aki_Data\\Launcher\\Locales";
 
         public static Dictionary<string, string> LocaleNameDictionary = GetLocaleDictionary();
 
