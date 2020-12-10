@@ -23,7 +23,7 @@ namespace SPTarkov.Launcher.Models.Launcher
             {
                 if (sea.Args[0].StartsWith("email:"))
                 {
-                    Email = sea.Args[0].Replace("username:", "");
+                    Email = sea.Args[0].Replace("email:", "");
                 }
 
                 if (sea.Args[1].StartsWith("password:"))
