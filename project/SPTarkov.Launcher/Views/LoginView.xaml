@@ -53,7 +53,8 @@ Merijn Hendriks
                  >
             <TextBox.InputBindings>
                 <KeyBinding Key="Return"
-                            Command="{Binding LoginCommand}"/>
+                            Command="{Binding LoginCommand}"
+                            CommandParameter="{Binding ElementName=view}"/>
             </TextBox.InputBindings>
         </TextBox>
 
@@ -61,16 +62,16 @@ Merijn Hendriks
         <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                          Path=password}" Grid.Column="1" Grid.Row="2" 
                    />
-        <TextBox Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="2"
-                 Text="{Binding login.Password, UpdateSourceTrigger=PropertyChanged}"
+        <PasswordBox x:Name="passBox" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="2"
                  IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
                             Path=AllowSettings}"
                  >
-            <TextBox.InputBindings>
+            <PasswordBox.InputBindings>
                 <KeyBinding Key="Return"
-                            Command="{Binding LoginCommand}"/>
-            </TextBox.InputBindings>
-        </TextBox>
+                            Command="{Binding LoginCommand}"
+                            CommandParameter="{Binding ElementName=view}"/>
+            </PasswordBox.InputBindings>
+        </PasswordBox>
 
         <!-- Addtional Controls -->
         <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
@@ -85,6 +86,7 @@ Merijn Hendriks
                 Style="{StaticResource SPTBigButtonStyle}"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                 Command="{Binding LoginCommand}"
+                CommandParameter="{Binding ElementName=view}"
                 />
     </Grid>
 </UserControl>

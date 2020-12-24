@@ -11,8 +11,10 @@
 using SPTarkov.Launcher.Generics;
 using SPTarkov.Launcher.Generics.AsyncCommand;
 using SPTarkov.Launcher.Helpers;
+using SPTarkov.Launcher.Interfaces;
 using SPTarkov.Launcher.Models.Launcher;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SPTarkov.Launcher.ViewModel
 {
@@ -49,8 +51,21 @@ namespace SPTarkov.Launcher.ViewModel
             navigationViewModel.SelectedViewModel = new RegisterViewModel(navigationViewModel);
         }
 
-        public async Task OnLoginCommand()
+        public async Task OnLoginCommand(object parameter)
         {
+            if(parameter is IHavePassword pass)
+            {
+                //a little redundent, but whatever...
+                login.Password = pass.Password;
+            }
+            else
+            {
+                //if it doesn't get the password for whatever reason, return with a failed login message
+                navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.login_failed);
+                return;
+            }
+
+
             LauncherSettingsProvider.Instance.AllowSettings = false;
 
             int status = await AccountManager.LoginAsync(login);

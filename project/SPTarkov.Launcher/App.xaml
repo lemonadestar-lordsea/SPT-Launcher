@@ -275,6 +275,15 @@ Merijn Hendriks
             <Setter Property="Margin" Value="0 5"/>
         </Style>
 
+        <!-- PasswordBox Style -->
+        <Style TargetType="{x:Type PasswordBox}">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
+            <Setter Property="Background" Value="{StaticResource SPTBackground}"/>
+            <Setter Property="Margin" Value="0 5"/>
+        </Style>
+
         <!-- Label Style-->
         <Style TargetType="{x:Type Label}">
             <Setter Property="FontSize" Value="15"/>

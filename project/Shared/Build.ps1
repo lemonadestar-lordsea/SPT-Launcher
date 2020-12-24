@@ -7,7 +7,7 @@
 
 #setup variables
 $buildDir = "Build/"
-$launcherData = "./SPTarkov.Launcher/Launcher_Data/"
+$launcherData = "./SPTarkov.Launcher/Aki_Data/"
 
 #removes the Obj and Bin directories and their contents
 function CleanBuild 
@@ -44,12 +44,12 @@ Wait-Process -InputObject $publishProcess
 $publishProcess.Dispose()
 Write-Host "`nDone" -ForegroundColor Cyan
 
-#copy launcher_data folder
-Write-Host "`nCopying Launcher_Data folder ... " -NoNewLine
+#copy aki_data folder
+Write-Host "`nCopying Aki_Data folder ... " -NoNewLine
 
-Copy-Item -Path $launcherData -Destination "./${buildDir}/Launcher_Data" -Recurse -Force -ErrorAction SilentlyContinue
+Copy-Item -Path $launcherData -Destination "./${buildDir}/Aki_Data" -Recurse -Force -ErrorAction SilentlyContinue
 
-if (Test-Path "$($buildDir)/Launcher_Data") 
+if (Test-Path "$($buildDir)/Aki_Data") 
 {
     Write-host "OK" -ForegroundColor Green
 }

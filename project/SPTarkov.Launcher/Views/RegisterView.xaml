@@ -52,7 +52,8 @@ Merijn Hendriks
                  >
             <TextBox.InputBindings>
                 <KeyBinding Key="Return"
-                            Command="{Binding RegisterCommand}"/>
+                            Command="{Binding RegisterCommand}"
+                            CommandParameter="{Binding ElementName=view}"/>
             </TextBox.InputBindings>
         </TextBox>
         
@@ -60,16 +61,17 @@ Merijn Hendriks
         <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                          Path=password}" Grid.Column="1" Grid.Row="2"
                    />
-        <TextBox Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2"
-                 Text="{Binding newProfile.Password, UpdateSourceTrigger=PropertyChanged}"
+        <PasswordBox x:Name="passBox" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2"
                  IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
                             Path=AllowSettings}"
                  >
-            <TextBox.InputBindings>
+            <PasswordBox.InputBindings>
                 <KeyBinding Key="Return"
-                            Command="{Binding RegisterCommand}"/>
-            </TextBox.InputBindings>
-        </TextBox>
+                            Command="{Binding RegisterCommand}"
+                            CommandParameter="{Binding ElementName=view}"
+                            />
+            </PasswordBox.InputBindings>
+        </PasswordBox>
 
         <!-- Edition Controls -->
         <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
@@ -95,6 +97,7 @@ Merijn Hendriks
                           Path=register}" Grid.Row="6" Grid.ColumnSpan="6" Style="{StaticResource SPTBigButtonStyle}"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                 Command="{Binding RegisterCommand}"
+                CommandParameter="{Binding ElementName=view}"
                 />
     </Grid>
 </UserControl>

@@ -8,6 +8,8 @@
  */
 
 using SPTarkov.Launcher.Controllers;
+using SPTarkov.Launcher.Helpers;
+using SPTarkov.Launcher.Models.Launcher;
 using System;
 using System.Windows;
 
@@ -25,10 +27,53 @@ namespace SPTarkov.Launcher
             //I'm not sure if you want application specific exception handling. AppDomain should handle them all AFAIK. You had something similar before, so I'm just adding this in. (might cause duplicate messageboxes though)
             Current.DispatcherUnhandledException += (sender, args) => HandleException(args.Exception);
 
-            // run launcher
-            MainWindow LauncherWindow = new MainWindow();
+            //check params
+            LauncherStartArgs startArgs = new LauncherStartArgs(e);
 
-            LauncherWindow.ShowDialog();
+            if (startArgs.HasAuthentication)
+            {
+                ServerManager.LoadServer(LauncherSettingsProvider.GetDefaultServer().Url);
+                int status = AccountManager.Login(startArgs.Email, startArgs.Password);
+
+                //we only care if we actually logged in, to make sure we can start the game.
+                if(status == 1)
+                {
+                    ServerManager.SelectServer(0);
+                    GameStarter gm = new GameStarter();
+
+                    
+                    int gameStatus = gm.LaunchGame(ServerManager.SelectedServer, AccountManager.SelectedAccount);
+
+                    //Show errors if game doesn't start
+                    switch(gameStatus)
+                    {
+                        case -1:
+                            MessageBox.Show(LocalizationProvider.Instance.installed_in_live_game_warning);
+                            break;
+
+                        case -2:
+                            MessageBox.Show(LocalizationProvider.Instance.no_official_game_warning);
+                            break;
+
+                        case -3:
+                            MessageBox.Show(LocalizationProvider.Instance.eft_exe_not_found_warning);
+                            break;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(LocalizationProvider.Instance.login_failed);
+                }
+
+                Application.Current.Shutdown(0);
+            }
+            else
+            {
+                // run launcher normally
+                MainWindow LauncherWindow = new MainWindow();
+
+                LauncherWindow.ShowDialog();
+            }
         }
 
         private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)
