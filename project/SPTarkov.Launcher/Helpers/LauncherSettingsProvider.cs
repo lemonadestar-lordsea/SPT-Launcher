@@ -21,7 +21,7 @@ namespace SPTarkov.Launcher.Helpers
 {
     public static class LauncherSettingsProvider
     {
-        public static string DefaultSettingsFileLocation = $"{Environment.CurrentDirectory}\\Aki_Data\\Launcher\\launcher.config.json";
+        public static string DefaultSettingsFileLocation = $"{Environment.CurrentDirectory}\\user\\launcher\\config.json";
 
         public static ServerSetting GetDefaultServer()
         {

@@ -42,6 +42,11 @@ namespace SPTarkov.Launcher.MiniCommon
 		/// <param name="format">NewtonSoft.Json Formatting</param>
 		public static void SaveWithFormatting<T>(string filepath, T data, Formatting format)
 		{
+			if (!File.Exists(filepath))
+			{
+				Directory.CreateDirectory(Path.GetDirectoryName(filepath));
+			}
+
 			File.WriteAllText(filepath, JsonConvert.SerializeObject(data, format));
 		}
 
