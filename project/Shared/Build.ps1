@@ -44,6 +44,8 @@ Wait-Process -InputObject $publishProcess
 $publishProcess.Dispose()
 Write-Host "`nDone" -ForegroundColor Cyan
 
+Remove-Item "$($buildDir)\Launcher.pdb"
+
 #copy aki_data folder
 Write-Host "`nCopying Aki_Data folder ... " -NoNewLine
 
