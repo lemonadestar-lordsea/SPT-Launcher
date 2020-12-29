@@ -36,11 +36,6 @@ Merijn Hendriks
             <RowDefinition Height="AUTO"/>
         </Grid.RowDefinitions>
 
-        <!-- Footer Image -->
-        <Image Source="/Resources/bg-footer.png" Grid.Row="6" Stretch="UniformToFill" Grid.ColumnSpan="6"
-               RenderOptions.BitmapScalingMode="Fant" Width="{Binding ActualWidth, ElementName=view}"
-               />
-
         <!-- Email Controls -->
         <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                          Path=email}" Grid.Column="1" Grid.Row="1"
@@ -55,12 +50,11 @@ Merijn Hendriks
         <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                          Path=password}" Grid.Column="1" Grid.Row="2"
                />
-        
-        <TextBox Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2"
-                 Text="{Binding login.Password}"
-                 IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
+
+        <PasswordBox x:Name="passBox" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2"
+                     IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
                             Path=AllowSettings}"
-                 />
+                     />
 
         <!-- Addtional Controls -->
         <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
@@ -80,6 +74,7 @@ Merijn Hendriks
                          Path=update}" Grid.Row="6" Grid.ColumnSpan="6" Style="{StaticResource SPTBigButtonStyle}"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                 Command="{Binding UpdateCommand}"
+                CommandParameter="{Binding ElementName=view}"
                 />
     </Grid>
 </UserControl>

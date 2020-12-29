@@ -14,9 +14,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\bg-alpha.png" />
-    <None Remove="Resources\bg-footer.png" />
     <None Remove="Resources\icon.ico" />
+    <None Remove="Resources\spt-aki-logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,9 +47,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\bg-alpha.png" />
-    <Resource Include="Resources\bg-footer.png" />
     <Resource Include="Resources\icon.ico" />
+    <Resource Include="Resources\spt-aki-logo.png" />
   </ItemGroup>
 
 </Project>

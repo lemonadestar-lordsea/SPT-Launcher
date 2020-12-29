@@ -35,11 +35,6 @@ Merijn Hendriks
             <RowDefinition Height="AUTO"/>
         </Grid.RowDefinitions>
 
-        <!-- Footer Image -->
-        <Image Source="/Resources/bg-footer.png" Grid.Row="6" Stretch="UniformToFill" Grid.ColumnSpan="6"
-               RenderOptions.BitmapScalingMode="Fant" Width="{Binding ActualWidth, ElementName=view}"
-               />
-
         <!-- Email Controls -->
         <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                          Path=edition}" Grid.Column="1" Grid.Row="1"

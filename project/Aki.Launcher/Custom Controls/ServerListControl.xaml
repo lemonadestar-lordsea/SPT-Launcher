@@ -29,7 +29,7 @@ Merijn Hendriks
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Rectangle Fill="{StaticResource SPTBackgroundLight}" Grid.ColumnSpan="3"
+        <Rectangle Fill="{StaticResource SPTAKI_Background_Dark}" Grid.ColumnSpan="3"
                    />
         
         <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
@@ -54,7 +54,7 @@ Merijn Hendriks
             </StackPanel>
         </Button>
 
-            <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2" Background="{StaticResource SPTBackground}">
+            <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2" Background="{StaticResource SPTAKI_Background_Dark}">
                 <ItemsControl ItemsSource="{Binding SourceList, RelativeSource={
                                                     RelativeSource
                                                     AncestorType=UserControl}}"

@@ -76,11 +76,6 @@ Merijn Hendriks
                 <RowDefinition Height="AUTO"/>
             </Grid.RowDefinitions>
 
-            <!-- Footer Image -->
-            <Image Source="/Resources/bg-footer.png" Grid.Row="2" Stretch="UniformToFill" Grid.ColumnSpan="5"
-               RenderOptions.BitmapScalingMode="Fant" Width="{Binding ActualWidth, ElementName=view}"
-               />
-
             <!-- Addtional Controls -->
             <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                               Path=edit_profile}" Grid.Row="1" Grid.Column="1"

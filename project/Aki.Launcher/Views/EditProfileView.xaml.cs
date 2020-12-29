@@ -7,31 +7,21 @@
  */
 
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using SPTarkov.Launcher.Interfaces;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Aki.Launcher.Views
 {
     /// <summary>
     /// Interaction logic for EditProfileView.xaml
     /// </summary>
-    public partial class EditProfileView : UserControl
+    public partial class EditProfileView : UserControl, IHavePassword
     {
         public EditProfileView()
         {
             InitializeComponent();
         }
+
+        public string Password => passBox.Password;
     }
 }

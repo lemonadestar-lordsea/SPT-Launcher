@@ -31,14 +31,14 @@ waffle.lord
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <Rectangle Fill="{StaticResource SPTBackgroundLight}" Grid.ColumnSpan="2"
+        <Rectangle Fill="{StaticResource AKI_Background_Light}" Grid.ColumnSpan="2"
                    />
 
         <TextBlock Text="{Binding NotificationQueue.queue[0].Message,
                                   RelativeSource={
                                   RelativeSource AncestorType=UserControl}}"
                    VerticalAlignment="Center"
-                   FontSize="15" TextWrapping="Wrap" Foreground="{StaticResource SPTForeground}"
+                   FontSize="15" TextWrapping="Wrap" Foreground="{StaticResource AKI_Foreground_Light}"
                    Margin="5"
                    />
         

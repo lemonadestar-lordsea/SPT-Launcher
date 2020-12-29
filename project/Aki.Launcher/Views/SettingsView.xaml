@@ -34,11 +34,6 @@ Merijn Hendriks
             <RowDefinition Height="AUTO"/>
         </Grid.RowDefinitions>
 
-        <Image Source="/Resources/bg-alpha.png" RenderOptions.BitmapScalingMode="Fant"
-               Grid.RowSpan="2" Grid.ColumnSpan="2" Stretch="UniformToFill"
-               Width="{Binding ActualWidth, ElementName=main}"
-               />
-
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="AUTO"/>

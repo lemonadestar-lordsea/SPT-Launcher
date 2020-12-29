@@ -36,10 +36,10 @@ Merijn Hendriks
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Rectangle Grid.ColumnSpan="4" Grid.RowSpan="8" Fill="{StaticResource SPTBackground}"
+        <Rectangle Grid.ColumnSpan="4" Grid.RowSpan="8" Fill="{StaticResource AKI_Background_Dark}"
                    />
         
-        <Rectangle Fill="{StaticResource SPTBackgroundLight}" Grid.ColumnSpan="4"
+        <Rectangle Fill="{StaticResource AKI_Background_Light}" Grid.ColumnSpan="4"
                    />
 
         <Button x:Name="backButton" HorizontalAlignment="Left" Style="{StaticResource IconButtonStyle}"

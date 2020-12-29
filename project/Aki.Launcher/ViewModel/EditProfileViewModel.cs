@@ -12,6 +12,7 @@ using Aki.Launcher.Generics;
 using Aki.Launcher.Generics.AsyncCommand;
 using Aki.Launcher.Helpers;
 using Aki.Launcher.Models.Launcher;
+using Aki.Launcher.Interfaces;
 using System.Threading.Tasks;
 
 namespace Aki.Launcher.ViewModel
@@ -60,8 +61,21 @@ namespace Aki.Launcher.ViewModel
             return "Undefined Response";   
         }
 
-        public async Task OnUpdateCommand()
+        public async Task OnUpdateCommand(object parameter)
         {
+            if(parameter is IHavePassword pass)
+            {
+                if (!string.IsNullOrWhiteSpace(pass.Password))
+                {
+                    login.Password = pass.Password;
+                }
+            }
+            else
+            {
+                navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.edit_profile_update_error);
+                navigationViewModel.SelectedViewModel = new ProfileViewModel(navigationViewModel);
+            }
+
             LauncherSettingsProvider.Instance.AllowSettings = false;
 
             string emailStatus = GetStatus(await AccountManager.ChangeEmailAsync(login.Email));
