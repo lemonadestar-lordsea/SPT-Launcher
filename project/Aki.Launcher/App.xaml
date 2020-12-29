@@ -1,0 +1,375 @@
+﻿<!-- App.xaml
+License: NCSA Open Source License
+
+Copyright: Merijn Hendriks
+AUTHORS:
+waffle.lord
+Merijn Hendriks
+-->
+    
+    <Application x:Class="Aki.Launcher.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Aki.Launcher"
+             xmlns:viewmodel="clr-namespace:Aki.Launcher.ViewModel"
+             xmlns:views="clr-namespace:Aki.Launcher.Views"
+             xmlns:cc="clr-namespace:Aki.Launcher.Custom_Controls"
+             StartupUri="MainWindow.xaml"
+             Startup="Application_Startup">
+    
+    <Application.Resources>
+        <!-- Colors -->
+
+        <Color x:Key="AkiBrown" A="255" R="32" G="32" B="32"/>
+        <Color x:Key="AkiLightBrown" A="255" R="50" G="50" B="50"/>
+        <Color x:Key="AkiDarkBrown" A="255" R="16" G="16" B="16"/>
+
+        <!-- Brushes for styles -->
+        <SolidColorBrush x:Key="SPTBackgroundLight" Color="{StaticResource AkiLightBrown}"/>
+        <SolidColorBrush x:Key="SPTBackground" Color="{StaticResource AkiBrown}"/>
+        <SolidColorBrush x:Key="SPTForeground" Color="WhiteSmoke"/>
+
+        <!-- Path Geometry for re-usable icons -->
+        <PathGeometry x:Key="SettingsCog" Figures="M19.14 12.94c0.04-0.3 0.06-0.61 0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14 0.23-0.41 0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39 0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4 2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24 0-0.43 0.17-0.47 0.41L9.25 5.35C8.66 5.59 8.12 5.92 7.63 6.29L5.24 5.33c-0.22-0.08-0.47 0-0.59 0.22L2.74 8.87 C2.62 9.08 2.66 9.34 2.86 9.48l2.03 1.58C4.84 11.36 4.8 11.69 4.8 12s0.02 0.64 0.07 0.94l-2.03 1.58 c-0.18 0.14-0.23 0.41-0.12 0.61l1.92 3.32c0.12 0.22 0.37 0.29 0.59 0.22l2.39-0.96c0.5 0.38 1.03 0.7 1.62 0.94l0.36 2.54 c0.05 0.24 0.24 0.41 0.48 0.41h3.84c0.24 0 0.44-0.17 0.47-0.41l0.36-2.54c0.59-0.24 1.13-0.56 1.62-0.94l2.39 0.96 c0.22 0.08 0.47 0 0.59-0.22l1.92-3.32c0.12-0.22 0.07-0.47-0.12-0.61L19.14 12.94z M12 15.6c-1.98 0-3.6-1.62-3.6-3.6 s1.62-3.6 3.6-3.6s3.6 1.62 3.6 3.6S13.98 15.6 12 15.6z" FillRule="Nonzero"/>
+        <PathGeometry x:Key="AppExit" Figures="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" FillRule="NonZero"/>
+        <PathGeometry x:Key="Add" Figures="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" FillRule="NonZero"/>
+        <PathGeometry x:Key="Save" Figures="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z" FillRule="NonZero"/>
+        <PathGeometry x:Key="BackArrow" Figures="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" FillRule="NonZero"/>
+        <PathGeometry x:Key="Delete" Figures="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" FillRule="NonZero"/>
+        <PathGeometry x:Key="Bookmark" Figures="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z" FillRule="NonZero"/>
+        <PathGeometry x:Key="FolderWithPlus" Figures="M20 6h-8l-2-2H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-1 8h-3v3h-2v-3h-3v-2h3V9h2v3h3v2z" FillRule="NonZero"/>
+
+        <!-- Data Templates to load views with view models -->
+
+        <DataTemplate DataType="{x:Type viewmodel:ConnectServerViewModel}">
+            <views:ConnectServerView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodel:SettingsViewModel}">
+            <views:SettingsView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodel:RegisterViewModel}">
+            <views:RegisterView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodel:LoginViewModel}">
+            <views:LoginView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodel:ProfileViewModel}">
+            <views:ProfileView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodel:WipeProfileViewModel}">
+            <views:WipeProfileView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodel:EditProfileViewModel}">
+            <views:EditProfileView/>
+        </DataTemplate>
+
+        <!-- Base Sytles -->
+
+        <!-- Remove Hightlight effect from buttons -->
+        <Style x:Key="NoChromeButton" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="NoChromeGrid" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                                <Setter Property="Opacity" TargetName="NoChromeGrid" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Styles for controls -->
+
+        <!-- Main Button Style -->
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NoChromeButton}">
+            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
+            <Setter Property="Background" Value="{StaticResource SPTBackground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource SPTForeground}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="0 5"/>
+            <Setter Property="MinWidth" Value="100"/>
+            <Setter Property="MinHeight" Value="30"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="PreviewMouseDown">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="WhiteSmoke" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource AkiBrown}" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AkiLightBrown}" Duration="0:0:0.200"/>
+                            <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="2" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AkiBrown}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="WhiteSmoke" Duration="0:0:0.200"/>
+                            <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="1" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Flat Button Style (Control Specific because transparency is weird with animations. Could look into this later, I'm being lazy.) -->
+        <Style x:Key="SPTButtonFlat_NonGeneric" TargetType="{x:Type Button}" BasedOn="{StaticResource NoChromeButton}">
+            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
+            <Setter Property="Background" Value="{StaticResource SPTBackgroundLight}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="0 5"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="PreviewMouseUp">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AkiLightBrown}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="WhiteSmoke" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="PreviewMouseDown">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="WhiteSmoke" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource AkiBrown}" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AkiBrown}"
+                                            From="{StaticResource AkiLightBrown}" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AkiLightBrown}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="WhiteSmoke" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Server Setting List Item Style -->
+        <Style x:Key="ServerSettingListItemStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource NoChromeButton}">
+            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
+            <Setter Property="Background" Value="{StaticResource SPTBackgroundLight}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AkiDarkBrown}" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AkiLightBrown}" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Big Button Style (the one at the bottom over the footer. Inherits everything from our Main Button Style. This is explicitly assigned.)-->
+        <Style x:Key="SPTBigButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Width" Value="140"/>
+            <Setter Property="Height" Value="50"/>
+        </Style>
+
+        <!-- Combo Box Style -->
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0 5"/>
+            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Grid.Column="2" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" Background="Transparent">
+                                <ToggleButton.Template>
+                                    <ControlTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="5*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Border x:Name="Border"  Grid.ColumnSpan="2" Background="{StaticResource SPTBackground}" BorderBrush="{StaticResource SPTForeground}" BorderThickness="1" />
+                                            <Border Grid.Column="0" Margin="1"  Background="{StaticResource SPTBackground}"  BorderBrush="{StaticResource SPTForeground}" BorderThickness="0,0,1,0" />
+                                            <Path x:Name="Arrow" Grid.Column="1"  Fill="{StaticResource SPTBackgroundLight}" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                                                <Setter TargetName="Border" Property="Background" Value="{StaticResource SPTBackgroundLight}" />
+                                            </Trigger>
+                                            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                                                <Setter TargetName="Border" Property="Background" Value="{StaticResource SPTBackgroundLight}" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Margin="3"  />
+                            <TextBox x:Name="PART_EditableTextBox" Visibility="Hidden" IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True"  Focusable="False" PopupAnimation="Slide">
+                                <Grid  Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder" Background="{StaticResource SPTBackgroundLight}" />
+                                    <ScrollViewer SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- TextBox Style -->
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
+            <Setter Property="Background" Value="{StaticResource SPTBackground}"/>
+            <Setter Property="Margin" Value="0 5"/>
+        </Style>
+
+        <!-- PasswordBox Style -->
+        <Style TargetType="{x:Type PasswordBox}">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
+            <Setter Property="Background" Value="{StaticResource SPTBackground}"/>
+            <Setter Property="Margin" Value="0 5"/>
+        </Style>
+
+        <!-- Label Style-->
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
+            <Setter Property="Margin" Value="10 5"/>
+        </Style>
+
+        <!-- Icon Button Style -->
+        <Style x:Key="IconButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource NoChromeButton}">
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="MinWidth" Value="35"/>
+            <Setter Property="MinHeight" Value="25"/>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="Gray" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="WhiteSmoke" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- CheckBox Style -->
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Opacity" Value="1"/>
+        </Style>
+
+        <!-- Notification Banner Style -->
+        <Style TargetType="{x:Type cc:NotificationBanner}">
+            <Setter Property="Background" Value="{StaticResource SPTBackgroundLight}"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleY="0"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding NotificationQueue.ShowBanner, RelativeSource={RelativeSource Self}}"
+                             Value="true">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                 To="1"
+                                                 Duration="0:0:0.200"
+                                                 />
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                 From="0"
+                                                 To="1"
+                                                 Duration="0:0:0.160"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                 To="0" Duration="0:0:0.200"
+                                                 />
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                 From="1"
+                                                 To="0"
+                                                 Duration="0:0:0.160"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </Application.Resources>
+</Application>

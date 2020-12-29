@@ -7,7 +7,7 @@
 
 #setup variables
 $buildDir = "Build/"
-$launcherData = "./SPTarkov.Launcher/Aki_Data/"
+$launcherData = "./Aki.Launcher/Aki_Data/"
 
 #removes the Obj and Bin directories and their contents
 function CleanBuild 
