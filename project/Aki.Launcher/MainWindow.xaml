@@ -50,7 +50,7 @@ Merijn Hendriks
         </DockPanel>
 
         <!-- Navigation Tool Bar -->
-        <StackPanel Orientation="Horizontal" Background="{StaticResource SPTAKI_Background_Dark}"
+        <StackPanel Orientation="Horizontal" Background="{StaticResource AKI_Background_Dark}"
                     Height="40" MouseDown="StackPanel_MouseDown">
             <Image Source=".\Resources\spt-aki-logo.png" RenderOptions.BitmapScalingMode="Fant"
                    Margin="10 0"/>

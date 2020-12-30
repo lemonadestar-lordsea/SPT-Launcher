@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace SPTarkov.Launcher.Custom_Controls
+namespace Aki.Launcher.Custom_Controls
 {
     /// <summary>
     /// Interaction logic for MenuBarButton.xaml

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SPTarkov.Launcher.Models.Launcher
+namespace Aki.Launcher.Models.Launcher
 {
     public class MenuBarItem
     {

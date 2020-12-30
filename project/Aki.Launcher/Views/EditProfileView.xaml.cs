@@ -7,7 +7,7 @@
  */
 
 
-using SPTarkov.Launcher.Interfaces;
+using Aki.Launcher.Interfaces;
 using System.Windows.Controls;
 
 namespace Aki.Launcher.Views

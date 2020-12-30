@@ -1,9 +1,9 @@
-﻿using SPTarkov.Launcher.Models.Launcher;
+﻿using Aki.Launcher.Models.Launcher;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SPTarkov.Launcher.Custom_Controls
+namespace Aki.Launcher.Custom_Controls
 {
     /// <summary>
     /// Interaction logic for MenuBarControl.xaml
