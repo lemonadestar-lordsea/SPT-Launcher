@@ -32,17 +32,17 @@ namespace Aki.Launcher.ViewModel
         public GenericICommand ClearGameSettingsCommand { get; set; }
         public ServerSetting NewServer { get; set; }
         public LocaleCollection Locales { get; set; } = new LocaleCollection();
-        private NavigationViewModel fullSpanNavigationViewModel { get; set; }
-        private NavigationViewModel mainNavigationViewModel { get; set; }
+        //private NavigationViewModel fullSpanNavigationViewModel { get; set; }
+        private NavigationViewModel navigationViewModel { get; set; }
 
         private GameStarter gameStarter = new GameStarter();
-        public SettingsViewModel(NavigationViewModel fullSpanViewModel, NavigationViewModel mainViewModel)
+        public SettingsViewModel(NavigationViewModel viewModel)
         {
-            fullSpanNavigationViewModel = fullSpanViewModel;
-            mainNavigationViewModel = mainViewModel;
+            //fullSpanNavigationViewModel = fullSpanViewModel;
+            navigationViewModel = viewModel;
 
             #region Settings Commands
-            BackCommand = new GenericICommand(OnBackCommand);
+            //BackCommand = new GenericICommand(OnBackCommand);
             CleanTempFilesCommand = new GenericICommand(OnCleanTempFilesCommand);
             SelectGameFolderCommand = new GenericICommand(OnSelectGameFolderCommand);
             RemoveRegistryKeysCommand = new GenericICommand(OnRemoveRegistryKeysCommand);
@@ -94,17 +94,14 @@ namespace Aki.Launcher.ViewModel
         #endregion
 
         #region Settings Commands
-        public void OnBackCommand(object parameter)
-        {
-            fullSpanNavigationViewModel.NotificationQueue.CloseQueue();
+        //public void OnBackCommand(object parameter)
+        //{
+        //    LauncherSettingsProvider.Instance.SaveSettings();
 
-            LauncherSettingsProvider.Instance.SaveSettings();
+        //    LauncherSettingsProvider.Instance.IsEditingSettings = false;
 
-            LauncherSettingsProvider.Instance.IsEditingSettings = false;
-
-            mainNavigationViewModel.SelectedViewModel = new ConnectServerViewModel(mainNavigationViewModel);
-            fullSpanNavigationViewModel.SelectedViewModel = null;
-        }
+        //    navigationViewModel.SelectedViewModel = new ConnectServerViewModel(navigationViewModel);
+        //}
 
         public void OnCleanTempFilesCommand(object parameter)
         {
@@ -112,11 +109,11 @@ namespace Aki.Launcher.ViewModel
 
             if(filesCleared)
             {
-                fullSpanNavigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.clean_temp_files_succeeded, true);
+                navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.clean_temp_files_succeeded, true);
             }
             else
             {
-                fullSpanNavigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.clean_temp_files_failed, true);
+                navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.clean_temp_files_failed, true);
             }
         }
 
@@ -126,11 +123,11 @@ namespace Aki.Launcher.ViewModel
 
             if(regKeysRemoved)
             {
-                fullSpanNavigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.remove_registry_keys_succeeded, true);
+                navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.remove_registry_keys_succeeded, true);
             }
             else
             {
-                fullSpanNavigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.remove_registry_keys_failed, true);
+                navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.remove_registry_keys_failed, true);
             }
         }
 
@@ -144,12 +141,12 @@ namespace Aki.Launcher.ViewModel
 
                 if(Directory.Exists(EFTSettingsFolder))
                 {
-                    fullSpanNavigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.clear_game_settings_failed, true);
+                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.clear_game_settings_failed, true);
                     return;
                 }
             }
 
-            fullSpanNavigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.clear_game_settings_succeeded, true);
+            navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.clear_game_settings_succeeded, true);
         }
 
         public void OnSelectGameFolderCommand(object parameter)
@@ -179,7 +176,7 @@ namespace Aki.Launcher.ViewModel
             {
                 if (setting.Url == "https://127.0.0.1")
                 {
-                    fullSpanNavigationViewModel.NotificationQueue.Enqueue($"{LocalizationProvider.Instance.local_server_remove_warning}\n\n{LocalizationProvider.Instance.remove_server_question}",
+                    navigationViewModel.NotificationQueue.Enqueue($"{LocalizationProvider.Instance.local_server_remove_warning}\n\n{LocalizationProvider.Instance.remove_server_question}",
                                                                           $"{LocalizationProvider.Instance.remove_server_tooltip}", () => 
                     {
                         LauncherSettingsProvider.Instance.RemoveServerAndSave(setting);
@@ -210,7 +207,7 @@ namespace Aki.Launcher.ViewModel
             }
             else
             {
-                fullSpanNavigationViewModel.NotificationQueue.Enqueue(addStatus.Message);
+                navigationViewModel.NotificationQueue.Enqueue(addStatus.Message);
             }
         }
 

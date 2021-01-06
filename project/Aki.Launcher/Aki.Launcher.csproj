@@ -14,8 +14,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\aki-logo.png" />
+    <None Remove="Resources\bear.png" />
     <None Remove="Resources\icon.ico" />
-    <None Remove="Resources\spt-aki-logo.png" />
+    <None Remove="Resources\usec.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,8 +49,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\aki-logo.png" />
+    <Resource Include="Resources\bear.png" />
     <Resource Include="Resources\icon.ico" />
-    <Resource Include="Resources\spt-aki-logo.png" />
+    <Resource Include="Resources\usec.png" />
   </ItemGroup>
 
 </Project>

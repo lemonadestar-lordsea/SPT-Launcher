@@ -57,7 +57,7 @@ Merijn Hendriks
                             <TextBlock Text="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                                               Path=default}" FontStyle="Italic" FontSize="12" VerticalAlignment="Center"
                                        Margin="0 0 10 0"/>
-                            <Path Data="{StaticResource Bookmark}" Fill="{StaticResource SPTAKI_Foreground_Light}"
+                            <Path Data="{StaticResource Bookmark}" Fill="{StaticResource AKI_Foreground_Light}"
                                   />
                         </StackPanel>
                     </Label>

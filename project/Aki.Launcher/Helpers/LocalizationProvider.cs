@@ -89,7 +89,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.server_connecting = "Connecting";
             englishLocale.server_unavailable_format_1 = "Default server '{0}' is not available.";
             englishLocale.no_servers_available = "No Servers found. Check server list in settings.";
-            englishLocale.settings_cog_tooltip = "Settings Menu";
+            englishLocale.settings_menu = "Settings Menu";
             englishLocale.back = "Back";
             englishLocale.wipe = "Wipe";
             englishLocale.wipe_profile = "Wipe Profile";
@@ -146,6 +146,10 @@ namespace Aki.Launcher.Helpers
             englishLocale.do_nothing_action = "Do nothing";
             englishLocale.exit_action = "Close Launcher";
             englishLocale.launcher_start_game_action = "Launcher Start Game Action";
+            englishLocale.game = "Game";
+            englishLocale.new_password = "New Password";
+            englishLocale.wipe_warning_format_2 = "Changing your account edition requires a profile wipe.\n'{0}' -> '{1}'\nAre you sure you want to wipe your profile?";
+            englishLocale.cancel = "Cancel";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -262,17 +266,17 @@ namespace Aki.Launcher.Helpers
         }
         #endregion
 
-        #region settings_cog_tooltip
-        private string _settings_cog_tooltip;
-        public string settings_cog_tooltip
+        #region settings_menu
+        private string _settings_menu;
+        public string settings_menu
         {
-            get => _settings_cog_tooltip;
+            get => _settings_menu;
             set
             {
-                if(_settings_cog_tooltip != value)
+                if(_settings_menu != value)
                 {
-                    _settings_cog_tooltip = value;
-                    RaisePropertyChanged(nameof(settings_cog_tooltip));
+                    _settings_menu = value;
+                    RaisePropertyChanged(nameof(settings_menu));
                 }
             }
         }
@@ -1170,6 +1174,70 @@ namespace Aki.Launcher.Helpers
                 {
                     _launcher_start_game_action = value;
                     RaisePropertyChanged(nameof(launcher_start_game_action));
+                }
+            }
+        }
+        #endregion
+
+        #region game
+        private string _game;
+        public string game
+        {
+            get => _game;
+            set
+            {
+                if(_game != value)
+                {
+                    _game = value;
+                    RaisePropertyChanged(nameof(game));
+                }
+            }
+        }
+        #endregion
+
+        #region new_password
+        private string _new_password;
+        public string new_password
+        {
+            get => _new_password;
+            set
+            {
+                if(_new_password != value)
+                {
+                    _new_password = value;
+                    RaisePropertyChanged(nameof(new_password));
+                }
+            }
+        }
+        #endregion
+
+        #region wipe_warning_format_2
+        private string _wipe_warning_format_1;
+        public string wipe_warning_format_2
+        {
+            get => _wipe_warning_format_1;
+            set
+            {
+                if(_wipe_warning_format_1 != value)
+                {
+                    _wipe_warning_format_1 = value;
+                    RaisePropertyChanged(nameof(wipe_warning_format_2));
+                }
+            }
+        }
+        #endregion
+
+        #region cancel
+        private string _cancel;
+        public string cancel
+        {
+            get => _cancel;
+            set
+            {
+                if(_cancel != value)
+                {
+                    _cancel = value;
+                    RaisePropertyChanged(nameof(cancel));
                 }
             }
         }

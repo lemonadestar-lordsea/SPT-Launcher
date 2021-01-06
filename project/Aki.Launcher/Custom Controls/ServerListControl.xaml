@@ -36,7 +36,7 @@ Merijn Hendriks
                          Path=server_list}" Margin="0"
                />
         
-        <Button x:Name="addButton" Grid.Column="2" Margin="5" Style="{StaticResource SPTButtonFlat_NonGeneric}"
+        <Button x:Name="addButton" Grid.Column="2" Margin="5" Style="{StaticResource ButtonFlat_NonGeneric}"
                 Command="{Binding AddCommand, 
                                   RelativeSource={
                                   RelativeSource 

@@ -4,7 +4,7 @@
   "server_connecting": "Подключение к серверу",
   "server_unavailable_format_1": "Сервер по умолчанию '{0}' недоступен.",
   "no_servers_available": "Сервера не найдены. Проверьте список серверов в настройках.",
-  "settings_cog_tooltip": "Меню настроек",
+  "settings_menu": "Меню настроек",
   "back": "Назад",
   "wipe": "Удалить",
   "wipe_profile": "Удалить профиль",
@@ -60,5 +60,9 @@
   "minimize_action": "Минимизировать",
   "do_nothing_action": "Ничего не делать",
   "exit_action": "Закрыть Launcher",
-  "launcher_start_game_action": "Пусковая установка Запуск игры Действие"
+  "launcher_start_game_action": "Пусковая установка Запуск игры Действие",
+  "game": "Игра",
+  "new_password": "Новый пароль",
+  "wipe_warning_format_2": "Для изменения выпуска учетной записи требуется очистка профиля.\n'{0}' -> '{1}'\nВы действительно хотите очистить свой профиль?",
+  "cancel": "отменить"
 }

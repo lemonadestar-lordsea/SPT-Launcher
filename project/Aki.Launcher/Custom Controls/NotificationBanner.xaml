@@ -42,7 +42,7 @@ waffle.lord
                    Margin="5"
                    />
         
-        <Button Grid.Column="1" Style="{StaticResource SPTButtonFlat_NonGeneric}"
+        <Button Grid.Column="1" Style="{StaticResource ButtonFlat_NonGeneric}"
                 Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                 Click="Button_Click"
                 Visibility="{Binding NotificationQueue.queue[0].HasButton, 

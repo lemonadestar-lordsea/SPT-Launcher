@@ -55,7 +55,7 @@ Merijn Hendriks
                             Path=AllowSettings}"
                 />
         <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                          Path=wipe}" Grid.Row="6" Grid.ColumnSpan="6" Style="{StaticResource SPTBigButtonStyle}"
+                          Path=wipe}" Grid.Row="6" Grid.ColumnSpan="6" Style="{StaticResource BigButtonStyle}"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                 Command="{Binding WipeCommand}"
                 />

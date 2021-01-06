@@ -57,7 +57,7 @@ Merijn Hendriks
                HorizontalAlignment="Center"
                />
 
-        <Button x:Name="saveButton" Grid.Column="4" Margin="5" Style="{StaticResource SPTButtonFlat_NonGeneric}"
+        <Button x:Name="saveButton" Grid.Column="4" Margin="5" Style="{StaticResource ButtonFlat_NonGeneric}"
                 Command="{Binding SaveCommand, 
                                   RelativeSource={
                                   RelativeSource 

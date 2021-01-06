@@ -1,7 +1,8 @@
 ﻿using Aki.Launcher.Models.Launcher;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Aki.Launcher.Custom_Controls
 {
@@ -15,13 +16,21 @@ namespace Aki.Launcher.Custom_Controls
             InitializeComponent();
         }
 
-        public static readonly DependencyProperty MenuBarItemCollectionProperty =
-            DependencyProperty.Register("MenuBarItemCollection", typeof(List<MenuBarItem>), typeof(MenuBarControl), new PropertyMetadata(default));
+        public static readonly DependencyProperty ItemCollectionProperty =
+            DependencyProperty.Register("ItemCollection", typeof(ObservableCollection<MenuBarItem>), typeof(MenuBarControl), new PropertyMetadata(default));
 
-        public List<MenuBarItem> MenuBarItemCollection
+        public ObservableCollection<MenuBarItem> ItemCollection
         {
-            get => (List<MenuBarItem>)GetValue(MenuBarItemCollectionProperty);
-            set => SetValue(MenuBarItemCollectionProperty, value);
+            get => (ObservableCollection<MenuBarItem>)GetValue(ItemCollectionProperty);
+            set => SetValue(ItemCollectionProperty, value);
+        }
+
+        public static readonly DependencyProperty ItemCollectionCommandProperty =
+            DependencyProperty.Register("ItemCollectionCommand", typeof(ICommand), typeof(MenuBarControl), new PropertyMetadata(null));
+        public ICommand ItemCollectionCommand
+        {
+            get => (ICommand)GetValue(ItemCollectionCommandProperty);
+            set => SetValue(ItemCollectionCommandProperty, value);
         }
     }
 }

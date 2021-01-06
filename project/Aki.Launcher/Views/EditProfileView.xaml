@@ -22,59 +22,85 @@ Merijn Hendriks
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="AUTO"/>
-            <ColumnDefinition Width="AUTO"/>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="AUTO"/>
             <RowDefinition Height="AUTO"/>
-            <RowDefinition Height="AUTO"/>
-            <RowDefinition Height="AUTO"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="AUTO"/>
         </Grid.RowDefinitions>
 
-        <!-- Email Controls -->
-        <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                         Path=email}" Grid.Column="1" Grid.Row="1"
+        <!-- Grid Card -->
+            <!-- Title -->
+            <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
+                Path=edit_profile}" Grid.Row="1" Grid.Column="1" FontSize="15" FontWeight="SemiBold"
                    />
-        <TextBox Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1"
+
+        <Grid Grid.Row="2" Grid.Column="1" Style="{StaticResource GridCardStyle}"
+              MinHeight="250" MinWidth="400">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="AUTO"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="AUTO"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="AUTO"/>
+            </Grid.RowDefinitions>
+
+
+            <!-- Email Controls -->
+            <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
+                         Path=email}"
+                   />
+            <TextBox Grid.Column="1" Grid.ColumnSpan="3" Margin="10 5"
                  Text="{Binding login.Email}"
                  IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
                             Path=AllowSettings}"
                  />
 
-        <!-- Password Controls -->
-        <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                         Path=password}" Grid.Column="1" Grid.Row="2"
+            <!-- Password Controls -->
+            <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
+                         Path=password}" Grid.Row="1"
                />
 
-        <PasswordBox x:Name="passBox" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2"
+            <PasswordBox x:Name="passBox" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Margin="10 5"
                      IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
                             Path=AllowSettings}"
                      />
 
-        <!-- Addtional Controls -->
-        <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                         Path=back}" Grid.Column="2" Grid.Row="4"
+            <!-- Edition Controls -->
+            <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
+                         Path=edition}" Grid.Row="2"
+                   />
+            <ComboBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="10 5"
+                  ItemsSource="{Binding ProfileWipe.EditionsCollection.AvailableEditions}"
+                  SelectedValue="{Binding ProfileWipe.EditionsCollection.SelectedEdition}"
+                  SelectedIndex="{Binding ProfileWipe.EditionsCollection.SelectedEditionIndex}"
+                  IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
+                            Path=AllowSettings}"
+                  />
+
+            <!-- Addtional Controls -->
+            <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
+                         Path=back}" Grid.Row="4" HorizontalAlignment="Left" Margin="10"
                 Command="{Binding BackCommand}"
                 IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
                             Path=AllowSettings}"
-                />
-        <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                          Path=wipe_profile}" Grid.Row="4" Grid.Column="3" Margin="5"
-                Command="{Binding WipeProfileCommand}"
-                IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
-                            Path=AllowSettings}"
+                Style="{StaticResource AltButtonStyle}"
                 />
 
-        <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                         Path=update}" Grid.Row="6" Grid.ColumnSpan="6" Style="{StaticResource SPTBigButtonStyle}"
-                HorizontalAlignment="Center" VerticalAlignment="Center"
-                Command="{Binding UpdateCommand}"
+            <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
+                         Path=update}" Grid.Row="4" Grid.ColumnSpan="6" HorizontalAlignment="Right"
+                Command="{Binding UpdateCommand}" Margin="10"
                 CommandParameter="{Binding ElementName=view}"
                 />
+        </Grid>
+
     </Grid>
 </UserControl>

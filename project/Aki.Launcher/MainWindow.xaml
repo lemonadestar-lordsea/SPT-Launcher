@@ -33,14 +33,21 @@ Merijn Hendriks
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="AUTO"/>
+            <ColumnDefinition Width="AUTO"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="AUTO"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!-- Settable Background Image - for senko ;) -->
+        <Image Source="{Binding Source={x:Static helpers:ResourceProvider.BackgroundImagePath}}"
+               Grid.ColumnSpan="3" Grid.Row="1"
+               />
+        
         <!-- Main Navigation View Container -->
-        <DockPanel LastChildFill="True" Grid.Row="1">
+        <DockPanel LastChildFill="True" Grid.Row="1" Grid.ColumnSpan="3">
             <ContentControl DockPanel.Dock="Right" 
                             Content="{Binding navigationViewModel.SelectedViewModel, 
                                               RelativeSource={
@@ -50,48 +57,38 @@ Merijn Hendriks
         </DockPanel>
 
         <!-- Navigation Tool Bar -->
-        <StackPanel Orientation="Horizontal" Background="{StaticResource AKI_Background_Dark}"
-                    Height="40" MouseDown="StackPanel_MouseDown">
-            <Image Source=".\Resources\spt-aki-logo.png" RenderOptions.BitmapScalingMode="Fant"
-                   Margin="10 0"/>
-            <cc:MenuBarButton Content="Game"
-                    Margin="0 0 10 0"
-                    Style="{StaticResource MenuToolbarButtonStyle}"
-                    IsSelected="True"/>
-            <cc:MenuBarButton Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=settings_cog_tooltip}"
-                    Margin="0"
-                    Style="{StaticResource MenuToolbarButtonStyle}"
-                    />
-        </StackPanel>
-        
-        <Button Content="X" HorizontalAlignment="Right"
+        <cc:MenuBarControl Grid.ColumnSpan="3"
+            MouseDown="WindowMove_MouseDown"
+            ItemCollection="{Binding MenuItemCollection, RelativeSource={
+                                     RelativeSource AncestorType=Window}}"
+            ItemCollectionCommand="{Binding MenuItemCommand, RelativeSource={
+                                            RelativeSource AncestorType=Window}}"
+            Background="{StaticResource AKI_Background_Dark}"
+            />
+
+        <!-- App buttons (close and minimize) -->
+        <Button Grid.Column="1" Content="-" HorizontalAlignment="Right" VerticalAlignment="Top"
+                Style="{StaticResource AppButtonStyle}"
+                Command="{Binding MinimizeAppCommand,
+                                  RelativeSource={
+                                  RelativeSource AncestorType=Window}}"
+                />
+
+        <Button Grid.Column="2" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top"
                 Style="{StaticResource AppCloseButtonStyle}"
                 Command="{Binding CloseAppCommand,
                                   RelativeSource={
                                   RelativeSource AncestorType=Window}}"
                 />
 
-            <!-- Settings Button -->
-        <!--<Button x:Name="settingsButton" HorizontalAlignment="Right" Style="{StaticResource IconButtonStyle}"
-                ToolTip="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                          Path=settings_cog_tooltip}"
-                Command="{Binding ShowSettingsCommand,
-                                  RelativeSource={
-                                  RelativeSource AncestorType=Window}}"
-                Visibility="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
-                                            Path=IsEditingSettings,
-                                            Converter={StaticResource IvtBoolToVisibiilty}}"
-                IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
-                            Path=AllowSettings}"
-                >
-            <Path Data="{StaticResource SettingsCog}" Fill="{Binding ElementName=settingsButton, Path=Foreground}"/>
-        </Button>-->
-
-        <!-- Main Navigation Notification Banner -->
-        <cc:NotificationBanner Grid.RowSpan="2" VerticalAlignment="Top"
+        <!-- Navigation Notification Banner -->
+        <cc:NotificationBanner Grid.Row="1"  Grid.ColumnSpan="3" VerticalAlignment="Top"
                                NotificationQueue="{Binding navigationViewModel.NotificationQueue, 
                                                            RelativeSource={
                                                            RelativeSource AncestorType=Window}}"
                                />
+
+
+        <cc:DialogHost x:Name="mainDialogHost" Grid.ColumnSpan="3" Grid.Row="1"/>
     </Grid>
 </Window>
