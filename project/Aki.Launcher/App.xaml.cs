@@ -38,14 +38,11 @@ namespace Aki.Launcher
                 //we only care if we actually logged in, to make sure we can start the game.
                 if(status == 1)
                 {
-                    ServerManager.SelectServer(0);
                     GameStarter gm = new GameStarter();
-
-                    
                     int gameStatus = gm.LaunchGame(ServerManager.SelectedServer, AccountManager.SelectedAccount);
 
                     //Show errors if game doesn't start
-                    switch(gameStatus)
+                    switch (gameStatus)
                     {
                         case -1:
                             MessageBox.Show(LocalizationProvider.Instance.installed_in_live_game_warning);

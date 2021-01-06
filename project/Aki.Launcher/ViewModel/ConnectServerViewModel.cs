@@ -62,10 +62,9 @@ namespace Aki.Launcher.ViewModel
             await ServerManager.LoadDefaultServerAsync(DefaultServer.Url);
 
             //This should only be the server we are loading from default. So it should be safe if the count is equal 1.
-            if (ServerManager.AvailableServers.Count == 1)
+            if (ServerManager.SelectedServer != null)
             {
-                ServerManager.SelectServer(0);
-                RequestHandler.ChangeBackendUrl(ServerManager.AvailableServers[0].backendUrl);
+                RequestHandler.ChangeBackendUrl(ServerManager.SelectedServer.backendUrl);
 
                 if (DefaultServer.AutoLoginCreds == null || DefaultServer.AutoLoginCreds.Username == "" || DefaultServer.AutoLoginCreds.Password == "")
                 {
