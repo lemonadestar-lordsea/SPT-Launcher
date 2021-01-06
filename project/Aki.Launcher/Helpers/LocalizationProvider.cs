@@ -331,15 +331,15 @@ namespace Aki.Launcher.Helpers
         #endregion
 
         #region username
-        private string _email;
+        private string _username;
         public string username
         {
-            get => _email;
+            get => _username;
             set
             {
-                if (_email != value)
+                if (_username != value)
                 {
-                    _email = value;
+                    _username = value;
                     RaisePropertyChanged(nameof(username));
                 }
             }

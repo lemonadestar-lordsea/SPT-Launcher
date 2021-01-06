@@ -50,7 +50,7 @@ Merijn Hendriks
                />
         
         <Label Grid.Column="1">
-            <TextBlock Text="{Binding CurrentEmail}"/>
+            <TextBlock Text="{Binding CurrentUsername}"/>
         </Label>
         
         <!-- Profile Edition -->
