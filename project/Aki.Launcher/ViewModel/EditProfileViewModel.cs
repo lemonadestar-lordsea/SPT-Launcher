@@ -54,7 +54,7 @@ namespace Aki.Launcher.ViewModel
 
         private string GetStatus(int status)
         {
-            switch(status)
+            switch (status)
             {
                 case 1:
                     return "OK";
@@ -72,7 +72,7 @@ namespace Aki.Launcher.ViewModel
 
         public async Task OnUpdateCommand(object parameter)
         {
-            if(parameter is IHavePassword pass)
+            if (parameter is IHavePassword pass)
             {
                 if (!string.IsNullOrWhiteSpace(pass.Password))
                 {
@@ -88,7 +88,7 @@ namespace Aki.Launcher.ViewModel
             LauncherSettingsProvider.Instance.AllowSettings = false;
 
 
-            if(ProfileWipe.EditionsCollection.SelectedEdition != AccountManager.SelectedAccount.edition)
+            if (ProfileWipe.EditionsCollection.SelectedEdition != AccountManager.SelectedAccount.edition)
             {
                 ConfirmationDialog confirmDialog = new ConfirmationDialog(
                     String.Format(LocalizationProvider.Instance.wipe_warning_format_2, AccountManager.SelectedAccount.edition, ProfileWipe.EditionsCollection.SelectedEdition),
@@ -97,7 +97,7 @@ namespace Aki.Launcher.ViewModel
 
                 var confirmWipe = await DialogHost.ShowDialog("mainDialogHost", confirmDialog);
 
-                if(confirmWipe is bool confirmation && confirmation == false)
+                if (confirmWipe is bool confirmation && confirmation == false)
                 {
                     navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.edit_profile_update_error, true);
                     LauncherSettingsProvider.Instance.AllowSettings = true;

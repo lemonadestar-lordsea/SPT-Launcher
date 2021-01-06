@@ -34,7 +34,7 @@ namespace Aki.Launcher.Custom_Controls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(NotificationQueue.queue.Count > 0 && NotificationQueue.queue[0] != null)
+            if (NotificationQueue.queue.Count > 0 && NotificationQueue.queue[0] != null)
             {
                 NotificationQueue.queueTimer.Stop();
                 NotificationQueue.queue[0].ItemAction?.Invoke();

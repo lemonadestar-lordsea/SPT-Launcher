@@ -41,7 +41,7 @@ namespace Aki.Launcher.Helpers
             get => _IsAddingServer;
             set
             {
-                if(_IsAddingServer != value)
+                if (_IsAddingServer != value)
                 {
                     _IsAddingServer = value;
                     RaisePropertyChanged(nameof(IsAddingServer));
@@ -86,7 +86,7 @@ namespace Aki.Launcher.Helpers
             get => _GameRunning;
             set
             {
-                if(_GameRunning != value)
+                if (_GameRunning != value)
                 {
                     _GameRunning = value;
                     RaisePropertyChanged(nameof(GameRunning));
@@ -100,7 +100,7 @@ namespace Aki.Launcher.Helpers
             get => _LauncherStartGameAction;
             set
             {
-                if(_LauncherStartGameAction != value)
+                if (_LauncherStartGameAction != value)
                 {
                     _LauncherStartGameAction = value;
                     RaisePropertyChanged(nameof(LauncherStartGameAction));
@@ -128,7 +128,7 @@ namespace Aki.Launcher.Helpers
             get => _GamePath;
             set
             {
-                if(_GamePath != value)
+                if (_GamePath != value)
                 {
                     _GamePath = value;
                     RaisePropertyChanged(nameof(GamePath));
@@ -140,7 +140,7 @@ namespace Aki.Launcher.Helpers
 
         public Settings()
         {
-            if(!File.Exists(LauncherSettingsProvider.DefaultSettingsFileLocation))
+            if (!File.Exists(LauncherSettingsProvider.DefaultSettingsFileLocation))
             {
                 LauncherStartGameAction = LauncherAction.MinimizeAction;
                 UseAutoLogin = true;

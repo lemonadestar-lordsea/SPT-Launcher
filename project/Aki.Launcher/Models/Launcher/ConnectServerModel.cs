@@ -19,7 +19,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _InfoText;
             set
             {
-                if(_InfoText != value)
+                if (_InfoText != value)
                 {
                     _InfoText = value;
                     RaisePropertyChanged(nameof(InfoText));

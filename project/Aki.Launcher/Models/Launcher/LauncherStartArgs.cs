@@ -19,7 +19,7 @@ namespace Aki.Launcher.Models.Launcher
 
         public LauncherStartArgs(StartupEventArgs sea)
         {
-            if(sea.Args.Length == 2)
+            if (sea.Args.Length == 2)
             {
                 if (sea.Args[0].StartsWith("username:"))
                 {
@@ -31,7 +31,7 @@ namespace Aki.Launcher.Models.Launcher
                     Password = sea.Args[1].Replace("password:", "");
                 }
 
-                if(!String.IsNullOrWhiteSpace(Username) && !String.IsNullOrWhiteSpace(Password))
+                if (!String.IsNullOrWhiteSpace(Username) && !String.IsNullOrWhiteSpace(Password))
                 {
                     HasAuthentication = true;
                 }

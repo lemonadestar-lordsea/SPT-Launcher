@@ -20,7 +20,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _SelectedEditionIndex;
             set
             {
-                if(_SelectedEditionIndex != value)
+                if (_SelectedEditionIndex != value)
                 {
                     _SelectedEditionIndex = value;
                     RaisePropertyChanged(nameof(SelectedEditionIndex));
@@ -34,7 +34,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _SelectedEdition;
             set
             {
-                if(_SelectedEdition != value)
+                if (_SelectedEdition != value)
                 {
                     _SelectedEdition = value;
                     RaisePropertyChanged(nameof(SelectedEdition));

@@ -36,7 +36,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _Url;
             set
             {
-                if(_Url != value)
+                if (_Url != value)
                 {
                     _Url = value;
                     RaisePropertyChanged(nameof(Url));

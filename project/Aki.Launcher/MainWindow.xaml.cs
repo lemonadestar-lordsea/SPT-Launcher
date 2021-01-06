@@ -83,9 +83,9 @@ namespace Aki.Launcher
 
         public void OnMenuItemCommand(object parameter)
         {
-            if(parameter is MenuBarItem menuItem)
+            if (parameter is MenuBarItem menuItem)
             {
-                if(menuItem.IsSelected)
+                if (menuItem.IsSelected)
                 {
                     return;
                 }
@@ -102,7 +102,7 @@ namespace Aki.Launcher
 
         private void WindowMove_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if(e.ChangedButton == MouseButton.Left)
+            if (e.ChangedButton == MouseButton.Left)
             {
                 this.DragMove();
             }

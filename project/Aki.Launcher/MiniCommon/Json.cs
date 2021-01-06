@@ -59,7 +59,7 @@ namespace Aki.Launcher.MiniCommon
 		/// <returns>Returns a class object or null</returns>
 		public static T LoadClassWithoutSaving<T>(string filepath, bool AllowNullValues = false) where T : class
         {
-			if(File.Exists(filepath))
+			if (File.Exists(filepath))
             {
 			    string json = File.ReadAllText(filepath);
 

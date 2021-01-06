@@ -24,7 +24,7 @@ namespace Aki.Launcher.Extensions
 
                 if (Dic.TryGetValue(Keys[x], out tempValue))
                 {
-                    if(tempValue != null && tempValue.Equals(value))
+                    if (tempValue != null && tempValue.Equals(value))
                     {
                         return Keys[x];
                     }

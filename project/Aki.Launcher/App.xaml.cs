@@ -36,7 +36,7 @@ namespace Aki.Launcher
                 int status = AccountManager.Login(startArgs.Username, startArgs.Password);
 
                 //we only care if we actually logged in, to make sure we can start the game.
-                if(status == 1)
+                if (status == 1)
                 {
                     GameStarter gm = new GameStarter();
                     int gameStatus = gm.LaunchGame(ServerManager.SelectedServer, AccountManager.SelectedAccount);
