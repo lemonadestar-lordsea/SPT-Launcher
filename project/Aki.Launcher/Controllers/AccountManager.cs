@@ -145,21 +145,21 @@ namespace Aki.Launcher
 			return 1;
 		}
 
-		public static async Task<int> ChangeEmailAsync(string username)
+		public static async Task<int> ChangeUsernameAsync(string username)
         {
 			return await Task.Run(() =>
 			{
-				return ChangeEmail(username);
+				return ChangeUsername(username);
 			});
         }
-		public static int ChangeEmail(string username)
+		public static int ChangeUsername(string username)
 		{
 			ChangeRequestData data = new ChangeRequestData(SelectedAccount.username, SelectedAccount.password, username);
 			string json = STATUS_FAILED;
 
 			try
 			{
-				json = RequestHandler.RequestChangeEmail(data);
+				json = RequestHandler.RequestChangeUsername(data);
 
 				if (json != STATUS_OK)
 				{

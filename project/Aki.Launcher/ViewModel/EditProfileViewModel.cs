@@ -126,12 +126,12 @@ namespace Aki.Launcher.ViewModel
                 }
             }
 
-            string emailStatus = GetStatus(await AccountManager.ChangeEmailAsync(login.Username));
+            string usernameStatus = GetStatus(await AccountManager.ChangeUsernameAsync(login.Username));
             string passStatus = GetStatus(await AccountManager.ChangePasswordAsync(login.Password));
 
             LauncherSettingsProvider.Instance.AllowSettings = true;
 
-            if (emailStatus == "OK" && passStatus == "OK")
+            if (usernameStatus == "OK" && passStatus == "OK")
             {
                 navigationViewModel.SelectedViewModel = new ProfileViewModel(navigationViewModel);
             }

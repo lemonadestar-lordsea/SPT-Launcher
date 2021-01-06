@@ -13,15 +13,15 @@ namespace Aki.Launcher.Models.Launcher
 {
     public class RegisterModel : INotifyPropertyChanged
     {
-        private string _Email;
+        private string _Username;
         public string Username
         {
-            get => _Email;
+            get => _Username;
             set
             {
-                if (_Email != value)
+                if (_Username != value)
                 {
-                    _Email = value;
+                    _Username = value;
                     RaisePropertyChanged(nameof(Username));
                 }
             }

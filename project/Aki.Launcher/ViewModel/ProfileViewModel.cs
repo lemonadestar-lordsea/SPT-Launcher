@@ -20,7 +20,7 @@ namespace Aki.Launcher.ViewModel
 {
     public class ProfileViewModel
     {
-        public string CurrentEmail { get; set; }
+        public string CurrentUsername { get; set; }
         public string CurrentEdition { get; set; }
         public string CurrentID { get; set; }
         public GenericICommand LogoutCommand { get; set; }
@@ -39,7 +39,7 @@ namespace Aki.Launcher.ViewModel
 
             monitor = new ProcessMonitor("EscapeFromTarkov", 1000, aliveCallback: null, exitCallback: GameExitCallback);
 
-            CurrentEmail = AccountManager.SelectedAccount.username;
+            CurrentUsername = AccountManager.SelectedAccount.username;
             CurrentEdition = AccountManager.SelectedAccount.edition;
             CurrentID = AccountManager.SelectedAccount.id;
         }
