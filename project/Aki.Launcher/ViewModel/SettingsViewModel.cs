@@ -49,14 +49,6 @@ namespace Aki.Launcher.ViewModel
             ClearGameSettingsCommand = new GenericICommand(OnClearGameSettingsCommand);
             #endregion
 
-            #region Server List Commands
-            RemoveServerCommand = new GenericICommand(OnRemoveServerCommand);
-            AddServerCommand = new GenericICommand(OnAddServerCommand);
-            SetServerAsDefaultCommand = new GenericICommand(OnSetServerAsDefaultCommand);
-            SaveNewServerCommand = new GenericICommand(OnSaveNewServerCommand);
-            ShowServerListCommand = new GenericICommand(OnShowServerListCommand);
-            #endregion
-
             ServerSetting tmpSettings = new ServerSetting();
 
             NewServer = tmpSettings;
@@ -157,63 +149,6 @@ namespace Aki.Launcher.ViewModel
             {
                 LauncherSettingsProvider.Instance.GamePath = path;
             }
-        }
-        #endregion
-
-        #region Server List Commands
-        public void OnAddServerCommand(object parameter)
-        {
-            NewServer.Name = "";
-            NewServer.Url = "";
-            NewServer.IsDefault = false;
-
-            LauncherSettingsProvider.Instance.IsAddingServer = true;
-        }
-
-        public void OnRemoveServerCommand(object parameter)
-        {
-            if(parameter is ServerSetting setting)
-            {
-                if (setting.Url == "https://127.0.0.1")
-                {
-                    navigationViewModel.NotificationQueue.Enqueue($"{LocalizationProvider.Instance.local_server_remove_warning}\n\n{LocalizationProvider.Instance.remove_server_question}",
-                                                                          $"{LocalizationProvider.Instance.remove_server_tooltip}", () => 
-                    {
-                        LauncherSettingsProvider.Instance.RemoveServerAndSave(setting);
-                    }, true);
-
-                    return;
-                }
-
-                LauncherSettingsProvider.Instance.RemoveServerAndSave(setting);
-            }
-        }
-
-        public void OnSetServerAsDefaultCommand(object parameter)
-        {
-            if (parameter is ServerSetting setting)
-            {
-                LauncherSettingsProvider.Instance.SetDefaultServerAndSave(setting);
-            }
-        }
-
-        public void OnSaveNewServerCommand(object parameter)
-        {
-            ServerAddStatus addStatus = LauncherSettingsProvider.Instance.AddServerAndSave(NewServer);
-
-            if(addStatus.AddSucceeded)
-            {
-                LauncherSettingsProvider.Instance.IsAddingServer = false;
-            }
-            else
-            {
-                navigationViewModel.NotificationQueue.Enqueue(addStatus.Message);
-            }
-        }
-
-        public void OnShowServerListCommand(object parameter)
-        {
-            LauncherSettingsProvider.Instance.IsAddingServer = false;
         }
         #endregion
     }
