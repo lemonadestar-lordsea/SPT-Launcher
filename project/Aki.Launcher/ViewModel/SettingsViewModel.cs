@@ -30,7 +30,6 @@ namespace Aki.Launcher.ViewModel
         public GenericICommand SelectGameFolderCommand { get; set; }
         public GenericICommand RemoveRegistryKeysCommand { get; set; }
         public GenericICommand ClearGameSettingsCommand { get; set; }
-        public ServerSetting NewServer { get; set; }
         public LocaleCollection Locales { get; set; } = new LocaleCollection();
         //private NavigationViewModel fullSpanNavigationViewModel { get; set; }
         private NavigationViewModel navigationViewModel { get; set; }
@@ -49,16 +48,12 @@ namespace Aki.Launcher.ViewModel
             ClearGameSettingsCommand = new GenericICommand(OnClearGameSettingsCommand);
             #endregion
 
-            ServerSetting tmpSettings = new ServerSetting();
-
-            NewServer = tmpSettings;
-
             Application.Current.MainWindow.Closing += MainWindow_Closing;
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if(LauncherSettingsProvider.Instance.IsEditingSettings)
+            if (LauncherSettingsProvider.Instance.IsEditingSettings)
             {
                 LauncherSettingsProvider.Instance.SaveSettings();
             }
@@ -75,7 +70,7 @@ namespace Aki.Launcher.ViewModel
             {
                 WinForms.DialogResult result = dialog.ShowDialog();
 
-                if(result == WinForms.DialogResult.OK && !String.IsNullOrEmpty(dialog.SelectedPath))
+                if (result == WinForms.DialogResult.OK && !String.IsNullOrEmpty(dialog.SelectedPath))
                 {
                     return dialog.SelectedPath;
                 }
@@ -99,7 +94,7 @@ namespace Aki.Launcher.ViewModel
         {
             bool filesCleared = gameStarter.CleanTempFiles();
 
-            if(filesCleared)
+            if (filesCleared)
             {
                 navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.clean_temp_files_succeeded, true);
             }
@@ -113,7 +108,7 @@ namespace Aki.Launcher.ViewModel
         {
             bool regKeysRemoved = gameStarter.RemoveRegisteryKeys();
 
-            if(regKeysRemoved)
+            if (regKeysRemoved)
             {
                 navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.remove_registry_keys_succeeded, true);
             }
@@ -127,11 +122,11 @@ namespace Aki.Launcher.ViewModel
         {
             string EFTSettingsFolder = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Escape from Tarkov";
 
-            if(Directory.Exists(EFTSettingsFolder))
+            if (Directory.Exists(EFTSettingsFolder))
             {
                 Directory.Delete(EFTSettingsFolder, true);
 
-                if(Directory.Exists(EFTSettingsFolder))
+                if (Directory.Exists(EFTSettingsFolder))
                 {
                     navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.clear_game_settings_failed, true);
                     return;
@@ -145,7 +140,7 @@ namespace Aki.Launcher.ViewModel
         {
             string path = GetFolderPath();
 
-            if(!String.IsNullOrEmpty(path))
+            if (!String.IsNullOrEmpty(path))
             {
                 LauncherSettingsProvider.Instance.GamePath = path;
             }
