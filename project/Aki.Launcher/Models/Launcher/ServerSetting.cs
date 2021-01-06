@@ -44,20 +44,6 @@ namespace Aki.Launcher.Models.Launcher
             }
         }
 
-        private bool _IsDefault;
-        public bool IsDefault
-        {
-            get => _IsDefault;
-            set
-            {
-                if(_IsDefault != value)
-                {
-                    _IsDefault = value;
-                    RaisePropertyChanged(nameof(IsDefault));
-                }
-            }
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void RaisePropertyChanged(string property)

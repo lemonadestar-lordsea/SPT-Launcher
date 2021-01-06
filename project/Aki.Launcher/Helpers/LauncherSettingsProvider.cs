@@ -146,7 +146,7 @@ namespace Aki.Launcher.Helpers
                 UseAutoLogin = true;
                 GamePath = Environment.CurrentDirectory;
 
-                Server = new ServerSetting { Name = "SPT-AKI", Url = "https://127.0.0.1", IsDefault = true };
+                Server = new ServerSetting { Name = "SPT-AKI", Url = "https://127.0.0.1" };
                 SaveSettings();
             }
         }
