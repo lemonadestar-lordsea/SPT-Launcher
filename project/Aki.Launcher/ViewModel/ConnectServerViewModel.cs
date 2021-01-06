@@ -38,12 +38,12 @@ namespace Aki.Launcher.ViewModel
 
         public async Task OnRetryAsyncCommand()
         {
-            if(!LauncherSettingsProvider.Instance.AllowSettings)
+            if (!LauncherSettingsProvider.Instance.AllowSettings)
             {
                 return;
             }
 
-            if(LauncherSettingsProvider.Instance.Server == null)
+            if (LauncherSettingsProvider.Instance.Server == null)
             {
                 connectInfo.InfoText = LocalizationProvider.Instance.no_servers_available;
                 return;
@@ -54,7 +54,7 @@ namespace Aki.Launcher.ViewModel
 
             ServerSetting DefaultServer = LauncherSettingsProvider.Instance.Server;
 
-            if(DefaultServer == null)
+            if (DefaultServer == null)
             {
                 return;
             }

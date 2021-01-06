@@ -22,7 +22,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _SelectedLocale;
             set
             {
-                if(_SelectedLocale != value)
+                if (_SelectedLocale != value)
                 {
                     _SelectedLocale = value;
                     RaisePropertyChanged(nameof(SelectedLocale));

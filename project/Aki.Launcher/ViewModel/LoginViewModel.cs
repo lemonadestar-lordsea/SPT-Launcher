@@ -53,7 +53,7 @@ namespace Aki.Launcher.ViewModel
 
         public async Task OnLoginCommand(object parameter)
         {
-            if(parameter is IHavePassword pass)
+            if (parameter is IHavePassword pass)
             {
                 //a little redundent, but whatever...
                 login.Password = pass.Password;

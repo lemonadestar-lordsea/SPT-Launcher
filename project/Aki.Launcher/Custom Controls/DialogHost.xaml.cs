@@ -51,13 +51,13 @@ namespace Aki.Launcher.Custom_Controls
 
             //find the dialog host by name
             object frameworkElement = Application.Current.MainWindow.FindName(HostName);
-            if(frameworkElement is DialogHost dh)
+            if (frameworkElement is DialogHost dh)
             {
                 //set our temp host
                 host = dh;
             }
 
-            if(host == null)
+            if (host == null)
             {
                 //no dialog found
                 return null;
@@ -138,7 +138,7 @@ namespace Aki.Launcher.Custom_Controls
 
         private static void DialogWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if(sender is DialogHost dh)
+            if (sender is DialogHost dh)
             {
                 dh.Opacity = 0;
                 DoubleAnimation doubleAnimation = new DoubleAnimation(1, TimeSpan.FromMilliseconds(300));

@@ -83,7 +83,7 @@ namespace Aki.Launcher.ViewModel
                 case 1:
                     monitor.Start();
 
-                    switch(LauncherSettingsProvider.Instance.LauncherStartGameAction)
+                    switch (LauncherSettingsProvider.Instance.LauncherStartGameAction)
                     {
                         case LauncherAction.MinimizeAction:
                             {
@@ -121,7 +121,7 @@ namespace Aki.Launcher.ViewModel
             LauncherSettingsProvider.Instance.GameRunning = false;
 
             //Make sure the call to MainWindow happens on the UI thread.
-            switch(LauncherSettingsProvider.Instance.LauncherStartGameAction)
+            switch (LauncherSettingsProvider.Instance.LauncherStartGameAction)
             {
                 case LauncherAction.MinimizeAction:
                     {

@@ -29,7 +29,7 @@ namespace Aki.Launcher.Models.Launcher.Notifications
             get => _ShowBanner;
             set
             {
-                if(_ShowBanner != value)
+                if (_ShowBanner != value)
                 {
                     _ShowBanner = value;
                     RaisePropertyChanged(nameof(ShowBanner));
@@ -63,7 +63,7 @@ namespace Aki.Launcher.Models.Launcher.Notifications
 
         private void CheckAndShowNotifications()
         {
-            if(!queueTimer.Enabled)
+            if (!queueTimer.Enabled)
             {
                 ShowBanner = true;
                 queueTimer.Start();
@@ -78,7 +78,7 @@ namespace Aki.Launcher.Models.Launcher.Notifications
 
                 CheckAndShowNotifications();
 
-                if(AllowNext && queue.Count == 2)
+                if (AllowNext && queue.Count == 2)
                 {
                     Next(true);
                 }
@@ -107,7 +107,7 @@ namespace Aki.Launcher.Models.Launcher.Notifications
                 return;
             }
 
-            if(ResetTimer)
+            if (ResetTimer)
             {
                 queueTimer.Stop();
                 queueTimer.Start();
@@ -126,7 +126,7 @@ namespace Aki.Launcher.Models.Launcher.Notifications
         {
             animateChangeTimer.Stop();
 
-            if(queue.Count > 0)
+            if (queue.Count > 0)
             {
                 queue.RemoveAt(0);
             }

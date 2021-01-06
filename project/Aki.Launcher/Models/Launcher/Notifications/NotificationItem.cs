@@ -48,7 +48,7 @@ namespace Aki.Launcher.Models.Launcher.Notifications
             get => _HasButton;
             set
             {
-                if(_HasButton != value)
+                if (_HasButton != value)
                 {
                     _HasButton = value;
                     RaisePropertyChanged(nameof(HasButton));

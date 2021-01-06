@@ -11,7 +11,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _Name;
             set
             {
-                if(_Name != value)
+                if (_Name != value)
                 {
                     _Name = value;
                     RaisePropertyChanged(nameof(Name));
@@ -25,7 +25,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _IsSelected;
             set
             {
-                if(_IsSelected != value)
+                if (_IsSelected != value)
                 {
                     _IsSelected = value;
                     RaisePropertyChanged(nameof(IsSelected));
@@ -39,7 +39,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _ItemAction;
             set
             {
-                if(_ItemAction != value)
+                if (_ItemAction != value)
                 {
                     _ItemAction = value;
                     RaisePropertyChanged(nameof(ItemAction));

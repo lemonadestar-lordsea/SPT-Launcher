@@ -43,7 +43,7 @@ namespace Aki.Launcher.ViewModel
 
         public async Task OnRegisterCommand(object parameter)
         {
-            if(parameter is IHavePassword pass)
+            if (parameter is IHavePassword pass)
             {
                 newProfile.Password = pass.Password;
             }

@@ -19,7 +19,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _Email;
             set
             {
-                if(_Email != value)
+                if (_Email != value)
                 {
                     _Email = value;
                     RaisePropertyChanged(nameof(Username));
@@ -33,7 +33,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _Password;
             set
             {
-                if(_Password != value)
+                if (_Password != value)
                 {
                     _Password = value;
                     RaisePropertyChanged(nameof(Password));

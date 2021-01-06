@@ -37,7 +37,7 @@ namespace Aki.Launcher.Helpers
 
             LocaleData newLocale = Json.LoadClassWithoutSaving<LocaleData>($"{DefaultLocaleFolderPath}\\{localeRomanName}.json");
 
-            if(newLocale != null)
+            if (newLocale != null)
             {
                 foreach(var prop in Instance.GetType().GetProperties())
                 {
@@ -57,13 +57,13 @@ namespace Aki.Launcher.Helpers
 
             var regexMatch = Regex.Match(UIlocaleName, @"^(\w+)");
 
-            if(regexMatch.Groups.Count == 2)
+            if (regexMatch.Groups.Count == 2)
             {
                 string localRomanName = LocaleNameDictionary.GetValueOrDefault(regexMatch.Groups[1].Value, "");
 
                 bool localExists = GetAvailableLocales().Where(x => x == localRomanName).Count() > 0;
 
-                if(localExists)
+                if (localExists)
                 {
                     return localRomanName;
                 }
@@ -193,7 +193,7 @@ namespace Aki.Launcher.Helpers
             get => _native_name;
             set
             {
-                if(_native_name != value)
+                if (_native_name != value)
                 {
                     _native_name = value;
                     RaisePropertyChanged(nameof(native_name));
@@ -209,7 +209,7 @@ namespace Aki.Launcher.Helpers
             get => _retry;
             set
             {
-                if(_retry != value)
+                if (_retry != value)
                 {
                     _retry = value;
                     RaisePropertyChanged(nameof(retry));
@@ -225,7 +225,7 @@ namespace Aki.Launcher.Helpers
             get => _server_connecting;
             set
             {
-                if(_server_connecting != value)
+                if (_server_connecting != value)
                 {
                     _server_connecting = value;
                     RaisePropertyChanged(nameof(server_connecting));
@@ -241,7 +241,7 @@ namespace Aki.Launcher.Helpers
             get => _server_unavailable_format_1;
             set
             {
-                if(_server_unavailable_format_1 != value)
+                if (_server_unavailable_format_1 != value)
                 {
                     _server_unavailable_format_1 = value;
                     RaisePropertyChanged(nameof(server_unavailable_format_1));
@@ -257,7 +257,7 @@ namespace Aki.Launcher.Helpers
             get => _no_servers_available;
             set
             {
-                if(_no_servers_available != value)
+                if (_no_servers_available != value)
                 {
                     _no_servers_available = value;
                     RaisePropertyChanged(nameof(no_servers_available));
@@ -273,7 +273,7 @@ namespace Aki.Launcher.Helpers
             get => _settings_menu;
             set
             {
-                if(_settings_menu != value)
+                if (_settings_menu != value)
                 {
                     _settings_menu = value;
                     RaisePropertyChanged(nameof(settings_menu));
@@ -289,7 +289,7 @@ namespace Aki.Launcher.Helpers
             get => _back;
             set
             {
-                if(_back != value)
+                if (_back != value)
                 {
                     _back = value;
                     RaisePropertyChanged(nameof(back));
@@ -305,7 +305,7 @@ namespace Aki.Launcher.Helpers
             get => _wipe;
             set
             {
-                if(_wipe != value)
+                if (_wipe != value)
                 {
                     _wipe = value;
                     RaisePropertyChanged(nameof(wipe));
@@ -321,7 +321,7 @@ namespace Aki.Launcher.Helpers
             get => _wipe_profile;
             set
             {
-                if(_wipe_profile != value)
+                if (_wipe_profile != value)
                 {
                     _wipe_profile = value;
                     RaisePropertyChanged(nameof(wipe_profile));
@@ -337,7 +337,7 @@ namespace Aki.Launcher.Helpers
             get => _email;
             set
             {
-                if(_email != value)
+                if (_email != value)
                 {
                     _email = value;
                     RaisePropertyChanged(nameof(username));
@@ -353,7 +353,7 @@ namespace Aki.Launcher.Helpers
             get => _password;
             set
             {
-                if(_password != value)
+                if (_password != value)
                 {
                     _password = value;
                     RaisePropertyChanged(nameof(password));
@@ -369,7 +369,7 @@ namespace Aki.Launcher.Helpers
             get => _update;
             set
             {
-                if(_update != value)
+                if (_update != value)
                 {
                     _update = value;
                     RaisePropertyChanged(nameof(update));
@@ -385,7 +385,7 @@ namespace Aki.Launcher.Helpers
             get => _edit_profile_update_error;
             set
             {
-                if(_edit_profile_update_error != value)
+                if (_edit_profile_update_error != value)
                 {
                     _edit_profile_update_error = value;
                     RaisePropertyChanged(nameof(edit_profile_update_error));
@@ -401,7 +401,7 @@ namespace Aki.Launcher.Helpers
             get => _register;
             set
             {
-                if(_register != value)
+                if (_register != value)
                 {
                     _register = value;
                     RaisePropertyChanged(nameof(register));
@@ -417,7 +417,7 @@ namespace Aki.Launcher.Helpers
             get => _go_to_register;
             set
             {
-                if(_go_to_register != value)
+                if (_go_to_register != value)
                 {
                     _go_to_register = value;
                     RaisePropertyChanged(nameof(_go_to_register));
@@ -433,7 +433,7 @@ namespace Aki.Launcher.Helpers
             get => _login;
             set
             {
-                if(_login != value)
+                if (_login != value)
                 {
                     _login = value;
                     RaisePropertyChanged(nameof(login));
@@ -449,7 +449,7 @@ namespace Aki.Launcher.Helpers
             get => _go_to_login;
             set
             {
-                if(_go_to_login != value)
+                if (_go_to_login != value)
                 {
                     _go_to_login = value;
                     RaisePropertyChanged(nameof(go_to_login));
@@ -465,7 +465,7 @@ namespace Aki.Launcher.Helpers
             get => _login_automatically;
             set
             {
-                if(_login_automatically != value)
+                if (_login_automatically != value)
                 {
                     _login_automatically = value;
                     RaisePropertyChanged(nameof(login_automatically));
@@ -481,7 +481,7 @@ namespace Aki.Launcher.Helpers
             get => _incorrect_login;
             set
             {
-                if(_incorrect_login != value)
+                if (_incorrect_login != value)
                 {
                     _incorrect_login = value;
                     RaisePropertyChanged(nameof(incorrect_login));
@@ -497,7 +497,7 @@ namespace Aki.Launcher.Helpers
             get => _login_failed;
             set
             {
-                if(_login_failed != value)
+                if (_login_failed != value)
                 {
                     _login_failed = value;
                     RaisePropertyChanged(nameof(login_failed));
@@ -513,7 +513,7 @@ namespace Aki.Launcher.Helpers
             get => _edition;
             set
             {
-                if(_edition != value)
+                if (_edition != value)
                 {
                     _edition = value;
                     RaisePropertyChanged(nameof(edition));
@@ -529,7 +529,7 @@ namespace Aki.Launcher.Helpers
             get => _id;
             set
             {
-                if(_id != value)
+                if (_id != value)
                 {
                     _id = value;
                     RaisePropertyChanged(nameof(id));
@@ -545,7 +545,7 @@ namespace Aki.Launcher.Helpers
             get => _logout;
             set
             {
-                if(_logout != value)
+                if (_logout != value)
                 {
                     _logout = value;
                     RaisePropertyChanged(nameof(logout));
@@ -561,7 +561,7 @@ namespace Aki.Launcher.Helpers
             get => _edit_profile;
             set
             {
-                if(_edit_profile != value)
+                if (_edit_profile != value)
                 {
                     _edit_profile = value;
                     RaisePropertyChanged(nameof(edit_profile));
@@ -593,7 +593,7 @@ namespace Aki.Launcher.Helpers
             get => _installed_in_live_game_warning;
             set
             {
-                if(_installed_in_live_game_warning != value)
+                if (_installed_in_live_game_warning != value)
                 {
                     _installed_in_live_game_warning = value;
                     RaisePropertyChanged(nameof(installed_in_live_game_warning));
@@ -609,7 +609,7 @@ namespace Aki.Launcher.Helpers
             get => _no_official_game_warning;
             set
             {
-                if(_no_official_game_warning != value)
+                if (_no_official_game_warning != value)
                 {
                     _no_official_game_warning = value;
                     RaisePropertyChanged(nameof(no_official_game_warning));
@@ -625,7 +625,7 @@ namespace Aki.Launcher.Helpers
             get => _eft_exe_not_found_warning;
             set
             {
-                if(_eft_exe_not_found_warning != value)
+                if (_eft_exe_not_found_warning != value)
                 {
                     _eft_exe_not_found_warning = value;
                     RaisePropertyChanged(nameof(eft_exe_not_found_warning));
@@ -641,7 +641,7 @@ namespace Aki.Launcher.Helpers
             get => _account_exist;
             set
             {
-                if(_account_exist != value)
+                if (_account_exist != value)
                 {
                     _account_exist = value;
                     RaisePropertyChanged(nameof(account_exist));
@@ -657,7 +657,7 @@ namespace Aki.Launcher.Helpers
             get => _local_server_remove_warning;
             set
             {
-                if(_local_server_remove_warning != value)
+                if (_local_server_remove_warning != value)
                 {
                     _local_server_remove_warning = value;
                     RaisePropertyChanged(nameof(local_server_remove_warning));
@@ -673,7 +673,7 @@ namespace Aki.Launcher.Helpers
             get => _remove_server_question;
             set
             {
-                if(_remove_server_question != value)
+                if (_remove_server_question != value)
                 {
                     _remove_server_question = value;
                     RaisePropertyChanged(nameof(remove_server_question));
@@ -689,7 +689,7 @@ namespace Aki.Launcher.Helpers
             get => _exit_setttings_tooltip;
             set
             {
-                if(_exit_setttings_tooltip != value)
+                if (_exit_setttings_tooltip != value)
                 {
                     _exit_setttings_tooltip = value;
                     RaisePropertyChanged(nameof(exit_settings_tooltip));
@@ -705,7 +705,7 @@ namespace Aki.Launcher.Helpers
             get => _name;
             set
             {
-                if(_name != value)
+                if (_name != value)
                 {
                     _name = value;
                     RaisePropertyChanged(nameof(name));
@@ -721,7 +721,7 @@ namespace Aki.Launcher.Helpers
             get => _save;
             set
             {
-                if(_save != value)
+                if (_save != value)
                 {
                     _save = value;
                     RaisePropertyChanged(nameof(save));
@@ -737,7 +737,7 @@ namespace Aki.Launcher.Helpers
             get => _url;
             set
             {
-                if(_url != value)
+                if (_url != value)
                 {
                     _url = value;
                     RaisePropertyChanged(nameof(url));
@@ -753,7 +753,7 @@ namespace Aki.Launcher.Helpers
             get => _new_server;
             set
             {
-                if(_new_server != value)
+                if (_new_server != value)
                 {
                     _new_server = value;
                     RaisePropertyChanged(nameof(new_server));
@@ -769,7 +769,7 @@ namespace Aki.Launcher.Helpers
             get => _server_list_back_arrow_tooltip;
             set
             {
-                if(_server_list_back_arrow_tooltip != value)
+                if (_server_list_back_arrow_tooltip != value)
                 {
                     _server_list_back_arrow_tooltip = value;
                     RaisePropertyChanged(nameof(server_list_back_arrow_tooltip));
@@ -785,7 +785,7 @@ namespace Aki.Launcher.Helpers
             get => _make_default;
             set
             {
-                if(_make_default != value)
+                if (_make_default != value)
                 {
                     _make_default = value;
                     RaisePropertyChanged(nameof(make_default));
@@ -802,7 +802,7 @@ namespace Aki.Launcher.Helpers
             get => _default;
             set
             {
-                if(_default != value)
+                if (_default != value)
                 {
                     _default = value;
                     RaisePropertyChanged(nameof(@default));
@@ -818,7 +818,7 @@ namespace Aki.Launcher.Helpers
             get => _server_list;
             set
             {
-                if(_server_list != value)
+                if (_server_list != value)
                 {
                     _server_list = value;
                     RaisePropertyChanged(nameof(server_list));
@@ -834,7 +834,7 @@ namespace Aki.Launcher.Helpers
             get => _add;
             set
             {
-                if(_add != value)
+                if (_add != value)
                 {
                     _add = value;
                     RaisePropertyChanged(nameof(add));
@@ -850,7 +850,7 @@ namespace Aki.Launcher.Helpers
             get => _remove_server_tooltip;
             set
             {
-                if(_remove_server_tooltip != value)
+                if (_remove_server_tooltip != value)
                 {
                     _remove_server_tooltip = value;
                     RaisePropertyChanged(nameof(remove_server_tooltip));
@@ -866,7 +866,7 @@ namespace Aki.Launcher.Helpers
             get => _default_language;
             set
             {
-                if(_default_language != value)
+                if (_default_language != value)
                 {
                     _default_language = value;
                     RaisePropertyChanged(nameof(default_language));
@@ -882,7 +882,7 @@ namespace Aki.Launcher.Helpers
             get => _game_path;
             set
             {
-                if(_game_path != value)
+                if (_game_path != value)
                 {
                     _game_path = value;
                     RaisePropertyChanged(nameof(game_path));
@@ -898,7 +898,7 @@ namespace Aki.Launcher.Helpers
             get => _clear_game_settings;
             set
             {
-                if(_clear_game_settings != value)
+                if (_clear_game_settings != value)
                 {
                     _clear_game_settings = value;
                     RaisePropertyChanged(nameof(clear_game_settings));
@@ -914,7 +914,7 @@ namespace Aki.Launcher.Helpers
             get => _clear_game_settings_succeeded;
             set
             {
-                if(_clear_game_settings_succeeded != value)
+                if (_clear_game_settings_succeeded != value)
                 {
                     _clear_game_settings_succeeded = value;
                     RaisePropertyChanged(nameof(clear_game_settings_succeeded));
@@ -930,7 +930,7 @@ namespace Aki.Launcher.Helpers
             get => _clear_game_settings_failed;
             set
             {
-                if(_clear_game_settings_failed != value)
+                if (_clear_game_settings_failed != value)
                 {
                     _clear_game_settings_failed = value;
                     RaisePropertyChanged(nameof(clear_game_settings_failed));
@@ -946,7 +946,7 @@ namespace Aki.Launcher.Helpers
             get => _remove_registry_keys;
             set
             {
-                if(_remove_registry_keys != value)
+                if (_remove_registry_keys != value)
                 {
                     _remove_registry_keys = value;
                     RaisePropertyChanged(nameof(remove_registry_keys));
@@ -962,7 +962,7 @@ namespace Aki.Launcher.Helpers
             get => _remove_registry_keys_succeeded;
             set
             {
-                if(_remove_registry_keys_succeeded != value)
+                if (_remove_registry_keys_succeeded != value)
                 {
                     _remove_registry_keys_succeeded = value;
                     RaisePropertyChanged(nameof(remove_registry_keys_succeeded));
@@ -978,7 +978,7 @@ namespace Aki.Launcher.Helpers
             get => _remove_registry_keys_failed;
             set
             {
-                if(_remove_registry_keys_failed != value)
+                if (_remove_registry_keys_failed != value)
                 {
                     _remove_registry_keys_failed = value;
                     RaisePropertyChanged(nameof(remove_registry_keys_failed));
@@ -994,7 +994,7 @@ namespace Aki.Launcher.Helpers
             get => _clean_temp_files;
             set
             {
-                if(_clean_temp_files != value)
+                if (_clean_temp_files != value)
                 {
                     _clean_temp_files = value;
                     RaisePropertyChanged(nameof(clean_temp_files));
@@ -1010,7 +1010,7 @@ namespace Aki.Launcher.Helpers
             get => _clean_temp_files_succeeded;
             set
             {
-                if(_clean_temp_files_succeeded != value)
+                if (_clean_temp_files_succeeded != value)
                 {
                     _clean_temp_files_succeeded = value;
                     RaisePropertyChanged(nameof(clean_temp_files_succeeded));
@@ -1026,7 +1026,7 @@ namespace Aki.Launcher.Helpers
             get => _clean_temp_files_failed;
             set
             {
-                if(_clean_temp_files_failed != value)
+                if (_clean_temp_files_failed != value)
                 {
                     _clean_temp_files_failed = value;
                     RaisePropertyChanged(nameof(clean_temp_files_failed));
@@ -1042,7 +1042,7 @@ namespace Aki.Launcher.Helpers
             get => _select_folder;
             set
             {
-                if(_select_folder != value)
+                if (_select_folder != value)
                 {
                     _select_folder = value;
                     RaisePropertyChanged(nameof(select_folder));
@@ -1058,7 +1058,7 @@ namespace Aki.Launcher.Helpers
             get => _server_url_and_name_empty;
             set
             {
-                if(_server_url_and_name_empty != value)
+                if (_server_url_and_name_empty != value)
                 {
                     _server_url_and_name_empty = value;
                     RaisePropertyChanged(nameof(server_url_and_name_empty));
@@ -1074,7 +1074,7 @@ namespace Aki.Launcher.Helpers
             get => _server_url_exists;
             set
             {
-                if(_server_url_exists != value)
+                if (_server_url_exists != value)
                 {
                     _server_url_exists = value;
                     RaisePropertyChanged(nameof(server_url_exists));
@@ -1090,7 +1090,7 @@ namespace Aki.Launcher.Helpers
             get => _server_name_exists;
             set
             {
-                if(_server_name_exists != value)
+                if (_server_name_exists != value)
                 {
                     _server_name_exists = value;
                     RaisePropertyChanged(nameof(server_name_exists));
@@ -1106,7 +1106,7 @@ namespace Aki.Launcher.Helpers
             get => _registration_failed;
             set
             {
-                if(_registration_failed != value)
+                if (_registration_failed != value)
                 {
                     _registration_failed = value;
                     RaisePropertyChanged(nameof(registration_failed));
@@ -1122,7 +1122,7 @@ namespace Aki.Launcher.Helpers
             get => _minimize_action;
             set
             {
-                if(_minimize_action != value)
+                if (_minimize_action != value)
                 {
                     _minimize_action = value;
                     RaisePropertyChanged(nameof(minimize_action));
@@ -1138,7 +1138,7 @@ namespace Aki.Launcher.Helpers
             get => _do_nothing_action;
             set
             {
-                if(_do_nothing_action != value)
+                if (_do_nothing_action != value)
                 {
                     _do_nothing_action = value;
                     RaisePropertyChanged(nameof(do_nothing_action));
@@ -1154,7 +1154,7 @@ namespace Aki.Launcher.Helpers
             get => _exit_action;
             set
             {
-                if(_exit_action != value)
+                if (_exit_action != value)
                 {
                     _exit_action = value;
                     RaisePropertyChanged(nameof(exit_action));
@@ -1170,7 +1170,7 @@ namespace Aki.Launcher.Helpers
             get => _launcher_start_game_action;
             set
             {
-                if(_launcher_start_game_action != value)
+                if (_launcher_start_game_action != value)
                 {
                     _launcher_start_game_action = value;
                     RaisePropertyChanged(nameof(launcher_start_game_action));
@@ -1186,7 +1186,7 @@ namespace Aki.Launcher.Helpers
             get => _game;
             set
             {
-                if(_game != value)
+                if (_game != value)
                 {
                     _game = value;
                     RaisePropertyChanged(nameof(game));
@@ -1202,7 +1202,7 @@ namespace Aki.Launcher.Helpers
             get => _new_password;
             set
             {
-                if(_new_password != value)
+                if (_new_password != value)
                 {
                     _new_password = value;
                     RaisePropertyChanged(nameof(new_password));
@@ -1218,7 +1218,7 @@ namespace Aki.Launcher.Helpers
             get => _wipe_warning_format_1;
             set
             {
-                if(_wipe_warning_format_1 != value)
+                if (_wipe_warning_format_1 != value)
                 {
                     _wipe_warning_format_1 = value;
                     RaisePropertyChanged(nameof(wipe_warning_format_2));
@@ -1234,7 +1234,7 @@ namespace Aki.Launcher.Helpers
             get => _cancel;
             set
             {
-                if(_cancel != value)
+                if (_cancel != value)
                 {
                     _cancel = value;
                     RaisePropertyChanged(nameof(cancel));
