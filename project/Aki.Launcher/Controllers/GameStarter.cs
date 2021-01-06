@@ -26,7 +26,6 @@ namespace Aki.Launcher
         private string clientExecutable = $"{LauncherSettingsProvider.Instance.GamePath}\\EscapeFromTarkov.exe";
         private const string registeryInstall = @"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov";
         private const string registerySettings = @"Software\Battlestate Games\EscapeFromTarkov";
-        private const string tempDir = @"Battlestate Games\EscapeFromTarkov";
 
         public int LaunchGame(ServerInfo server, AccountInfo account)
         {
@@ -213,38 +212,50 @@ namespace Aki.Launcher
         /// <returns>returns true if the temp folder was cleaned succefully or doesn't exist. returns false if something went wrong.</returns>
 		public bool CleanTempFiles()
 		{
-			DirectoryInfo directoryInfo = new DirectoryInfo(Path.Combine(Path.GetTempPath(), tempDir));
+            var basepath = @"Battlestate Games\EscapeFromTarkov";
+			var rootdir = new DirectoryInfo(Path.Combine(Path.GetTempPath(), basepath));
 
-			if (!Directory.Exists(tempDir))
+			if (!rootdir.Exists)
 			{
 				return true;
 			}
 
+            return CleanTempRecurse(rootdir);
+		}
+
+        private bool CleanTempRecurse(DirectoryInfo basedir)
+        {
+            if (!basedir.Exists)
+            {
+                return true;
+            }
+
             try
             {
-                foreach (FileInfo file in directoryInfo.GetFiles())
+                // remove subdirectories
+                foreach (var dir in basedir.EnumerateDirectories())
                 {
+                    CleanTempRecurse(dir);
+                }
+
+                // remove files
+                var files = basedir.GetFiles();
+
+                foreach (var file in files)
+                {
+                    file.IsReadOnly = false;
                     file.Delete();
                 }
 
-                foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
-                {
-                    directory.Delete(true);
-                }
-
-                directoryInfo.Refresh();
-
-                if(directoryInfo.GetFiles().Count() > 0 || directoryInfo.GetDirectories().Count() > 0)
-                {
-                    return false;
-                }
-
-                return true;
+                // remove directory
+                basedir.Delete();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return false;
             }
-		}
+
+            return true;
+        }
 	}
 }
