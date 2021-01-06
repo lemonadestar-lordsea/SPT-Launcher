@@ -81,7 +81,7 @@ namespace Aki.Launcher.ViewModel
             }
             else
             {
-                navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.edit_profile_update_error);
+                navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.edit_account_update_error);
                 navigationViewModel.SelectedViewModel = new ProfileViewModel(navigationViewModel);
             }
 
@@ -99,7 +99,7 @@ namespace Aki.Launcher.ViewModel
 
                 if (confirmWipe is bool confirmation && confirmation == false)
                 {
-                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.edit_profile_update_error, true);
+                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.edit_account_update_error, true);
                     LauncherSettingsProvider.Instance.AllowSettings = true;
                     return;
                 }
@@ -120,7 +120,7 @@ namespace Aki.Launcher.ViewModel
                         return;
 
                     case -2:
-                        navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.edit_profile_update_error);
+                        navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.edit_account_update_error);
                         navigationViewModel.SelectedViewModel = new ConnectServerViewModel(navigationViewModel);
                         return;
                 }
@@ -137,7 +137,7 @@ namespace Aki.Launcher.ViewModel
             }
             else
             {
-                navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.edit_profile_update_error);
+                navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.edit_account_update_error);
                 navigationViewModel.SelectedViewModel = new ConnectServerViewModel(navigationViewModel);
             }
         }

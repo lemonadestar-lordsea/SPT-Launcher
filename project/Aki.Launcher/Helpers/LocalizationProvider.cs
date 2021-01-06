@@ -96,7 +96,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.username = "Username";
             englishLocale.password = "Password";
             englishLocale.update = "Update";
-            englishLocale.edit_profile_update_error = "Some Issues occurred while updating your profile.";
+            englishLocale.edit_account_update_error = "Some Issues occurred while updating your profile.";
             englishLocale.register = "Register";
             englishLocale.go_to_register = "Go to Register";
             englishLocale.registration_failed = "Registration Failed";
@@ -108,7 +108,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.edition = "Edition";
             englishLocale.id = "ID";
             englishLocale.logout = "Logout";
-            englishLocale.edit_profile = "Edit Profile";
+            englishLocale.edit_account = "Edit Profile";
             englishLocale.start_game = "Start Game";
             englishLocale.installed_in_live_game_warning = "Aki shouldn't be installed into live game. Please make a copy of the gamefiles and install Aki there.";
             englishLocale.no_official_game_warning = "Escape From Tarkov isn't installed on your computer. Please buy a copy of the game and support the developers!";
@@ -378,17 +378,17 @@ namespace Aki.Launcher.Helpers
         }
         #endregion
 
-        #region edit_profile_update_error
-        private string _edit_profile_update_error;
-        public string edit_profile_update_error
+        #region edit_account_update_error
+        private string _edit_account_update_error;
+        public string edit_account_update_error
         {
-            get => _edit_profile_update_error;
+            get => _edit_account_update_error;
             set
             {
-                if (_edit_profile_update_error != value)
+                if (_edit_account_update_error != value)
                 {
-                    _edit_profile_update_error = value;
-                    RaisePropertyChanged(nameof(edit_profile_update_error));
+                    _edit_account_update_error = value;
+                    RaisePropertyChanged(nameof(edit_account_update_error));
                 }
             }
         }
@@ -554,17 +554,17 @@ namespace Aki.Launcher.Helpers
         }
         #endregion
 
-        #region edit_profile
-        private string _edit_profile;
-        public string edit_profile
+        #region edit_account
+        private string _edit_account;
+        public string edit_account
         {
-            get => _edit_profile;
+            get => _edit_account;
             set
             {
-                if (_edit_profile != value)
+                if (_edit_account != value)
                 {
-                    _edit_profile = value;
-                    RaisePropertyChanged(nameof(edit_profile));
+                    _edit_account = value;
+                    RaisePropertyChanged(nameof(edit_account));
                 }
             }
         }

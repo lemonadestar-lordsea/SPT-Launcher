@@ -37,6 +37,7 @@ namespace Aki.Launcher
 				return Login(username, password);
 			});
         }
+
 		public static int Login(string username, string password)
 		{
 			LoginRequestData data = new LoginRequestData(username, password);
@@ -72,6 +73,7 @@ namespace Aki.Launcher
 				return Register(username, password, edition);
 			});
         }
+
 		public static int Register(string username, string password, string edition)
 		{
 			RegisterRequestData data = new RegisterRequestData(username, password, edition);
@@ -116,6 +118,7 @@ namespace Aki.Launcher
 				return Remove();
 			});
         }
+
 		public static int Remove()
 		{
 			LoginRequestData data = new LoginRequestData(SelectedAccount.username, SelectedAccount.password);
@@ -152,6 +155,7 @@ namespace Aki.Launcher
 				return ChangeUsername(username);
 			});
         }
+		
 		public static int ChangeUsername(string username)
 		{
 			ChangeRequestData data = new ChangeRequestData(SelectedAccount.username, SelectedAccount.password, username);

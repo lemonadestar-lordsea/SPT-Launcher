@@ -62,7 +62,7 @@ namespace Aki.Launcher.ViewModel
                     return;
 
                 case -2:
-                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.edit_profile_update_error);
+                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.edit_account_update_error);
                     navigationViewModel.SelectedViewModel = new ConnectServerViewModel(navigationViewModel);
                     return;
             }

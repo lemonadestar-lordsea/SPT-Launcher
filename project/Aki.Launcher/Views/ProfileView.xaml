@@ -72,7 +72,7 @@ Merijn Hendriks
         </Label>
 
             <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                              Path=edit_profile}" Grid.Row="3" Grid.ColumnSpan="3"
+                              Path=edit_account}" Grid.Row="3" Grid.ColumnSpan="3"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     Command="{Binding EditProfileCommand}"
                     IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
