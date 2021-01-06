@@ -91,8 +91,21 @@ Merijn Hendriks
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Foreground" Value="#ADADAD"/>
-                                <Setter Property="Opacity" TargetName="NoChromeGrid" Value="0.5"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard x:Name="disable_enter">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.5" Duration="0:0:0.100" BeginTime="0:0:0.100"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>    
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <RemoveStoryboard BeginStoryboardName="disable_enter"/>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.100"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -118,7 +131,7 @@ Merijn Hendriks
         <Style x:Key="MenuToolbarButtonStyle" TargetType="{x:Type cc:MenuBarButton}" BasedOn="{StaticResource NoChromeButton}">
             <Setter Property="Background" Value="{StaticResource AKI_Background_Dark}"/>
             <Setter Property="Foreground" Value="{StaticResource AKI_Foreground_Light}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource AKI_Background_Blue}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource AKI_Background_Yellow}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
