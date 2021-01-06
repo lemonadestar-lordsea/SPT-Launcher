@@ -1,6 +1,6 @@
-# SPTarkov-Launcher
+# Launcher
 
-A custom game launcher allows the game to be launched offline.
+Custom launcher for Escape From Tarkov to start the game in offline mode
 
 ## Requirements
 
