@@ -63,7 +63,7 @@ namespace Aki.Launcher.ViewModel
             switch (status)
             {
                 case 1:
-                    ServerSetting DefaultServer = LauncherSettingsProvider.GetDefaultServer();
+                    ServerSetting DefaultServer = LauncherSettingsProvider.Instance.Server;
 
                     if (DefaultServer.AutoLoginCreds == null)
                     {

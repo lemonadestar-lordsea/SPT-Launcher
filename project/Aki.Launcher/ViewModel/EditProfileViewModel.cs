@@ -38,7 +38,7 @@ namespace Aki.Launcher.ViewModel
             BackCommand = new GenericICommand(OnBackCommand);
             WipeProfileCommand = new GenericICommand(OnWipeProfileCommand);
 
-            ServerSetting DefaultServer = LauncherSettingsProvider.GetDefaultServer();
+            ServerSetting DefaultServer = LauncherSettingsProvider.Instance.Server;
 
             LoginModel tmpLogin = new LoginModel();
             tmpLogin.Username = DefaultServer.AutoLoginCreds.Username;

@@ -33,7 +33,7 @@ namespace Aki.Launcher.ViewModel
             ShowRegisterCommand = new GenericICommand(OnShowRegisterCommand);
             LoginCommand = new AwaitableDelegateCommand(OnLoginCommand);
 
-            DefaultServer = LauncherSettingsProvider.GetDefaultServer();
+            DefaultServer = LauncherSettingsProvider.Instance.Server;
 
             LoginModel tmpLogin = new LoginModel();
 

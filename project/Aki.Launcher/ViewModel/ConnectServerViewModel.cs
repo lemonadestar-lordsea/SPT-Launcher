@@ -43,7 +43,7 @@ namespace Aki.Launcher.ViewModel
                 return;
             }
 
-            if(LauncherSettingsProvider.Instance.ServerCollection.Count == 0)
+            if(LauncherSettingsProvider.Instance.Server == null)
             {
                 connectInfo.InfoText = LocalizationProvider.Instance.no_servers_available;
                 return;
@@ -52,7 +52,7 @@ namespace Aki.Launcher.ViewModel
             LauncherSettingsProvider.Instance.AllowSettings = false;
             connectInfo.InfoText = $"{LocalizationProvider.Instance.server_connecting} ...";
 
-            ServerSetting DefaultServer = LauncherSettingsProvider.GetDefaultServer();
+            ServerSetting DefaultServer = LauncherSettingsProvider.Instance.Server;
 
             if(DefaultServer == null)
             {

@@ -32,7 +32,7 @@ namespace Aki.Launcher
 
             if (startArgs.HasAuthentication)
             {
-                ServerManager.LoadServer(LauncherSettingsProvider.GetDefaultServer().Url);
+                ServerManager.LoadServer(LauncherSettingsProvider.Instance.Server.Url);
                 int status = AccountManager.Login(startArgs.Username, startArgs.Password);
 
                 //we only care if we actually logged in, to make sure we can start the game.
