@@ -133,7 +133,6 @@ Merijn Hendriks
                         <RemoveStoryboard BeginStoryboardName="selected_exit"/>
                         <BeginStoryboard>
                             <Storyboard>
-                                <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource AKI_White}" Duration="0:0:0.200"/>
                                 <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="0 0 0 2" Duration="0:0:0.200"/>
                                 <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" To="{StaticResource AKI_DarkYellow}" Duration="0:0:0.200"/>
                             </Storyboard>
@@ -142,7 +141,6 @@ Merijn Hendriks
                     <MultiDataTrigger.ExitActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource AKI_White}" Duration="0:0:0.200"/>
                                 <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="0" Duration="0:0:0.200"/>
                             </Storyboard>
                         </BeginStoryboard>
