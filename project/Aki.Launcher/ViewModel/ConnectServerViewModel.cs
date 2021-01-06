@@ -67,7 +67,7 @@ namespace Aki.Launcher.ViewModel
                 ServerManager.SelectServer(0);
                 RequestHandler.ChangeBackendUrl(ServerManager.AvailableServers[0].backendUrl);
 
-                if (DefaultServer.AutoLoginCreds == null || DefaultServer.AutoLoginCreds.Email == "" || DefaultServer.AutoLoginCreds.Password == "")
+                if (DefaultServer.AutoLoginCreds == null || DefaultServer.AutoLoginCreds.Username == "" || DefaultServer.AutoLoginCreds.Password == "")
                 {
                     LauncherSettingsProvider.Instance.AllowSettings = true;
 

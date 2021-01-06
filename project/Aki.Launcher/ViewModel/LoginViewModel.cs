@@ -39,7 +39,7 @@ namespace Aki.Launcher.ViewModel
 
             if (DefaultServer.AutoLoginCreds != null)
             {
-                tmpLogin.Email = DefaultServer.AutoLoginCreds.Email ?? "";
+                tmpLogin.Username = DefaultServer.AutoLoginCreds.Username ?? "";
                 tmpLogin.Password = DefaultServer.AutoLoginCreds.Password ?? "";
             }
 

@@ -11,14 +11,14 @@ namespace Aki.Launcher
 {
 	public struct LoginToken
 	{
-		public string email;
+		public string username;
 		public string password;
 		public bool toggle;
 		public long timestamp;
 
-		public LoginToken(string email, string password)
+		public LoginToken(string username, string password)
 		{
-			this.email = email;
+			this.username = username;
 			this.password = password;
 			toggle = true;
 			timestamp = 0;

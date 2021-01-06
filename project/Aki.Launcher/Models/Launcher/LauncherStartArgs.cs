@@ -13,7 +13,7 @@ namespace Aki.Launcher.Models.Launcher
 {
     public class LauncherStartArgs
     {
-        public string Email = String.Empty;
+        public string Username = String.Empty;
         public string Password = String.Empty;
         public bool HasAuthentication = false;
 
@@ -21,9 +21,9 @@ namespace Aki.Launcher.Models.Launcher
         {
             if(sea.Args.Length == 2)
             {
-                if (sea.Args[0].StartsWith("email:"))
+                if (sea.Args[0].StartsWith("username:"))
                 {
-                    Email = sea.Args[0].Replace("email:", "");
+                    Username = sea.Args[0].Replace("username:", "");
                 }
 
                 if (sea.Args[1].StartsWith("password:"))
@@ -31,7 +31,7 @@ namespace Aki.Launcher.Models.Launcher
                     Password = sea.Args[1].Replace("password:", "");
                 }
 
-                if(!String.IsNullOrWhiteSpace(Email) && !String.IsNullOrWhiteSpace(Password))
+                if(!String.IsNullOrWhiteSpace(Username) && !String.IsNullOrWhiteSpace(Password))
                 {
                     HasAuthentication = true;
                 }

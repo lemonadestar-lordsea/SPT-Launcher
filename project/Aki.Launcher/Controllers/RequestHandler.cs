@@ -57,7 +57,7 @@ namespace Aki.Launcher
 
 		public static string RequestChangeEmail(ChangeRequestData data)
 		{
-			return request.PostJson("/launcher/profile/change/email", Json.Serialize(data));
+			return request.PostJson("/launcher/profile/change/username", Json.Serialize(data));
 		}
 
 		public static string RequestChangePassword(ChangeRequestData data)

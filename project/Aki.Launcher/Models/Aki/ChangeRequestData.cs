@@ -11,13 +11,13 @@ namespace Aki.Launcher
 {
 	public struct ChangeRequestData
 	{
-		public string email;
+		public string username;
 		public string password;
 		public string change;
 
-		public ChangeRequestData(string email, string password, string change)
+		public ChangeRequestData(string username, string password, string change)
 		{
-			this.email = email;
+			this.username = username;
 			this.password = password;
 			this.change = change;
 		}

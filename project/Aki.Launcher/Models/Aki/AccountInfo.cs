@@ -13,7 +13,7 @@ namespace Aki.Launcher
 	{
 		public string id;
 		public string nickname;
-		public string email;
+		public string username;
 		public string password;
 		public bool wipe;
 		public string edition;
@@ -22,7 +22,7 @@ namespace Aki.Launcher
 		{
 			id = "";
 			nickname = "";
-			email = "";
+			username = "";
 			password = "";
 			wipe = false;
 			edition = "";

@@ -14,7 +14,7 @@ namespace Aki.Launcher.Models.Launcher
     public class LoginModel : INotifyPropertyChanged
     {
         private string _Email;
-        public string Email
+        public string Username
         {
             get => _Email;
             set
@@ -22,7 +22,7 @@ namespace Aki.Launcher.Models.Launcher
                 if(_Email != value)
                 {
                     _Email = value;
-                    RaisePropertyChanged(nameof(Email));
+                    RaisePropertyChanged(nameof(Username));
                 }
             }
         }
@@ -43,7 +43,7 @@ namespace Aki.Launcher.Models.Launcher
 
         public LoginModel()
         {
-            Email = "";
+            Username = "";
             Password = "";
         }
 

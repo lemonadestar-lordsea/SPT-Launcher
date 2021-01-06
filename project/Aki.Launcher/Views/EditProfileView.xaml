@@ -54,12 +54,12 @@ Merijn Hendriks
             </Grid.RowDefinitions>
 
 
-            <!-- Email Controls -->
+            <!-- Username Controls -->
             <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                         Path=email}"
+                         Path=username}"
                    />
             <TextBox Grid.Column="1" Grid.ColumnSpan="3" Margin="10 5"
-                 Text="{Binding login.Email}"
+                 Text="{Binding login.Username}"
                  IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
                             Path=AllowSettings}"
                  />

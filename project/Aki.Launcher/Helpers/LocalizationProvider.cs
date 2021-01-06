@@ -93,7 +93,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.back = "Back";
             englishLocale.wipe = "Wipe";
             englishLocale.wipe_profile = "Wipe Profile";
-            englishLocale.email = "Email";
+            englishLocale.username = "Username";
             englishLocale.password = "Password";
             englishLocale.update = "Update";
             englishLocale.edit_profile_update_error = "Some Issues occurred while updating your profile.";
@@ -103,7 +103,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.login = "Login";
             englishLocale.go_to_login = "Go to Login";
             englishLocale.login_automatically = "Login Automatically";
-            englishLocale.incorrect_login = "Email or password are incorrect";
+            englishLocale.incorrect_login = "Username or password are incorrect";
             englishLocale.login_failed = "Login Failed";
             englishLocale.edition = "Edition";
             englishLocale.id = "ID";
@@ -330,9 +330,9 @@ namespace Aki.Launcher.Helpers
         }
         #endregion
 
-        #region email
+        #region username
         private string _email;
-        public string email
+        public string username
         {
             get => _email;
             set
@@ -340,7 +340,7 @@ namespace Aki.Launcher.Helpers
                 if(_email != value)
                 {
                     _email = value;
-                    RaisePropertyChanged(nameof(email));
+                    RaisePropertyChanged(nameof(username));
                 }
             }
         }
