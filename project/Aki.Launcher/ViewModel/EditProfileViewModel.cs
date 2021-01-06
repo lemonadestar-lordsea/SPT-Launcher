@@ -38,10 +38,10 @@ namespace Aki.Launcher.ViewModel
             BackCommand = new GenericICommand(OnBackCommand);
             WipeProfileCommand = new GenericICommand(OnWipeProfileCommand);
 
-            ServerSetting DefaultServer = LauncherSettingsProvider.GetDefaultServer();
+            ServerSetting DefaultServer = LauncherSettingsProvider.Instance.Server;
 
             LoginModel tmpLogin = new LoginModel();
-            tmpLogin.Email = DefaultServer.AutoLoginCreds.Email;
+            tmpLogin.Username = DefaultServer.AutoLoginCreds.Username;
             tmpLogin.Password = DefaultServer.AutoLoginCreds.Password;
 
             WipeProfileModel tmpWipeProfile = new WipeProfileModel();
@@ -126,7 +126,7 @@ namespace Aki.Launcher.ViewModel
                 }
             }
 
-            string emailStatus = GetStatus(await AccountManager.ChangeEmailAsync(login.Email));
+            string emailStatus = GetStatus(await AccountManager.ChangeEmailAsync(login.Username));
             string passStatus = GetStatus(await AccountManager.ChangePasswordAsync(login.Password));
 
             LauncherSettingsProvider.Instance.AllowSettings = true;

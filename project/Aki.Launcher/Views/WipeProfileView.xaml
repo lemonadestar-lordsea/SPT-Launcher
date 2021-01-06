@@ -35,7 +35,7 @@ Merijn Hendriks
             <RowDefinition Height="AUTO"/>
         </Grid.RowDefinitions>
 
-        <!-- Email Controls -->
+        <!-- Username Controls -->
         <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                          Path=edition}" Grid.Column="1" Grid.Row="1"
                    />

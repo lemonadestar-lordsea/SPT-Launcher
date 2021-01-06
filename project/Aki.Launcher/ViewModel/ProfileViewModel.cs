@@ -39,7 +39,7 @@ namespace Aki.Launcher.ViewModel
 
             monitor = new ProcessMonitor("EscapeFromTarkov", 1000, aliveCallback: null, exitCallback: GameExitCallback);
 
-            CurrentEmail = AccountManager.SelectedAccount.email;
+            CurrentEmail = AccountManager.SelectedAccount.username;
             CurrentEdition = AccountManager.SelectedAccount.edition;
             CurrentID = AccountManager.SelectedAccount.id;
         }
@@ -57,7 +57,7 @@ namespace Aki.Launcher.ViewModel
         {
             LauncherSettingsProvider.Instance.AllowSettings = false;
 
-            int status = await AccountManager.LoginAsync(AccountManager.SelectedAccount.email, AccountManager.SelectedAccount.password);
+            int status = await AccountManager.LoginAsync(AccountManager.SelectedAccount.username, AccountManager.SelectedAccount.password);
 
             LauncherSettingsProvider.Instance.AllowSettings = true;
 

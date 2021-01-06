@@ -44,9 +44,9 @@ Merijn Hendriks
                 <RowDefinition Height="AUTO"/>
                 <RowDefinition Height="AUTO"/>
             </Grid.RowDefinitions>
-        <!-- Profile Email -->
+        <!-- Profile Username -->
         <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                         Path=email}"
+                         Path=username}"
                />
         
         <Label Grid.Column="1">

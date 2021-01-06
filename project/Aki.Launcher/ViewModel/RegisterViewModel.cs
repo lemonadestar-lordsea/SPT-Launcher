@@ -55,7 +55,7 @@ namespace Aki.Launcher.ViewModel
 
             LauncherSettingsProvider.Instance.AllowSettings = false;
 
-            int status = await AccountManager.RegisterAsync(newProfile.Email ?? "", newProfile.Password ?? "", newProfile.EditionsCollection.SelectedEdition);
+            int status = await AccountManager.RegisterAsync(newProfile.Username ?? "", newProfile.Password ?? "", newProfile.EditionsCollection.SelectedEdition);
 
             LauncherSettingsProvider.Instance.AllowSettings = true;
 
@@ -63,11 +63,11 @@ namespace Aki.Launcher.ViewModel
             switch (status)
             {
                 case 1:
-                    ServerSetting DefaultServer = LauncherSettingsProvider.GetDefaultServer();
+                    ServerSetting DefaultServer = LauncherSettingsProvider.Instance.Server;
 
                     if (DefaultServer.AutoLoginCreds == null)
                     {
-                        DefaultServer.AutoLoginCreds = new LoginModel { Email = newProfile.Email, Password = newProfile.Password };
+                        DefaultServer.AutoLoginCreds = new LoginModel { Username = newProfile.Username, Password = newProfile.Password };
                         LauncherSettingsProvider.Instance.SaveSettings();
                     }
 

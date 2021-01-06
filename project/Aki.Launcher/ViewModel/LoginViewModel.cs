@@ -33,13 +33,13 @@ namespace Aki.Launcher.ViewModel
             ShowRegisterCommand = new GenericICommand(OnShowRegisterCommand);
             LoginCommand = new AwaitableDelegateCommand(OnLoginCommand);
 
-            DefaultServer = LauncherSettingsProvider.GetDefaultServer();
+            DefaultServer = LauncherSettingsProvider.Instance.Server;
 
             LoginModel tmpLogin = new LoginModel();
 
             if (DefaultServer.AutoLoginCreds != null)
             {
-                tmpLogin.Email = DefaultServer.AutoLoginCreds.Email ?? "";
+                tmpLogin.Username = DefaultServer.AutoLoginCreds.Username ?? "";
                 tmpLogin.Password = DefaultServer.AutoLoginCreds.Password ?? "";
             }
 

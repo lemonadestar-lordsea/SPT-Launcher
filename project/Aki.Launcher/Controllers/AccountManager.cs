@@ -26,20 +26,20 @@ namespace Aki.Launcher
         {
 			return await Task.Run(() =>
 			{
-				return Login(Creds.Email, Creds.Password);
+				return Login(Creds.Username, Creds.Password);
 			});
         }
 
-		public static async Task<int> LoginAsync(string email, string password)
+		public static async Task<int> LoginAsync(string username, string password)
         {
 			return await Task.Run(() =>
 			{
-				return Login(email, password);
+				return Login(username, password);
 			});
         }
-		public static int Login(string email, string password)
+		public static int Login(string username, string password)
 		{
-			LoginRequestData data = new LoginRequestData(email, password);
+			LoginRequestData data = new LoginRequestData(username, password);
 			string id = STATUS_FAILED;
 			string json = "";
 
@@ -65,16 +65,16 @@ namespace Aki.Launcher
             return 1;
 		}
 
-		public static async Task<int> RegisterAsync(string email, string password, string edition)
+		public static async Task<int> RegisterAsync(string username, string password, string edition)
         {
 			return await Task.Run(() =>
 			{
-				return Register(email, password, edition);
+				return Register(username, password, edition);
 			});
         }
-		public static int Register(string email, string password, string edition)
+		public static int Register(string username, string password, string edition)
 		{
-			RegisterRequestData data = new RegisterRequestData(email, password, edition);
+			RegisterRequestData data = new RegisterRequestData(username, password, edition);
 			string registerStatus = STATUS_FAILED;
 
 			try
@@ -91,7 +91,7 @@ namespace Aki.Launcher
 				return -2;
 			}
 
-			int loginStatus = Login(email, password);
+			int loginStatus = Login(username, password);
 
 			if (loginStatus != 1)
 			{
@@ -118,7 +118,7 @@ namespace Aki.Launcher
         }
 		public static int Remove()
 		{
-			LoginRequestData data = new LoginRequestData(SelectedAccount.email, SelectedAccount.password);
+			LoginRequestData data = new LoginRequestData(SelectedAccount.username, SelectedAccount.password);
 			string json = STATUS_FAILED;
 
 			try
@@ -139,22 +139,22 @@ namespace Aki.Launcher
 
 
 			// Left in for future, incase needed for reference
-			//launcherConfig.Email = "";
+			//launcherConfig.Username = "";
 			//launcherConfig.Password = "";
 			//JsonHandler.SaveLauncherConfig(launcherConfig);
 			return 1;
 		}
 
-		public static async Task<int> ChangeEmailAsync(string email)
+		public static async Task<int> ChangeEmailAsync(string username)
         {
 			return await Task.Run(() =>
 			{
-				return ChangeEmail(email);
+				return ChangeEmail(username);
 			});
         }
-		public static int ChangeEmail(string email)
+		public static int ChangeEmail(string username)
 		{
-			ChangeRequestData data = new ChangeRequestData(SelectedAccount.email, SelectedAccount.password, email);
+			ChangeRequestData data = new ChangeRequestData(SelectedAccount.username, SelectedAccount.password, username);
 			string json = STATUS_FAILED;
 
 			try
@@ -171,10 +171,10 @@ namespace Aki.Launcher
 				return -2;
 			}
 
-			ServerSetting DefaultServer = LauncherSettingsProvider.GetDefaultServer();
+			ServerSetting DefaultServer = LauncherSettingsProvider.Instance.Server;
 
-			DefaultServer.AutoLoginCreds.Email = email;
-            SelectedAccount.email = email;
+			DefaultServer.AutoLoginCreds.Username = username;
+            SelectedAccount.username = username;
 			LauncherSettingsProvider.Instance.SaveSettings();
 
             return 1;
@@ -189,7 +189,7 @@ namespace Aki.Launcher
         }
 		public static int ChangePassword(string password)
 		{
-			ChangeRequestData data = new ChangeRequestData(SelectedAccount.email, SelectedAccount.password, password);
+			ChangeRequestData data = new ChangeRequestData(SelectedAccount.username, SelectedAccount.password, password);
 			string json = STATUS_FAILED;
 
 			try
@@ -206,7 +206,7 @@ namespace Aki.Launcher
 				return -2;
 			}
 
-			ServerSetting DefaultServer = LauncherSettingsProvider.GetDefaultServer();
+			ServerSetting DefaultServer = LauncherSettingsProvider.Instance.Server;
 
 			DefaultServer.AutoLoginCreds.Password = password;
             SelectedAccount.password = password;
@@ -224,7 +224,7 @@ namespace Aki.Launcher
         }
 		public static int Wipe(string edition)
 		{
-			RegisterRequestData data = new RegisterRequestData(SelectedAccount.email, SelectedAccount.password, edition);
+			RegisterRequestData data = new RegisterRequestData(SelectedAccount.username, SelectedAccount.password, edition);
 			string json = STATUS_FAILED;
 
 			try

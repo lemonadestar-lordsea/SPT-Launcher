@@ -11,12 +11,12 @@ namespace Aki.Launcher
 {
 	public struct LoginRequestData
 	{
-		public string email;
+		public string username;
 		public string password;
 
-		public LoginRequestData(string email, string password)
+		public LoginRequestData(string username, string password)
 		{
-			this.email = email;
+			this.username = username;
 			this.password = password;
 		}
 	}
