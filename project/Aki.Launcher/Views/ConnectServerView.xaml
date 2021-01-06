@@ -31,18 +31,15 @@ Merijn Hendriks
             <RowDefinition Height="AUTO"/>
         </Grid.RowDefinitions>
 
-        <Image Source="/Resources/bg-footer.png" Grid.Row="4" Stretch="UniformToFill" Grid.ColumnSpan="3"
-               RenderOptions.BitmapScalingMode="Fant" Width="{Binding ActualWidth, ElementName=view}"
-               />
-
         <!-- Message To Display -->
         <Label Content="{Binding connectInfo.InfoText}" Grid.Column="1" Grid.Row="1"
                FontSize="18"
                />
 
-        <!-- Retry Button -->
+            <!-- Retry Button -->
         <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
             Path=retry}" Grid.Column="1" Grid.Row="2" MaxWidth="100"
-                Command="{Binding RetryAsyncCommand}"/>
+                Command="{Binding RetryAsyncCommand}"
+                />
     </Grid>
 </UserControl>

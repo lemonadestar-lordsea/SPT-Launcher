@@ -6,7 +6,6 @@ AUTHORS:
 waffle.lord
 Merijn Hendriks
 -->
-    
     <Window x:Class="Aki.Launcher.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -17,41 +16,38 @@ Merijn Hendriks
         xmlns:cc="clr-namespace:Aki.Launcher.Custom_Controls"
         xmlns:local="clr-namespace:Aki.Launcher"
         mc:Ignorable="d"
-        Title="SPT AKI" Height="450" Width="800">
+        Title="SPT AKI" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow"
+        ResizeMode="CanResize"
+        Background="{StaticResource AKI_Background_Light}">
+
     <Window.Resources>
         <cvt:InvertedBooleanToVisibilityConverter x:Key="IvtBoolToVisibiilty" />
     </Window.Resources>
+    
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" CornerRadius="0" GlassFrameThickness="0 0 0 5" UseAeroCaptionButtons="False"
+                      ResizeBorderThickness="5"
+                      />
+    </WindowChrome.WindowChrome>
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.6*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="AUTO"/>
+            <ColumnDefinition Width="AUTO"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="AUTO"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-
-
-        <!-- Images (Background and alpha) -->
-        <Image Source="{Binding Source={x:Static helpers:ResourceProvider.BackgroundImagePath}}" RenderOptions.BitmapScalingMode="Fant"
-               Grid.RowSpan="2" Grid.ColumnSpan="2" Stretch="UniformToFill"
-               Width="{Binding ActualWidth, ElementName=main}"
+        <!-- Settable Background Image - for senko ;) -->
+        <Image Source="{Binding Source={x:Static helpers:ResourceProvider.BackgroundImagePath}}"
+               Grid.ColumnSpan="3" Grid.Row="1"
                />
-
-        <Image Source="/Resources/bg-alpha.png" RenderOptions.BitmapScalingMode="Fant"
-               Grid.RowSpan="2" Grid.Column="1" Stretch="UniformToFill"
-               Width="{Binding ActualWidth, ElementName=main}"
-               Visibility="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
-                                            Path=IsEditingSettings,
-                                            Converter={StaticResource IvtBoolToVisibiilty}}"
-               />
-
-
-
-
+        
         <!-- Main Navigation View Container -->
-        <DockPanel LastChildFill="True" Grid.Column="1" Grid.Row="1">
+        <DockPanel LastChildFill="True" Grid.Row="1" Grid.ColumnSpan="3">
             <ContentControl DockPanel.Dock="Right" 
                             Content="{Binding navigationViewModel.SelectedViewModel, 
                                               RelativeSource={
@@ -60,46 +56,39 @@ Merijn Hendriks
                             />
         </DockPanel>
 
-        <!-- Settings Button -->
-        <Button x:Name="settingsButton" Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource IconButtonStyle}"
-                ToolTip="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                          Path=settings_cog_tooltip}"
-                Command="{Binding ShowSettingsCommand,
+        <!-- Navigation Tool Bar -->
+        <cc:MenuBarControl Grid.ColumnSpan="3"
+            MouseDown="WindowMove_MouseDown"
+            ItemCollection="{Binding MenuItemCollection, RelativeSource={
+                                     RelativeSource AncestorType=Window}}"
+            ItemCollectionCommand="{Binding MenuItemCommand, RelativeSource={
+                                            RelativeSource AncestorType=Window}}"
+            Background="{StaticResource AKI_Background_Dark}"
+            />
+
+        <!-- App buttons (close and minimize) -->
+        <Button Grid.Column="1" Content="-" HorizontalAlignment="Right" VerticalAlignment="Top"
+                Style="{StaticResource AppButtonStyle}"
+                Command="{Binding MinimizeAppCommand,
                                   RelativeSource={
                                   RelativeSource AncestorType=Window}}"
-                Visibility="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
-                                            Path=IsEditingSettings,
-                                            Converter={StaticResource IvtBoolToVisibiilty}}"
-                IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
-                            Path=AllowSettings}"
-                >
-            <Path Data="{StaticResource SettingsCog}" Fill="{Binding ElementName=settingsButton, Path=Foreground}"/>
-        </Button>
+                />
 
-        <!-- Main Navigation Notification Banner -->
-        <cc:NotificationBanner Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top"
+        <Button Grid.Column="2" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top"
+                Style="{StaticResource AppCloseButtonStyle}"
+                Command="{Binding CloseAppCommand,
+                                  RelativeSource={
+                                  RelativeSource AncestorType=Window}}"
+                />
+
+        <!-- Navigation Notification Banner -->
+        <cc:NotificationBanner Grid.Row="1"  Grid.ColumnSpan="3" VerticalAlignment="Top"
                                NotificationQueue="{Binding navigationViewModel.NotificationQueue, 
                                                            RelativeSource={
                                                            RelativeSource AncestorType=Window}}"
                                />
 
 
-
-        <!-- Full Spanning navigation container used for settings view -->
-        <DockPanel LastChildFill="True" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <ContentControl DockPanel.Dock="Right" 
-                            Content="{Binding FullSpanNavigationViewModel.SelectedViewModel,
-                                              RelativeSource={
-                                              RelativeSource AncestorType=Window}}"
-                            IsTabStop="False"
-                            />
-        </DockPanel>
-
-        <!-- Full Span Navigation Banner -->
-        <cc:NotificationBanner Grid.ColumnSpan="2" Grid.RowSpan="2" VerticalAlignment="Top"
-                               NotificationQueue="{Binding FullSpanNavigationViewModel.NotificationQueue,
-                                                           RelativeSource={
-                                                           RelativeSource AncestorType=Window}}"
-                               />
+        <cc:DialogHost x:Name="mainDialogHost" Grid.ColumnSpan="3" Grid.Row="1"/>
     </Grid>
 </Window>

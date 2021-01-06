@@ -31,18 +31,18 @@ waffle.lord
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <Rectangle Fill="{StaticResource SPTBackgroundLight}" Grid.ColumnSpan="2"
+        <Rectangle Fill="{StaticResource AKI_Background_Light}" Grid.ColumnSpan="2"
                    />
 
         <TextBlock Text="{Binding NotificationQueue.queue[0].Message,
                                   RelativeSource={
                                   RelativeSource AncestorType=UserControl}}"
                    VerticalAlignment="Center"
-                   FontSize="15" TextWrapping="Wrap" Foreground="{StaticResource SPTForeground}"
+                   FontSize="15" TextWrapping="Wrap" Foreground="{StaticResource AKI_Foreground_Light}"
                    Margin="5"
                    />
         
-        <Button Grid.Column="1" Style="{StaticResource SPTButtonFlat_NonGeneric}"
+        <Button Grid.Column="1" Style="{StaticResource ButtonFlat_NonGeneric}"
                 Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                 Click="Button_Click"
                 Visibility="{Binding NotificationQueue.queue[0].HasButton, 

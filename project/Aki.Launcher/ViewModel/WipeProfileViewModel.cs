@@ -45,10 +45,10 @@ namespace Aki.Launcher.ViewModel
         {
             LauncherSettingsProvider.Instance.AllowSettings = false;
 
-            int status = await AccountManager.WipeAsync(ProfileWipe.EditionsCollection.SelectedEdition);
 
             LauncherSettingsProvider.Instance.AllowSettings = true;
 
+            int status = await AccountManager.WipeAsync(ProfileWipe.EditionsCollection.SelectedEdition);
 
             switch (status)
             {

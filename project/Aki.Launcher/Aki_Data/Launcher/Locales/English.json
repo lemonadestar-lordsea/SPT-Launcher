@@ -4,7 +4,7 @@
   "server_connecting": "Connecting",
   "server_unavailable_format_1": "Default server '{0}' is not available.",
   "no_servers_available": "No Servers found. Check server list in settings.",
-  "settings_cog_tooltip": "Settings Menu",
+  "settings_menu": "Settings Menu",
   "back": "Back",
   "wipe": "Wipe",
   "wipe_profile": "Wipe Profile",
@@ -60,5 +60,9 @@
   "minimize_action": "Minimize",
   "do_nothing_action": "Do nothing",
   "exit_action": "Close Launcher",
-  "launcher_start_game_action": "Launcher Start Game Action"
+  "launcher_start_game_action": "Launcher Start Game Action",
+  "game": "Game",
+  "new_password": "New Password",
+  "wipe_warning_format_2": "Changing your account edition requires a profile wipe.\n'{0}' -> '{1}'\nAre you sure you want to wipe your profile?",
+  "cancel": "Cancel"
 }

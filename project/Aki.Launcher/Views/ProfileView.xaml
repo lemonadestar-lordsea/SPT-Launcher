@@ -29,11 +29,21 @@ Merijn Hendriks
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="AUTO"/>
-            <RowDefinition Height="AUTO"/>
-            <RowDefinition Height="AUTO"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="AUTO"/>
         </Grid.RowDefinitions>
 
+        <Grid Style="{StaticResource GridCardStyle}" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="AUTO"/>
+                <ColumnDefinition Width="AUTO"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+            </Grid.RowDefinitions>
         <!-- Profile Email -->
         <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                          Path=email}"
@@ -61,45 +71,42 @@ Merijn Hendriks
             <TextBlock Text="{Binding CurrentID}"/>
         </Label>
 
-        <!-- Sub Grid to position buttons and footer -->
-        <Grid Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="AUTO"/>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="AUTO"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="AUTO"/>
-                <RowDefinition Height="AUTO"/>
-            </Grid.RowDefinitions>
-
-            <!-- Footer Image -->
-            <Image Source="/Resources/bg-footer.png" Grid.Row="2" Stretch="UniformToFill" Grid.ColumnSpan="5"
-               RenderOptions.BitmapScalingMode="Fant" Width="{Binding ActualWidth, ElementName=view}"
-               />
-
-            <!-- Addtional Controls -->
             <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                              Path=edit_profile}" Grid.Row="1" Grid.Column="1"
+                              Path=edit_profile}" Grid.Row="3" Grid.ColumnSpan="3"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
                     Command="{Binding EditProfileCommand}"
                     IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
                                 Path=AllowSettings}"
+                    Style="{StaticResource AltButtonStyle}"
                     />
+
+        </Grid>
+        
+        <!-- Sub Grid to position buttons and footer -->
+        <Grid Grid.Row="2" Style="{StaticResource GridCardStyle}" Margin="10"
+              Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="AUTO"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="AUTO"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Addtional Controls -->
+            
             
             <Button  Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                               Path=logout}" Grid.Row="1" Grid.Column="3"
+                               Path=logout}" Grid.Column="2"
+                     HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 5"
                      Command="{Binding LogoutCommand}"
                      IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
                             Path=AllowSettings}"
+                     Style="{StaticResource AltButtonStyle}"
                      />
             
             <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                Path=start_game}" Grid.Row="5" Grid.ColumnSpan="5"
-                HorizontalAlignment="Center" VerticalAlignment="Center"
-                Style="{StaticResource SPTBigButtonStyle}"
+                Path=start_game}"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 5"
+                Style="{StaticResource BigButtonStyle}"
                 Command="{Binding StartGameCommand}"
                 IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
                 Path=GameRunning, Converter={StaticResource IvtBool}}"

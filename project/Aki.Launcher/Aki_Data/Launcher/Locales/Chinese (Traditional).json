@@ -4,7 +4,7 @@
   "server_connecting": "連接中",
   "server_unavailable_format_1": "服務器'{0}'不可用。",
   "no_servers_available": "找到服務器。檢查設置中的服務器列表",
-  "settings_cog_tooltip": "菜单设定",
+  "settings_menu": "菜单设定",
   "back": "上一步",
   "wipe": "清檔",
   "wipe_profile": "清除該存檔",
@@ -60,5 +60,9 @@
   "minimize_action": "最小化",
   "do_nothing_action": "無動作",
   "exit_action": "關閉啟動器",
-  "launcher_start_game_action": "啟動遊戲後登錄器將"
+  "launcher_start_game_action": "啟動遊戲後登錄器將",
+  "game": "遊戲",
+  "new_password": "新密碼",
+  "wipe_warning_format_2": "更改帳戶版本需要擦除個人資料。\n'{0}'->'{1}'\n您確定要擦除個人資料嗎?",
+  "cancel": "取消"
 }

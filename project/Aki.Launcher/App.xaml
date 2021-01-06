@@ -18,16 +18,26 @@ Merijn Hendriks
              Startup="Application_Startup">
     
     <Application.Resources>
+        
         <!-- Colors -->
-
-        <Color x:Key="AkiBrown" A="255" R="32" G="32" B="32"/>
-        <Color x:Key="AkiLightBrown" A="255" R="50" G="50" B="50"/>
-        <Color x:Key="AkiDarkBrown" A="255" R="16" G="16" B="16"/>
-
-        <!-- Brushes for styles -->
-        <SolidColorBrush x:Key="SPTBackgroundLight" Color="{StaticResource AkiLightBrown}"/>
-        <SolidColorBrush x:Key="SPTBackground" Color="{StaticResource AkiBrown}"/>
-        <SolidColorBrush x:Key="SPTForeground" Color="WhiteSmoke"/>
+        <Color x:Key="AKI_DarkGray">#121212</Color>
+        <Color x:Key="AKI_Yellow">#FFC107</Color>
+        <Color x:Key="AKI_DarkYellow">#997300</Color>
+        <Color x:Key="AKI_White">#FFFFFF</Color>
+        <Color x:Key="AKI_Gray">#282828</Color>
+        <Color x:Key="AKI_Red">#FC5C65</Color>
+        <Color x:Key="AKI_Blue">#4B7BEC</Color>
+        <Color x:Key="AKI_DarkGrayBlue">#323947</Color>
+        
+        <!-- Brushes -->
+        <SolidColorBrush x:Key="AKI_Foreground_Dark" Color="{StaticResource AKI_DarkGray}"/>
+        <SolidColorBrush x:Key="AKI_Foreground_Light" Color="{StaticResource AKI_White}"/>
+        <SolidColorBrush x:Key="AKI_Foreground_Red" Color="{StaticResource AKI_Red}"/>
+        <SolidColorBrush x:Key="AKI_Background_Dark" Color="{StaticResource AKI_DarkGray}"/>
+        <SolidColorBrush x:Key="AKI_Background_Light" Color="{StaticResource AKI_Gray}"/>
+        <SolidColorBrush x:Key="AKI_Background_Yellow" Color="{StaticResource AKI_Yellow}"/>
+        <SolidColorBrush x:Key="AKI_Background_Blue" Color="{StaticResource AKI_Blue}"/>
+        <SolidColorBrush x:Key="AKI_Background_DarkGrayBlue" Color="{StaticResource AKI_DarkGrayBlue}"/>
 
         <!-- Path Geometry for re-usable icons -->
         <PathGeometry x:Key="SettingsCog" Figures="M19.14 12.94c0.04-0.3 0.06-0.61 0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14 0.23-0.41 0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39 0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4 2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24 0-0.43 0.17-0.47 0.41L9.25 5.35C8.66 5.59 8.12 5.92 7.63 6.29L5.24 5.33c-0.22-0.08-0.47 0-0.59 0.22L2.74 8.87 C2.62 9.08 2.66 9.34 2.86 9.48l2.03 1.58C4.84 11.36 4.8 11.69 4.8 12s0.02 0.64 0.07 0.94l-2.03 1.58 c-0.18 0.14-0.23 0.41-0.12 0.61l1.92 3.32c0.12 0.22 0.37 0.29 0.59 0.22l2.39-0.96c0.5 0.38 1.03 0.7 1.62 0.94l0.36 2.54 c0.05 0.24 0.24 0.41 0.48 0.41h3.84c0.24 0 0.44-0.17 0.47-0.41l0.36-2.54c0.59-0.24 1.13-0.56 1.62-0.94l2.39 0.96 c0.22 0.08 0.47 0 0.59-0.22l1.92-3.32c0.12-0.22 0.07-0.47-0.12-0.61L19.14 12.94z M12 15.6c-1.98 0-3.6-1.62-3.6-3.6 s1.62-3.6 3.6-3.6s3.6 1.62 3.6 3.6S13.98 15.6 12 15.6z" FillRule="Nonzero"/>
@@ -40,7 +50,6 @@ Merijn Hendriks
         <PathGeometry x:Key="FolderWithPlus" Figures="M20 6h-8l-2-2H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-1 8h-3v3h-2v-3h-3v-2h3V9h2v3h3v2z" FillRule="NonZero"/>
 
         <!-- Data Templates to load views with view models -->
-
         <DataTemplate DataType="{x:Type viewmodel:ConnectServerViewModel}">
             <views:ConnectServerView/>
         </DataTemplate>
@@ -98,41 +107,245 @@ Merijn Hendriks
             </Setter>
         </Style>
 
+        <!-- App Button Base Style -->
+        <Style x:Key="AppButtonStyleBase" TargetType="{x:Type Button}" BasedOn="{StaticResource NoChromeButton}">
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="Background" Value="{StaticResource AKI_Background_Dark}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="MinWidth" Value="40"/>
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
         <!-- Styles for controls -->
 
-        <!-- Main Button Style -->
-        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NoChromeButton}">
-            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
-            <Setter Property="Background" Value="{StaticResource SPTBackground}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource SPTForeground}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Margin" Value="0 5"/>
-            <Setter Property="MinWidth" Value="100"/>
-            <Setter Property="MinHeight" Value="30"/>
-            <Setter Property="FontSize" Value="12"/>
+        <!-- Menu Toolbar Button Style -->
+        <Style x:Key="MenuToolbarButtonStyle" TargetType="{x:Type cc:MenuBarButton}" BasedOn="{StaticResource NoChromeButton}">
+            <Setter Property="Background" Value="{StaticResource AKI_Background_Dark}"/>
+            <Setter Property="Foreground" Value="{StaticResource AKI_Foreground_Light}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource AKI_Background_Blue}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="False"/>
+                        <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.EnterActions>
+                        <RemoveStoryboard BeginStoryboardName="selected_enter"/>
+                        <RemoveStoryboard BeginStoryboardName="selected_exit"/>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource AKI_DarkYellow}" Duration="0:0:0.200"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="0 0 0 2" Duration="0:0:0.200"/>
+                                <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" To="{StaticResource AKI_Blue}" Duration="0:0:0.200"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </MultiDataTrigger.EnterActions>
+                    <MultiDataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource AKI_White}" Duration="0:0:0.200"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="0" Duration="0:0:0.200"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </MultiDataTrigger.ExitActions>
+                </MultiDataTrigger>
+                
+                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard x:Name="selected_enter">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" To="{StaticResource AKI_Yellow}" Duration="0:0:0.200"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="0 0 0 2" Duration="0:0:0.200"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard x:Name="selected_exit">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" To="{StaticResource AKI_White}" Duration="0:0:0.200"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="0" Duration="0:0:0.200"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        
+        <!-- Normal App Button Style -->
+        <Style x:Key="AppButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource AppButtonStyleBase}">
             <Style.Triggers>
                 <EventTrigger RoutedEvent="PreviewMouseDown">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="WhiteSmoke" Duration="0:0:0.200"/>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource AkiBrown}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AKI_DarkGrayBlue}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="White" Duration="0:0:0.200"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
                 <EventTrigger RoutedEvent="MouseEnter">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AkiLightBrown}" Duration="0:0:0.200"/>
-                            <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="2" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AKI_Gray}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="White" Duration="0:0:0.200"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
                 <EventTrigger RoutedEvent="MouseLeave">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AkiBrown}" Duration="0:0:0.200"/>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="WhiteSmoke" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AKI_DarkGray}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="Gray" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        
+        <!-- Close App Button Style -->
+        <Style x:Key="AppCloseButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource AppButtonStyleBase}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="PreviewMouseDown">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AKI_DarkGrayBlue}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="White" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="IndianRed" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="White" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AKI_DarkGray}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="Gray" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        
+        <!-- Main Button Style -->
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NoChromeButton}">
+            <Setter Property="Foreground" Value="{StaticResource AKI_Foreground_Dark}"/>
+            <Setter Property="Background" Value="{StaticResource AKI_Background_Yellow}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Margin" Value="0 5"/>
+            <Setter Property="MinWidth" Value="100"/>
+            <Setter Property="MinHeight" Value="30"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Button.Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" ShadowDepth="3" BlurRadius="6" Opacity=".7"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="PreviewMouseDown">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AKI_DarkGray}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource AKI_White}" Duration="0:0:0.200"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Effect).ShadowDepth" To="0" Duration="0:0:0.200"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Effect).BlurRadius" To="0" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="PreviewMouseUp">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AKI_DarkYellow}" Duration="0:0:0.200"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Effect).ShadowDepth" To="5" Duration="0:0:0.200"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Effect).BlurRadius" To="8" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AKI_DarkYellow}" Duration="0:0:0.200"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Effect).ShadowDepth" To="5" Duration="0:0:0.200"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Effect).BlurRadius" To="8" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AKI_Yellow}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource AKI_DarkGray}" Duration="0:0:0.200"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Effect).ShadowDepth" To="3" Duration="0:0:0.200"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Effect).BlurRadius" To="6" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        
+        <!-- Alternate Button Style -->
+        <Style x:Key="AltButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource NoChromeButton}">
+            <Setter Property="Foreground" Value="{StaticResource AKI_Background_Blue}"/>
+            <Setter Property="Background" Value="{StaticResource AKI_Background_Blue}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource AKI_Background_Blue}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="0 5"/>
+            <Setter Property="MinWidth" Value="100"/>
+            <Setter Property="MinHeight" Value="30"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(Button.Background).Opacity" To="0" Duration="0"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="PreviewMouseDown">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To=".7" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource AKI_White}" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="PreviewMouseUp">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource AKI_Blue}" Duration="0:0:0.200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
                             <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="1" Duration="0:0:0.200"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Button.Background).Opacity" To="1" Duration="0:0:0.100" BeginTime="0:0:0.220"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource AKI_White}" Duration="0:0:0.100" BeginTime="0:0:0.220"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource AKI_Blue}" Duration="0:0:0.200"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Button.Background).Opacity" To="0" Duration="0:0:0.200"/>
+                            <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="0" Duration="0:0:0.100" BeginTime="0:0:0.220"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
@@ -140,9 +353,9 @@ Merijn Hendriks
         </Style>
 
         <!-- Flat Button Style (Control Specific because transparency is weird with animations. Could look into this later, I'm being lazy.) -->
-        <Style x:Key="SPTButtonFlat_NonGeneric" TargetType="{x:Type Button}" BasedOn="{StaticResource NoChromeButton}">
-            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
-            <Setter Property="Background" Value="{StaticResource SPTBackgroundLight}"/>
+        <Style x:Key="ButtonFlat_NonGeneric" TargetType="{x:Type Button}" BasedOn="{StaticResource NoChromeButton}">
+            <Setter Property="Foreground" Value="{StaticResource AKI_Foreground_Light}"/>
+            <Setter Property="Background" Value="{StaticResource AKI_Background_Dark}"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Margin" Value="0 5"/>
@@ -151,7 +364,7 @@ Merijn Hendriks
                 <EventTrigger RoutedEvent="PreviewMouseUp">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AkiLightBrown}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AKI_Gray}" Duration="0:0:0.200"/>
                             <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="WhiteSmoke" Duration="0:0:0.200"/>
                         </Storyboard>
                     </BeginStoryboard>
@@ -160,22 +373,22 @@ Merijn Hendriks
                     <BeginStoryboard>
                         <Storyboard>
                             <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="WhiteSmoke" Duration="0:0:0.200"/>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource AkiBrown}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="{StaticResource AKI_DarkGray}" Duration="0:0:0.200"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
                 <EventTrigger RoutedEvent="MouseEnter">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AkiBrown}"
-                                            From="{StaticResource AkiLightBrown}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AKI_Gray}"
+                                            From="{StaticResource AKI_DarkGray}" Duration="0:0:0.200"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
                 <EventTrigger RoutedEvent="MouseLeave">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AkiLightBrown}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AKI_Gray}" Duration="0:0:0.200"/>
                             <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="WhiteSmoke" Duration="0:0:0.200"/>
                         </Storyboard>
                     </BeginStoryboard>
@@ -185,8 +398,8 @@ Merijn Hendriks
 
         <!-- Server Setting List Item Style -->
         <Style x:Key="ServerSettingListItemStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource NoChromeButton}">
-            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
-            <Setter Property="Background" Value="{StaticResource SPTBackgroundLight}"/>
+            <Setter Property="Foreground" Value="{StaticResource AKI_Foreground_Light}"/>
+            <Setter Property="Background" Value="{StaticResource AKI_Background_Dark}"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Margin" Value="5"/>
@@ -195,14 +408,14 @@ Merijn Hendriks
                 <EventTrigger RoutedEvent="MouseEnter">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AkiDarkBrown}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AKI_DarkGrayBlue}" Duration="0:0:0.200"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
                 <EventTrigger RoutedEvent="MouseLeave">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AkiLightBrown}" Duration="0:0:0.200"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource AKI_DarkGray}" Duration="0:0:0.200"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
@@ -210,7 +423,7 @@ Merijn Hendriks
         </Style>
 
         <!-- Big Button Style (the one at the bottom over the footer. Inherits everything from our Main Button Style. This is explicitly assigned.)-->
-        <Style x:Key="SPTBigButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+        <Style x:Key="BigButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Width" Value="140"/>
             <Setter Property="Height" Value="50"/>
@@ -222,7 +435,7 @@ Merijn Hendriks
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0 5"/>
-            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
+            <Setter Property="Foreground" Value="{StaticResource AKI_Foreground_Light}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
@@ -235,16 +448,16 @@ Merijn Hendriks
                                                 <ColumnDefinition Width="5*" />
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
-                                            <Border x:Name="Border"  Grid.ColumnSpan="2" Background="{StaticResource SPTBackground}" BorderBrush="{StaticResource SPTForeground}" BorderThickness="1" />
-                                            <Border Grid.Column="0" Margin="1"  Background="{StaticResource SPTBackground}"  BorderBrush="{StaticResource SPTForeground}" BorderThickness="0,0,1,0" />
-                                            <Path x:Name="Arrow" Grid.Column="1"  Fill="{StaticResource SPTBackgroundLight}" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z"/>
+                                            <Border x:Name="Border"  Grid.ColumnSpan="2" Background="{StaticResource AKI_Background_Dark}" BorderBrush="Gray" BorderThickness="1" />
+                                            <Border Grid.Column="0" Margin="1"  Background="{StaticResource AKI_Background_Dark}"  BorderBrush="Gray" BorderThickness="0.5" />
+                                            <Path x:Name="Arrow" Grid.Column="1"  Fill="{StaticResource AKI_Background_Light}" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z"/>
                                         </Grid>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="ToggleButton.IsMouseOver" Value="true">
-                                                <Setter TargetName="Border" Property="Background" Value="{StaticResource SPTBackgroundLight}" />
+                                                    <Setter TargetName="Border" Property="Background" Value="{StaticResource AKI_Background_DarkGrayBlue}" />
                                             </Trigger>
                                             <Trigger Property="ToggleButton.IsChecked" Value="true">
-                                                <Setter TargetName="Border" Property="Background" Value="{StaticResource SPTBackgroundLight}" />
+                                                <Setter TargetName="Border" Property="Background" Value="{StaticResource AKI_Background_Light}" />
                                             </Trigger>
                                         </ControlTemplate.Triggers>
                                     </ControlTemplate>
@@ -254,7 +467,7 @@ Merijn Hendriks
                             <TextBox x:Name="PART_EditableTextBox" Visibility="Hidden" IsReadOnly="{TemplateBinding IsReadOnly}"/>
                             <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True"  Focusable="False" PopupAnimation="Slide">
                                 <Grid  Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                                    <Border x:Name="DropDownBorder" Background="{StaticResource SPTBackgroundLight}" />
+                                    <Border x:Name="DropDownBorder" Background="{StaticResource AKI_Background_Dark}" BorderBrush="Gray" BorderThickness="1"/>
                                     <ScrollViewer SnapsToDevicePixels="True">
                                         <StackPanel IsItemsHost="True" />
                                     </ScrollViewer>
@@ -270,8 +483,8 @@ Merijn Hendriks
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
-            <Setter Property="Background" Value="{StaticResource SPTBackground}"/>
+            <Setter Property="Foreground" Value="{StaticResource AKI_Foreground_Light}"/>
+            <Setter Property="Background" Value="{StaticResource AKI_Background_Dark}"/>
             <Setter Property="Margin" Value="0 5"/>
         </Style>
 
@@ -279,8 +492,8 @@ Merijn Hendriks
         <Style TargetType="{x:Type PasswordBox}">
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
-            <Setter Property="Background" Value="{StaticResource SPTBackground}"/>
+            <Setter Property="Foreground" Value="{StaticResource AKI_Foreground_Light}"/>
+            <Setter Property="Background" Value="{StaticResource AKI_Background_Dark}"/>
             <Setter Property="Margin" Value="0 5"/>
         </Style>
 
@@ -289,8 +502,18 @@ Merijn Hendriks
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
+            <Setter Property="Foreground" Value="{StaticResource AKI_Foreground_Light}"/>
             <Setter Property="Margin" Value="10 5"/>
+            <Setter Property="Opacity" Value="0"/>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.200" BeginTime="0:0:0.150"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
         </Style>
 
         <!-- Icon Button Style -->
@@ -323,15 +546,38 @@ Merijn Hendriks
         <Style TargetType="{x:Type CheckBox}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="{StaticResource SPTForeground}"/>
+            <Setter Property="Foreground" Value="{StaticResource AKI_Foreground_Light}"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Opacity" Value="1"/>
         </Style>
+        
+        <!-- Grid Card Style -->
+        <Style x:Key="GridCardStyle" TargetType="{x:Type Grid}">
+            <Setter Property="Background" Value="{StaticResource AKI_Background_Dark}"/>
+            <Setter Property="Opacity" Value="0"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="0" Color="Black"/>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(Effect).ShadowDepth" To="3" From="0" Duration="0:0:0.200" BeginTime="0:0:0.150"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Effect).BlurRadius" To="8" From="0" Duration="0:0:0.200" BeginTime="0:0:0.150"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" From="0" Duration="0:0:0.200" BeginTime="0:0:0.100"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
 
         <!-- Notification Banner Style -->
         <Style TargetType="{x:Type cc:NotificationBanner}">
-            <Setter Property="Background" Value="{StaticResource SPTBackgroundLight}"/>
+            <Setter Property="Background" Value="{StaticResource AKI_Background_Light}"/>
             <Setter Property="RenderTransform">
                 <Setter.Value>
                     <ScaleTransform ScaleY="0"/>

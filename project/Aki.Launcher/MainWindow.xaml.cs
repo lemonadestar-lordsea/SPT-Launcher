@@ -9,8 +9,12 @@
 
 using Aki.Launcher.Generics;
 using Aki.Launcher.Helpers;
+using Aki.Launcher.Models.Launcher;
 using Aki.Launcher.ViewModel;
+using System;
+using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Aki.Launcher
 {
@@ -19,10 +23,12 @@ namespace Aki.Launcher
     /// </summary>
     public partial class MainWindow : Window
     {
-        public GenericICommand ShowSettingsCommand { get; set; }
-
-        public NavigationViewModel FullSpanNavigationViewModel { get; set; }
+        public GenericICommand MinimizeAppCommand { get; set; }
+        public GenericICommand CloseAppCommand { get; set; }
+        public GenericICommand MenuItemCommand { get; set; }
         public NavigationViewModel navigationViewModel { get; set; }
+        public ObservableCollection<MenuBarItem> MenuItemCollection { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -35,29 +41,71 @@ namespace Aki.Launcher
             }
 
             var viewmodel = new NavigationViewModel();
-            viewmodel.SelectedViewModel = new ConnectServerViewModel(viewmodel);
             navigationViewModel = viewmodel;
 
+            MinimizeAppCommand = new GenericICommand(OnMinimizeAppCommand);
+            CloseAppCommand = new GenericICommand(OnCloseAppCommand);
+            MenuItemCommand = new GenericICommand(OnMenuItemCommand);
 
-            var fullSpanViewModel = new NavigationViewModel();
-            FullSpanNavigationViewModel = fullSpanViewModel;
+            ObservableCollection<MenuBarItem> tempMenuItemCollection = new ObservableCollection<MenuBarItem>();
+            tempMenuItemCollection.Add(new MenuBarItem
+            {
+                Name = "Game",
+                ItemAction = () =>
+                {
+                    navigationViewModel.SelectedViewModel = new ConnectServerViewModel(navigationViewModel);
+                }
+            });
 
-            ShowSettingsCommand = new GenericICommand(OnShowSettingsCommand);
+            tempMenuItemCollection.Add(new MenuBarItem
+            {
+                Name = LocalizationProvider.Instance.settings_menu,
+                ItemAction = () =>
+                {
+                    navigationViewModel.SelectedViewModel = new SettingsViewModel(navigationViewModel);
+                }
+            });
+
+            MenuItemCollection = tempMenuItemCollection;
+
+            OnMenuItemCommand(MenuItemCollection[0]);
         }
 
-        public void OnShowSettingsCommand(object parameter)
+        public void OnMinimizeAppCommand(object parameter)
         {
-            if (LauncherSettingsProvider.Instance.IsEditingSettings)
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        }
+
+        public void OnCloseAppCommand(object parameter)
+        {
+            Environment.Exit(0);
+        }
+
+        public void OnMenuItemCommand(object parameter)
+        {
+            if(parameter is MenuBarItem menuItem)
             {
-                return;
+                if(menuItem.IsSelected)
+                {
+                    return;
+                }
+
+                foreach(MenuBarItem m in MenuItemCollection)
+                {
+                    m.IsSelected = false;
+                }
+
+                menuItem.IsSelected = true;
+                menuItem.ItemAction?.Invoke();
             }
+        }
 
-            navigationViewModel.SelectedViewModel = null;
-
-            navigationViewModel.NotificationQueue.CloseQueue();
-
-            LauncherSettingsProvider.Instance.IsEditingSettings = true;
-            FullSpanNavigationViewModel.SelectedViewModel = new SettingsViewModel(FullSpanNavigationViewModel, navigationViewModel);
+        private void WindowMove_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
         }
     }
 }

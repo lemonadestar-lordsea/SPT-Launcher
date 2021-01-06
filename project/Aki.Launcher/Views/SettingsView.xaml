@@ -34,11 +34,6 @@ Merijn Hendriks
             <RowDefinition Height="AUTO"/>
         </Grid.RowDefinitions>
 
-        <Image Source="/Resources/bg-alpha.png" RenderOptions.BitmapScalingMode="Fant"
-               Grid.RowSpan="2" Grid.ColumnSpan="2" Stretch="UniformToFill"
-               Width="{Binding ActualWidth, ElementName=main}"
-               />
-
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="AUTO"/>
@@ -157,13 +152,5 @@ Merijn Hendriks
                              IsDefault="{Binding NewServer.IsDefault, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              MaxNameLength="30"
                              />
-
-        <Button x:Name="exitSettings" Grid.Row="2" Style="{StaticResource IconButtonStyle}" HorizontalAlignment="Left"
-                ToolTip="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                          Path=exit_settings_tooltip}"
-                Command="{Binding BackCommand}" Margin="5" 
-                >
-            <Path Data="{StaticResource AppExit}" Fill="{Binding ElementName=exitSettings, Path=Foreground}"/>
-        </Button>
     </Grid>
 </UserControl>

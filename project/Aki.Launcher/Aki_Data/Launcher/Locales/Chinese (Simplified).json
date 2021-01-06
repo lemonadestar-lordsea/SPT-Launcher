@@ -4,7 +4,7 @@
   "server_connecting": "连接中",
   "server_unavailable_format_1": "服务器'{0}'不可用。",
   "no_servers_available": "找不到服务器。 检查设置中的服务器列表。",
-  "settings_cog_tooltip": "菜单设定",
+  "settings_menu": "菜单设定",
   "back": "上一步",
   "wipe": "清档",
   "wipe_profile": "清除该存档",
@@ -60,5 +60,9 @@
   "minimize_action": "最小化",
   "do_nothing_action": "无动作",
   "exit_action": "关闭启动器",
-  "launcher_start_game_action": "启动游戏后登录器将"
+  "launcher_start_game_action": "启动游戏后登录器将",
+  "game": "游戏",
+  "new_password": "新密码",
+  "wipe_warning_format_2": "更改帐户版本需要擦除个人资料。\n'{0}'->'{1}'\n您确定要擦除个人资料吗?",
+  "cancel": "取消"
 }
