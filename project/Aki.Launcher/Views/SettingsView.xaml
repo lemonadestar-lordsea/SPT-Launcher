@@ -27,7 +27,7 @@ Merijn Hendriks
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="AUTO" MinWidth="250"/>
+            <ColumnDefinition Width="AUTO" MinWidth="200"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
