@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aki.Launcher", "Aki.Launcher\Aki.Launcher.csproj", "{B2561FAB-6792-4D89-85DD-1E48844CD69F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aki.BytePatcher", "Aki.BytePatcher\Aki.BytePatcher.csproj", "{4B1F5C39-92C9-41DC-820C-E0EC3500E400}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aki.ByteBanger", "Aki.ByteBanger\Aki.ByteBanger.csproj", "{4B1F5C39-92C9-41DC-820C-E0EC3500E400}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
