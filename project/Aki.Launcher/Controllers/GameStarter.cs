@@ -26,7 +26,7 @@ namespace Aki.Launcher
 
         public int LaunchGame(ServerInfo server, AccountInfo account)
         {
-            gamepath = LauncherSettingsProvider.Instance.GamePath ?? Environment.CurrentDirectory;
+            gamepath = $@"{LauncherSettingsProvider.Instance.GamePath}\" ?? Environment.CurrentDirectory;
 
             // setup directories
             if (IsInstalledInLive())
@@ -72,7 +72,7 @@ namespace Aki.Launcher
             }
 
             // start game
-            var clientExecutable = $"{gamepath}\\EscapeFromTarkov.exe";
+            var clientExecutable = $@"{gamepath}EscapeFromTarkov.exe";
 
             if (!File.Exists(clientExecutable))
 			{
