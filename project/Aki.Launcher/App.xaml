@@ -444,13 +444,6 @@ Merijn Hendriks
             </Style.Triggers>
         </Style>
 
-        <!-- Big Button Style (the one at the bottom over the footer. Inherits everything from our Main Button Style. This is explicitly assigned.)--><!--
-        <Style x:Key="BigButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Width" Value="140"/>
-            <Setter Property="Height" Value="50"/>
-        </Style>-->
-
         <!-- Combo Box Style -->
         <Style TargetType="{x:Type ComboBox}">
             <Setter Property="FontSize" Value="15"/>
