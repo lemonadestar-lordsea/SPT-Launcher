@@ -66,5 +66,6 @@
   "wipe_warning_format_2": "更改帳戶版本需要擦除個人資料。\n'{0}'->'{1}'\n您確定要擦除個人資料嗎?",
   "cancel": "取消",
   "need_an_account": "Don't have an account yet?",
-  "have_an_account": "Already have an account?"
+  "have_an_account": "Already have an account?",
+  "repatch": "Repatch"
 }

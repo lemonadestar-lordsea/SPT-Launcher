@@ -71,7 +71,7 @@ Merijn Hendriks
 
             <!-- Password Controls -->
             <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                         Path=password}" Grid.Row="2" Grid.Column="1"
+                         Path=new_password}" Grid.Row="2" Grid.Column="1"
                />
 
             <PasswordBox x:Name="passBox" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="2" Margin="10 5"

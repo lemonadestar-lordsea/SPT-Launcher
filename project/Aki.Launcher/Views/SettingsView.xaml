@@ -30,7 +30,6 @@ Merijn Hendriks
                 <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="AUTO"/>
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -44,21 +43,11 @@ Merijn Hendriks
 
             <Rectangle Fill="Black" Opacity=".8" Grid.RowSpan="99" Grid.ColumnSpan="99"/>
 
-            <!--<Grid Grid.Row="1" Grid.Column="1" Margin="5">
-                <CheckBox Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                                Path=login_automatically}"
-                      VerticalAlignment="Center" FontSize="18"
-                      HorizontalAlignment="Center" Margin="10"
-                      IsChecked="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
-                                  Path=UseAutoLogin}"
-                      />
-            </Grid>-->
-
-            <!-- Multi-button grid -->
-            
             <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5">
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="3*"/>
@@ -71,14 +60,12 @@ Merijn Hendriks
                         Grid.Column="0"
                         HorizontalAlignment="Center"
                         Command="{Binding RemoveRegistryKeysCommand}"
-                        Style="{StaticResource AltButtonStyle}"
                         />
                     <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                               Path=clear_game_settings}"
                         Grid.Column="2"
                         HorizontalAlignment="Center"
                         Command="{Binding ClearGameSettingsCommand}"
-                        Style="{StaticResource AltButtonStyle}"
                     />
 
                     <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
@@ -86,8 +73,14 @@ Merijn Hendriks
                         Grid.Column="4"
                         HorizontalAlignment="Center"
                         Command="{Binding CleanTempFilesCommand}"
-                        Style="{StaticResource AltButtonStyle}"
                         />
+
+                    <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
+                                      Path=repatch}" 
+                            Grid.Column="6"
+                            HorizontalAlignment="Center"
+                            Command="{Binding ReApplyPatchCommand}"
+                            />
                 </Grid>
             </Grid>
 

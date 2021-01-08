@@ -66,5 +66,6 @@
   "wipe_warning_format_2": "Das Ändern Ihrer Kontoausgabe erfordert ein Löschen des Profils.\n'{0}' -> '{1}'\nSind Sie sicher, dass Sie Ihr Profil löschen möchten?",
   "cancel": "Stornieren",
   "need_an_account": "Don't have an account yet?",
-  "have_an_account": "Already have an account?"
+  "have_an_account": "Already have an account?",
+  "repatch": "Repatch"
   }
