@@ -30,6 +30,7 @@ namespace Aki.Launcher.ViewModel
         public GenericICommand SelectGameFolderCommand { get; set; }
         public GenericICommand RemoveRegistryKeysCommand { get; set; }
         public GenericICommand ClearGameSettingsCommand { get; set; }
+        public GenericICommand ReApplyPatchCommand { get; set; }
         public LocaleCollection Locales { get; set; } = new LocaleCollection();
         //private NavigationViewModel fullSpanNavigationViewModel { get; set; }
         private NavigationViewModel navigationViewModel { get; set; }
@@ -46,6 +47,7 @@ namespace Aki.Launcher.ViewModel
             SelectGameFolderCommand = new GenericICommand(OnSelectGameFolderCommand);
             RemoveRegistryKeysCommand = new GenericICommand(OnRemoveRegistryKeysCommand);
             ClearGameSettingsCommand = new GenericICommand(OnClearGameSettingsCommand);
+            ReApplyPatchCommand = new GenericICommand(OnReApplyPatchCommand);
             #endregion
 
             Application.Current.MainWindow.Closing += MainWindow_Closing;
@@ -81,14 +83,14 @@ namespace Aki.Launcher.ViewModel
         #endregion
 
         #region Settings Commands
-        //public void OnBackCommand(object parameter)
-        //{
-        //    LauncherSettingsProvider.Instance.SaveSettings();
 
-        //    LauncherSettingsProvider.Instance.IsEditingSettings = false;
-
-        //    navigationViewModel.SelectedViewModel = new ConnectServerViewModel(navigationViewModel);
-        //}
+        public void OnReApplyPatchCommand(object parameter)
+        {
+            //This will probably need to be async to not halt the UI thread, but I don't know how long a patch will take. This is more of a placeholder for testing.
+            //Also, if patches do take a significant amount of time, we should indicate progress somehow. Best option would be if the lib had some ProgressChagned
+            //event we could use to update a progress view of some kind. We'll figure something out.
+            navigationViewModel.NotificationQueue.Enqueue("This is not ready :(", "OK", () => { });
+        }
 
         public void OnCleanTempFilesCommand(object parameter)
         {

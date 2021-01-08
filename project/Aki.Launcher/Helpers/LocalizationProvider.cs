@@ -152,6 +152,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.cancel = "Cancel";
             englishLocale.need_an_account = "Don't have an account yet?";
             englishLocale.have_an_account = "Already have an account?";
+            englishLocale.repatch = "Repatch";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -1272,6 +1273,22 @@ namespace Aki.Launcher.Helpers
                 {
                     _have_an_account = value;
                     RaisePropertyChanged(nameof(have_an_account));
+                }
+            }
+        }
+        #endregion
+
+        #region repatch
+        private string _repatch;
+        public string repatch
+        {
+            get => _repatch;
+            set
+            {
+                if(_repatch != value)
+                {
+                    _repatch = value;
+                    RaisePropertyChanged(nameof(repatch));
                 }
             }
         }
