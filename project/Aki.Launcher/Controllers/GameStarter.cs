@@ -50,22 +50,22 @@ namespace Aki.Launcher
             // apply patches
             var patchStatus = PatchManager.ApplyPatches(gamepath);
 
-            if (patchStatus < 1)
+            if (patchStatus != PatchStatus.Success)
             {
                 // patching failed
                 PatchManager.RestorePatched(gamepath);
 
                 switch (patchStatus)
                 {
-                    case -1:
+                    case PatchStatus.NoPatchReceived:
                         // failed to receive patches
                         return -3;
 
-                    case -2:
+                    case PatchStatus.FailedCorePatch:
                         // failed to apply core patch
                         return -4;
 
-                    case -3:
+                    case PatchStatus.FailedModPatch:
                         // failed to apply mod patch
                         return -5;
                 }

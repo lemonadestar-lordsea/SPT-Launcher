@@ -13,16 +13,24 @@ using Aki.ByteBanger;
 
 namespace Aki.Launcher
 {
+    public enum PatchStatus
+    {
+        Success = 0,
+        NoPatchReceived,
+        FailedCorePatch,
+        FailedModPatch
+    }
+
 	public static class PatchManager
 	{
-        public static int ApplyPatches(string filepath)
+        public static PatchStatus ApplyPatches(string filepath)
         {
             var patches = RequestPatches();
 
             // get patches from server
             if (patches == null)
             {
-                return -1;
+                return PatchStatus.NoPatchReceived;
             }
 
             // patch from clean files
@@ -31,7 +39,7 @@ namespace Aki.Launcher
             // apply core patch
             if (!ApplyCorePatch(filepath))
             {
-                return -2;
+                return PatchStatus.FailedCorePatch;
             }
 
             // apply mod patches
@@ -40,12 +48,12 @@ namespace Aki.Launcher
             {
                 if (!PatchFile(filepath))
                 {
-                    return -3;
+                    return PatchStatus.FailedModPatch;
                 }
             }
             */
 
-            return 1;
+            return PatchStatus.Success;
         }
 
         static PatchInfo[] RequestPatches()
