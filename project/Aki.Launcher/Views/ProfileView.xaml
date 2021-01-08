@@ -106,7 +106,7 @@ Merijn Hendriks
             <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                 Path=start_game}"
                 HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 5"
-                Style="{StaticResource BigButtonStyle}"
+                Height="40"
                 Command="{Binding StartGameCommand}"
                 IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
                 Path=GameRunning, Converter={StaticResource IvtBool}}"

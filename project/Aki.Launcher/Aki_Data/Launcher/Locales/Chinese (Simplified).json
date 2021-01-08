@@ -64,5 +64,7 @@
   "game": "游戏",
   "new_password": "新密码",
   "wipe_warning_format_2": "更改帐户版本需要擦除个人资料。\n'{0}'->'{1}'\n您确定要擦除个人资料吗?",
-  "cancel": "取消"
+  "cancel": "取消",
+  "need_an_account": "Don't have an account yet?",
+  "have_an_account": "Already have an account?"
 }
