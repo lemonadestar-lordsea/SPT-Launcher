@@ -16,7 +16,7 @@ Merijn Hendriks
         xmlns:cc="clr-namespace:Aki.Launcher.Custom_Controls"
         xmlns:local="clr-namespace:Aki.Launcher"
         mc:Ignorable="d"
-        Title="SPT AKI" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow"
+        Title="SPT AKI" Height="470" Width="820" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow"
         ResizeMode="CanResize" x:Name="main"
         Background="{StaticResource AKI_Background_Light}">
 

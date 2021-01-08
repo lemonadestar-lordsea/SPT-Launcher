@@ -64,5 +64,7 @@
   "game": "Game",
   "new_password": "New Password",
   "wipe_warning_format_2": "Changing your account edition requires a profile wipe.\n'{0}' > '{1}'\nAre you sure you want to wipe your profile?",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "need_an_account": "Don't have an account yet?",
+  "have_an_account": "Already have an account?"
 }
