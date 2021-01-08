@@ -15,15 +15,14 @@ using System.Diagnostics;
 using System.IO;
 using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Helpers;
-using Aki.ByteBanger;
 
 namespace Aki.Launcher
 {
 	public class GameStarter
 	{
-        private string clientExecutable = $"{LauncherSettingsProvider.Instance.GamePath}\\EscapeFromTarkov.exe";
         private const string registeryInstall = @"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov";
         private const string registerySettings = @"Software\Battlestate Games\EscapeFromTarkov";
+        private string clientExecutable = $"{LauncherSettingsProvider.Instance.GamePath}\\EscapeFromTarkov.exe";
 
         public int LaunchGame(ServerInfo server, AccountInfo account)
         {
@@ -39,7 +38,7 @@ namespace Aki.Launcher
                 return -2;
             }
 
-            if (!ApplyPatches())
+            if (!PatchManager.ApplyPatches())
             {
                 return -3;
             }
@@ -184,53 +183,6 @@ namespace Aki.Launcher
             }
 
             return value0;
-        }
-
-        public bool ApplyPatches()
-        {
-            string filepath = LauncherSettingsProvider.Instance.GamePath ?? Environment.CurrentDirectory;
-            string targetFile = $@"{filepath}EscapeFromTarkov_Data/Managed/Assembly-CSharp.dll";
-            string patchFile = $@"{filepath}Aki_Data/Launcher/Patches/aki-core.bpf";
-
-            return PatchFile(targetFile, patchFile);
-        }
-
-        public bool PatchFile(string targetFile, string patchFile)
-        {            
-            byte[] target = File.ReadAllBytes(targetFile);
-            byte[] patch = File.ReadAllBytes(patchFile);
-            byte[] patched = null;
-
-            // backup before patching
-            if (!File.Exists($@"{targetFile}.bak"))
-            {
-                File.Copy(targetFile, $@"{targetFile}.bak");
-            }
-
-            // patch
-            try
-            {
-                patched = PatchUtil.Patch(target, PatchInfo.FromBytes(patch));
-                
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message == "Invalid input file")
-                {
-                    // already patched
-                    return true;
-                }
-
-                if (ex.Message == "Output hash mismatch")
-                {
-                    // version mismatch
-                    return false;
-                }
-            }
-
-            // apply patch
-            File.WriteAllBytes(targetFile, patched);
-            return true;
         }
 
         /// <summary>
