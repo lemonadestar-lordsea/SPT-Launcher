@@ -64,5 +64,7 @@
   "game": "Игра",
   "new_password": "Новый пароль",
   "wipe_warning_format_2": "Для изменения выпуска учетной записи требуется очистка профиля.\n'{0}' -> '{1}'\nВы действительно хотите очистить свой профиль?",
-  "cancel": "отменить"
+  "cancel": "отменить",
+  "need_an_account": "Don't have an account yet?",
+  "have_an_account": "Already have an account?"
 }

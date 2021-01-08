@@ -150,6 +150,8 @@ namespace Aki.Launcher.Helpers
             englishLocale.new_password = "New Password";
             englishLocale.wipe_warning_format_2 = "Changing your account edition requires a profile wipe.\n'{0}' -> '{1}'\nAre you sure you want to wipe your profile?";
             englishLocale.cancel = "Cancel";
+            englishLocale.need_an_account = "Don't have an account yet?";
+            englishLocale.have_an_account = "Already have an account?";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -1238,6 +1240,38 @@ namespace Aki.Launcher.Helpers
                 {
                     _cancel = value;
                     RaisePropertyChanged(nameof(cancel));
+                }
+            }
+        }
+        #endregion
+
+        #region need_an_account
+        private string _need_an_account;
+        public string need_an_account
+        {
+            get => _need_an_account;
+            set
+            {
+                if(_need_an_account != value)
+                {
+                    _need_an_account = value;
+                    RaisePropertyChanged(nameof(need_an_account));
+                }
+            }
+        }
+        #endregion
+
+        #region have_an_account
+        private string _have_an_account;
+        public string have_an_account
+        {
+            get => _have_an_account;
+            set
+            {
+                if(_have_an_account != value)
+                {
+                    _have_an_account = value;
+                    RaisePropertyChanged(nameof(have_an_account));
                 }
             }
         }

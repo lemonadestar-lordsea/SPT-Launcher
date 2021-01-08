@@ -28,6 +28,7 @@ Merijn Hendriks
             <RowDefinition Height="*"/>
             <RowDefinition Height="AUTO"/>
             <RowDefinition Height="AUTO"/>
+            <RowDefinition Height="AUTO"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -102,20 +103,26 @@ Merijn Hendriks
         
         <!-- Addtional Controls -->
         <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                          Path=go_to_login}" Grid.Row="5" Grid.Column="1" Margin="10"
-                Style="{StaticResource AltButtonStyle}"
-                Command="{Binding ShowLoginCommand}"
-                IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
-                            Path=AllowSettings}"
-                />
-
-        <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                           Path=register}" Grid.Row="5" Grid.Column="4" Margin="10"
                 HorizontalAlignment="Right"
                 Command="{Binding RegisterCommand}"
                 CommandParameter="{Binding ElementName=view}"
                 />
             
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.Column="1" Margin="0 10" Style="{StaticResource GridCardStyle}">
+            <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
+                Path=have_an_account}" HorizontalAlignment="Left"
+                   />
+
+            <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
+                          Path=go_to_login}" Margin="10 5"
+                Style="{StaticResource AltButtonStyle}"
+                Command="{Binding ShowLoginCommand}" HorizontalAlignment="Right"
+                IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
+                            Path=AllowSettings}"
+                />
         </Grid>
     </Grid>
 </UserControl>
