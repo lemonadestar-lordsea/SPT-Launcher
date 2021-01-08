@@ -109,6 +109,18 @@ namespace Aki.Launcher.ViewModel
                     break;
 
                 case -3:
+                    // TODO: add this, failed to receive patches
+                    return;
+
+                case -4:
+                    // TODO: add this, failed core patch
+                    return;
+
+                case -5:
+                    // TODO: add this, failed mod patch
+                    return;
+
+                case -6:
                     navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.eft_exe_not_found_warning);
                     return;
             }

@@ -13,22 +13,22 @@ using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 using Aki.Launcher.MiniCommon;
-using System.Linq;
 using Aki.Launcher.Helpers;
-using System.Windows;
 
 namespace Aki.Launcher
 {
 	public class GameStarter
 	{
-        private string clientExecutable = $"{LauncherSettingsProvider.Instance.GamePath}\\EscapeFromTarkov.exe";
-        private const string registeryInstall = @"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov";
-        private const string registerySettings = @"Software\Battlestate Games\EscapeFromTarkov";
+        const string registeryInstall = @"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov";
+        const string registerySettings = @"Software\Battlestate Games\EscapeFromTarkov";
+        string gamepath;
 
         public int LaunchGame(ServerInfo server, AccountInfo account)
         {
+            gamepath = $@"{LauncherSettingsProvider.Instance.GamePath}\" ?? Environment.CurrentDirectory;
+
+            // setup directories
             if (IsInstalledInLive())
             {
                 return -1;
@@ -47,24 +47,50 @@ namespace Aki.Launcher
                 CleanTempFiles();
             }
 
+            // apply patches
+            var patchStatus = PatchManager.ApplyPatches(gamepath);
+
+            if (patchStatus != PatchStatus.Success)
+            {
+                // patching failed
+                PatchManager.RestorePatched(gamepath);
+
+                switch (patchStatus)
+                {
+                    case PatchStatus.NoPatchReceived:
+                        // failed to receive patches
+                        return -3;
+
+                    case PatchStatus.FailedCorePatch:
+                        // failed to apply core patch
+                        return -4;
+
+                    case PatchStatus.FailedModPatch:
+                        // failed to apply mod patch
+                        return -5;
+                }
+            }
+
+            // start game
+            var clientExecutable = $@"{gamepath}EscapeFromTarkov.exe";
+
             if (!File.Exists(clientExecutable))
 			{
-				return -3;
+				return -4;
 			}
 			
-			ProcessStartInfo clientProcess = new ProcessStartInfo(clientExecutable)
+			var clientProcess = new ProcessStartInfo(clientExecutable)
 			{
 				Arguments = $"-force-gfx-jobs native -token={account.id} -config={Json.Serialize(new ClientConfig(server.backendUrl))}",
 				UseShellExecute = false,
-				WorkingDirectory = LauncherSettingsProvider.Instance.GamePath ?? Environment.CurrentDirectory
+				WorkingDirectory = gamepath
 			};
 
 			Process.Start(clientProcess);
-
 			return 1;
 		}
 
-        private bool IsInstalledInLive()
+        bool IsInstalledInLive()
         {
             var value0 = false;
 
@@ -106,10 +132,10 @@ namespace Aki.Launcher
             return value0;
         }
 
-        private void SetupGameFiles()
+        void SetupGameFiles()
         {
-            string filepath = LauncherSettingsProvider.Instance.GamePath ?? Environment.CurrentDirectory;
-            string[] files = new string[]
+            var filepath = LauncherSettingsProvider.Instance.GamePath ?? Environment.CurrentDirectory;
+            var files = new string[]
             {
                 Path.Combine(filepath, "BattlEye"),
                 Path.Combine(filepath, "Logs"),
@@ -120,26 +146,11 @@ namespace Aki.Launcher
                 Path.Combine(filepath, "WinPixEventRuntime.dll")
             };
 
-            foreach (string file in files)
+            foreach (var file in files)
             {
                 if (Directory.Exists(file))
                 {
-                    try
-                    {
-                        Directory.Delete(file, true);
-                    }
-                    catch(Exception)
-                    {
-                        //something prevented the recursive deletion of the directory, try again.
-                        try
-                        {
-                            Directory.Delete(file, true);
-                        }
-                        catch(Exception)
-                        {
-                            // *Shrug
-                        }
-                    }
+                    RemoveFilesRecurse(new DirectoryInfo(file));
                 }
 
                 if (File.Exists(file))
@@ -149,7 +160,7 @@ namespace Aki.Launcher
             }
         }
 
-        private int IsPiratedCopy()
+        int IsPiratedCopy()
         {
             var value0 = 0;
 
@@ -191,19 +202,19 @@ namespace Aki.Launcher
 		{
 			try
 			{
-				RegistryKey key = Registry.CurrentUser.OpenSubKey(registerySettings, true);
+				var key = Registry.CurrentUser.OpenSubKey(registerySettings, true);
 
-				foreach (string value in key.GetValueNames())
+				foreach (var value in key.GetValueNames())
 				{
 					key.DeleteValue(value);
 				}
-
-                return true;
 			}
 			catch
 			{
                 return false;
 			}
+
+            return true;
 		}
 
         /// <summary>
@@ -220,10 +231,10 @@ namespace Aki.Launcher
 				return true;
 			}
 
-            return CleanTempRecurse(rootdir);
+            return RemoveFilesRecurse(rootdir);
 		}
 
-        private bool CleanTempRecurse(DirectoryInfo basedir)
+        bool RemoveFilesRecurse(DirectoryInfo basedir)
         {
             if (!basedir.Exists)
             {
@@ -235,7 +246,7 @@ namespace Aki.Launcher
                 // remove subdirectories
                 foreach (var dir in basedir.EnumerateDirectories())
                 {
-                    CleanTempRecurse(dir);
+                    RemoveFilesRecurse(dir);
                 }
 
                 // remove files
