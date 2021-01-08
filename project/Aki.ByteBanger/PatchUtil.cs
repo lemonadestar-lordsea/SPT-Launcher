@@ -16,7 +16,7 @@ namespace Aki.ByteBanger
 {
     public static class PatchUtil
     {
-        public static PatchInfo Diff(byte[] original, byte[] patched)
+        public static DiffResult Diff(byte[] original, byte[] patched)
         {
             PatchInfo pi = new PatchInfo
             {
@@ -30,7 +30,10 @@ namespace Aki.ByteBanger
                 pi.PatchedChecksum = sha256.ComputeHash(patched);
             }
 
-            long minLength = Math.Min(pi.OriginalLength, pi.PatchedLength);
+            if ((pi.OriginalLength == pi.PatchedLength) && ArraysMatch(pi.OriginalChecksum, pi.PatchedChecksum))
+                return new DiffResult(DiffResultType.FilesMatch, null);
+
+            int minLength = Math.Min(pi.OriginalLength, pi.PatchedLength);
 
             List<PatchItem> items = new List<PatchItem>();
             List<byte> currentData = null;
@@ -70,20 +73,28 @@ namespace Aki.ByteBanger
 
             pi.Items = items.ToArray();
 
-            return pi;
+            return new DiffResult(DiffResultType.Success, pi);
         }
 
-        public static PatchInfo Diff(string originalFile, string patchedFile)
+        public static DiffResult Diff(string originalFile, string patchedFile)
         {
-            if (string.IsNullOrWhiteSpace(originalFile)) throw new ArgumentException("originalFile must not be null or empty");
-            if (string.IsNullOrWhiteSpace(patchedFile)) throw new ArgumentException("patchedFile must not be null or empty");
-            if (!File.Exists(originalFile)) throw new FileNotFoundException($"File '{originalFile}' not found");
-            if (!File.Exists(patchedFile)) throw new FileNotFoundException($"File '{patchedFile}' not found");
+            if (string.IsNullOrWhiteSpace(originalFile)) return new DiffResult(DiffResultType.OriginalFilePathInvalid, null);
+            if (string.IsNullOrWhiteSpace(patchedFile)) return new DiffResult(DiffResultType.PatchedFilePathInvalid, null);
+            if (!File.Exists(originalFile)) return new DiffResult(DiffResultType.OriginalFileNotFound, null);
+            if (!File.Exists(patchedFile)) return new DiffResult(DiffResultType.PatchedFileNotFound, null);
 
-            return Diff(File.ReadAllBytes(originalFile), File.ReadAllBytes(patchedFile));
+            byte[] originalData, patchedData;
+
+            try { originalData = File.ReadAllBytes(originalFile); }
+            catch { return new DiffResult(DiffResultType.OriginalFileReadFailed, null); }
+
+            try { patchedData = File.ReadAllBytes(patchedFile); }
+            catch { return new DiffResult(DiffResultType.PatchedFileReadFailed, null); }
+
+            return Diff(originalData, patchedData);
         }
 
-        public static byte[] Patch(byte[] input, PatchInfo pi)
+        public static PatchResult Patch(byte[] input, PatchInfo pi)
         {
             byte[] inputHash;
             using (SHA256CryptoServiceProvider sha256 = new SHA256CryptoServiceProvider())
@@ -91,7 +102,9 @@ namespace Aki.ByteBanger
                 inputHash = sha256.ComputeHash(input);
             }
 
-            if (!ArraysMatch(inputHash, pi.OriginalChecksum)) throw new Exception("Invalid input file");
+            if (ArraysMatch(inputHash, pi.PatchedChecksum)) return new PatchResult(PatchResultType.AlreadyPatched, null);
+            if (!ArraysMatch(inputHash, pi.OriginalChecksum)) return new PatchResult(PatchResultType.InputChecksumMismatch, null);
+            if (input.Length != pi.OriginalLength) return new PatchResult(PatchResultType.InputLengthMismatch, null);
 
             byte[] patchedData = new byte[pi.PatchedLength];
             long minLen = Math.Min(pi.OriginalLength, pi.PatchedLength);
@@ -106,9 +119,9 @@ namespace Aki.ByteBanger
                 patchedHash = sha256.ComputeHash(patchedData);
             }
 
-            if (!ArraysMatch(patchedHash, pi.PatchedChecksum)) throw new Exception("Output hash mismatch");
+            if (!ArraysMatch(patchedHash, pi.PatchedChecksum)) return new PatchResult(PatchResultType.OutputChecksumMismatch, null);
 
-            return patchedData;
+            return new PatchResult(PatchResultType.Success, patchedData);
         }
 
         private static bool ArraysMatch(byte[] a, byte[] b)

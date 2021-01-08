@@ -21,8 +21,8 @@ namespace Aki.Launcher
         FailedModPatch
     }
 
-	public static class PatchManager
-	{
+    public static class PatchManager
+    {
         public static PatchStatus ApplyPatches(string filepath)
         {
             var patches = RequestPatches();
@@ -71,10 +71,9 @@ namespace Aki.Launcher
         }
 
         static bool PatchFile(string targetFile, string patchFile)
-        {            
-            var target = File.ReadAllBytes(targetFile);
-            var patch = File.ReadAllBytes(patchFile);
-            byte[] patched = null;
+        {
+            byte[] target = File.ReadAllBytes(targetFile);
+            byte[] patch = File.ReadAllBytes(patchFile);
 
             // backup before patching
             if (!File.Exists($@"{targetFile}.bak"))
@@ -83,29 +82,25 @@ namespace Aki.Launcher
             }
 
             // patch
-            try
+            PatchResult result = PatchUtil.Patch(target, PatchInfo.FromBytes(patch));
+
+            switch (result.Result)
             {
-                patched = PatchUtil.Patch(target, PatchInfo.FromBytes(patch));
-                
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message == "Invalid input file")
-                {
-                    // already patched
+                case PatchResultType.Success:   // successfully patched, write the file
+                    File.WriteAllBytes(targetFile, result.PatchedData);
                     return true;
-                }
 
-                if (ex.Message == "Output hash mismatch")
-                {
-                    // version mismatch
+                case PatchResultType.AlreadyPatched:            // input file is already patched (size & hash match)
+                case PatchResultType.InputChecksumMismatch:     // input file's hash mismatches
+                case PatchResultType.InputLengthMismatch:       // input file's length mismatches
+                    return true;
+
+                case PatchResultType.OutputChecksumMismatch:    // patched hash mismatches intended output hash
                     return false;
-                }
-            }
 
-            // apply patch
-            File.WriteAllBytes(targetFile, patched);
-            return true;
+                default:                                        // something else that shouldn't happen
+                    return false;
+            }
         }
 
         public static void RestorePatched(string filepath)
