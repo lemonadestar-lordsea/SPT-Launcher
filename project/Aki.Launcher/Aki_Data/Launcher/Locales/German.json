@@ -67,5 +67,9 @@
   "cancel": "Stornieren",
   "need_an_account": "Don't have an account yet?",
   "have_an_account": "Already have an account?",
-  "repatch": "Repatch"
+  "repatch": "Repatch",
+  "failed_to_receive_patches": "Failed to receive patches",
+  "failed_core_patch": "Core patch failed",
+  "failed_mod_patch": "Mod patch failed",
+  "ok": "OK"
   }

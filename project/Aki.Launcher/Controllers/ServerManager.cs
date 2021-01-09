@@ -27,6 +27,7 @@ namespace Aki.Launcher
 			}
 			catch
 			{
+				SelectedServer = null;
 				return;
 			}
 

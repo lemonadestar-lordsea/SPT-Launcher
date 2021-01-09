@@ -45,6 +45,7 @@ $publishProcess.Dispose()
 Write-Host "`nDone" -ForegroundColor Cyan
 
 Remove-Item "$($buildDir)\Launcher.pdb"
+Remove-Item "$($buildDir)\Aki.ByteBanger.pdb"
 
 #copy aki_data folder
 Write-Host "`nCopying Aki_Data folder ... " -NoNewLine

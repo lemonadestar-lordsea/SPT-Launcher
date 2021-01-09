@@ -336,7 +336,7 @@ Merijn Hendriks
                                                 To="{StaticResource AKI_Transparaent_DarkGray}" From="{StaticResource AKI_DarkGray}"
                                                 Duration="0:0:0.200"/>
                                 <ColorAnimation Storyboard.TargetProperty="(Button.BorderBrush).(SolidColorBrush.Color)" To="LightGray" Duration="0:0:0.200"/>
-                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="1 1 1 2" Duration="0:0:0.200"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="1" Duration="0:0:0.200"/>
                                 <DoubleAnimation Storyboard.TargetProperty="(Effect).ShadowDepth" To="0" Duration="0:0:0.200"/>
                                 <DoubleAnimation Storyboard.TargetProperty="(Effect).BlurRadius" To="0" Duration="0:0:0.200"/>
                             </Storyboard>
