@@ -68,8 +68,8 @@
   "need_an_account": "Belum punya akun?",
   "have_an_account": "Sudah punya akun?",
   "repatch": "Patch Ulang",
-  "failed_to_receive_patches": "Failed to receive patches",
-  "failed_core_patch": "Core patch failed",
-  "failed_mod_patch": "Mod patch failed",
-  "ok": "OK"
+  "failed_to_receive_patches": "Gagal menerima patch", 
+  "failed_core_patch": "Patch utama gagal", 
+  "failed_mod_patch": "Patch mod gagal", 
+  "ok": "OK" 
 }
