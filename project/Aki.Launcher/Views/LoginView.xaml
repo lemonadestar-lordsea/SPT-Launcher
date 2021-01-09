@@ -14,6 +14,7 @@ Merijn Hendriks
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:helpers="clr-namespace:Aki.Launcher.Helpers"
+             xmlns:cc="clr-namespace:Aki.Launcher.Custom_Controls"
              xmlns:local="clr-namespace:Aki.Launcher.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
@@ -58,36 +59,22 @@ Merijn Hendriks
             </Grid.RowDefinitions>
 
             <!-- Username Controls -->
-            <Label Grid.Column="1" Grid.Row="1"
-                   Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                             Path=username}"
-                   />
-            <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Margin="10 5"
-                 Text="{Binding login.Username, UpdateSourceTrigger=PropertyChanged}"
-                 IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
-                            Path=AllowSettings}"
-                 >
-                <TextBox.InputBindings>
-                    <KeyBinding Key="Return"
-                            Command="{Binding LoginCommand}"
-                            CommandParameter="{Binding ElementName=view}"/>
-                </TextBox.InputBindings>
-            </TextBox>
+            <cc:HintedTextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4"
+                              Hint="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
+                                     Path=username}"
+                              HintColor="{StaticResource AKI_Background_Yellow}"
+                              Data="{Binding login.Username, UpdateSourceTrigger=PropertyChanged}"
+                              ReturnKeyCommand="{Binding LoginCommand}"
+                              ReturnKeyCommandParameter="{Binding ElementName=view}"
+                              />
 
-            <!-- Password Controls -->
-            <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                         Path=password}" Grid.Row="2" Grid.Column="1"
-                   />
-            <PasswordBox x:Name="passBox" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="2" Margin="10 5"
-                 IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
-                            Path=AllowSettings}"
-                 >
-                <PasswordBox.InputBindings>
-                    <KeyBinding Key="Return"
-                            Command="{Binding LoginCommand}"
-                            CommandParameter="{Binding ElementName=view}"/>
-                </PasswordBox.InputBindings>
-            </PasswordBox>
+            <cc:HintedPasswordBox x:Name="passBox" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4"
+                                  Hint="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
+                                         Path=password}"
+                                  HintColor="{StaticResource AKI_Background_Yellow}"
+                                  ReturnKeyCommand="{Binding LoginCommand}"
+                                  ReturnKeyCommandParameter="{Binding ElementName=view}"
+                                  />
 
             <!-- Addtional Controls -->
             <CheckBox Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
