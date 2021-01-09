@@ -153,6 +153,10 @@ namespace Aki.Launcher.Helpers
             englishLocale.need_an_account = "Don't have an account yet?";
             englishLocale.have_an_account = "Already have an account?";
             englishLocale.repatch = "Repatch";
+            englishLocale.failed_to_receive_patches = "Failed to receive patches";
+            englishLocale.failed_core_patch = "Core patch failed";
+            englishLocale.failed_mod_patch = "Mod patch failed";
+            englishLocale.ok = "OK";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -1289,6 +1293,70 @@ namespace Aki.Launcher.Helpers
                 {
                     _repatch = value;
                     RaisePropertyChanged(nameof(repatch));
+                }
+            }
+        }
+        #endregion
+
+        #region failed_to_receive_patches
+        private string _failed_to_receive_patches;
+        public string failed_to_receive_patches
+        {
+            get => _failed_to_receive_patches;
+            set
+            {
+                if(_failed_to_receive_patches != value)
+                {
+                    _failed_to_receive_patches = value;
+                    RaisePropertyChanged(nameof(failed_to_receive_patches));
+                }
+            }
+        }
+        #endregion
+
+        #region failed_core_patch
+        private string _failed_core_patch;
+        public string failed_core_patch
+        {
+            get => _failed_core_patch;
+            set
+            {
+                if(_failed_core_patch != value)
+                {
+                    _failed_core_patch = value;
+                    RaisePropertyChanged(nameof(failed_core_patch));
+                }
+            }
+        }
+        #endregion
+
+        #region failed_mod_patch
+        private string _failed_mod_patch;
+        public string failed_mod_patch
+        {
+            get => _failed_mod_patch;
+            set
+            {
+                if(_failed_mod_patch != value)
+                {
+                    _failed_mod_patch = value;
+                    RaisePropertyChanged(nameof(failed_mod_patch));
+                }
+            }
+        }
+        #endregion
+
+        #region OK
+        private string _ok;
+        public string ok
+        {
+            get => _ok;
+            set
+            {
+                if(_ok != value)
+                {
+                    _ok = value;
+                    RaisePropertyChanged(nameof(ok));
                 }
             }
         }

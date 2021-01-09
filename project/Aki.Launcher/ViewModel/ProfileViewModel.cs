@@ -47,7 +47,7 @@ namespace Aki.Launcher.ViewModel
         public void OnLogoutCommand(object parameter)
         {
 
-            navigationViewModel.SelectedViewModel = new LoginViewModel(navigationViewModel);
+            navigationViewModel.SelectedViewModel = new ConnectServerViewModel(navigationViewModel, true);
         }
         public void OnEditProfileCommand(object parameter)
         {
@@ -109,15 +109,15 @@ namespace Aki.Launcher.ViewModel
                     break;
 
                 case -3:
-                    // TODO: add this, failed to receive patches
+                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.failed_to_receive_patches);
                     return;
 
                 case -4:
-                    // TODO: add this, failed core patch
+                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.failed_core_patch);
                     return;
 
                 case -5:
-                    // TODO: add this, failed mod patch
+                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.failed_mod_patch);
                     return;
 
                 case -6:

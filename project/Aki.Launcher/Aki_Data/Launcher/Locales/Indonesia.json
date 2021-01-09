@@ -67,5 +67,9 @@
   "cancel": "Batal",
   "need_an_account": "Belum punya akun?",
   "have_an_account": "Sudah punya akun?",
-  "repatch": "Patch Ulang"
+  "repatch": "Patch Ulang",
+  "failed_to_receive_patches": "Failed to receive patches",
+  "failed_core_patch": "Core patch failed",
+  "failed_mod_patch": "Mod patch failed",
+  "ok": "OK"
 }

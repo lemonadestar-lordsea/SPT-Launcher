@@ -18,13 +18,16 @@ namespace Aki.Launcher.ViewModel
 {
     public class ConnectServerViewModel
     {
+        private bool UserLoggedOut { get; set; }
         public ConnectServerModel connectInfo { get; set; }
         public AwaitableDelegateCommand RetryAsyncCommand { get; set; }
         private NavigationViewModel navigationViewModel { get; set; }
 
-        public ConnectServerViewModel(NavigationViewModel viewModel)
+        public ConnectServerViewModel(NavigationViewModel viewModel, bool logout = false)
         {
             navigationViewModel = viewModel;
+
+            UserLoggedOut = logout;
 
             RetryAsyncCommand = new AwaitableDelegateCommand(OnRetryAsyncCommand);
 
@@ -74,7 +77,7 @@ namespace Aki.Launcher.ViewModel
                 }
                 else
                 {
-                    if (LauncherSettingsProvider.Instance.UseAutoLogin && DefaultServer.AutoLoginCreds != null)
+                    if (LauncherSettingsProvider.Instance.UseAutoLogin && DefaultServer.AutoLoginCreds != null && !UserLoggedOut)
                     {
                         int status = await AccountManager.LoginAsync(DefaultServer.AutoLoginCreds);
 
@@ -104,6 +107,7 @@ namespace Aki.Launcher.ViewModel
                 connectInfo.InfoText = String.Format(LocalizationProvider.Instance.server_unavailable_format_1, DefaultServer.Name);
             }
 
+            UserLoggedOut = false;
             LauncherSettingsProvider.Instance.AllowSettings = true;
         }
     }

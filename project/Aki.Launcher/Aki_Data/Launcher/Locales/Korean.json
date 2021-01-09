@@ -67,5 +67,9 @@
   "cancel": "취소",
   "need_an_account": "아직 계정이 없으십니까?",
   "have_an_account": "계정이 이미 있습니까?",
-  "repatch": "재패치"
+  "repatch": "재패치",
+  "failed_to_receive_patches": "Failed to receive patches",
+  "failed_core_patch": "Core patch failed",
+  "failed_mod_patch": "Mod patch failed",
+  "ok": "OK"
 }

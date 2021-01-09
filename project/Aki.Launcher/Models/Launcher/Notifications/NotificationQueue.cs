@@ -7,6 +7,7 @@
  */
 
 
+using Aki.Launcher.Helpers;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -70,15 +71,22 @@ namespace Aki.Launcher.Models.Launcher.Notifications
             }
         }
 
-        public void Enqueue(string Message, bool AllowNext = false)
+        public void Enqueue(string Message, bool AutowNext = false, bool NoDefaultButton = false)
         {
             if (queue.Where(x => x.Message == Message).Count() == 0)
             {
-                queue.Add(new NotificationItem(Message));
+                if (NoDefaultButton)
+                {
+                    queue.Add(new NotificationItem(Message));
+                }
+                else
+                {
+                    queue.Add(new NotificationItem(Message, LocalizationProvider.Instance.ok, () => { }));
+                }
 
                 CheckAndShowNotifications();
 
-                if (AllowNext && queue.Count == 2)
+                if (AutowNext && queue.Count == 2)
                 {
                     Next(true);
                 }

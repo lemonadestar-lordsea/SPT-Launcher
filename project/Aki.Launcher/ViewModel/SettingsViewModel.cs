@@ -32,13 +32,11 @@ namespace Aki.Launcher.ViewModel
         public GenericICommand ClearGameSettingsCommand { get; set; }
         public GenericICommand ReApplyPatchCommand { get; set; }
         public LocaleCollection Locales { get; set; } = new LocaleCollection();
-        //private NavigationViewModel fullSpanNavigationViewModel { get; set; }
         private NavigationViewModel navigationViewModel { get; set; }
 
         private GameStarter gameStarter = new GameStarter();
         public SettingsViewModel(NavigationViewModel viewModel)
         {
-            //fullSpanNavigationViewModel = fullSpanViewModel;
             navigationViewModel = viewModel;
 
             #region Settings Commands
@@ -86,10 +84,7 @@ namespace Aki.Launcher.ViewModel
 
         public void OnReApplyPatchCommand(object parameter)
         {
-            //This will probably need to be async to not halt the UI thread, but I don't know how long a patch will take. This is more of a placeholder for testing.
-            //Also, if patches do take a significant amount of time, we should indicate progress somehow. Best option would be if the lib had some ProgressChagned
-            //event we could use to update a progress view of some kind. We'll figure something out.
-            navigationViewModel.NotificationQueue.Enqueue("This is not ready :(", "OK", () => { });
+            navigationViewModel.NotificationQueue.Enqueue("This button doesn't do anything yet.  :(");
         }
 
         public void OnCleanTempFilesCommand(object parameter)
