@@ -66,7 +66,7 @@ Merijn Hendriks
                               Hint="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                                      Path=username}"
                               HintColor="LightGray"
-                              Data="{Binding login.Username, UpdateSourceTrigger=PropertyChanged}"
+                              Data="{Binding login.Username, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               ReturnKeyCommand="{Binding LoginCommand}"
                               ReturnKeyCommandParameter="{Binding ElementName=view}"
                               IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},

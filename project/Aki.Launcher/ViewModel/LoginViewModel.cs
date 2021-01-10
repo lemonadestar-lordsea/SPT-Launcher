@@ -14,7 +14,6 @@ using Aki.Launcher.Helpers;
 using Aki.Launcher.Interfaces;
 using Aki.Launcher.Models.Launcher;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace Aki.Launcher.ViewModel
 {

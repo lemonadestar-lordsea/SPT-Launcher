@@ -13,7 +13,8 @@
                        Opacity=".5"
                        />
         </Label>
-        <TextBox Text="{Binding Data, RelativeSource={RelativeSource AncestorType=UserControl}}" Background="Transparent" VerticalContentAlignment="Center"
+        <TextBox Text="{Binding Data, RelativeSource={RelativeSource AncestorType=UserControl}}" Background="Transparent" 
+                 VerticalContentAlignment="Center"
                  TextChanged="TextBox_TextChanged">
             <TextBox.InputBindings>
                 <KeyBinding Key="Return"
