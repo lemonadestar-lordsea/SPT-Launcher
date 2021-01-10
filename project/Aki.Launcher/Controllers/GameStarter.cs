@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.IO;
 using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Helpers;
+using Aki.Launcher.Models.Launcher;
 
 namespace Aki.Launcher
 {
@@ -24,21 +25,21 @@ namespace Aki.Launcher
         const string registerySettings = @"Software\Battlestate Games\EscapeFromTarkov";
         string gamepath;
 
-        public int LaunchGame(ServerInfo server, AccountInfo account)
+        public GameStarterResult LaunchGame(ServerInfo server, AccountInfo account)
         {
             gamepath = $@"{LauncherSettingsProvider.Instance.GamePath}\" ?? Environment.CurrentDirectory;
 
             // setup directories
             if (IsInstalledInLive())
             {
-                return -1;
+                return GameStarterResult.FromError(-1);
             }
 
             SetupGameFiles();
 
             if (IsPiratedCopy() > 1)
             {
-                return -2;
+                return GameStarterResult.FromError(-2);
             }
 
             if (account.wipe)
@@ -59,15 +60,15 @@ namespace Aki.Launcher
                 {
                     case PatchStatus.NoPatchReceived:
                         // failed to receive patches
-                        return -3;
+                        return GameStarterResult.FromError(-3);
 
                     case PatchStatus.FailedCorePatch:
                         // failed to apply core patch
-                        return -4;
+                        return GameStarterResult.FromError(-4);
 
                     case PatchStatus.FailedModPatch:
                         // failed to apply mod patch
-                        return -5;
+                        return GameStarterResult.FromError(-5);
                 }
             }
 
@@ -76,7 +77,7 @@ namespace Aki.Launcher
 
             if (!File.Exists(clientExecutable))
 			{
-				return -4;
+				return GameStarterResult.FromError(-4);
 			}
 			
 			var clientProcess = new ProcessStartInfo(clientExecutable)
@@ -87,7 +88,7 @@ namespace Aki.Launcher
 			};
 
 			Process.Start(clientProcess);
-			return 1;
+            return GameStarterResult.FromSuccess();
 		}
 
         bool IsInstalledInLive()

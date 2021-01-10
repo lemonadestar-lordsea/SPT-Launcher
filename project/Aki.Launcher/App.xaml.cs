@@ -27,7 +27,7 @@ namespace Aki.Launcher
             //I'm not sure if you want application specific exception handling. AppDomain should handle them all AFAIK. You had something similar before, so I'm just adding this in. (might cause duplicate messageboxes though)
             Current.DispatcherUnhandledException += (sender, args) => HandleException(args.Exception);
 
-            //check params
+            //check params - Example: Launcher.exe username:waffelord password:12345
             LauncherStartArgs startArgs = new LauncherStartArgs(e);
 
             if (startArgs.HasAuthentication)
@@ -39,22 +39,11 @@ namespace Aki.Launcher
                 if (status == 1)
                 {
                     GameStarter gm = new GameStarter();
-                    int gameStatus = gm.LaunchGame(ServerManager.SelectedServer, AccountManager.SelectedAccount);
+                    GameStarterResult gameStartResult = gm.LaunchGame(ServerManager.SelectedServer, AccountManager.SelectedAccount);
 
-                    //Show errors if game doesn't start
-                    switch (gameStatus)
+                    if(!gameStartResult.Succeeded)
                     {
-                        case -1:
-                            MessageBox.Show(LocalizationProvider.Instance.installed_in_live_game_warning);
-                            break;
-
-                        case -2:
-                            MessageBox.Show(LocalizationProvider.Instance.no_official_game_warning);
-                            break;
-
-                        case -3:
-                            MessageBox.Show(LocalizationProvider.Instance.eft_exe_not_found_warning);
-                            break;
+                        MessageBox.Show(gameStartResult.Message);
                     }
                 }
                 else

@@ -29,20 +29,15 @@ Merijn Hendriks
             <RowDefinition Height="*"/>
             <RowDefinition Height="AUTO"/>
             <RowDefinition Height="AUTO"/>
-            <RowDefinition Height="AUTO"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Title -->
-        <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-               Path=login}" Grid.Row="1" Grid.Column="1"
-               />
+        
 
-        <Grid Grid.Row="2" Grid.Column="1" Style="{StaticResource GridCardStyle}"
+        <Grid Grid.Row="1" Grid.Column="1" Style="{StaticResource GridCardStyle}"
               MinHeight="150" MinWidth="400">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10"/>
-                <ColumnDefinition Width="AUTO"/>
                 <ColumnDefinition Width="AUTO"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="AUTO"/>
@@ -53,33 +48,46 @@ Merijn Hendriks
                 <RowDefinition Height="10"/>
                 <RowDefinition Height="AUTO"/>
                 <RowDefinition Height="AUTO"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="10"/>
                 <RowDefinition Height="AUTO"/>
                 <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
 
-            <!-- Username Controls -->
-            <cc:HintedTextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4"
+            <!-- Title -->
+            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+                   Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
+                             Path=login}"
+                   />
+
+            <!-- Username Control -->
+            <cc:HintedTextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
                               Hint="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                                      Path=username}"
-                              HintColor="{StaticResource AKI_Background_Yellow}"
-                              Data="{Binding login.Username, UpdateSourceTrigger=PropertyChanged}"
+                              HintColor="LightGray"
+                              Data="{Binding login.Username, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               ReturnKeyCommand="{Binding LoginCommand}"
                               ReturnKeyCommandParameter="{Binding ElementName=view}"
+                              IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
+                                          Path=AllowSettings}"
                               />
 
-            <cc:HintedPasswordBox x:Name="passBox" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4"
+            <!-- Password Control -->
+            <cc:HintedPasswordBox x:Name="passBox" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3"
                                   Hint="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                                          Path=password}"
-                                  HintColor="{StaticResource AKI_Background_Yellow}"
+                                  HintColor="LightGray"
                                   ReturnKeyCommand="{Binding LoginCommand}"
                                   ReturnKeyCommandParameter="{Binding ElementName=view}"
+                                  IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
+                                              Path=AllowSettings}"
                                   />
 
             <!-- Addtional Controls -->
             <CheckBox Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                                 Path=login_automatically}"
-                      Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+                      Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"
                       VerticalAlignment="Center" FontSize="10"
                       HorizontalAlignment="Left"
                       IsChecked="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
@@ -87,8 +95,7 @@ Merijn Hendriks
                       />
 
             <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                          Path=login}" Grid.Row="4" Grid.Column="4" Margin="10"
-                HorizontalAlignment="Right" VerticalAlignment="Center"
+                          Path=login}" Grid.Row="6" Grid.Column="3"
                 Command="{Binding LoginCommand}"
                 CommandParameter="{Binding ElementName=view}"
                 />
@@ -97,13 +104,26 @@ Merijn Hendriks
             
         </Grid>
 
-        <Grid Grid.Row="3" Grid.Column="1" Margin="0 10" Style="{StaticResource GridCardStyle}">
+        <!-- Lower Card -->
+        <Grid Grid.Row="2" Grid.Column="1" Margin="0 10" Style="{StaticResource GridCardStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="AUTO"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="AUTO"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
             <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                Path=need_an_account}" HorizontalAlignment="Left"
+                Path=need_an_account}" Grid.Row="1" Grid.Column="1"
                    />
             <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                          Path=go_to_register}" Margin="10 5"
-                Command="{Binding ShowRegisterCommand}" HorizontalAlignment="Right"
+                          Path=go_to_register}" 
+                Command="{Binding ShowRegisterCommand}" Grid.Row="1" Grid.Column="3"
                 IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
                             Path=AllowSettings}"
                 Style="{StaticResource AltButtonStyle}"

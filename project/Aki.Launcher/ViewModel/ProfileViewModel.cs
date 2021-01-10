@@ -76,53 +76,30 @@ namespace Aki.Launcher.ViewModel
 
             LauncherSettingsProvider.Instance.GameRunning = true;
 
-            int gameStatus = gameStarter.LaunchGame(ServerManager.SelectedServer, AccountManager.SelectedAccount);
+            GameStarterResult gameStartResult = gameStarter.LaunchGame(ServerManager.SelectedServer, AccountManager.SelectedAccount);
 
-            switch (gameStatus)
+            if(gameStartResult.Succeeded)
             {
-                case 1:
-                    monitor.Start();
+                monitor.Start();
 
-                    switch (LauncherSettingsProvider.Instance.LauncherStartGameAction)
-                    {
-                        case LauncherAction.MinimizeAction:
-                            {
-                                Application.Current.MainWindow.WindowState = WindowState.Minimized;
-                                break;
-                            }
-                        case LauncherAction.ExitAction:
-                            {
-                                Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-                                Application.Current.MainWindow.Close();
-                                break;
-                            }
-                    }
-
-                    break;
-
-                case -1:
-                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.installed_in_live_game_warning);
-                    break;
-
-                case -2:
-                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.no_official_game_warning);
-                    break;
-
-                case -3:
-                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.failed_to_receive_patches);
-                    return;
-
-                case -4:
-                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.failed_core_patch);
-                    return;
-
-                case -5:
-                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.failed_mod_patch);
-                    return;
-
-                case -6:
-                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.eft_exe_not_found_warning);
-                    return;
+                switch (LauncherSettingsProvider.Instance.LauncherStartGameAction)
+                {
+                    case LauncherAction.MinimizeAction:
+                        {
+                            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+                            break;
+                        }
+                    case LauncherAction.ExitAction:
+                        {
+                            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+                            Application.Current.MainWindow.Close();
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                navigationViewModel.NotificationQueue.Enqueue(gameStartResult.Message);
             }
         }
 
