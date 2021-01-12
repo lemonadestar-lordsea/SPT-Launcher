@@ -42,7 +42,7 @@
   "add": "Añadir",
   "remove_server_tooltip": "Eliminar Servidor",
   "default_language": "Lenguaje Predeterminado",
-  "game_path": "Camino del Juego",
+  "game_path": "Ubicación del juego",
   "clear_game_settings": "Borrar los Ajustes del Juego",
   "clear_game_settings_succeeded": "Se han borrado los ajustes del juego",
   "clear_game_settings_failed": "Se produjeron algunos problemas mientras se borraban los ajustes del juego",
@@ -68,8 +68,8 @@
   "need_an_account": "¿No tienes una cuenta todavía?",
   "have_an_account": "¿Ya tienes una cuenta?",
   "repatch": "Parchear de nuevo",
-  "failed_to_receive_patches": "Falló al recibir los parches",
-  "failed_core_patch": "Falló en parche del núcleo",
-  "failed_mod_patch": "Falló en parche del mod",
+  "failed_to_receive_patches": "Fallo al recibir los parches",
+  "failed_core_patch": "Fallo en parche del núcleo",
+  "failed_mod_patch": "Fallo en parche del mod",
   "ok": "OK"
 }
