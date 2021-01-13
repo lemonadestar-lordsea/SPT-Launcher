@@ -63,7 +63,7 @@
   "launcher_start_game_action": "Tindakan Terhadap Launcher Saat Game Berjalan",
   "game": "Game",
   "new_password": "Password Baru",
-  "wipe_warning_format_2": "Pergantian Edisi memerlukan pembersihan profil.\n'{0}' > '{1}' apakah anda yakin ingin membersihkan profil anda?",
+  "wipe_warning_format_2": "Pergantian Edisi memerlukan pembersihan profil.\n'{0}' > '{1}'\nApakah anda yakin ingin membersihkan profil anda?",
   "cancel": "Batal",
   "need_an_account": "Belum punya akun?",
   "have_an_account": "Sudah punya akun?",
