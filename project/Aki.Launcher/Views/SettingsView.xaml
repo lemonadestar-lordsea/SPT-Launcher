@@ -76,7 +76,7 @@ Merijn Hendriks
                         />
 
                     <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                                      Path=repatch}" 
+                                      Path=reapply_patch}" 
                             Grid.Column="6"
                             HorizontalAlignment="Center"
                             Command="{Binding ReApplyPatchCommand}"
@@ -87,7 +87,7 @@ Merijn Hendriks
             <Grid Grid.Row="2" Grid.Column="1" Margin="5">
                 <StackPanel>
                     <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                Path=launcher_start_game_action}"
+                Path=on_game_start}"
                    />
                     <ComboBox MinWidth="300" Margin="0 0 0 10"
                       ItemsSource="{Binding Source={ext:EnumBindingSource {x:Type model:LauncherAction}}}"
