@@ -91,7 +91,6 @@ namespace Aki.Launcher.Helpers
             englishLocale.no_servers_available = "No Servers found. Check server list in settings.";
             englishLocale.settings_menu = "Settings Menu";
             englishLocale.back = "Back";
-            englishLocale.wipe = "Wipe";
             englishLocale.wipe_profile = "Wipe Profile";
             englishLocale.username = "Username";
             englishLocale.password = "Password";
@@ -114,19 +113,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.no_official_game_warning = "Escape From Tarkov isn't installed on your computer. Please buy a copy of the game and support the developers!";
             englishLocale.eft_exe_not_found_warning = "EscapeFromTarkov.exe not found at game path.";
             englishLocale.account_exist = "Account already exists";
-            englishLocale.local_server_remove_warning = "You are about to remove the local server.";
-            englishLocale.remove_server_question = "Remove Server?";
-            englishLocale.exit_settings_tooltip = "Exit Settings";
-            englishLocale.name = "Name";
-            englishLocale.save = "Save";
             englishLocale.url = "URL";
-            englishLocale.new_server = "New Server";
-            englishLocale.server_list_back_arrow_tooltip = "Back to server list";
-            englishLocale.make_default = "Make Default";
-            englishLocale.@default = "Default";
-            englishLocale.server_list = "Server List";
-            englishLocale.add = "Add";
-            englishLocale.remove_server_tooltip = "Remove Server";
             englishLocale.default_language = "Default Language";
             englishLocale.game_path = "Game Path";
             englishLocale.clear_game_settings = "Clear Game Settings";
@@ -139,20 +126,17 @@ namespace Aki.Launcher.Helpers
             englishLocale.clean_temp_files_succeeded = "Temp files cleaned";
             englishLocale.clean_temp_files_failed = "Some issues occurred while cleaning temp files";
             englishLocale.select_folder = "Select Folder";
-            englishLocale.server_url_and_name_empty = "Name and Url cannot be empty";
-            englishLocale.server_url_exists = "Url already exists";
-            englishLocale.server_name_exists = "Name already exists";
             englishLocale.minimize_action = "Minimize";
             englishLocale.do_nothing_action = "Do nothing";
             englishLocale.exit_action = "Close Launcher";
-            englishLocale.launcher_start_game_action = "Launcher Start Game Action";
+            englishLocale.on_game_start = "On Game Start";
             englishLocale.game = "Game";
             englishLocale.new_password = "New Password";
             englishLocale.wipe_warning_format_2 = "Changing your account edition requires a profile wipe.\n'{0}' -> '{1}'\nAre you sure you want to wipe your profile?";
             englishLocale.cancel = "Cancel";
             englishLocale.need_an_account = "Don't have an account yet?";
             englishLocale.have_an_account = "Already have an account?";
-            englishLocale.repatch = "Repatch";
+            englishLocale.reapply_patch = "Reapply Patch";
             englishLocale.failed_to_receive_patches = "Failed to receive patches";
             englishLocale.failed_core_patch = "Core patch failed";
             englishLocale.failed_mod_patch = "Mod patch failed";
@@ -300,22 +284,6 @@ namespace Aki.Launcher.Helpers
                 {
                     _back = value;
                     RaisePropertyChanged(nameof(back));
-                }
-            }
-        }
-        #endregion
-
-        #region wipe
-        private string _wipe;
-        public string wipe
-        {
-            get => _wipe;
-            set
-            {
-                if (_wipe != value)
-                {
-                    _wipe = value;
-                    RaisePropertyChanged(nameof(wipe));
                 }
             }
         }
@@ -657,86 +625,6 @@ namespace Aki.Launcher.Helpers
         }
         #endregion
 
-        #region local_server_remove_warning
-        private string _local_server_remove_warning;
-        public string local_server_remove_warning
-        {
-            get => _local_server_remove_warning;
-            set
-            {
-                if (_local_server_remove_warning != value)
-                {
-                    _local_server_remove_warning = value;
-                    RaisePropertyChanged(nameof(local_server_remove_warning));
-                }
-            }
-        }
-        #endregion
-
-        #region remove_server_question
-        private string _remove_server_question;
-        public string remove_server_question
-        {
-            get => _remove_server_question;
-            set
-            {
-                if (_remove_server_question != value)
-                {
-                    _remove_server_question = value;
-                    RaisePropertyChanged(nameof(remove_server_question));
-                }
-            }
-        }
-        #endregion
-
-        #region exit_settings_tooltip
-        private string _exit_setttings_tooltip;
-        public string exit_settings_tooltip
-        {
-            get => _exit_setttings_tooltip;
-            set
-            {
-                if (_exit_setttings_tooltip != value)
-                {
-                    _exit_setttings_tooltip = value;
-                    RaisePropertyChanged(nameof(exit_settings_tooltip));
-                }
-            }
-        }
-        #endregion
-
-        #region name
-        private string _name;
-        public string name
-        {
-            get => _name;
-            set
-            {
-                if (_name != value)
-                {
-                    _name = value;
-                    RaisePropertyChanged(nameof(name));
-                }
-            }
-        }
-        #endregion
-
-        #region save
-        private string _save;
-        public string save
-        {
-            get => _save;
-            set
-            {
-                if (_save != value)
-                {
-                    _save = value;
-                    RaisePropertyChanged(nameof(save));
-                }
-            }
-        }
-        #endregion
-
         #region url
         private string _url;
         public string url
@@ -748,119 +636,6 @@ namespace Aki.Launcher.Helpers
                 {
                     _url = value;
                     RaisePropertyChanged(nameof(url));
-                }
-            }
-        }
-        #endregion
-
-        #region new_server
-        private string _new_server;
-        public string new_server
-        {
-            get => _new_server;
-            set
-            {
-                if (_new_server != value)
-                {
-                    _new_server = value;
-                    RaisePropertyChanged(nameof(new_server));
-                }
-            }
-        }
-        #endregion
-
-        #region server_list_back_arrow_tooltip
-        private string _server_list_back_arrow_tooltip;
-        public string server_list_back_arrow_tooltip
-        {
-            get => _server_list_back_arrow_tooltip;
-            set
-            {
-                if (_server_list_back_arrow_tooltip != value)
-                {
-                    _server_list_back_arrow_tooltip = value;
-                    RaisePropertyChanged(nameof(server_list_back_arrow_tooltip));
-                }
-            }
-        }
-        #endregion
-
-        #region make_default
-        private string _make_default;
-        public string make_default
-        {
-            get => _make_default;
-            set
-            {
-                if (_make_default != value)
-                {
-                    _make_default = value;
-                    RaisePropertyChanged(nameof(make_default));
-                }
-            }
-        }
-        #endregion
-
-        #region default
-        private string _default;
-        //@ symbol is because 'default' is a reserved word
-        public string @default
-        {
-            get => _default;
-            set
-            {
-                if (_default != value)
-                {
-                    _default = value;
-                    RaisePropertyChanged(nameof(@default));
-                }
-            }
-        }
-        #endregion
-
-        #region server_list
-        private string _server_list;
-        public string server_list
-        {
-            get => _server_list;
-            set
-            {
-                if (_server_list != value)
-                {
-                    _server_list = value;
-                    RaisePropertyChanged(nameof(server_list));
-                }
-            }
-        }
-        #endregion
-
-        #region add
-        private string _add;
-        public string add
-        {
-            get => _add;
-            set
-            {
-                if (_add != value)
-                {
-                    _add = value;
-                    RaisePropertyChanged(nameof(add));
-                }
-            }
-        }
-        #endregion
-
-        #region remove_server_tooltip
-        private string _remove_server_tooltip;
-        public string remove_server_tooltip
-        {
-            get => _remove_server_tooltip;
-            set
-            {
-                if (_remove_server_tooltip != value)
-                {
-                    _remove_server_tooltip = value;
-                    RaisePropertyChanged(nameof(remove_server_tooltip));
                 }
             }
         }
@@ -1058,54 +833,6 @@ namespace Aki.Launcher.Helpers
         }
         #endregion
 
-        #region server_url_and_name_empty
-        private string _server_url_and_name_empty;
-        public string server_url_and_name_empty
-        {
-            get => _server_url_and_name_empty;
-            set
-            {
-                if (_server_url_and_name_empty != value)
-                {
-                    _server_url_and_name_empty = value;
-                    RaisePropertyChanged(nameof(server_url_and_name_empty));
-                }
-            }
-        }
-        #endregion
-
-        #region server_url_exists
-        private string _server_url_exists;
-        public string server_url_exists
-        {
-            get => _server_url_exists;
-            set
-            {
-                if (_server_url_exists != value)
-                {
-                    _server_url_exists = value;
-                    RaisePropertyChanged(nameof(server_url_exists));
-                }
-            }
-        }
-        #endregion
-
-        #region server_name_exists
-        private string _server_name_exists;
-        public string server_name_exists
-        {
-            get => _server_name_exists;
-            set
-            {
-                if (_server_name_exists != value)
-                {
-                    _server_name_exists = value;
-                    RaisePropertyChanged(nameof(server_name_exists));
-                }
-            }
-        }
-        #endregion
-
         #region registration_failed
         private string _registration_failed;
         public string registration_failed
@@ -1170,17 +897,17 @@ namespace Aki.Launcher.Helpers
         }
         #endregion
 
-        #region launcher_start_game_action
-        private string _launcher_start_game_action;
-        public string launcher_start_game_action
+        #region on_game_start
+        private string _on_game_start;
+        public string on_game_start
         {
-            get => _launcher_start_game_action;
+            get => _on_game_start;
             set
             {
-                if (_launcher_start_game_action != value)
+                if (_on_game_start != value)
                 {
-                    _launcher_start_game_action = value;
-                    RaisePropertyChanged(nameof(launcher_start_game_action));
+                    _on_game_start = value;
+                    RaisePropertyChanged(nameof(on_game_start));
                 }
             }
         }
@@ -1282,17 +1009,17 @@ namespace Aki.Launcher.Helpers
         }
         #endregion
 
-        #region repatch
-        private string _repatch;
-        public string repatch
+        #region reapply_patch
+        private string _reapply_patch;
+        public string reapply_patch
         {
-            get => _repatch;
+            get => _reapply_patch;
             set
             {
-                if(_repatch != value)
+                if(_reapply_patch != value)
                 {
-                    _repatch = value;
-                    RaisePropertyChanged(nameof(repatch));
+                    _reapply_patch = value;
+                    RaisePropertyChanged(nameof(reapply_patch));
                 }
             }
         }
