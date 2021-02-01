@@ -13,72 +13,39 @@ using Aki.ByteBanger;
 
 namespace Aki.Launcher
 {
-    public enum PatchStatus
-    {
-        Success = 0,
-        NoPatchReceived,
-        FailedCorePatch,
-        FailedModPatch
-    }
-
     public static class PatchManager
     {
-        public static PatchStatus ApplyPatches(string filepath)
+        public static bool ApplyPatches(string filepath)
         {
-            var patches = RequestPatches();
+            var targetfile = $@"{filepath}EscapeFromTarkov_Data/Managed/Assembly-CSharp.dll";
+            var files = new DirectoryInfo($@"{filepath}Aki_Data/Launcher/Patches/").GetFiles();
 
-            // get patches from server
-            if (patches == null)
+            foreach (var file in files)
             {
-                return PatchStatus.NoPatchReceived;
-            }
+                // patch from clean files
+                RestorePatched(filepath);
 
-            // patch from clean files
-            RestorePatched(filepath);
-
-            // apply core patch
-            if (!ApplyCorePatch(filepath))
-            {
-                return PatchStatus.FailedCorePatch;
-            }
-
-            // apply mod patches
-            /*
-            for (var patch in patches)
-            {
-                if (!PatchFile(filepath))
+                // apply patch
+                if (ApplyPatch(targetfile, file.FullName))
                 {
-                    return PatchStatus.FailedModPatch;
+                    // game patch found
+                    return true;
                 }
             }
-            */
 
-            return PatchStatus.Success;
+            // patch failed
+            return false;
         }
 
-        static PatchInfo[] RequestPatches()
+        static bool ApplyPatch(string targetfile, string patchfile)
         {
-            // TODO: get patch files
-            return new PatchInfo[1];
-        }
-
-        static bool ApplyCorePatch(string filepath)
-        {
-            var targetFile = $@"{filepath}EscapeFromTarkov_Data/Managed/Assembly-CSharp.dll";
-            var patchFile = $@"{filepath}Aki_Data/Launcher/Patches/aki-core.bpf";
-
-            return PatchFile(targetFile, patchFile);
-        }
-
-        static bool PatchFile(string targetFile, string patchFile)
-        {
-            byte[] target = File.ReadAllBytes(targetFile);
-            byte[] patch = File.ReadAllBytes(patchFile);
+            byte[] target = File.ReadAllBytes(targetfile);
+            byte[] patch = File.ReadAllBytes(patchfile);
 
             // backup before patching
-            if (!File.Exists($@"{targetFile}.bak"))
+            if (!File.Exists($@"{targetfile}.bak"))
             {
-                File.Copy(targetFile, $@"{targetFile}.bak");
+                File.Copy(targetfile, $@"{targetfile}.bak");
             }
 
             // patch
@@ -86,8 +53,8 @@ namespace Aki.Launcher
 
             switch (result.Result)
             {
-                case PatchResultType.Success:   // successfully patched, write the file
-                    File.WriteAllBytes(targetFile, result.PatchedData);
+                case PatchResultType.Success:                   // successfully patched, write the file
+                    File.WriteAllBytes(targetfile, result.PatchedData);
                     return true;
 
                 case PatchResultType.AlreadyPatched:            // input file is already patched (size & hash match)

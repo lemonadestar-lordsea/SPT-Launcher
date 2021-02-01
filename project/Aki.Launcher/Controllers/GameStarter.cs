@@ -23,11 +23,10 @@ namespace Aki.Launcher
 	{
         const string registeryInstall = @"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov";
         const string registerySettings = @"Software\Battlestate Games\EscapeFromTarkov";
-        string gamepath;
 
         public GameStarterResult LaunchGame(ServerInfo server, AccountInfo account)
         {
-            gamepath = $@"{LauncherSettingsProvider.Instance.GamePath}\" ?? Environment.CurrentDirectory;
+            var gamepath = $@"{LauncherSettingsProvider.Instance.GamePath}\" ?? Environment.CurrentDirectory;
 
             // setup directories
             if (IsInstalledInLive())
@@ -35,7 +34,7 @@ namespace Aki.Launcher
                 return GameStarterResult.FromError(-1);
             }
 
-            SetupGameFiles();
+            SetupGameFiles(gamepath);
 
             if (IsPiratedCopy() > 1)
             {
@@ -49,27 +48,10 @@ namespace Aki.Launcher
             }
 
             // apply patches
-            var patchStatus = PatchManager.ApplyPatches(gamepath);
-
-            if (patchStatus != PatchStatus.Success)
+            if (!PatchManager.ApplyPatches(gamepath))
             {
                 // patching failed
-                PatchManager.RestorePatched(gamepath);
-
-                switch (patchStatus)
-                {
-                    case PatchStatus.NoPatchReceived:
-                        // failed to receive patches
-                        return GameStarterResult.FromError(-3);
-
-                    case PatchStatus.FailedCorePatch:
-                        // failed to apply core patch
-                        return GameStarterResult.FromError(-4);
-
-                    case PatchStatus.FailedModPatch:
-                        // failed to apply mod patch
-                        return GameStarterResult.FromError(-5);
-                }
+                return GameStarterResult.FromError(-4);
             }
 
             // start game
@@ -133,9 +115,8 @@ namespace Aki.Launcher
             return value0;
         }
 
-        void SetupGameFiles()
+        void SetupGameFiles(string filepath)
         {
-            var filepath = LauncherSettingsProvider.Instance.GamePath ?? Environment.CurrentDirectory;
             var files = new string[]
             {
                 Path.Combine(filepath, "BattlEye"),
@@ -224,8 +205,7 @@ namespace Aki.Launcher
         /// <returns>returns true if the temp folder was cleaned succefully or doesn't exist. returns false if something went wrong.</returns>
 		public bool CleanTempFiles()
 		{
-            var basepath = @"Battlestate Games\EscapeFromTarkov";
-			var rootdir = new DirectoryInfo(Path.Combine(Path.GetTempPath(), basepath));
+			var rootdir = new DirectoryInfo(Path.Combine(Path.GetTempPath(), @"Battlestate Games\EscapeFromTarkov"));
 
 			if (!rootdir.Exists)
 			{
