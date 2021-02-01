@@ -17,18 +17,16 @@ namespace Aki.Launcher
     {
         public static bool ApplyPatches(string filepath)
         {
-            var files = new DirectoryInfo(filepath).GetFiles();
             var targetfile = $@"{filepath}EscapeFromTarkov_Data/Managed/Assembly-CSharp.dll";
+            var files = new DirectoryInfo($@"{filepath}Aki_Data/Launcher/Patches/").GetFiles();
 
             foreach (var file in files)
             {
                 // patch from clean files
-                RestorePatched(targetfile);
+                RestorePatched(filepath);
 
                 // apply patch
-                var patchfile = $@"{filepath}Aki_Data/Launcher/Patches/{file.Name}.bpf";
-
-                if (ApplyPatch(targetfile, patchfile))
+                if (ApplyPatch(targetfile, file.FullName))
                 {
                     // game patch found
                     return true;
