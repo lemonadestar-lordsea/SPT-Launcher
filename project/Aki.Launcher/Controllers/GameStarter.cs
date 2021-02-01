@@ -23,7 +23,6 @@ namespace Aki.Launcher
 	{
         const string registeryInstall = @"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov";
         const string registerySettings = @"Software\Battlestate Games\EscapeFromTarkov";
-        string gamepath;
 
         public GameStarterResult LaunchGame(ServerInfo server, AccountInfo account)
         {
@@ -35,7 +34,7 @@ namespace Aki.Launcher
                 return GameStarterResult.FromError(-1);
             }
 
-            SetupGameFiles();
+            SetupGameFiles(gamepath);
 
             if (IsPiratedCopy() > 1)
             {
@@ -116,9 +115,8 @@ namespace Aki.Launcher
             return value0;
         }
 
-        void SetupGameFiles()
+        void SetupGameFiles(string filepath)
         {
-            var filepath = gamepath;
             var files = new string[]
             {
                 Path.Combine(filepath, "BattlEye"),
