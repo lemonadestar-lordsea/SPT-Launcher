@@ -32,6 +32,7 @@
   "default_language": "Standardspråk",
   "game_path": "Spelväg",
   "clear_game_settings": "Rensa spelinställningar",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "Spelinställningar rensade",
   "clear_game_settings_failed": "Vissa problem uppstod när du rensade spelinställningarna",
   "remove_registry_keys": "Ta bort registernycklar",

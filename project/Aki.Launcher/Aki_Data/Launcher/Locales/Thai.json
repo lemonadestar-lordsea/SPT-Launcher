@@ -32,6 +32,7 @@
   "default_language": "ค่าภาษาหลัก",
   "game_path": "ที่อยู่ของเกม",
   "clear_game_settings": "เคลียร์การตั้งค่าเกม",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "เคลียร์การตั้งค่าเกมสำเร็จ",
   "clear_game_settings_failed": "เกิดข้อผิดพลาดระหว่างเคลียร์การตั้งค่าเกม",
   "remove_registry_keys": "นำฐานข้อมูลส่วนกลางออกออก",

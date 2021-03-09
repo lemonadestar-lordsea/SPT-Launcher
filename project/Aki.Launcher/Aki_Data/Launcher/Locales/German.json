@@ -32,6 +32,7 @@
   "default_language": "Standardsprache",
   "game_path": "Spielpfad",
   "clear_game_settings": "Spieleinstellungen zurücksetzen",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "Spieleinstellungen zurückgesetzt",
   "clear_game_settings_failed": "Die Spieleinstellungen konnten aufgrund eines Fehlers nicht zurückgesetzt werden.",
   "remove_registry_keys": "Registry-Schlüssel entfernen?",

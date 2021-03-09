@@ -32,6 +32,7 @@
   "default_language": "Regular Parrot",
   "game_path": "Game Path",
   "clear_game_settings": "Trash Game Settings",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "Game settings nuked",
   "clear_game_settings_failed": "Mate, i'll level with you, we put the apprentice on gettin' rid of the game settings, and he borked it. I owe you a case.",
   "remove_registry_keys": "Remove Rego Keys",

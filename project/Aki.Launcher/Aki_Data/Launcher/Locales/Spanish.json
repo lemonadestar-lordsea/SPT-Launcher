@@ -32,6 +32,7 @@
   "default_language": "Lenguaje Predeterminado",
   "game_path": "Ubicación del juego",
   "clear_game_settings": "Borrar los Ajustes del Juego",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "Se han borrado los ajustes del juego",
   "clear_game_settings_failed": "Se produjeron algunos problemas mientras se borraban los ajustes del juego",
   "remove_registry_keys": "Eliminar las Claves del Registro",
