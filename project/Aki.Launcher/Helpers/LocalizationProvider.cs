@@ -117,6 +117,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.default_language = "Default Language";
             englishLocale.game_path = "Game Path";
             englishLocale.clear_game_settings = "Clear Game Settings";
+            englishLocale.clear_game_settings_warning = "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?";
             englishLocale.clear_game_settings_succeeded = "Game settings cleared";
             englishLocale.clear_game_settings_failed = "Some issues occurred while clearing game settings";
             englishLocale.remove_registry_keys = "Remove Registry Keys";
@@ -684,6 +685,22 @@ namespace Aki.Launcher.Helpers
                 {
                     _clear_game_settings = value;
                     RaisePropertyChanged(nameof(clear_game_settings));
+                }
+            }
+        }
+        #endregion
+
+        #region clear_game_settings_warning
+        private string _clear_game_settings_warning;
+        public string clear_game_settings_warning
+        {
+            get => _clear_game_settings_warning;
+            set
+            {
+                if(_clear_game_settings_warning != value)
+                {
+                    _clear_game_settings_warning = value;
+                    RaisePropertyChanged(nameof(clear_game_settings_warning));
                 }
             }
         }

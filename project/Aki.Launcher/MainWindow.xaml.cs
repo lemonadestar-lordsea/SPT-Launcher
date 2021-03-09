@@ -7,6 +7,7 @@
  * Merijn Hendriks
  */
 
+using Aki.Launcher.Custom_Controls;
 using Aki.Launcher.Generics;
 using Aki.Launcher.Helpers;
 using Aki.Launcher.Models.Launcher;
@@ -32,6 +33,8 @@ namespace Aki.Launcher
         public MainWindow()
         {
             InitializeComponent();
+
+            DialogHost.DefaultHost = "mainDialogHost";
 
             if (LauncherSettingsProvider.Instance.FirstRun)
             {

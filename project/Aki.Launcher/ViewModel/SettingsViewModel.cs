@@ -8,11 +8,15 @@
  */
 
 
+using Aki.Launcher.Custom_Controls;
+using Aki.Launcher.Custom_Controls.Dialogs;
 using Aki.Launcher.Generics;
+using Aki.Launcher.Generics.AsyncCommand;
 using Aki.Launcher.Helpers;
 using Aki.Launcher.Models.Launcher;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using WinForms = System.Windows.Forms;
 
@@ -29,7 +33,7 @@ namespace Aki.Launcher.ViewModel
         public GenericICommand CleanTempFilesCommand { get; set; }
         public GenericICommand SelectGameFolderCommand { get; set; }
         public GenericICommand RemoveRegistryKeysCommand { get; set; }
-        public GenericICommand ClearGameSettingsCommand { get; set; }
+        public AwaitableDelegateCommand ClearGameSettingsCommand { get; set; }
         public GenericICommand ReApplyPatchCommand { get; set; }
         public LocaleCollection Locales { get; set; } = new LocaleCollection();
         private NavigationViewModel navigationViewModel { get; set; }
@@ -44,7 +48,7 @@ namespace Aki.Launcher.ViewModel
             CleanTempFilesCommand = new GenericICommand(OnCleanTempFilesCommand);
             SelectGameFolderCommand = new GenericICommand(OnSelectGameFolderCommand);
             RemoveRegistryKeysCommand = new GenericICommand(OnRemoveRegistryKeysCommand);
-            ClearGameSettingsCommand = new GenericICommand(OnClearGameSettingsCommand);
+            ClearGameSettingsCommand = new AwaitableDelegateCommand(OnClearGameSettingsCommand);
             ReApplyPatchCommand = new GenericICommand(OnReApplyPatchCommand);
             #endregion
 
@@ -115,15 +119,68 @@ namespace Aki.Launcher.ViewModel
             }
         }
 
-        public void OnClearGameSettingsCommand(object parameter)
+        public async Task OnClearGameSettingsCommand(object parameter)
         {
+            
+            bool BackupAndRemove(string backupFolderPath, FileInfo file)
+            {
+                file.Refresh();
+
+                //if for some reason the file no longer exists /shrug
+                if (!file.Exists)
+                {
+                    return false;
+                }
+
+                //create backup dir and copy file
+                Directory.CreateDirectory(backupFolderPath);
+
+                string newFilePath = Path.Combine(backupFolderPath, $"{file.Name}_{DateTime.Now.ToString("MM-dd-yyyy_hh-mm-ss-tt")}.bak");
+
+                File.Copy(file.FullName, newFilePath);
+
+                //copy check
+                if (!File.Exists(newFilePath))
+                {
+                    return false;
+                }
+
+                //delete old file
+                file.Delete();
+
+                //delete check
+                if (file.Exists)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+
             string EFTSettingsFolder = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Escape from Tarkov";
+            string backupFolderPath = Path.Combine(EFTSettingsFolder, "Backups");
 
             if (Directory.Exists(EFTSettingsFolder))
             {
-                Directory.Delete(EFTSettingsFolder, true);
+                FileInfo local_ini = new FileInfo(Path.Combine(EFTSettingsFolder, "local.ini"));
+                FileInfo shared_ini = new FileInfo(Path.Combine(EFTSettingsFolder, "shared.ini"));
 
-                if (Directory.Exists(EFTSettingsFolder))
+                string Message = string.Format(LocalizationProvider.Instance.clear_game_settings_warning, backupFolderPath);
+                ConfirmationDialog confirmDelete = new ConfirmationDialog(Message, LocalizationProvider.Instance.clear_game_settings, LocalizationProvider.Instance.cancel);
+
+                 var confirmation = await DialogHost.ShowDialog(confirmDelete);
+
+                if (confirmation is bool proceed && !proceed)
+                {
+                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.clear_game_settings_failed, true);
+                    return;
+                }
+
+                bool localSucceeded = BackupAndRemove(backupFolderPath, local_ini);
+                bool sharedSucceeded = BackupAndRemove(backupFolderPath, shared_ini);
+
+                    //if one fails, I'm considering it bad. Send failed notification.
+                if (!localSucceeded || !sharedSucceeded)
                 {
                     navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.clear_game_settings_failed, true);
                     return;
