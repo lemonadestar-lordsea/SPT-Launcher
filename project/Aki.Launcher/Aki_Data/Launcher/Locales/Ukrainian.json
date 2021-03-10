@@ -32,6 +32,7 @@
   "default_language": "Мова за замовчуванням",
   "game_path": "Шлях до гри",
   "clear_game_settings": "Очистити Налаштування гри",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "Налаштування гри очищено",
   "clear_game_settings_failed": "Деякі проблеми виникли під час очищення налаштувань гри",
   "remove_registry_keys": "Видаліть Ключі Реєстру",

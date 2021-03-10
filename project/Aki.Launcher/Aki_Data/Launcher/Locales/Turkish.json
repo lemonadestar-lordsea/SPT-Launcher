@@ -32,6 +32,7 @@
   "default_language": "Varsayılan dil",
   "game_path": "Oyun dizini",
   "clear_game_settings": "Oyun ayarlarını temizle",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "Oyun ayarları temizlendi",
   "clear_game_settings_failed": "Oyun ayarları temizlenemedi",
   "remove_registry_keys": "Registery keyleri sil",

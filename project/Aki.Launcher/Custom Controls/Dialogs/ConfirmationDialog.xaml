@@ -21,10 +21,12 @@
 
         <Label x:Name="MessageLabel" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center"
                />
-        <Button x:Name="ConfirmButton" Grid.Row="1" Grid.Column="1" Margin="20 10" Padding="5"
-                Click="ConfirmButton_Click"/>
-        <Button x:Name="DenyButton" Grid.Row="1" Grid.Column="2" Margin="20 10" Padding="5"
+        <Button x:Name="DenyButton" Grid.Row="1" Grid.Column="1" Margin="20 10" Padding="5"
                 Style="{StaticResource AltButtonStyle}"
-                Click="DenyButton_Click"/>
+                Click="DenyButton_Click"
+                />
+        <Button x:Name="ConfirmButton" Grid.Row="1" Grid.Column="2" Margin="20 10" Padding="5"
+                Click="ConfirmButton_Click"
+                />
     </Grid>
 </UserControl>

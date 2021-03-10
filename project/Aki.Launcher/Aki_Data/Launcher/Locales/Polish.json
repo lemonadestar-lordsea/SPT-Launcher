@@ -32,6 +32,7 @@
   "default_language": "Domyślny język",
   "game_path": "Ścieżka gry",
   "clear_game_settings": "Wyczyść ustawienia gry",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "Ustawienia gry wyczyszczone",
   "clear_game_settings_failed": "Pojawiły się problemy podczas czyszczenia ustawień gry",
   "remove_registry_keys": "Usuń klucze rejestru",

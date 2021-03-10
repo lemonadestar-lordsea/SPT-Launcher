@@ -32,6 +32,7 @@
   "default_language": "Výchozí jazyk",
   "game_path": "Cesta k souborům hry",
   "clear_game_settings": "Vymazat nastavení hry",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "Nastavení hry smazáno",
   "clear_game_settings_failed": "Vyskytly se problémy při mazání nastavení hry",
   "remove_registry_keys": "Smazat klíče registru",

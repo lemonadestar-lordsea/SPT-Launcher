@@ -32,6 +32,7 @@
   "default_language": "Προεπιλεγμένη γλώσσα",
   "game_path": "Φάκελος παιχνιδιού",
   "clear_game_settings": "Εκκαθάριση ρυθμίσεων παιχνιδιού",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "Οι ρυθμίσεις παιχνιδιού διαγράφηκαν",
   "clear_game_settings_failed": "Παρουσιάστηκαν ορισμένα προβλήματα κατά την εκκαθάριση των ρυθμίσεων παιχνιδιού",
   "remove_registry_keys": "Κατάργηση κλειδιών μητρώου",

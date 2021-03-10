@@ -32,6 +32,7 @@
   "default_language": "Default Language",
   "game_path": "Game Path",
   "clear_game_settings": "Clear Game Settings",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "Game settings cleared.",
   "clear_game_settings_failed": "An issue occurred while clearing game settings.",
   "remove_registry_keys": "Remove Registry Keys",

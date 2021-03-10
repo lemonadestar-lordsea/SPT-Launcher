@@ -32,6 +32,7 @@
   "default_language": "Standaardtaal",
   "game_path": "Spelpad",
   "clear_game_settings": "Vee spelinstellings uit",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "Spelinstellings is uitgevee",
   "clear_game_settings_failed": "Sommige probleme het voorgekom tydens die skoonmaak van spelinstellings",
   "remove_registry_keys": "Verwyder registersleutels",

@@ -32,6 +32,7 @@
   "default_language": "기본 언어",
   "game_path": "게임 경로",
   "clear_game_settings": "게임 설정 초기화",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "게임 설정이 초기화 되었습니다.",
   "clear_game_settings_failed": "게임 설정을 삭제하지 못했습니다. 일부 문제가 발생했습니다.",
   "remove_registry_keys": "레지스트리 키 제거하기",

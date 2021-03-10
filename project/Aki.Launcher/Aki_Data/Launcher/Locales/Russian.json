@@ -32,6 +32,7 @@
   "default_language": "Язык по-уолчанию",
   "game_path": "Путь к игре",
   "clear_game_settings": "Очистить настройки игры",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "Настройки игры очищены",
   "clear_game_settings_failed": "Неизвестная проблема при очистке настроек игры",
   "remove_registry_keys": "Очистить реестр",

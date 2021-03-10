@@ -32,6 +32,7 @@
   "default_language": "默认语言",
   "game_path": "游戏路径",
   "clear_game_settings": "恢复默认游戏设置",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "游戏设置已恢复默认",
   "clear_game_settings_failed": "游戏设置恢复失败",
   "remove_registry_keys": "移除注册表",

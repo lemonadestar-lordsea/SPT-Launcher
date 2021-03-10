@@ -32,6 +32,7 @@
   "default_language": "Lingua Predefinita",
   "game_path": "Percorso File di Gioco",
   "clear_game_settings": "Cancella Impostazioni Gioco",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "Impostazioni Gioco Cancellate",
   "clear_game_settings_failed": "Qualcosa è andato storto cancellando le impostazioni del gioco",
   "remove_registry_keys": "Rimuovi Chiavi di Registro",

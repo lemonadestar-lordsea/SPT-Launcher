@@ -35,13 +35,23 @@ namespace Aki.Launcher.Custom_Controls
         }
 
         /// <summary>
+        /// The default dialog host name to use
+        /// </summary>
+        public static string DefaultHost = "";
+
+        /// <summary>
         /// Shows a ViewModel or UserControl inside a dialog window and waits for a result to be returned.
         /// </summary>
         /// <param name="HostName">The x:Name of the dialog host you want to use to display this dialog</param>
         /// <param name="DialogViewModel">The ViewModel or UserControl to load</param>
         /// <returns>The result of the dialog</returns>
-        public static async Task<object> ShowDialog(string HostName, IReturnDialogResult DialogViewModel)
+        public static async Task<object> ShowDialog(IReturnDialogResult DialogViewModel, string HostName = "")
         {
+            if(HostName == "")
+            {
+                HostName = DefaultHost;
+            }
+
             //create a temporary host
             DialogHost host = null;
 

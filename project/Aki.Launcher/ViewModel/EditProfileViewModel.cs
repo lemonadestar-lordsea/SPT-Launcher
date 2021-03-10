@@ -95,7 +95,7 @@ namespace Aki.Launcher.ViewModel
                     LocalizationProvider.Instance.wipe_profile,
                     LocalizationProvider.Instance.cancel);
 
-                var confirmWipe = await DialogHost.ShowDialog("mainDialogHost", confirmDialog);
+                var confirmWipe = await DialogHost.ShowDialog(confirmDialog);
 
                 if (confirmWipe is bool confirmation && confirmation == false)
                 {

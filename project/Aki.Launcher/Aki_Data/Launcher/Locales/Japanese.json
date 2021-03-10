@@ -32,6 +32,7 @@
   "default_language": "既定の言語",
   "game_path": "ゲームの位置",
   "clear_game_settings": "ゲーム設定の初期化",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "ゲーム設定は初期化されました。",
   "clear_game_settings_failed": "ゲーム設定の初期化中にエラーが発生しました。",
   "remove_registry_keys": "レジストリーキーの削除",

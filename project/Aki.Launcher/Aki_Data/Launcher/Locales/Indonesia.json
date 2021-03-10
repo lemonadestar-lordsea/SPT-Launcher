@@ -32,6 +32,7 @@
   "default_language": "Bahasa Utama",
   "game_path": "Direktori Permainan",
   "clear_game_settings": "Bersihkan Pengaturan Game",
+  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
   "clear_game_settings_succeeded": "Pengaturan Game telah dibersihkan",
   "clear_game_settings_failed": "Pembersihan pengaturan game gagal",
   "remove_registry_keys": "Hapus Registry",
