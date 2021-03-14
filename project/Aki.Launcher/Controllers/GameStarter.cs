@@ -88,11 +88,14 @@ namespace Aki.Launcher
                     new FileInfo(value2.Replace(value3.Name, @"Server.exe")),
                     new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\0Harmony.dll")),
                     new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\NLog.dll.nlog")),
-                    new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\Nlog.Aki.Common.dll")),
-                    new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\Nlog.Aki.Core.dll")),
-                    new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\Nlog.Aki.SinglePlayer.dll")),
-                    new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\Nlog.Aki.Tools.dll")),
+                    new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\Nlog.Aki.Loader.dll")),
                 };
+                var value5 = new FileInfo[]
+                {
+                    value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll.bak")),
+                    value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll")),
+                };
+                var value6 = new DirectoryInfo(value2.Replace(value3.Name, @"Aki_Data")));
 
                 foreach (var value in value4)
                 {
@@ -103,9 +106,17 @@ namespace Aki.Launcher
                     }
                 }
 
-                if (value0)
+                if (File.Exists(value5[0].FullName))
                 {
-                    File.Delete(@"EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll");
+                    File.Delete(value5[1].FullName);
+                    File.Move(value5[0].FullName, value5[1].FullName);
+                    value0 = true;
+                }
+
+                if (Directory.Exists(value6.FullName))
+                {
+                    RemoveFilesRecurse(value6);
+                    value0 = true;
                 }
             }
             catch
