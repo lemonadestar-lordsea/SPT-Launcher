@@ -92,10 +92,10 @@ namespace Aki.Launcher
                 };
                 var value5 = new FileInfo[]
                 {
-                    value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll.bak")),
-                    value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll")),
+                    new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll.bak")),
+                    new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll")),
                 };
-                var value6 = new DirectoryInfo(value2.Replace(value3.Name, @"Aki_Data")));
+                var value6 = new DirectoryInfo(value2.Replace(value3.Name, @"Aki_Data"));
 
                 foreach (var value in value4)
                 {
