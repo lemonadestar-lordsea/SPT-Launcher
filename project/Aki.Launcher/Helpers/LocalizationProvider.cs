@@ -89,40 +89,41 @@ namespace Aki.Launcher.Helpers
             englishLocale.server_connecting = "Connecting";
             englishLocale.server_unavailable_format_1 = "Default server '{0}' is not available.";
             englishLocale.no_servers_available = "No Servers found. Check server list in settings.";
-            englishLocale.settings_menu = "Settings Menu";
+            englishLocale.settings_menu = "Settings";
             englishLocale.back = "Back";
             englishLocale.wipe_profile = "Wipe Profile";
             englishLocale.username = "Username";
             englishLocale.password = "Password";
             englishLocale.update = "Update";
-            englishLocale.edit_account_update_error = "Some Issues occurred while updating your profile.";
+            englishLocale.edit_account_update_error = "An issue occurred while updating your profile.";
             englishLocale.register = "Register";
             englishLocale.go_to_register = "Go to Register";
-            englishLocale.registration_failed = "Registration Failed";
+            englishLocale.registration_failed = "Registration Failed.";
             englishLocale.login = "Login";
             englishLocale.go_to_login = "Go to Login";
             englishLocale.login_automatically = "Login Automatically";
-            englishLocale.incorrect_login = "Username or password are incorrect";
+            englishLocale.incorrect_login = "Username or password is incorrect";
             englishLocale.login_failed = "Login Failed";
             englishLocale.edition = "Edition";
             englishLocale.id = "ID";
             englishLocale.logout = "Logout";
-            englishLocale.edit_account = "Edit Profile";
+            englishLocale.account = "Account";
+            englishLocale.edit_account = "Edit Account";
             englishLocale.start_game = "Start Game";
-            englishLocale.installed_in_live_game_warning = "Aki shouldn't be installed into live game. Please make a copy of the gamefiles and install Aki there.";
+            englishLocale.installed_in_live_game_warning = "Aki shouldn't be installed into the live game directory. Please install Aki into a copy of the game directory elsewhere on your computer.";
             englishLocale.no_official_game_warning = "Escape From Tarkov isn't installed on your computer. Please buy a copy of the game and support the developers!";
-            englishLocale.eft_exe_not_found_warning = "EscapeFromTarkov.exe not found at game path.";
+            englishLocale.eft_exe_not_found_warning = "EscapeFromTarkov.exe not found at game path. Please check that the directory is correct.";
             englishLocale.account_exist = "Account already exists";
             englishLocale.url = "URL";
             englishLocale.default_language = "Default Language";
             englishLocale.game_path = "Game Path";
             englishLocale.clear_game_settings = "Clear Game Settings";
             englishLocale.clear_game_settings_warning = "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?";
-            englishLocale.clear_game_settings_succeeded = "Game settings cleared";
-            englishLocale.clear_game_settings_failed = "Some issues occurred while clearing game settings";
+            englishLocale.clear_game_settings_succeeded = "Game settings cleared.";
+            englishLocale.clear_game_settings_failed = "An issue occurred while clearing game settings.";
             englishLocale.remove_registry_keys = "Remove Registry Keys";
-            englishLocale.remove_registry_keys_succeeded = "Registry keys removed";
-            englishLocale.remove_registry_keys_failed = "Some issues occurred while removing registry keys";
+            englishLocale.remove_registry_keys_succeeded = "Registry keys removed.";
+            englishLocale.remove_registry_keys_failed = "An issue occurred while removing registry keys.";
             englishLocale.clean_temp_files = "Clean Temp Files";
             englishLocale.clean_temp_files_succeeded = "Temp files cleaned";
             englishLocale.clean_temp_files_failed = "Some issues occurred while cleaning temp files";
@@ -133,6 +134,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.on_game_start = "On Game Start";
             englishLocale.game = "Game";
             englishLocale.new_password = "New Password";
+            englishLocale.wipe_warning = "Wiping your profile will reset your game progress. Are you sure you want to wipe your profile?";
             englishLocale.wipe_warning_format_2 = "Changing your account edition requires a profile wipe.\n'{0}' -> '{1}'\nAre you sure you want to wipe your profile?";
             englishLocale.cancel = "Cancel";
             englishLocale.need_an_account = "Don't have an account yet?";
@@ -142,6 +144,8 @@ namespace Aki.Launcher.Helpers
             englishLocale.failed_core_patch = "Core patch failed";
             englishLocale.failed_mod_patch = "Mod patch failed";
             englishLocale.ok = "OK";
+            englishLocale.please_sign_in_to_access_account_page = "Please sign in to access the account page";
+            englishLocale.account_updated = "Your account has been updated";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -525,6 +529,22 @@ namespace Aki.Launcher.Helpers
                 {
                     _logout = value;
                     RaisePropertyChanged(nameof(logout));
+                }
+            }
+        }
+        #endregion
+
+        #region account
+        private string _account;
+        public string account
+        {
+            get => _account;
+            set
+            {
+                if(_account != value)
+                {
+                    _account = value;
+                    RaisePropertyChanged(nameof(account));
                 }
             }
         }
@@ -962,6 +982,22 @@ namespace Aki.Launcher.Helpers
         }
         #endregion
 
+        #region wipe_warning
+        private string _wipe_warning;
+        public string wipe_warning
+        {
+            get => _wipe_warning;
+            set
+            {
+                if(_wipe_warning != value)
+                {
+                    _wipe_warning = value;
+                    RaisePropertyChanged(nameof(wipe_warning));
+                }
+            }
+        }
+        #endregion
+
         #region wipe_warning_format_2
         private string _wipe_warning_format_1;
         public string wipe_warning_format_2
@@ -1101,6 +1137,38 @@ namespace Aki.Launcher.Helpers
                 {
                     _ok = value;
                     RaisePropertyChanged(nameof(ok));
+                }
+            }
+        }
+        #endregion
+
+        #region please_sign_in_to_access_account_page
+        private string _please_sign_in_to_access_account_page;
+        public string please_sign_in_to_access_account_page
+        {
+            get => _please_sign_in_to_access_account_page;
+            set
+            {
+                if(_please_sign_in_to_access_account_page != value)
+                {
+                    _please_sign_in_to_access_account_page = value;
+                    RaisePropertyChanged(nameof(please_sign_in_to_access_account_page));
+                }
+            }
+        }
+        #endregion
+
+        #region account_updated
+        private string _account_updated;
+        public string account_updated
+        {
+            get => _account_updated;
+            set
+            {
+                if(_account_updated != value)
+                {
+                    _account_updated = value;
+                    RaisePropertyChanged(nameof(_account_updated));
                 }
             }
         }

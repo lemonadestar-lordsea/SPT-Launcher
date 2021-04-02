@@ -47,6 +47,9 @@ namespace Aki.Launcher.Models.Launcher
             }
         }
 
+        public Func<bool> CanUseAction = () => true;
+
+        public Action OnFailedToUseAction = null;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

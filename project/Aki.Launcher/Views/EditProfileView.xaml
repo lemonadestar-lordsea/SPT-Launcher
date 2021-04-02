@@ -28,12 +28,14 @@ Merijn Hendriks
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="AUTO"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="AUTO"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Grid Card -->
         <Grid Grid.Row="1" Grid.Column="1" Style="{StaticResource GridCardStyle}"
-              MinHeight="220" MinWidth="400">
+              MinWidth="400">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="AUTO"/>
@@ -46,9 +48,6 @@ Merijn Hendriks
                 <RowDefinition Height="AUTO"/>
                 <RowDefinition Height="AUTO"/>
                 <RowDefinition Height="10"/>
-                <RowDefinition Height="AUTO"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="AUTO"/>
                 <RowDefinition Height="AUTO"/>
                 <RowDefinition Height="10"/>
                 <RowDefinition Height="AUTO"/>
@@ -78,12 +77,33 @@ Merijn Hendriks
                                   IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
                                               Path=AllowSettings}"
                                   />
-
+            <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
+                         Path=update}" Grid.Row="6" Grid.Column="3"
+                Command="{Binding UpdateCommand}"
+                CommandParameter="{Binding ElementName=view}"
+                />
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="3" Style="{StaticResource GridCardStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="AUTO"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="AUTO"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
             <!-- Edition Controls -->
             <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                         Path=edition}" Grid.Row="6" Grid.Column="1"
+                         Path=edition}" Grid.Row="1" Grid.Column="1"
                    />
-            <ComboBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3"
+            <ComboBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
                   ItemsSource="{Binding ProfileWipe.EditionsCollection.AvailableEditions}"
                   SelectedValue="{Binding ProfileWipe.EditionsCollection.SelectedEdition}"
                   SelectedIndex="{Binding ProfileWipe.EditionsCollection.SelectedEditionIndex}"
@@ -92,18 +112,17 @@ Merijn Hendriks
                   />
 
             <!-- Addtional Controls -->
-            <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
+            <!--<Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                          Path=back}" Grid.Row="9" Grid.Column="1"
                 Command="{Binding BackCommand}"
                 IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
                             Path=AllowSettings}"
                 Style="{StaticResource AltButtonStyle}"
-                />
+                />-->
 
             <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                         Path=update}" Grid.Row="9" Grid.Column="3"
-                Command="{Binding UpdateCommand}"
-                CommandParameter="{Binding ElementName=view}"
+                         Path=wipe_profile}" Grid.Row="4" Grid.Column="3"
+                Command="{Binding WipeProfileCommand}"
                 />
         </Grid>
     </Grid>

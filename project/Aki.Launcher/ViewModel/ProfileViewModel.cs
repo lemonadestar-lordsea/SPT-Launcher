@@ -46,7 +46,7 @@ namespace Aki.Launcher.ViewModel
 
         public void OnLogoutCommand(object parameter)
         {
-
+            AccountManager.Logout();
             navigationViewModel.SelectedViewModel = new ConnectServerViewModel(navigationViewModel, true);
         }
         public void OnEditProfileCommand(object parameter)
