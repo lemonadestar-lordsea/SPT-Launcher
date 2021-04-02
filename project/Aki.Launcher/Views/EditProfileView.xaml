@@ -33,7 +33,7 @@ Merijn Hendriks
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Grid Card -->
+        <!-- Username & Password Grid Card -->
         <Grid Grid.Row="1" Grid.Column="1" Style="{StaticResource GridCardStyle}"
               MinWidth="400">
             <Grid.ColumnDefinitions>
@@ -77,12 +77,16 @@ Merijn Hendriks
                                   IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
                                               Path=AllowSettings}"
                                   />
+            
+            <!-- Update Button -->
             <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                          Path=update}" Grid.Row="6" Grid.Column="3"
                 Command="{Binding UpdateCommand}"
                 CommandParameter="{Binding ElementName=view}"
                 />
         </Grid>
+
+        <!-- Edition Grid Card -->
         <Grid Grid.Column="1" Grid.Row="3" Style="{StaticResource GridCardStyle}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10"/>
@@ -99,6 +103,7 @@ Merijn Hendriks
                 <RowDefinition Height="AUTO"/>
                 <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
+            
             <!-- Edition Controls -->
             <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                          Path=edition}" Grid.Row="1" Grid.Column="1"
@@ -111,15 +116,7 @@ Merijn Hendriks
                             Path=AllowSettings}"
                   />
 
-            <!-- Addtional Controls -->
-            <!--<Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                         Path=back}" Grid.Row="9" Grid.Column="1"
-                Command="{Binding BackCommand}"
-                IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
-                            Path=AllowSettings}"
-                Style="{StaticResource AltButtonStyle}"
-                />-->
-
+            <!-- Wipe Profile Button -->
             <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                          Path=wipe_profile}" Grid.Row="4" Grid.Column="3"
                 Command="{Binding WipeProfileCommand}"

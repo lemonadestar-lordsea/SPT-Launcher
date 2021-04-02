@@ -21,6 +21,7 @@
   "edition": "Ed'tion",
   "id": "Pirate",
   "logout": "Avast",
+  "account": "Account",
   "edit_account": "Ed't Voyage",
   "start_game": "Start Voyage",
   "installed_in_live_game_warning": "Ye filthy scallywag, ye can't install Acky in Escape From Tark'v's main ocean! Make a copy o' it an give 'er another try.",
@@ -49,6 +50,7 @@
   "on_game_start": "Launcher Start Voyage Action",
   "game": "Game",
   "new_password": "New Secret Word",
+  "wipe_warning": "Wiping your profile will reset your game progress. Are you sure you want to wipe your profile?",
   "wipe_warning_format_2": "Changing ye account edition require a profile wipe.\n'{0}' > '{1}'\n're ye sure ye want to wipe yer profile, son?",
   "cancel": "Cancel",
   "need_an_account": "D'ye n't have an account yet, old salt?",
@@ -57,5 +59,7 @@
   "failed_to_receive_patches": "Failed t' receive patches!",
   "failed_core_patch": "Core patch failed",
   "failed_mod_patch": "Mod patch failed",
-  "ok": "Aye!"
+  "ok": "Aye!",
+  "please_sign_in_to_access_account_page": "Please sign in to access the account page",
+  "account_updated": "Your account has been updated"
 }

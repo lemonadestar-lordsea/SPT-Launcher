@@ -21,6 +21,7 @@
   "edition": "Edição",
   "id": "ID",
   "logout": "Logout",
+  "account": "Account",
   "edit_account": "Editar Conta",
   "start_game": "Começar Jogo",
   "installed_in_live_game_warning": "Aki não deve ser instalado na cópia original. Por favor, faça uma cópia dos arquivos originais e instale Aki lá.",
@@ -49,6 +50,7 @@
   "on_game_start": "Launcher Ação Iniciar Jogo",
   "game": "Jogo",
   "new_password": "Nova Senha",
+  "wipe_warning": "Wiping your profile will reset your game progress. Are you sure you want to wipe your profile?",
   "wipe_warning_format_2": "Mudar a Edição da sua conta requer uma limpeza de perfil.\n'{0}' > '{1}'\nVocê tem certeza de que gostaria de limpar o seu perfil?",
   "cancel": "Cancelar",
   "need_an_account": "Ainda não possui uma conta?",
@@ -57,5 +59,7 @@
   "failed_to_receive_patches": "Failed to receive patches",
   "failed_core_patch": "Core patch failed",
   "failed_mod_patch": "Mod patch failed",
-  "ok": "OK"
+  "ok": "OK",
+  "please_sign_in_to_access_account_page": "Please sign in to access the account page",
+  "account_updated": "Your account has been updated"
 }
