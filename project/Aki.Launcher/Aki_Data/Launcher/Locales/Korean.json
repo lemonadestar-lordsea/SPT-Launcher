@@ -21,6 +21,7 @@
   "edition": "에디션",
   "id": "아이디",
   "logout": "로그아웃",
+  "account": "Account",
   "edit_account": "계정 수정",
   "start_game": "게임 시작",
   "installed_in_live_game_warning": "에뮬은 타르코프 정식 폴더에 직접 설치되면 안됩니다.해당 클라이언트를 다른 폴더로 복사해서 이용해주세요.",
@@ -49,6 +50,7 @@
   "on_game_start": "게임 시작",
   "game": "게임",
   "new_password": "새로운 비밀번호",
+  "wipe_warning": "Wiping your profile will reset your game progress. Are you sure you want to wipe your profile?",
   "wipe_warning_format_2": "계정버전을 변경하려면 프로필을 삭제해야됩니다.\n'{0}' > '{1}'\n 프로필을 삭제하시겠습니까?",
   "cancel": "취소",
   "need_an_account": "아직 계정이 없으십니까?",
@@ -57,5 +59,7 @@
   "failed_to_receive_patches": "패치를 다운로드 받는 데 실패하였습니다",
   "failed_core_patch": "코어 패치 실패",
   "failed_mod_patch": "모드 패치 실패",
-  "ok": "확인"
+  "ok": "확인",
+  "please_sign_in_to_access_account_page": "Please sign in to access the account page",
+  "account_updated": "Your account has been updated"
 }

@@ -8,7 +8,6 @@
  */
 
 
-using Aki.Launcher.Generics;
 using Aki.Launcher.Generics.AsyncCommand;
 using Aki.Launcher.Helpers;
 using Aki.Launcher.Models.Launcher;
@@ -25,18 +24,18 @@ namespace Aki.Launcher.ViewModel
         public LoginModel login { get; set; }
 
         public AwaitableDelegateCommand UpdateCommand { get; set; }
-        public GenericICommand BackCommand { get; set; }
         public WipeProfileModel ProfileWipe { get; set; }
-        public GenericICommand WipeProfileCommand { get; set; }
+        public AwaitableDelegateCommand WipeProfileCommand { get; set; }
 
         private NavigationViewModel navigationViewModel { get; set; }
         public EditProfileViewModel(NavigationViewModel viewModel)
         {
             navigationViewModel = viewModel;
 
+            ServerManager.LoadServer(LauncherSettingsProvider.Instance.Server.Url);
+
             UpdateCommand = new AwaitableDelegateCommand(OnUpdateCommand);
-            BackCommand = new GenericICommand(OnBackCommand);
-            WipeProfileCommand = new GenericICommand(OnWipeProfileCommand);
+            WipeProfileCommand = new AwaitableDelegateCommand(OnWipeProfileCommand);
 
             ServerSetting DefaultServer = LauncherSettingsProvider.Instance.Server;
 
@@ -46,6 +45,7 @@ namespace Aki.Launcher.ViewModel
 
             WipeProfileModel tmpWipeProfile = new WipeProfileModel();
             tmpWipeProfile.EditionsCollection.SelectedEdition = AccountManager.SelectedAccount.edition;
+            
             tmpWipeProfile.EditionsCollection.SelectedEditionIndex = tmpWipeProfile.EditionsCollection.AvailableEditions.IndexOf(AccountManager.SelectedAccount.edition);
             ProfileWipe = tmpWipeProfile;
 
@@ -104,26 +104,7 @@ namespace Aki.Launcher.ViewModel
                     return;
                 }
 
-
-                //TODO - Improve this whole section, just copying over from other viewmodel for now. -Waffle.sad :(
-                int status = await AccountManager.WipeAsync(ProfileWipe.EditionsCollection.SelectedEdition);
-
-                switch (status)
-                {
-                    //case 1:
-                    //    navigationViewModel.SelectedViewModel = new ProfileViewModel(navigationViewModel);
-                    //    break;
-
-                    case -1:
-                        navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.login_failed);
-                        navigationViewModel.SelectedViewModel = new ConnectServerViewModel(navigationViewModel);
-                        return;
-
-                    case -2:
-                        navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.edit_account_update_error);
-                        navigationViewModel.SelectedViewModel = new ConnectServerViewModel(navigationViewModel);
-                        return;
-                }
+                await OnWipeProfileCommand(true);
             }
 
             string usernameStatus = GetStatus(await AccountManager.ChangeUsernameAsync(login.Username));
@@ -133,7 +114,7 @@ namespace Aki.Launcher.ViewModel
 
             if (usernameStatus == "OK" && passStatus == "OK")
             {
-                navigationViewModel.SelectedViewModel = new ProfileViewModel(navigationViewModel);
+                navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.account_updated);
             }
             else
             {
@@ -142,14 +123,50 @@ namespace Aki.Launcher.ViewModel
             }
         }
 
-        public void OnBackCommand(object parameter)
+        public async Task OnWipeProfileCommand(object parameter = null)
         {
-            navigationViewModel.SelectedViewModel = new ProfileViewModel(navigationViewModel);
-        }
+            bool bypassCheck;
 
-        public void OnWipeProfileCommand(object parameter)
-        {
-            navigationViewModel.SelectedViewModel = new WipeProfileViewModel(navigationViewModel);
+            if(!bool.TryParse(parameter?.ToString(), out bypassCheck))
+            {
+                bypassCheck = false;
+            }
+
+            if (!bypassCheck)
+            {
+                ConfirmationDialog confirmDialog = new ConfirmationDialog(
+                    LocalizationProvider.Instance.wipe_warning,
+                    LocalizationProvider.Instance.wipe_profile,
+                    LocalizationProvider.Instance.cancel);
+
+                var confirmWipe = await DialogHost.ShowDialog(confirmDialog);
+
+                if (confirmWipe is bool confirmation && confirmation == false)
+                {
+                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.edit_account_update_error, true);
+                    LauncherSettingsProvider.Instance.AllowSettings = true;
+                    return;
+                }
+            }
+
+            int status = await AccountManager.WipeAsync(ProfileWipe.EditionsCollection.SelectedEdition);
+
+            switch (status)
+            {
+                case 1:
+                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.account_updated);
+                    return;
+
+                case -1:
+                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.login_failed);
+                    navigationViewModel.SelectedViewModel = new ConnectServerViewModel(navigationViewModel);
+                    return;
+
+                case -2:
+                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.edit_account_update_error);
+                    navigationViewModel.SelectedViewModel = new ConnectServerViewModel(navigationViewModel);
+                    return;
+            }
         }
     }
 }

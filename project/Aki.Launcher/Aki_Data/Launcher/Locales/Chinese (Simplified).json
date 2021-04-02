@@ -21,6 +21,7 @@
   "edition": "游戏版本",
   "id": "ID",
   "logout": "登出",
+  "account": "Account",
   "edit_account": "编辑个人存档",
   "start_game": "开始游戏",
   "installed_in_live_game_warning": "Aki不应该安装在在线版塔科夫的目录里，请复制游戏文件并在其他地方安装。",
@@ -49,6 +50,7 @@
   "on_game_start": "登录器在启动游戏后",
   "game": "游戏",
   "new_password": "新密码",
+  "wipe_warning": "Wiping your profile will reset your game progress. Are you sure you want to wipe your profile?",
   "wipe_warning_format_2": "更改帐户版本需要清除个人资料。\n'{0}'->'{1}'\n您确定要清除个人资料吗?",
   "cancel": "取消",
   "need_an_account": "还没有账号吗？", 
@@ -57,5 +59,7 @@
   "failed_to_receive_patches": "接收补丁失败", 
   "failed_core_patch": "核心补丁安装失败", 
   "failed_mod_patch": "Mod补丁安装失败", 
-  "ok": "好"
+  "ok": "好",
+  "please_sign_in_to_access_account_page": "Please sign in to access the account page",
+  "account_updated": "Your account has been updated"
 }

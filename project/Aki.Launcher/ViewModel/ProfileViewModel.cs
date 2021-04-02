@@ -24,7 +24,6 @@ namespace Aki.Launcher.ViewModel
         public string CurrentEdition { get; set; }
         public string CurrentID { get; set; }
         public GenericICommand LogoutCommand { get; set; }
-        public GenericICommand EditProfileCommand { get; set; }
         public AwaitableDelegateCommand StartGameCommand { get; set; }
         private NavigationViewModel navigationViewModel { get; set; }
         private GameStarter gameStarter = new GameStarter();
@@ -34,7 +33,6 @@ namespace Aki.Launcher.ViewModel
         {
             navigationViewModel = viewModel;
             LogoutCommand = new GenericICommand(OnLogoutCommand);
-            EditProfileCommand = new GenericICommand(OnEditProfileCommand);
             StartGameCommand = new AwaitableDelegateCommand(OnStartGameCommand);
 
             monitor = new ProcessMonitor("EscapeFromTarkov", 1000, aliveCallback: null, exitCallback: GameExitCallback);
@@ -46,13 +44,10 @@ namespace Aki.Launcher.ViewModel
 
         public void OnLogoutCommand(object parameter)
         {
-
+            AccountManager.Logout();
             navigationViewModel.SelectedViewModel = new ConnectServerViewModel(navigationViewModel, true);
         }
-        public void OnEditProfileCommand(object parameter)
-        {
-            navigationViewModel.SelectedViewModel = new EditProfileViewModel(navigationViewModel);
-        }
+
         public async Task OnStartGameCommand()
         {
             LauncherSettingsProvider.Instance.AllowSettings = false;

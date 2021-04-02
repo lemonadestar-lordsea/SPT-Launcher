@@ -22,6 +22,8 @@ namespace Aki.Launcher
 
 		public static AccountInfo SelectedAccount { get; private set; } = null;
 
+		public static void Logout() => SelectedAccount = null;
+
 		public static async Task<int> LoginAsync(LoginModel Creds)
         {
 			return await Task.Run(() =>

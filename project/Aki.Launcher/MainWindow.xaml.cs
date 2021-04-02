@@ -51,9 +51,10 @@ namespace Aki.Launcher
             MenuItemCommand = new GenericICommand(OnMenuItemCommand);
 
             ObservableCollection<MenuBarItem> tempMenuItemCollection = new ObservableCollection<MenuBarItem>();
+
             tempMenuItemCollection.Add(new MenuBarItem
             {
-                Name = "Game",
+                Name = LocalizationProvider.Instance.game,
                 ItemAction = () =>
                 {
                     navigationViewModel.SelectedViewModel = new ConnectServerViewModel(navigationViewModel);
@@ -66,6 +67,20 @@ namespace Aki.Launcher
                 ItemAction = () =>
                 {
                     navigationViewModel.SelectedViewModel = new SettingsViewModel(navigationViewModel);
+                }
+            });
+
+            tempMenuItemCollection.Add(new MenuBarItem
+            {
+                Name = LocalizationProvider.Instance.account,
+                ItemAction = () =>
+                {
+                    navigationViewModel.SelectedViewModel = new EditProfileViewModel(navigationViewModel);
+                },
+                CanUseAction = () => AccountManager.SelectedAccount != null,
+                OnFailedToUseAction = () =>
+                {
+                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.please_sign_in_to_access_account_page);
                 }
             });
 
@@ -90,6 +105,13 @@ namespace Aki.Launcher
             {
                 if (menuItem.IsSelected)
                 {
+                    return;
+                }
+
+                if(!menuItem.CanUseAction.Invoke())
+                {
+                    menuItem.OnFailedToUseAction?.Invoke();
+
                     return;
                 }
 
