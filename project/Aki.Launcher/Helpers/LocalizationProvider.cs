@@ -144,8 +144,14 @@ namespace Aki.Launcher.Helpers
             englishLocale.failed_core_patch = "Core patch failed";
             englishLocale.failed_mod_patch = "Mod patch failed";
             englishLocale.ok = "OK";
-            englishLocale.please_sign_in_to_access_account_page = "Please sign in to access the account page";
+            englishLocale.account_page_denied = "Account page denied. Either you are not logged in or the game is running.";
             englishLocale.account_updated = "Your account has been updated";
+            englishLocale.nickname = "Nickname";
+            englishLocale.side = "Side";
+            englishLocale.level = "Level";
+            englishLocale.total_xp = "Total XP";
+            englishLocale.current_xp = "Current XP";
+            englishLocale.remaining_xp = "Remaining XP";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -1142,17 +1148,17 @@ namespace Aki.Launcher.Helpers
         }
         #endregion
 
-        #region please_sign_in_to_access_account_page
-        private string _please_sign_in_to_access_account_page;
-        public string please_sign_in_to_access_account_page
+        #region account_page_denied
+        private string _account_page_denied;
+        public string account_page_denied
         {
-            get => _please_sign_in_to_access_account_page;
+            get => _account_page_denied;
             set
             {
-                if(_please_sign_in_to_access_account_page != value)
+                if(_account_page_denied != value)
                 {
-                    _please_sign_in_to_access_account_page = value;
-                    RaisePropertyChanged(nameof(please_sign_in_to_access_account_page));
+                    _account_page_denied = value;
+                    RaisePropertyChanged(nameof(account_page_denied));
                 }
             }
         }
@@ -1169,6 +1175,102 @@ namespace Aki.Launcher.Helpers
                 {
                     _account_updated = value;
                     RaisePropertyChanged(nameof(_account_updated));
+                }
+            }
+        }
+        #endregion
+
+        #region nickname
+        private string _nickname;
+        public string nickname
+        {
+            get => _nickname;
+            set
+            {
+                if(_nickname != value)
+                {
+                    _nickname = value;
+                    RaisePropertyChanged(nameof(nickname));
+                }
+            }
+        }
+        #endregion
+
+        #region side
+        private string _side;
+        public string side
+        {
+            get => _side;
+            set
+            {
+                if(_side != value)
+                {
+                    _side = value;
+                    RaisePropertyChanged(nameof(side));
+                }
+            }
+        }
+        #endregion
+
+        #region level
+        private string _level;
+        public string level
+        {
+            get => _level;
+            set
+            {
+                if(_level != value)
+                {
+                    _level = value;
+                    RaisePropertyChanged(nameof(level));
+                }
+            }
+        }
+        #endregion
+
+        #region total_xp
+        private string _total_xp;
+        public string total_xp
+        {
+            get => _total_xp;
+            set
+            {
+                if(_total_xp != value)
+                {
+                    _total_xp = value;
+                    RaisePropertyChanged(nameof(total_xp));
+                }
+            }
+        }
+        #endregion
+
+        #region current_xp
+        private string _current_xp;
+        public string current_xp
+        {
+            get => _current_xp;
+            set
+            {
+                if(_current_xp != value)
+                {
+                    _current_xp = value;
+                    RaisePropertyChanged(nameof(current_xp));
+                }
+            }
+        }
+        #endregion
+
+        #region remaining_xp
+        private string _remaining_xp;
+        public string remaining_xp
+        {
+            get => _remaining_xp;
+            set
+            {
+                if(_remaining_xp != value)
+                {
+                    _remaining_xp = value;
+                    RaisePropertyChanged(nameof(remaining_xp));
                 }
             }
         }
