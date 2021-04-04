@@ -24,6 +24,7 @@ namespace Aki.Launcher.ViewModel
         public string CurrentEdition { get; set; }
         public string CurrentID { get; set; }
         public GenericICommand LogoutCommand { get; set; }
+        public ProfileInfo ProfileInfo { get; set; }
         public AwaitableDelegateCommand StartGameCommand { get; set; }
         private NavigationViewModel navigationViewModel { get; set; }
         private GameStarter gameStarter = new GameStarter();
@@ -40,6 +41,13 @@ namespace Aki.Launcher.ViewModel
             CurrentUsername = AccountManager.SelectedAccount.username;
             CurrentEdition = AccountManager.SelectedAccount.edition;
             CurrentID = AccountManager.SelectedAccount.id;
+
+            //this will be replaced with a server call. Whenever that request is added ...
+            string profilePath = $"{LauncherSettingsProvider.Instance.GamePath}\\user\\profiles\\{CurrentID}.json";
+
+            ProfileInfo tempProfileInfo = AccountManager.SelectedProfileInfo;
+
+            ProfileInfo = tempProfileInfo;
         }
 
         public void OnLogoutCommand(object parameter)

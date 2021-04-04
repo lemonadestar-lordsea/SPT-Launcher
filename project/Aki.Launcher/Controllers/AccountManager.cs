@@ -12,6 +12,7 @@ using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Helpers;
 using Aki.Launcher.Models.Launcher;
 using System.Threading.Tasks;
+using Aki.Launcher.Models.Aki;
 
 namespace Aki.Launcher
 {
@@ -19,8 +20,8 @@ namespace Aki.Launcher
 	{
         private const string STATUS_FAILED = "FAILED";
         private const string STATUS_OK = "OK";
-
 		public static AccountInfo SelectedAccount { get; private set; } = null;
+		public static ProfileInfo SelectedProfileInfo { get; private set; } = null;
 
 		public static void Logout() => SelectedAccount = null;
 
@@ -64,6 +65,13 @@ namespace Aki.Launcher
 
 			SelectedAccount = Json.Deserialize<AccountInfo>(json);
             RequestHandler.ChangeSession(SelectedAccount.id);
+			
+			string profileInfoJson = RequestHandler.RequestProfileInfo(data);
+			if(profileInfoJson != null)
+            {
+				ServerProfileInfo serverProfileInfo = Json.Deserialize<ServerProfileInfo>(profileInfoJson);
+				SelectedProfileInfo = new ProfileInfo(serverProfileInfo);
+            }
 
             return 1;
 		}

@@ -60,6 +60,12 @@
   "failed_core_patch": "Core patch failed",
   "failed_mod_patch": "Mod patch failed",
   "ok": "OK",
-  "please_sign_in_to_access_account_page": "Please sign in to access the account page",
-  "account_updated": "Your account has been updated"
+  "account_page_denied": "Account page denied. Either you are not logged in or the game is running.",
+  "account_updated": "Your account has been updated",
+  "nickname": "Nickname",
+  "side": "Side",
+  "level": "Level",
+  "total_xp": "Total XP",
+  "current_xp": "Current XP",
+  "remaining_xp": "Remaining XP"
 }

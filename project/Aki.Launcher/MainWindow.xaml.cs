@@ -63,24 +63,24 @@ namespace Aki.Launcher
 
             tempMenuItemCollection.Add(new MenuBarItem
             {
-                Name = LocalizationProvider.Instance.settings_menu,
-                ItemAction = () =>
-                {
-                    navigationViewModel.SelectedViewModel = new SettingsViewModel(navigationViewModel);
-                }
-            });
-
-            tempMenuItemCollection.Add(new MenuBarItem
-            {
                 Name = LocalizationProvider.Instance.account,
                 ItemAction = () =>
                 {
                     navigationViewModel.SelectedViewModel = new EditProfileViewModel(navigationViewModel);
                 },
-                CanUseAction = () => AccountManager.SelectedAccount != null,
+                CanUseAction = () => !LauncherSettingsProvider.Instance.GameRunning && AccountManager.SelectedAccount != null,
                 OnFailedToUseAction = () =>
                 {
-                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.please_sign_in_to_access_account_page);
+                    navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.account_page_denied);
+                }
+            });
+
+            tempMenuItemCollection.Add(new MenuBarItem
+            {
+                Name = LocalizationProvider.Instance.settings_menu,
+                ItemAction = () =>
+                {
+                    navigationViewModel.SelectedViewModel = new SettingsViewModel(navigationViewModel);
                 }
             });
 
