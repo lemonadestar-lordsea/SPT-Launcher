@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Aki.Launcher.Custom_Controls"
+             xmlns:cvt="clr-namespace:Aki.Launcher.Converters"
              xmlns:helpers="clr-namespace:Aki.Launcher.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <cvt:ImageSourceConverter x:Key="ImgSrcCvt" />
+    </UserControl.Resources>
     <Grid Style="{StaticResource GridCardStyle}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
@@ -35,7 +39,8 @@
         <Image Grid.Column="1"
                Grid.Row="1" Grid.RowSpan="3"
                Source="{Binding Path=SideImagePath, RelativeSource={
-                               RelativeSource AncestorType=UserControl}}" 
+                               RelativeSource AncestorType=UserControl}, 
+                               Converter={StaticResource ImgSrcCvt}}"
                
                RenderOptions.BitmapScalingMode="Fant"
                Height="60"
@@ -107,7 +112,7 @@
             />
         <Label Grid.Column="2"
                Grid.Row="7"
-               Content="{Binding Path=RemainingXPProperty, RelativeSource={
+               Content="{Binding Path=RemainingXP, RelativeSource={
                                  RelativeSource AncestorType=UserControl}}"
             />
         

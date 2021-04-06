@@ -26,7 +26,7 @@ namespace Aki.Launcher.MiniCommon
 			RemoteEndPoint = remoteEndPoint;
 		}
 
-		private Stream Send(string url, string method = "GET", string data = null, bool compress = true)
+		public Stream Send(string url, string method = "GET", string data = null, bool compress = true)
         {
 			// disable SSL encryption
 			ServicePointManager.Expect100Continue = true;

@@ -65,15 +65,21 @@ namespace Aki.Launcher
 
 			SelectedAccount = Json.Deserialize<AccountInfo>(json);
             RequestHandler.ChangeSession(SelectedAccount.id);
-			
-			string profileInfoJson = RequestHandler.RequestProfileInfo(data);
-			if(profileInfoJson != null)
-            {
-				ServerProfileInfo serverProfileInfo = Json.Deserialize<ServerProfileInfo>(profileInfoJson);
-				SelectedProfileInfo = new ProfileInfo(serverProfileInfo);
-            }
+
+			UpdateProfileInfo();
 
             return 1;
+		}
+
+		public static void UpdateProfileInfo()
+        {
+			LoginRequestData data = new LoginRequestData(SelectedAccount.username, SelectedAccount.password);
+			string profileInfoJson = RequestHandler.RequestProfileInfo(data);
+			if (profileInfoJson != null)
+			{
+				ServerProfileInfo serverProfileInfo = Json.Deserialize<ServerProfileInfo>(profileInfoJson);
+				SelectedProfileInfo = new ProfileInfo(serverProfileInfo);
+			}
 		}
 
 		public static async Task<int> RegisterAsync(string username, string password, string edition)

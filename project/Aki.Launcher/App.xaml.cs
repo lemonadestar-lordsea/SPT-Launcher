@@ -8,8 +8,6 @@
  */
 
 using Aki.Launcher.Controllers;
-using Aki.Launcher.Helpers;
-using Aki.Launcher.Models.Launcher;
 using System;
 using System.Windows;
 
@@ -27,39 +25,10 @@ namespace Aki.Launcher
             //I'm not sure if you want application specific exception handling. AppDomain should handle them all AFAIK. You had something similar before, so I'm just adding this in. (might cause duplicate messageboxes though)
             Current.DispatcherUnhandledException += (sender, args) => HandleException(args.Exception);
 
-            //check params - Example: Launcher.exe username:waffelord password:12345
-            LauncherStartArgs startArgs = new LauncherStartArgs(e);
+            // run launcher normally
+            MainWindow LauncherWindow = new MainWindow();
 
-            if (startArgs.HasAuthentication)
-            {
-                ServerManager.LoadServer(LauncherSettingsProvider.Instance.Server.Url);
-                int status = AccountManager.Login(startArgs.Username, startArgs.Password);
-
-                //we only care if we actually logged in, to make sure we can start the game.
-                if (status == 1)
-                {
-                    GameStarter gm = new GameStarter();
-                    GameStarterResult gameStartResult = gm.LaunchGame(ServerManager.SelectedServer, AccountManager.SelectedAccount);
-
-                    if(!gameStartResult.Succeeded)
-                    {
-                        MessageBox.Show(gameStartResult.Message);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(LocalizationProvider.Instance.login_failed);
-                }
-
-                Application.Current.Shutdown(0);
-            }
-            else
-            {
-                // run launcher normally
-                MainWindow LauncherWindow = new MainWindow();
-
-                LauncherWindow.ShowDialog();
-            }
+            LauncherWindow.ShowDialog();
         }
 
         private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)

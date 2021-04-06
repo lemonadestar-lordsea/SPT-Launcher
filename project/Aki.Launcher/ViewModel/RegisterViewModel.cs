@@ -65,11 +65,9 @@ namespace Aki.Launcher.ViewModel
                 case 1:
                     ServerSetting DefaultServer = LauncherSettingsProvider.Instance.Server;
 
-                    if (DefaultServer.AutoLoginCreds == null)
-                    {
-                        DefaultServer.AutoLoginCreds = new LoginModel { Username = newProfile.Username, Password = newProfile.Password };
-                        LauncherSettingsProvider.Instance.SaveSettings();
-                    }
+                    DefaultServer.AutoLoginCreds = new LoginModel { Username = newProfile.Username, Password = newProfile.Password };
+                    LauncherSettingsProvider.Instance.SaveSettings();
+                    
 
                     navigationViewModel.SelectedViewModel = new ProfileViewModel(navigationViewModel);
                     break;

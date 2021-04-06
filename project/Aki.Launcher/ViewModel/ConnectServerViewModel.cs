@@ -10,8 +10,10 @@
 
 using Aki.Launcher.Generics.AsyncCommand;
 using Aki.Launcher.Helpers;
+using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Models.Launcher;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Aki.Launcher.ViewModel
@@ -68,6 +70,13 @@ namespace Aki.Launcher.ViewModel
             if (ServerManager.SelectedServer != null)
             {
                 RequestHandler.ChangeBackendUrl(ServerManager.SelectedServer.backendUrl);
+
+                ImageRequest.CacheBackgroundImage();
+
+                if(navigationViewModel.BackgroundImage == null)
+                {
+                    navigationViewModel.BackgroundImage = Path.Combine(ImageRequest.ImageCacheFolder, "bg.png");
+                }
 
                 if (DefaultServer.AutoLoginCreds == null || DefaultServer.AutoLoginCreds.Username == "" || DefaultServer.AutoLoginCreds.Password == "")
                 {
