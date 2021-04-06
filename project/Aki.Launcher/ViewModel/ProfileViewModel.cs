@@ -42,8 +42,10 @@ namespace Aki.Launcher.ViewModel
             CurrentEdition = AccountManager.SelectedAccount.edition;
             CurrentID = AccountManager.SelectedAccount.id;
 
-            //this will be replaced with a server call. Whenever that request is added ...
-            string profilePath = $"{LauncherSettingsProvider.Instance.GamePath}\\user\\profiles\\{CurrentID}.json";
+            if (AccountManager.SelectedProfileInfo != null && AccountManager.SelectedProfileInfo.Side != null)
+            {
+                ImageRequest.CacheSideImage(AccountManager.SelectedProfileInfo.Side);
+            }
 
             ProfileInfo tempProfileInfo = AccountManager.SelectedProfileInfo;
 
@@ -125,6 +127,10 @@ namespace Aki.Launcher.ViewModel
                         break;
                     }
             }
+
+            AccountManager.UpdateProfileInfo();
+            ImageRequest.CacheSideImage(AccountManager.SelectedProfileInfo.Side);
+            ProfileInfo.UpdateDisplayedProfile(AccountManager.SelectedProfileInfo);
         }
 
         private void TrayIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)

@@ -22,7 +22,7 @@ Merijn Hendriks
              x:Name="view">
     <UserControl.Resources>
         <cvt:InvertedBooleanConverter x:Key="IvtBool"/>
-        <cvt:InvertedBooleanToVisibilityConverter x:Key="IvtBoolVisibility"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -90,6 +90,8 @@ Merijn Hendriks
             CurrentXP="{Binding ProfileInfo.CurrentXP}"
             TotalXP="{Binding ProfileInfo.TotalXP}"
             LevelProgressValue="{Binding ProfileInfo.XPLevelProgress}"
+            RemainingXP="{Binding ProfileInfo.TillNextLevel}"
+            Visibility="{Binding ProfileInfo.HasData, Converter={StaticResource BoolToVisibility}}"
             />
 
         <!-- Sub Grid to position buttons and footer -->

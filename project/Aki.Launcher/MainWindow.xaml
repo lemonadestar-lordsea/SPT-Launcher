@@ -22,6 +22,7 @@ Merijn Hendriks
 
     <Window.Resources>
         <cvt:InvertedBooleanToVisibilityConverter x:Key="IvtBoolToVisibiilty" />
+        <cvt:ImageSourceConverter x:Key="ImgSrcCvt" />
     </Window.Resources>
     
     <WindowChrome.WindowChrome>
@@ -42,7 +43,9 @@ Merijn Hendriks
         </Grid.RowDefinitions>
 
         <!-- Settable Background Image - for senko ;) -->
-        <Image Source="{Binding Source={x:Static helpers:ResourceProvider.BackgroundImagePath}}"
+        <Image Source="{Binding navigationViewModel.BackgroundImage, RelativeSource={
+                                RelativeSource AncestorType=Window},
+                                Converter={StaticResource ImgSrcCvt}}"
                RenderOptions.BitmapScalingMode="Fant" Stretch="UniformToFill"
                Width="{Binding ActualWidth, ElementName=main}"
                Grid.ColumnSpan="3" Grid.Row="1"

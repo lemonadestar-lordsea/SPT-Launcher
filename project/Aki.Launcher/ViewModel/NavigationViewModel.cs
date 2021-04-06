@@ -27,6 +27,20 @@ namespace Aki.Launcher.ViewModel
             }
         }
 
+        private string _backgroundImage;
+        public string BackgroundImage
+        {
+            get => _backgroundImage;
+            set
+            {
+                if(_backgroundImage != value)
+                {
+                    _backgroundImage = value;
+                    RaisePropertyChanged(nameof(BackgroundImage));
+                }
+            }
+        }
+
         public NotificationQueue NotificationQueue { get; set; } = new NotificationQueue(5000);
 
         public event PropertyChangedEventHandler PropertyChanged;
