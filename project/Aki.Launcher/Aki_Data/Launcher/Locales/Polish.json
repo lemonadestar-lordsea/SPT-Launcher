@@ -65,7 +65,6 @@
   "nickname": "Nickname",
   "side": "Side",
   "level": "Level",
-  "total_xp": "Total XP",
   "current_xp": "Current XP",
   "remaining_xp": "Remaining XP"
 }

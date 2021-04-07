@@ -87,10 +87,9 @@ Merijn Hendriks
             SideImagePath="{Binding ProfileInfo.SideImage}"
             Side="{Binding ProfileInfo.Side}"
             Level="{Binding ProfileInfo.Level}"
-            CurrentXP="{Binding ProfileInfo.CurrentXP}"
-            TotalXP="{Binding ProfileInfo.TotalXP}"
+            CurrentXP="{Binding ProfileInfo.CurrentExp}"
             LevelProgressValue="{Binding ProfileInfo.XPLevelProgress}"
-            RemainingXP="{Binding ProfileInfo.TillNextLevel}"
+            RemainingXP="{Binding ProfileInfo.RemainingExp}"
             Visibility="{Binding ProfileInfo.HasData, Converter={StaticResource BoolToVisibility}}"
             />
 

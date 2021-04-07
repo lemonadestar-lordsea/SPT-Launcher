@@ -56,7 +56,7 @@ namespace Aki.Launcher.Custom_Controls
             set => SetValue(LevelProperty, value);
         }
 
-        //xp
+        //current xp
         public static readonly DependencyProperty CurrentXPProperty =
             DependencyProperty.Register("CurrentXP", typeof(string), typeof(ProfileInfoCard), new PropertyMetadata(string.Empty));
 
@@ -64,16 +64,6 @@ namespace Aki.Launcher.Custom_Controls
         {
             get => (string)GetValue(CurrentXPProperty);
             set => SetValue(CurrentXPProperty, value);
-        }
-
-        //xp_total
-        public static readonly DependencyProperty TotalXPProperty =
-            DependencyProperty.Register("TotalXP", typeof(string), typeof(ProfileInfoCard), new PropertyMetadata(string.Empty));
-
-        public string TotalXP
-        {
-            get => (string)GetValue(TotalXPProperty);
-            set => SetValue(TotalXPProperty, value);
         }
 
         //remainingXP

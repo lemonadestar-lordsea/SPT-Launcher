@@ -8,6 +8,7 @@
  */
 
 using Aki.Launcher.Controllers;
+using Aki.Launcher.Helpers;
 using System;
 using System.Windows;
 
@@ -25,10 +26,13 @@ namespace Aki.Launcher
             //I'm not sure if you want application specific exception handling. AppDomain should handle them all AFAIK. You had something similar before, so I'm just adding this in. (might cause duplicate messageboxes though)
             Current.DispatcherUnhandledException += (sender, args) => HandleException(args.Exception);
 
-            // run launcher normally
-            MainWindow LauncherWindow = new MainWindow();
-
-            LauncherWindow.ShowDialog();
+            if (MiniDebugHelper.Instance.SpawnMiniDebugWindow)
+            {
+                MiniDebugHelper.Instance.SpawnMiniDebugWindow = false;
+                MiniDebugWindow debugWindow = new MiniDebugWindow();
+                debugWindow.Show();
+                MiniDebugHelper.LogMessage("Debug Window Spawned, Happy hunting!  >:)");
+            }
         }
 
         private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)

@@ -149,7 +149,6 @@ namespace Aki.Launcher.Helpers
             englishLocale.nickname = "Nickname";
             englishLocale.side = "Side";
             englishLocale.level = "Level";
-            englishLocale.total_xp = "Total XP";
             englishLocale.current_xp = "Current XP";
             englishLocale.remaining_xp = "Remaining XP";
             #endregion
@@ -1223,22 +1222,6 @@ namespace Aki.Launcher.Helpers
                 {
                     _level = value;
                     RaisePropertyChanged(nameof(level));
-                }
-            }
-        }
-        #endregion
-
-        #region total_xp
-        private string _total_xp;
-        public string total_xp
-        {
-            get => _total_xp;
-            set
-            {
-                if(_total_xp != value)
-                {
-                    _total_xp = value;
-                    RaisePropertyChanged(nameof(total_xp));
                 }
             }
         }

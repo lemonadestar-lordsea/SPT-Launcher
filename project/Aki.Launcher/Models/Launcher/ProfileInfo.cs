@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows.Media.Imaging;
 using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Models.Aki;
+using Aki.Launcher.ViewModel;
 
 namespace Aki.Launcher.Models.Launcher
 {
@@ -80,7 +81,7 @@ namespace Aki.Launcher.Models.Launcher
         }
 
         private long _CurrentXP;
-        public long CurrentXP
+        public long CurrentExp
         {
             get => _CurrentXP;
             set
@@ -88,35 +89,35 @@ namespace Aki.Launcher.Models.Launcher
                 if (_CurrentXP != value)
                 {
                     _CurrentXP = value;
-                    RaisePropertyChanged(nameof(CurrentXP));
+                    RaisePropertyChanged(nameof(CurrentExp));
                 }
             }
         }
 
-        private long _TillNextLevel;
-        public long TillNextLevel
+        private long _RemainingExp;
+        public long RemainingExp
         {
-            get => _TillNextLevel;
+            get => _RemainingExp;
             set
             {
-                if(_TillNextLevel != value)
+                if(_RemainingExp != value)
                 {
-                    _TillNextLevel = value;
-                    RaisePropertyChanged(nameof(TillNextLevel));
+                    _RemainingExp = value;
+                    RaisePropertyChanged(nameof(RemainingExp));
                 }
             }
         }
 
-        private long _TotalXP;
-        public long TotalXP
+        private long _NextLvlExp;
+        public long NextLvlExp
         {
-            get => _TotalXP;
+            get => _NextLvlExp;
             set
             {
-                if(_TotalXP != value)
+                if(_NextLvlExp != value)
                 {
-                    _TotalXP = value;
-                    RaisePropertyChanged(nameof(TotalXP));
+                    _NextLvlExp = value;
+                    RaisePropertyChanged(nameof(NextLvlExp));
                 }
             }
         }
@@ -142,23 +143,20 @@ namespace Aki.Launcher.Models.Launcher
             HasData = true;
             Nickname = PInfo.Nickname;
             Side = PInfo.Side;
-
-            //invalidate the image (incase it needs to be reloaded)
-            RaisePropertyChanged(nameof(SideImage));
-
+            SideImage = PInfo.SideImage;
             Level = PInfo.Level;
-            CurrentXP = PInfo.CurrentXP;
-            TotalXP = PInfo.TotalXP;
-            TillNextLevel = PInfo.TillNextLevel;
+            CurrentExp = PInfo.CurrentExp;
+            NextLvlExp = PInfo.NextLvlExp;
+            RemainingExp = PInfo.RemainingExp;
             XPLevelProgress = PInfo.XPLevelProgress;
         }
         
         public ProfileInfo(ServerProfileInfo serverProfileInfo)
         {
-            Nickname = serverProfileInfo.Nickname;
-            Side = serverProfileInfo.Side;
+            Nickname = serverProfileInfo.nickname;
+            Side = serverProfileInfo.side;
 
-            SideImage = Path.Combine(ImageRequest.ImageCacheFolder, $"side.png");
+            SideImage = Path.Combine(ImageRequest.ImageCacheFolder, $"side_{Side.ToLower()}.png");
 
             if(Side != null && !string.IsNullOrWhiteSpace(Side) && Side != "unknown")
             {
@@ -169,12 +167,12 @@ namespace Aki.Launcher.Models.Launcher
                 HasData = false;
             }
 
-            Level = serverProfileInfo.Level.ToString();
-            CurrentXP = serverProfileInfo.CurrExp;
-            TotalXP = serverProfileInfo.NextExp;
-            TillNextLevel = TotalXP - CurrentXP;
+            Level = serverProfileInfo.currlvl.ToString();
+            CurrentExp = serverProfileInfo.currexp;
+            NextLvlExp = serverProfileInfo.nextlvl;
+            RemainingExp = NextLvlExp - CurrentExp;
 
-            XPLevelProgress = (int)Math.Floor((((double)TotalXP - serverProfileInfo.PrevExp) - TillNextLevel) / TillNextLevel * 100);
+            XPLevelProgress = (int)Math.Floor((((double)NextLvlExp - serverProfileInfo.prevexp) - RemainingExp) / RemainingExp * 100);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

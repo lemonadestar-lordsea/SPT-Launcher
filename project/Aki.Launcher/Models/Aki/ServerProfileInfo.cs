@@ -2,11 +2,11 @@
 {
     public class ServerProfileInfo
     {
-        public string Nickname { get; set; }
-        public string Side { get; set; }
-        public int Level { get; set; }
-        public long CurrExp { get; set; }
-        public long PrevExp { get; set; }
-        public long NextExp { get; set; }
+        public string nickname { get; set; }
+        public string side { get; set; }
+        public int currlvl { get; set; }
+        public long currexp { get; set; }
+        public long prevexp { get; set; }
+        public long nextlvl { get; set; }
     }
 }
