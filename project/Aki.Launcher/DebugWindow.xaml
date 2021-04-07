@@ -1,0 +1,17 @@
+﻿<Window x:Class="Aki.Launcher.MiniDebugWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Aki.Launcher"
+        xmlns:helpers="clr-namespace:Aki.Launcher.Helpers"
+        mc:Ignorable="d"
+        Title="Launcher Mini Debug Log" Height="300" Width="700" Background="DimGray">
+    <Grid>
+        <ScrollViewer Background="Gainsboro" Grid.Row="1">
+            <ListBox ItemsSource="{Binding Source={x:Static helpers:MiniDebugHelper.Instance}, Path=MiniLog,
+                                           UpdateSourceTrigger=PropertyChanged}"
+                     />
+        </ScrollViewer>
+    </Grid>
+</Window>

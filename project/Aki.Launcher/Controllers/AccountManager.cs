@@ -75,7 +75,8 @@ namespace Aki.Launcher
         {
 			LoginRequestData data = new LoginRequestData(SelectedAccount.username, SelectedAccount.password);
 			string profileInfoJson = RequestHandler.RequestProfileInfo(data);
-			if (profileInfoJson != null)
+
+            if (profileInfoJson != null)
 			{
 				ServerProfileInfo serverProfileInfo = Json.Deserialize<ServerProfileInfo>(profileInfoJson);
 				SelectedProfileInfo = new ProfileInfo(serverProfileInfo);

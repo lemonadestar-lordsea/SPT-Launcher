@@ -16,6 +16,7 @@
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="AUTO"/>
             <ColumnDefinition Width="AUTO"/>
+            <ColumnDefinition Width="AUTO"/>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="AUTO"/>
             <ColumnDefinition Width="AUTO"/>
@@ -48,53 +49,43 @@
 
 
         <!-- Nickname -->
-        <Label Grid.Column="3" 
+        <Label Grid.Column="3" Margin="10 0 0 0"
                Grid.Row="1"
                Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, 
                                  Path=nickname}"
                />
-        <Label Grid.Column="4"
+        <Label Grid.Column="5"
                Grid.Row="1"
                Content="{Binding Path=NickName, RelativeSource={
                                  RelativeSource AncestorType=UserControl}}"
                />
         <!-- Side -->
-        <Label Grid.Column="3"
+        <Label Grid.Column="3" Margin="10 0 0 0"
                Grid.Row="2"
                Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                                  Path=side}"
                />
-        <Label Grid.Column="4"
+        <Label Grid.Column="5"
                Grid.Row="2"
                Content="{Binding Path=Side, RelativeSource={
                                  RelativeSource AncestorType=UserControl}}"
                />
 
         <!-- Level -->
-        <Label Grid.Column="3"
+        <Label Grid.Column="3" Margin="10 0 0 0"
                Grid.Row="3"
                Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                                  Path=level}"
                />
-        <Label Grid.Column="4"
+        <Label Grid.Column="5"
                Grid.Row="3"
                Content="{Binding Path=Level, RelativeSource={
                                  RelativeSource AncestorType=UserControl}}"
                />
 
-        <!-- Current XP -->
-        <Label Grid.Column="1" Grid.Row="5"
-               Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                                 Path=current_xp}"
-               />
-
-        <Label Grid.Column="2" Grid.Row="5"
-               Content="{Binding Path=CurrentXP, RelativeSource={
-                                 RelativeSource AncestorType=UserControl}}"
-               />
 
         <!-- Level Progress Bar -->
-        <ProgressBar Grid.Column="1" Grid.ColumnSpan="6"
+        <ProgressBar Grid.Column="1" Grid.ColumnSpan="8"
                      Grid.Row="6"
                      Height="5"
                      Value="{Binding Path=LevelProgressValue, RelativeSource={
@@ -105,27 +96,23 @@
                      BorderThickness="0"
             />
 
-        <!-- RemainingXP -->
+        <!-- Current XP -->
         <Label Grid.Column="1" Grid.Row="7"
+               Content="{Binding Path=CurrentXP, RelativeSource={
+                                 RelativeSource AncestorType=UserControl}}"
+               />
+
+        <!-- RemainingXP -->
+        <Label Grid.Column="7" Grid.Row="7"
                Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                                  Path=remaining_xp}"
             />
-        <Label Grid.Column="2"
+        <Label Grid.Column="8"
                Grid.Row="7"
                Content="{Binding Path=RemainingXP, RelativeSource={
                                  RelativeSource AncestorType=UserControl}}"
             />
         
-        <!-- TotalXP -->
-        <Label Grid.Column="5" Grid.Row="7"
-               Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
-                                 Path=total_xp}"
-            />
-        <Label Grid.Column="6"
-               Grid.Row="7"
-               Content="{Binding Path=TotalXP, RelativeSource={
-                         RelativeSource AncestorType=UserControl}}"
-            />
 
         <!--  A simple diagram to show what this control looks like. Sorry if it's confusing, but it helps me :)   -waffle
         

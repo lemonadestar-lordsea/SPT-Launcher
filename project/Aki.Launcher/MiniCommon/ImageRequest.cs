@@ -19,7 +19,7 @@ namespace Aki.Launcher.MiniCommon
 		{
 			if (Side == null || string.IsNullOrWhiteSpace(Side) || Side.ToLower() == "unknown") return;
 
-			string SideImagePath = Path.Combine(ImageCacheFolder, "side.png");
+			string SideImagePath = Path.Combine(ImageCacheFolder, $"side_{Side.ToLower()}.png");
 
 			CacheImage($"{LauncherRoute}side_{Side.ToLower()}.png", SideImagePath);
 		}
@@ -28,18 +28,12 @@ namespace Aki.Launcher.MiniCommon
 		{
 			Directory.CreateDirectory(ImageCacheFolder);
 
-			if (String.IsNullOrWhiteSpace(route) || CachedRoutes.Contains(route)) //Don't want to request the image if it was already cached.
+			if (String.IsNullOrWhiteSpace(route) || CachedRoutes.Contains(route)) //Don't want to request the image if it was already cached this session.
 			{
 				return;
 			}
 
-			string sessionID = null;
-			string remote = "https://127.0.0.1";
-			string type = "GET";
-			string data = null;
-			bool compress = false;
-
-			using Stream s = new Request(sessionID, remote).Send(route, type, data, compress);
+			using Stream s = new Request(null, LauncherSettingsProvider.Instance.Server.Url).Send(route, "GET", null, false);
 
 			using MemoryStream ms = new MemoryStream();
 
