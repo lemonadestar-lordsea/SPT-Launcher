@@ -11,6 +11,8 @@ namespace Aki.Launcher.MiniCommon
 	{
 		public static string ImageCacheFolder = $"{LauncherSettingsProvider.Instance.GamePath}\\Aki_Data\\Launcher\\Image_Cache";
 
+		private static List<string> CachedRoutes = new List<string>();
+
 		private static string LauncherRoute = "/files/launcher/";
 		public static void CacheBackgroundImage() => CacheImage($"{LauncherRoute}bg.png", Path.Combine(ImageCacheFolder, "bg.png"));
 		public static void CacheSideImage(string Side)
@@ -26,7 +28,7 @@ namespace Aki.Launcher.MiniCommon
 		{
 			Directory.CreateDirectory(ImageCacheFolder);
 
-			if (String.IsNullOrWhiteSpace(route))
+			if (String.IsNullOrWhiteSpace(route) || CachedRoutes.Contains(route)) //Don't want to request the image if it was already cached this session.
 			{
 				return;
 			}
@@ -42,6 +44,8 @@ namespace Aki.Launcher.MiniCommon
 			using Image image = Image.FromStream(ms);
 
 			image.Save(filePath);
+
+			CachedRoutes.Add(route);
 		}
 	}
 }
