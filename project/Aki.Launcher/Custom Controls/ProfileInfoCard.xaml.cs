@@ -67,13 +67,13 @@ namespace Aki.Launcher.Custom_Controls
         }
 
         //remainingXP
-        public static readonly DependencyProperty RemainingXPProperty =
-            DependencyProperty.Register("RemainingXP", typeof(string), typeof(ProfileInfoCard), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty NextLvlXPProperty =
+            DependencyProperty.Register("NextLvlXP", typeof(string), typeof(ProfileInfoCard), new PropertyMetadata(string.Empty));
 
-        public string RemainingXP
+        public string NextLvlXP
         {
-            get => (string)GetValue(RemainingXPProperty);
-            set => SetValue(RemainingXPProperty, value);
+            get => (string)GetValue(NextLvlXPProperty);
+            set => SetValue(NextLvlXPProperty, value);
         }
 
         //levelprogressvalue

@@ -64,7 +64,5 @@
   "account_updated": "Your account has been updated",
   "nickname": "Nickname",
   "side": "Side",
-  "level": "Level",
-  "current_xp": "Current XP",
-  "remaining_xp": "Remaining XP"
+  "level": "Level"
 }
