@@ -89,7 +89,7 @@ Merijn Hendriks
             Level="{Binding ProfileInfo.Level}"
             CurrentXP="{Binding ProfileInfo.CurrentExp}"
             LevelProgressValue="{Binding ProfileInfo.XPLevelProgress}"
-            RemainingXP="{Binding ProfileInfo.RemainingExp}"
+            NextLvlXP="{Binding ProfileInfo.NextLvlExp}"
             Visibility="{Binding ProfileInfo.HasData, Converter={StaticResource BoolToVisibility}}"
             />
 

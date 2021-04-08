@@ -149,8 +149,6 @@ namespace Aki.Launcher.Helpers
             englishLocale.nickname = "Nickname";
             englishLocale.side = "Side";
             englishLocale.level = "Level";
-            englishLocale.current_xp = "Current XP";
-            englishLocale.remaining_xp = "Remaining XP";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -1222,38 +1220,6 @@ namespace Aki.Launcher.Helpers
                 {
                     _level = value;
                     RaisePropertyChanged(nameof(level));
-                }
-            }
-        }
-        #endregion
-
-        #region current_xp
-        private string _current_xp;
-        public string current_xp
-        {
-            get => _current_xp;
-            set
-            {
-                if(_current_xp != value)
-                {
-                    _current_xp = value;
-                    RaisePropertyChanged(nameof(current_xp));
-                }
-            }
-        }
-        #endregion
-
-        #region remaining_xp
-        private string _remaining_xp;
-        public string remaining_xp
-        {
-            get => _remaining_xp;
-            set
-            {
-                if(_remaining_xp != value)
-                {
-                    _remaining_xp = value;
-                    RaisePropertyChanged(nameof(remaining_xp));
                 }
             }
         }
