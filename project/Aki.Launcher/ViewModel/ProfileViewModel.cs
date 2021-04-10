@@ -36,7 +36,7 @@ namespace Aki.Launcher.ViewModel
             LogoutCommand = new GenericICommand(OnLogoutCommand);
             StartGameCommand = new AwaitableDelegateCommand(OnStartGameCommand);
 
-            monitor = new ProcessMonitor("EscapeFromTarkov", 1000, aliveCallback: null, exitCallback: GameExitCallback);
+            monitor = new ProcessMonitor("EscapeFromTarkov", 1000, aliveCallback: GameAliveCallBack, exitCallback: GameExitCallback);
 
             CurrentUsername = AccountManager.SelectedAccount.username;
             CurrentEdition = AccountManager.SelectedAccount.edition;
@@ -108,6 +108,27 @@ namespace Aki.Launcher.ViewModel
             }
         }
 
+        private void UpdateProfileInfo()
+        {
+            AccountManager.UpdateProfileInfo();
+            ImageRequest.CacheSideImage(AccountManager.SelectedProfileInfo.Side);
+            ProfileInfo.UpdateDisplayedProfile(AccountManager.SelectedProfileInfo);
+        }
+
+
+        //pull profile every x seconds
+        private int aliveCallBackCountdown = 60;
+        private void GameAliveCallBack(ProcessMonitor monitor)
+        {
+            aliveCallBackCountdown--;
+
+            if(aliveCallBackCountdown <= 0)
+            {
+                aliveCallBackCountdown = 60;
+                UpdateProfileInfo();
+            }
+        }
+
         private void GameExitCallback(ProcessMonitor monitor)
         {
             monitor.Stop();
@@ -128,9 +149,7 @@ namespace Aki.Launcher.ViewModel
                     }
             }
 
-            AccountManager.UpdateProfileInfo();
-            ImageRequest.CacheSideImage(AccountManager.SelectedProfileInfo.Side);
-            ProfileInfo.UpdateDisplayedProfile(AccountManager.SelectedProfileInfo);
+            UpdateProfileInfo();
         }
 
         private void TrayIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
