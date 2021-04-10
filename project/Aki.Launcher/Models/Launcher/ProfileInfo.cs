@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Media.Imaging;
+using Aki.Launcher.Helpers;
 using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Models.Aki;
 using Aki.Launcher.ViewModel;
@@ -172,7 +173,9 @@ namespace Aki.Launcher.Models.Launcher
             NextLvlExp = serverProfileInfo.nextlvl;
             RemainingExp = NextLvlExp - CurrentExp;
 
-            XPLevelProgress = (int)Math.Floor((((double)NextLvlExp - serverProfileInfo.prevexp) - RemainingExp) / RemainingExp * 100);
+            long currentLvlTotal = NextLvlExp - serverProfileInfo.prevexp;
+
+            XPLevelProgress = (int)Math.Floor((((double)currentLvlTotal) - RemainingExp) / currentLvlTotal * 100);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
