@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Launcher Mini Debug Log" Height="300" Width="700" Background="DimGray">
     <Grid>
-        <ScrollViewer Background="Gainsboro" Grid.Row="1">
+        <ScrollViewer x:Name="sv" Background="Gainsboro" Grid.Row="1" ScrollChanged="sv_ScrollChanged">
             <ListBox ItemsSource="{Binding Source={x:Static helpers:MiniDebugHelper.Instance}, Path=MiniLog,
                                            UpdateSourceTrigger=PropertyChanged}"
                      />
