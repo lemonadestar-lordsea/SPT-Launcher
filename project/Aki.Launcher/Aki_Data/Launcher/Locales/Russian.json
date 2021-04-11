@@ -33,7 +33,7 @@
   "default_language": "Язык по-уолчанию",
   "game_path": "Путь к игре",
   "clear_game_settings": "Очистить настройки игры",
-  "clear_game_settings_warning": "You are about to remove your old game settings files. They will be backed up to:\n{0}\n\nAre you sure?",
+  "clear_game_settings_warning": "Вы собираетесь удалить старые файлы настроек игры. Их копия будет расположена здесь:\n{0}\n\n Продолжить?",
   "clear_game_settings_succeeded": "Настройки игры очищены",
   "clear_game_settings_failed": "Неизвестная проблема при очистке настроек игры",
   "remove_registry_keys": "Очистить реестр",
@@ -50,7 +50,7 @@
   "on_game_start": "Запуск игры через лаунчер",
   "game": "Игра",
   "new_password": "Новый пароль",
-  "wipe_warning": "Wiping your profile will reset your game progress. Are you sure you want to wipe your profile?",
+  "wipe_warning": "Вайп профиля обнулит ваш прогресс. Вы действительно хотите это сделать?",
   "wipe_warning_format_2": "Изменить тип издания можно только с обнулением профиля.\n'{0}' > '{1}'\nХотите обнулить профиль?",
   "cancel": "Отмена",
   "need_an_account": "Еще нет профиля?",
@@ -60,9 +60,9 @@
   "failed_core_patch": "Не удалось пропатчить ядро",
   "failed_mod_patch": "Не удалось пропатчит мод",
   "ok": "Ок",
-  "account_page_denied": "Account page denied. Either you are not logged in or the game is running.",
-  "account_updated": "Your account has been updated",
-  "nickname": "Nickname",
-  "side": "Side",
-  "level": "Level"
+  "account_page_denied": "Страница профиля недоступна. Возможно вы не авторизованы либо игра запущена.",
+  "account_updated": "Ваш аккаут обновлен",
+  "nickname": "Никнейм",
+  "side": "Сторона",
+  "level": "Уровень"
 }
