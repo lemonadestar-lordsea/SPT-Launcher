@@ -170,6 +170,15 @@ namespace Aki.Launcher.Models.Launcher
 
             Level = serverProfileInfo.currlvl.ToString();
             CurrentExp = serverProfileInfo.currexp;
+
+            //check if player is max level
+            if(Level == serverProfileInfo.maxlvl.ToString())
+            {
+                NextLvlExp = 0;
+                XPLevelProgress = 100;
+                return;
+            }
+
             NextLvlExp = serverProfileInfo.nextlvl;
             RemainingExp = NextLvlExp - CurrentExp;
 

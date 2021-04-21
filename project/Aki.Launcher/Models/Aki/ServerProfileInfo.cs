@@ -8,5 +8,6 @@
         public long currexp { get; set; }
         public long prevexp { get; set; }
         public long nextlvl { get; set; }
+        public int maxlvl { get; set; }
     }
 }
