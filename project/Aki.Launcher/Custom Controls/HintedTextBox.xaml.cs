@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* HintedTextBox.xaml.cs
+ * License: NCSA Open Source License
+ * 
+ * Copyright: Merijn Hendriks
+ * AUTHORS:
+ * waffle.lord
+ */
+
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -58,9 +66,9 @@ namespace Aki.Launcher.Custom_Controls
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(sender is TextBox tb)
+            if (sender is TextBox tb)
             {
-                if(tb.Text.Length > 0)
+                if (tb.Text.Length > 0)
                 {
                     HintLabel.Visibility = Visibility.Hidden;
                 }

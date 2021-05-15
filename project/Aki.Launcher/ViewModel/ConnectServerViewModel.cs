@@ -73,12 +73,12 @@ namespace Aki.Launcher.ViewModel
 
                 ImageRequest.CacheBackgroundImage();
 
-                if(navigationViewModel.BackgroundImage == null)
+                if (navigationViewModel.BackgroundImage == null)
                 {
                     navigationViewModel.BackgroundImage = Path.Combine(ImageRequest.ImageCacheFolder, "bg.png");
                 }
 
-                if (DefaultServer.AutoLoginCreds == null || DefaultServer.AutoLoginCreds.Username == "" || DefaultServer.AutoLoginCreds.Password == "")
+                if (DefaultServer.AutoLoginCreds == null || DefaultServer.AutoLoginCreds.Username == "")
                 {
                     LauncherSettingsProvider.Instance.AllowSettings = true;
 

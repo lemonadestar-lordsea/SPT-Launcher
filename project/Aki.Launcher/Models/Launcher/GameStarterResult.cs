@@ -1,5 +1,13 @@
-﻿using Aki.Launcher.Helpers;
-using System;
+﻿/* GameStarterResult.cs
+ * License: NCSA Open Source License
+ * 
+ * Copyright: Merijn Hendriks
+ * AUTHORS:
+ * Merijn Hendriks
+ * waffle.lord
+ */
+
+using Aki.Launcher.Helpers;
 
 namespace Aki.Launcher.Models.Launcher
 {
@@ -9,7 +17,7 @@ namespace Aki.Launcher.Models.Launcher
         public string Message { get; } = null;
         protected GameStarterResult(int ServerStatus)
         {
-            switch(ServerStatus)
+            switch (ServerStatus)
             {
                 case 1:
                     break;

@@ -9,18 +9,18 @@
  */
 
 
+using Aki.Launcher.Helpers;
+using Aki.Launcher.MiniCommon;
+using Aki.Launcher.Models.Launcher;
 using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.IO;
-using Aki.Launcher.MiniCommon;
-using Aki.Launcher.Helpers;
-using Aki.Launcher.Models.Launcher;
 
 namespace Aki.Launcher
 {
-	public class GameStarter
-	{
+    public class GameStarter
+    {
         const string registeryInstall = @"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov";
         const string registerySettings = @"Software\Battlestate Games\EscapeFromTarkov";
 
@@ -58,20 +58,20 @@ namespace Aki.Launcher
             var clientExecutable = $@"{gamepath}EscapeFromTarkov.exe";
 
             if (!File.Exists(clientExecutable))
-			{
-				return GameStarterResult.FromError(-4);
-			}
-			
-			var clientProcess = new ProcessStartInfo(clientExecutable)
-			{
-				Arguments = $"-force-gfx-jobs native -token={account.id} -config={Json.Serialize(new ClientConfig(server.backendUrl))}",
-				UseShellExecute = false,
-				WorkingDirectory = gamepath
-			};
+            {
+                return GameStarterResult.FromError(-4);
+            }
 
-			Process.Start(clientProcess);
+            var clientProcess = new ProcessStartInfo(clientExecutable)
+            {
+                Arguments = $"-force-gfx-jobs native -token={account.id} -config={Json.Serialize(new ClientConfig(server.backendUrl))}",
+                UseShellExecute = false,
+                WorkingDirectory = gamepath
+            };
+
+            Process.Start(clientProcess);
             return GameStarterResult.FromSuccess();
-		}
+        }
 
         bool IsInstalledInLive()
         {
@@ -192,39 +192,39 @@ namespace Aki.Launcher
         /// </summary>
         /// <returns>returns true if the keys were removed. returns false if an exception occured</returns>
 		public bool RemoveRegisteryKeys()
-		{
-			try
-			{
-				var key = Registry.CurrentUser.OpenSubKey(registerySettings, true);
+        {
+            try
+            {
+                var key = Registry.CurrentUser.OpenSubKey(registerySettings, true);
 
-				foreach (var value in key.GetValueNames())
-				{
-					key.DeleteValue(value);
-				}
-			}
-			catch
-			{
+                foreach (var value in key.GetValueNames())
+                {
+                    key.DeleteValue(value);
+                }
+            }
+            catch
+            {
                 return false;
-			}
+            }
 
             return true;
-		}
+        }
 
         /// <summary>
         /// Clean the temp folder
         /// </summary>
         /// <returns>returns true if the temp folder was cleaned succefully or doesn't exist. returns false if something went wrong.</returns>
 		public bool CleanTempFiles()
-		{
-			var rootdir = new DirectoryInfo(Path.Combine(Path.GetTempPath(), @"Battlestate Games\EscapeFromTarkov"));
+        {
+            var rootdir = new DirectoryInfo(Path.Combine(Path.GetTempPath(), @"Battlestate Games\EscapeFromTarkov"));
 
-			if (!rootdir.Exists)
-			{
-				return true;
-			}
+            if (!rootdir.Exists)
+            {
+                return true;
+            }
 
             return RemoveFilesRecurse(rootdir);
-		}
+        }
 
         bool RemoveFilesRecurse(DirectoryInfo basedir)
         {
@@ -260,5 +260,5 @@ namespace Aki.Launcher
 
             return true;
         }
-	}
+    }
 }

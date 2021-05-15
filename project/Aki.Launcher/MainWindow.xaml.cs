@@ -108,14 +108,14 @@ namespace Aki.Launcher
                     return;
                 }
 
-                if(!menuItem.CanUseAction.Invoke())
+                if (!menuItem.CanUseAction.Invoke())
                 {
                     menuItem.OnFailedToUseAction?.Invoke();
 
                     return;
                 }
 
-                foreach(MenuBarItem m in MenuItemCollection)
+                foreach (MenuBarItem m in MenuItemCollection)
                 {
                     m.IsSelected = false;
                 }

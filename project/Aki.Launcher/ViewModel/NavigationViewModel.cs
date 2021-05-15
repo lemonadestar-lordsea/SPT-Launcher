@@ -33,7 +33,7 @@ namespace Aki.Launcher.ViewModel
             get => _backgroundImage;
             set
             {
-                if(_backgroundImage != value)
+                if (_backgroundImage != value)
                 {
                     _backgroundImage = value;
                     RaisePropertyChanged(nameof(BackgroundImage));

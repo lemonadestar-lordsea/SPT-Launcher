@@ -1,5 +1,12 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿/* DebugWindow.xaml.cs
+ * License: NCSA Open Source License
+ * 
+ * Copyright: Merijn Hendriks
+ * AUTHORS:
+ * waffle.lord
+ */
+
+using System.Windows;
 
 namespace Aki.Launcher
 {
