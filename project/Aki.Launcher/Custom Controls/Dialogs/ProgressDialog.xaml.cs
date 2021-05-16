@@ -58,7 +58,7 @@ namespace Aki.Launcher.Custom_Controls.Dialogs
         /// Set the progress bar's indeterminate value
         /// </summary>
         /// <param name="IsIndeterminate"></param>
-        public void UpdateIndeterminateProgress(bool IsIndeterminate) => Progress_Bar.IsIndeterminate = IsIndeterminate;
+        public void UpdateIndeterminateProgress(bool IsIndeterminate) => Application.Current.Dispatcher.Invoke(() => { Progress_Bar.IsIndeterminate = IsIndeterminate; });
 
         public event EventHandler<object> ResultsReady;
 
