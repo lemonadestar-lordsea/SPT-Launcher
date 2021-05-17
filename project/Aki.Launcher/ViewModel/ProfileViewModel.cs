@@ -8,13 +8,13 @@
  */
 
 
-using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Generics;
 using Aki.Launcher.Generics.AsyncCommand;
 using Aki.Launcher.Helpers;
+using Aki.Launcher.MiniCommon;
+using Aki.Launcher.Models.Launcher;
 using System.Threading.Tasks;
 using System.Windows;
-using Aki.Launcher.Models.Launcher;
 
 namespace Aki.Launcher.ViewModel
 {
@@ -83,7 +83,7 @@ namespace Aki.Launcher.ViewModel
 
             GameStarterResult gameStartResult = gameStarter.LaunchGame(ServerManager.SelectedServer, AccountManager.SelectedAccount);
 
-            if(gameStartResult.Succeeded)
+            if (gameStartResult.Succeeded)
             {
                 monitor.Start();
 
@@ -122,7 +122,7 @@ namespace Aki.Launcher.ViewModel
         {
             aliveCallBackCountdown--;
 
-            if(aliveCallBackCountdown <= 0)
+            if (aliveCallBackCountdown <= 0)
             {
                 aliveCallBackCountdown = 60;
                 UpdateProfileInfo();

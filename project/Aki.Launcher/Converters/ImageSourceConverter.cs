@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* ImageSourceConverter.cs
+ * License: NCSA Open Source License
+ * 
+ * Copyright: Merijn Hendriks
+ * AUTHORS:
+ * waffle.lord
+ */
+
+using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;

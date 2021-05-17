@@ -1,4 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿/* MiniDebug.cs
+ * License: NCSA Open Source License
+ * 
+ * Copyright: Merijn Hendriks
+ * AUTHORS:
+ * waffle.lord
+ */
+
+using System.Collections.ObjectModel;
 
 namespace Aki.Launcher.Helpers
 {

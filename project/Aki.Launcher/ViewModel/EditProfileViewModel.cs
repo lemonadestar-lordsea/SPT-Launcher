@@ -8,14 +8,14 @@
  */
 
 
-using Aki.Launcher.Generics.AsyncCommand;
-using Aki.Launcher.Helpers;
-using Aki.Launcher.Models.Launcher;
-using Aki.Launcher.Interfaces;
-using System.Threading.Tasks;
 using Aki.Launcher.Custom_Controls;
 using Aki.Launcher.Custom_Controls.Dialogs;
+using Aki.Launcher.Generics.AsyncCommand;
+using Aki.Launcher.Helpers;
+using Aki.Launcher.Interfaces;
+using Aki.Launcher.Models.Launcher;
 using System;
+using System.Threading.Tasks;
 
 namespace Aki.Launcher.ViewModel
 {
@@ -45,7 +45,7 @@ namespace Aki.Launcher.ViewModel
 
             WipeProfileModel tmpWipeProfile = new WipeProfileModel();
             tmpWipeProfile.EditionsCollection.SelectedEdition = AccountManager.SelectedAccount.edition;
-            
+
             tmpWipeProfile.EditionsCollection.SelectedEditionIndex = tmpWipeProfile.EditionsCollection.AvailableEditions.IndexOf(AccountManager.SelectedAccount.edition);
             ProfileWipe = tmpWipeProfile;
 
@@ -60,14 +60,14 @@ namespace Aki.Launcher.ViewModel
                     return "OK";
 
                 case -1:
-                    
+
                     return "Login failed";
 
                 case -2:
                     return "CONNECTION_ERROR";
             }
 
-            return "Undefined Response";   
+            return "Undefined Response";
         }
 
         public async Task OnUpdateCommand(object parameter)
@@ -127,7 +127,7 @@ namespace Aki.Launcher.ViewModel
         {
             bool bypassCheck;
 
-            if(!bool.TryParse(parameter?.ToString(), out bypassCheck))
+            if (!bool.TryParse(parameter?.ToString(), out bypassCheck))
             {
                 bypassCheck = false;
             }

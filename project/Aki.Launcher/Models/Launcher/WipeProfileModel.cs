@@ -6,9 +6,6 @@
  * Merijn Hendriks
  */
 
-
-using System.ComponentModel;
-
 namespace Aki.Launcher.Models.Launcher
 {
     public class WipeProfileModel

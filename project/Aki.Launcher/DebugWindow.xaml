@@ -1,4 +1,12 @@
-﻿<Window x:Class="Aki.Launcher.MiniDebugWindow"
+﻿<!-- DebugWindow.xaml
+License: NCSA Open Source License
+
+Copyright: Merijn Hendriks
+AUTHORS:
+waffle.lord
+-->
+    
+<Window x:Class="Aki.Launcher.MiniDebugWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"

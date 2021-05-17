@@ -1,5 +1,5 @@
 # Build.ps1
-# Copyright: © SPT-AKI 2020
+# Copyright: © SPT-AKI 2021
 # License: NCSA
 # Authors:
 # - Merijn Hendriks

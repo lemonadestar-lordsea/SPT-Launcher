@@ -67,7 +67,7 @@ namespace Aki.Launcher.ViewModel
 
                     DefaultServer.AutoLoginCreds = new LoginModel { Username = newProfile.Username, Password = newProfile.Password };
                     LauncherSettingsProvider.Instance.SaveSettings();
-                    
+
 
                     navigationViewModel.SelectedViewModel = new ProfileViewModel(navigationViewModel);
                     break;

@@ -7,9 +7,8 @@
  */
 
 
-using System;
-using System.IO;
 using Aki.ByteBanger;
+using System.IO;
 
 namespace Aki.Launcher
 {

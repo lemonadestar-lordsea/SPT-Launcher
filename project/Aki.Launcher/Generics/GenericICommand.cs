@@ -48,7 +48,7 @@ namespace Aki.Launcher.Generics
 
             return false;
         }
-        
+
         public event EventHandler CanExecuteChanged = delegate { };
 
         void ICommand.Execute(object parameter)
