@@ -29,7 +29,8 @@ namespace Aki.Launcher.Helpers
 
     public class MiniDebug
     {
-        //Just set this to true to spawn the debug window.
+        //Just set this to true to spawn the debug window. You can use MiniDebugHelper.LogMessage to send information to the debug window.
+        //Do make sure to turn this back to false when you are done. You will also probably want to remove your LogMessage calls to keep things clean.
         public bool SpawnMiniDebugWindow = false;
         public ObservableCollection<string> MiniLog { get; set; }
 

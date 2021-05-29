@@ -27,7 +27,9 @@ namespace Aki.Launcher
         public GenericICommand MinimizeAppCommand { get; set; }
         public GenericICommand CloseAppCommand { get; set; }
         public GenericICommand MenuItemCommand { get; set; }
+
         public NavigationViewModel navigationViewModel { get; set; }
+
         public ObservableCollection<MenuBarItem> MenuItemCollection { get; set; }
 
         public MainWindow()
