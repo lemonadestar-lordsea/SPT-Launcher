@@ -1,4 +1,12 @@
-﻿namespace Aki.Launcher.Models.Aki
+﻿/* ServerProfileInfo.cs
+ * License: NCSA Open Source License
+ * 
+ * Copyright: Merijn Hendriks
+ * AUTHORS:
+ * waffle.lord
+ */
+
+namespace Aki.Launcher.Models.Aki
 {
     public class ServerProfileInfo
     {

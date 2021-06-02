@@ -1,4 +1,11 @@
-﻿using System;
+﻿/* ProfileInfoCard.xaml.cs
+ * License: NCSA Open Source License
+ * 
+ * Copyright: Merijn Hendriks
+ * AUTHORS:
+ * waffle.lord
+ */
+
 using System.Windows;
 using System.Windows.Controls;
 

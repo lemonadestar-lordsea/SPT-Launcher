@@ -1,11 +1,16 @@
-﻿using System;
-using System.ComponentModel;
-using System.IO;
-using System.Windows.Media.Imaging;
-using Aki.Launcher.Helpers;
+﻿/* ProfileInfo.cs
+ * License: NCSA Open Source License
+ * 
+ * Copyright: Merijn Hendriks
+ * AUTHORS:
+ * waffle.lord
+ */
+
 using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Models.Aki;
-using Aki.Launcher.ViewModel;
+using System;
+using System.ComponentModel;
+using System.IO;
 
 namespace Aki.Launcher.Models.Launcher
 {
@@ -17,7 +22,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _Nickname;
             set
             {
-                if(_Nickname != value)
+                if (_Nickname != value)
                 {
                     _Nickname = value;
                     RaisePropertyChanged(nameof(Nickname));
@@ -31,7 +36,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _SideImage;
             set
             {
-                if(_SideImage != value)
+                if (_SideImage != value)
                 {
                     _SideImage = value;
                     RaisePropertyChanged(nameof(SideImage));
@@ -45,7 +50,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _Side;
             set
             {
-                if(_Side != value)
+                if (_Side != value)
                 {
                     _Side = value;
                     RaisePropertyChanged(nameof(Side));
@@ -59,7 +64,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _Level;
             set
             {
-                if(_Level != value)
+                if (_Level != value)
                 {
                     _Level = value;
                     RaisePropertyChanged(nameof(Level));
@@ -73,7 +78,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _XPLevelProgress;
             set
             {
-                if(_XPLevelProgress != value)
+                if (_XPLevelProgress != value)
                 {
                     _XPLevelProgress = value;
                     RaisePropertyChanged(nameof(XPLevelProgress));
@@ -101,7 +106,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _RemainingExp;
             set
             {
-                if(_RemainingExp != value)
+                if (_RemainingExp != value)
                 {
                     _RemainingExp = value;
                     RaisePropertyChanged(nameof(RemainingExp));
@@ -115,7 +120,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _NextLvlExp;
             set
             {
-                if(_NextLvlExp != value)
+                if (_NextLvlExp != value)
                 {
                     _NextLvlExp = value;
                     RaisePropertyChanged(nameof(NextLvlExp));
@@ -129,7 +134,7 @@ namespace Aki.Launcher.Models.Launcher
             get => _HasData;
             set
             {
-                if(_HasData != value)
+                if (_HasData != value)
                 {
                     _HasData = value;
                     RaisePropertyChanged(nameof(HasData));
@@ -151,7 +156,7 @@ namespace Aki.Launcher.Models.Launcher
             RemainingExp = PInfo.RemainingExp;
             XPLevelProgress = PInfo.XPLevelProgress;
         }
-        
+
         public ProfileInfo(ServerProfileInfo serverProfileInfo)
         {
             Nickname = serverProfileInfo.nickname;
@@ -159,7 +164,7 @@ namespace Aki.Launcher.Models.Launcher
 
             SideImage = Path.Combine(ImageRequest.ImageCacheFolder, $"side_{Side.ToLower()}.png");
 
-            if(Side != null && !string.IsNullOrWhiteSpace(Side) && Side != "unknown")
+            if (Side != null && !string.IsNullOrWhiteSpace(Side) && Side != "unknown")
             {
                 HasData = true;
             }
@@ -172,7 +177,7 @@ namespace Aki.Launcher.Models.Launcher
             CurrentExp = serverProfileInfo.currexp;
 
             //check if player is max level
-            if(Level == serverProfileInfo.maxlvl.ToString())
+            if (Level == serverProfileInfo.maxlvl.ToString())
             {
                 NextLvlExp = 0;
                 XPLevelProgress = 100;

@@ -21,16 +21,19 @@ namespace Aki.Launcher
     {
         private void Application_Startup(object s, StartupEventArgs e)
         {
+            //setup unhandled exception handling across the application.
             AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
-
-            //I'm not sure if you want application specific exception handling. AppDomain should handle them all AFAIK. You had something similar before, so I'm just adding this in. (might cause duplicate messageboxes though)
             Current.DispatcherUnhandledException += (sender, args) => HandleException(args.Exception);
 
+            //spawn the mini debug window if SpawnMiniDebugWindow is true
+            //Check out MiniDebugHelper for some additional information.
             if (MiniDebugHelper.Instance.SpawnMiniDebugWindow)
             {
                 MiniDebugHelper.Instance.SpawnMiniDebugWindow = false;
                 MiniDebugWindow debugWindow = new MiniDebugWindow();
                 debugWindow.Show();
+
+                //here is an example of how to send information to the mini debug window.
                 MiniDebugHelper.LogMessage("Debug Window Spawned, Happy hunting!  >:)");
             }
         }

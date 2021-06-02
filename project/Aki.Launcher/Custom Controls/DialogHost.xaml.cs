@@ -1,4 +1,12 @@
-﻿using Aki.Launcher.Interfaces;
+﻿/* DialogHost.xaml.cs
+ * License: NCSA Open Source License
+ * 
+ * Copyright: Merijn Hendriks
+ * AUTHORS:
+ * waffle.lord
+ */
+
+using Aki.Launcher.Interfaces;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -47,7 +55,7 @@ namespace Aki.Launcher.Custom_Controls
         /// <returns>The result of the dialog</returns>
         public static async Task<object> ShowDialog(IReturnDialogResult DialogViewModel, string HostName = "")
         {
-            if(HostName == "")
+            if (HostName == "")
             {
                 HostName = DefaultHost;
             }
@@ -119,7 +127,7 @@ namespace Aki.Launcher.Custom_Controls
             {
                 do
                 {
-                    
+
                 }
                 while (!ResultsReady);
             });
@@ -133,14 +141,14 @@ namespace Aki.Launcher.Custom_Controls
 
             //run backdrop close animation
             CloseDialogHost(host);
-            
+
             //return results
             return Results;
         }
 
         private static void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            foreach(Window win in Application.Current.MainWindow.OwnedWindows)
+            foreach (Window win in Application.Current.MainWindow.OwnedWindows)
             {
                 SetDialogPosistion(win);
             }

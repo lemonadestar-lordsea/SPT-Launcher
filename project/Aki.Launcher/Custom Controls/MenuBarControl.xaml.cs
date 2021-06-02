@@ -1,4 +1,12 @@
-﻿using Aki.Launcher.Models.Launcher;
+﻿/* MenuBarControl.xaml.cs
+ * License: NCSA Open Source License
+ * 
+ * Copyright: Merijn Hendriks
+ * AUTHORS:
+ * waffle.lord
+ */
+
+using Aki.Launcher.Models.Launcher;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;

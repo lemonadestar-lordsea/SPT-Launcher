@@ -27,7 +27,9 @@ namespace Aki.Launcher
         public GenericICommand MinimizeAppCommand { get; set; }
         public GenericICommand CloseAppCommand { get; set; }
         public GenericICommand MenuItemCommand { get; set; }
+
         public NavigationViewModel navigationViewModel { get; set; }
+
         public ObservableCollection<MenuBarItem> MenuItemCollection { get; set; }
 
         public MainWindow()
@@ -108,14 +110,14 @@ namespace Aki.Launcher
                     return;
                 }
 
-                if(!menuItem.CanUseAction.Invoke())
+                if (!menuItem.CanUseAction.Invoke())
                 {
                     menuItem.OnFailedToUseAction?.Invoke();
 
                     return;
                 }
 
-                foreach(MenuBarItem m in MenuItemCollection)
+                foreach (MenuBarItem m in MenuItemCollection)
                 {
                     m.IsSelected = false;
                 }

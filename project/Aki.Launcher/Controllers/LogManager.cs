@@ -34,12 +34,12 @@ namespace Aki.Launcher.Controllers
             }
 
             string filename = Path.Combine(filepath, $"{DateTime.Now:yyyyMMdd}.log");
-            File.AppendAllLines(filename, new []{ $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}]{text}" });
+            File.AppendAllLines(filename, new[] { $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}]{text}" });
         }
 
         public void Debug(string text) => Write($"[Debug]{text}");
 
-        public void Info(string text)=> Write($"[Info]{text}");
+        public void Info(string text) => Write($"[Info]{text}");
 
         public void Warning(string text) => Write($"[Warning]{text}");
 

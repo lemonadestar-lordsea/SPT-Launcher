@@ -121,7 +121,7 @@ namespace Aki.Launcher.ViewModel
 
         public async Task OnClearGameSettingsCommand(object parameter)
         {
-            
+
             bool BackupAndRemove(string backupFolderPath, FileInfo file)
             {
                 file.Refresh();
@@ -168,7 +168,7 @@ namespace Aki.Launcher.ViewModel
                 string Message = string.Format(LocalizationProvider.Instance.clear_game_settings_warning, backupFolderPath);
                 ConfirmationDialog confirmDelete = new ConfirmationDialog(Message, LocalizationProvider.Instance.clear_game_settings, LocalizationProvider.Instance.cancel);
 
-                 var confirmation = await DialogHost.ShowDialog(confirmDelete);
+                var confirmation = await DialogHost.ShowDialog(confirmDelete);
 
                 if (confirmation is bool proceed && !proceed)
                 {
@@ -179,7 +179,7 @@ namespace Aki.Launcher.ViewModel
                 bool localSucceeded = BackupAndRemove(backupFolderPath, local_ini);
                 bool sharedSucceeded = BackupAndRemove(backupFolderPath, shared_ini);
 
-                    //if one fails, I'm considering it bad. Send failed notification.
+                //if one fails, I'm considering it bad. Send failed notification.
                 if (!localSucceeded || !sharedSucceeded)
                 {
                     navigationViewModel.NotificationQueue.Enqueue(LocalizationProvider.Instance.clear_game_settings_failed, true);

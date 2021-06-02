@@ -8,9 +8,9 @@
  */
 
 
-using Newtonsoft.Json;
 using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Models.Launcher;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.IO;

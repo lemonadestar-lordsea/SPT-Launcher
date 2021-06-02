@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* MenuBarItem.cs
+ * License: NCSA Open Source License
+ * 
+ * Copyright: Merijn Hendriks
+ * AUTHORS:
+ * waffle.lord
+ */
+
+using System;
 using System.ComponentModel;
 
 namespace Aki.Launcher.Models.Launcher

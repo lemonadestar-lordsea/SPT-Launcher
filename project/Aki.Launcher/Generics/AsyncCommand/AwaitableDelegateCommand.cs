@@ -21,7 +21,7 @@ namespace Aki.Launcher.Generics.AsyncCommand
         {
         }
 
-        public AwaitableDelegateCommand(Func<object, Task> executeMethod) 
+        public AwaitableDelegateCommand(Func<object, Task> executeMethod)
             : base(executeMethod)
         {
         }
