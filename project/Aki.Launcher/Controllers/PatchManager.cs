@@ -6,6 +6,7 @@
  * Merijn Hendriks
  */
 
+using System.Collections.Generic;
 using System.IO;
 using Aki.Launcher.Helpers;
 using Aki.Launcher.MiniCommon;
@@ -16,14 +17,30 @@ namespace Aki.Launcher
     {
         public static bool ApplyPatches(string filepath)
         {
-            var modsPath = VFS.Combine(filepath, "Aki_Data/Launcher/Patches/");
-            var mods = VFS.GetDirectories(modsPath);
+            var core = VFS.GetDirectories(VFS.Combine(filepath, "Aki_Data/Launcher/Patches/"));
+            var mods = VFS.GetDirectories(VFS.Combine(filepath, "user/mods/"));
+            var patches = new List<string>();
 
+            // delete all previous applied patches
             RestorePatched(filepath);
+
+            // get patches to apply
+            patches.AddRange(core);
 
             foreach (var mod in mods)
             {
-                if (!FilePatcher.Run(filepath, VFS.Combine(modsPath, mod)))
+                var modPatch = VFS.Combine(filepath, string.Format("user/mods/{0}/patches/", mod));
+
+                if (VFS.Exists(modPatch))
+                {
+                    patches.Add(modPatch);
+                }
+            }
+
+            // apply patches
+            foreach (var patch in patches)
+            {
+                if (!FilePatcher.Run(filepath, patch))
                 {
                     return false;
                 }
