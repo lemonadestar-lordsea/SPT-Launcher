@@ -22,7 +22,7 @@ namespace Aki.Launcher
             var patches = new List<string>();
 
             // delete all previous applied patches
-            RestorePatched(filepath);
+            FilePatcher.Restore(filepath);
 
             // get patches to apply
             patches.AddRange(core);
@@ -47,41 +47,6 @@ namespace Aki.Launcher
             }
 
             return true;
-        }
-
-        public static void RestorePatched(string filepath)
-        {
-            RestorePatchedRecurse(new DirectoryInfo(filepath));
-        }
-
-        static void RestorePatchedRecurse(DirectoryInfo basedir)
-        {
-            // scan subdirectories
-            foreach (var dir in basedir.EnumerateDirectories())
-            {
-                RestorePatchedRecurse(dir);
-            }
-
-            // scan files
-            var files = basedir.GetFiles();
-
-            foreach (var file in files)
-            {
-                if (file.Extension == ".bak")
-                {
-                    var target = Path.ChangeExtension(file.FullName, null);
-
-                    // remove patched file
-                    var patched = new FileInfo(target);
-                    patched.IsReadOnly = false;
-                    patched.Delete();
-
-                    // restore from backup
-                    File.Copy(file.FullName, target);
-                    file.IsReadOnly = false;
-                    file.Delete();
-                }
-            }
         }
     }
 }

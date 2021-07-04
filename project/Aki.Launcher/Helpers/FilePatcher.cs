@@ -53,24 +53,9 @@ namespace Aki.Launcher.Helpers
                         }
                         break;
 
-                    // add new files
-                    case ".new":
-                        {
-                            target = new FileInfo(VFS.Combine(targetpath, file.Name.Replace(".new", "")));
-                            VFS.WriteFile(target.FullName, Zlib.Decompress(VFS.ReadFile(file.FullName)));
-                        }
-                        break;
-
-                    // delete old files
-                    case ".del":
-                        {
-                            target = new FileInfo(VFS.Combine(targetpath, file.Name.Replace(".del", "")));
-                            target.IsReadOnly = false;
-                            target.Delete();
-                        }
+                    default:
                         break;
                 }
-
             }
 
             foreach (DirectoryInfo directory in di.GetDirectories())
@@ -92,6 +77,41 @@ namespace Aki.Launcher.Helpers
         public static bool Run(string targetPath, string patchPath)
         {
             return PatchAll(targetPath, patchPath);
+        }
+
+        public static void Restore(string filepath)
+        {
+            RestoreRecurse(new DirectoryInfo(filepath));
+        }
+
+        static void RestoreRecurse(DirectoryInfo basedir)
+        {
+            // scan subdirectories
+            foreach (var dir in basedir.EnumerateDirectories())
+            {
+                RestoreRecurse(dir);
+            }
+
+            // scan files
+            var files = basedir.GetFiles();
+
+            foreach (var file in files)
+            {
+                if (file.Extension == ".bak")
+                {
+                    var target = Path.ChangeExtension(file.FullName, null);
+
+                    // remove patched file
+                    var patched = new FileInfo(target);
+                    patched.IsReadOnly = false;
+                    patched.Delete();
+
+                    // restore from backup
+                    File.Copy(file.FullName, target);
+                    file.IsReadOnly = false;
+                    file.Delete();
+                }
+            }
         }
     }
 }
