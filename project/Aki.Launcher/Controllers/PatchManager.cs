@@ -6,9 +6,10 @@
  * Merijn Hendriks
  */
 
-
-using Aki.ByteBanger;
+using System.Collections.Generic;
 using System.IO;
+using Aki.Launcher.Helpers;
+using Aki.Launcher.MiniCommon;
 
 namespace Aki.Launcher
 {
@@ -16,92 +17,55 @@ namespace Aki.Launcher
     {
         public static bool ApplyPatches(string filepath)
         {
-            var targetfile = $@"{filepath}EscapeFromTarkov_Data/Managed/Assembly-CSharp.dll";
-            var files = new DirectoryInfo($@"{filepath}Aki_Data/Launcher/Patches/").GetFiles();
+            var patches = new List<string>();
+            patches.AddRange(GetCorePatches(filepath));
+            patches.AddRange(GetModPatches(filepath));
+            return PatchFiles(filepath, patches.ToArray());
+        }
 
-            foreach (var file in files)
+        public static string[] GetCorePatches(string filepath)
+        {
+            return VFS.GetDirectories(VFS.Combine(filepath, "Aki_Data/Launcher/Patches/"));
+        }
+
+        public static string[] GetModPatches(string filepath)
+        {
+            var basepath = "user/mods/";
+            
+            if (!VFS.Exists(basepath))
             {
-                // patch from clean files
-                RestorePatched(filepath);
+                return new string[0];
+            }
 
-                // apply patch
-                if (ApplyPatch(targetfile, file.FullName))
+            var result = new List<string>();
+            var mods = VFS.GetDirectories(VFS.Combine(filepath, basepath));
+
+            foreach (var mod in mods)
+            {
+                var modPatch = VFS.Combine(filepath, string.Format("{0}{1}/patches/", basepath, mod));
+
+                if (VFS.Exists(modPatch))
                 {
-                    // game patch found
-                    return true;
+                    result.Add(modPatch);
                 }
             }
 
-            // patch failed
-            return false;
+            return result.ToArray();
         }
 
-        static bool ApplyPatch(string targetfile, string patchfile)
+        public static bool PatchFiles(string filepath, string[] patches)
         {
-            byte[] target = File.ReadAllBytes(targetfile);
-            byte[] patch = File.ReadAllBytes(patchfile);
+            FilePatcher.Restore(filepath);
 
-            // backup before patching
-            if (!File.Exists($@"{targetfile}.bak"))
+            foreach (var patch in patches)
             {
-                File.Copy(targetfile, $@"{targetfile}.bak");
-            }
-
-            // patch
-            PatchResult result = PatchUtil.Patch(target, PatchInfo.FromBytes(patch));
-
-            switch (result.Result)
-            {
-                case PatchResultType.Success:                   // successfully patched, write the file
-                    File.WriteAllBytes(targetfile, result.PatchedData);
-                    return true;
-
-                case PatchResultType.AlreadyPatched:            // input file is already patched (size & hash match)
-                case PatchResultType.InputChecksumMismatch:     // input file's hash mismatches
-                case PatchResultType.InputLengthMismatch:       // input file's length mismatches
-                    return true;
-
-                case PatchResultType.OutputChecksumMismatch:    // patched hash mismatches intended output hash
-                    return false;
-
-                default:                                        // something else that shouldn't happen
-                    return false;
-            }
-        }
-
-        public static void RestorePatched(string filepath)
-        {
-            RestorePatchedRecurse(new DirectoryInfo(filepath));
-        }
-
-        static void RestorePatchedRecurse(DirectoryInfo basedir)
-        {
-            // scan subdirectories
-            foreach (var dir in basedir.EnumerateDirectories())
-            {
-                RestorePatchedRecurse(dir);
-            }
-
-            // scan files
-            var files = basedir.GetFiles();
-
-            foreach (var file in files)
-            {
-                if (file.Extension == ".bak")
+                if (!FilePatcher.Run(filepath, patch))
                 {
-                    var target = Path.ChangeExtension(file.FullName, null);
-
-                    // remove patched file
-                    var patched = new FileInfo(target);
-                    patched.IsReadOnly = false;
-                    patched.Delete();
-
-                    // restore from backup
-                    File.Copy(file.FullName, target);
-                    file.IsReadOnly = false;
-                    file.Delete();
+                    return false;
                 }
             }
+
+            return true;
         }
     }
 }
