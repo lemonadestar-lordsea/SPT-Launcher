@@ -17,27 +17,46 @@ namespace Aki.Launcher
     {
         public static bool ApplyPatches(string filepath)
         {
-            var core = VFS.GetDirectories(VFS.Combine(filepath, "Aki_Data/Launcher/Patches/"));
-            var mods = VFS.GetDirectories(VFS.Combine(filepath, "user/mods/"));
             var patches = new List<string>();
+            patches.AddRange(GetCorePatches(filepath));
+            patches.AddRange(GetModPatches(filepath));
+            return PatchFiles(filepath, patches.ToArray());
+        }
 
-            // delete all previous applied patches
-            FilePatcher.Restore(filepath);
+        public static string[] GetCorePatches(string filepath)
+        {
+            return VFS.GetDirectories(VFS.Combine(filepath, "Aki_Data/Launcher/Patches/"));
+        }
 
-            // get patches to apply
-            patches.AddRange(core);
+        public static string[] GetModPatches(string filepath)
+        {
+            var basepath = "user/mods/";
+            
+            if (!VFS.Exists(basepath))
+            {
+                return new string[0];
+            }
+
+            var result = new List<string>();
+            var mods = VFS.GetDirectories(VFS.Combine(filepath, basepath));
 
             foreach (var mod in mods)
             {
-                var modPatch = VFS.Combine(filepath, string.Format("user/mods/{0}/patches/", mod));
+                var modPatch = VFS.Combine(filepath, string.Format("{0}{1}/patches/", basepath, mod));
 
                 if (VFS.Exists(modPatch))
                 {
-                    patches.Add(modPatch);
+                    result.Add(modPatch);
                 }
             }
 
-            // apply patches
+            return result.ToArray();
+        }
+
+        public static bool PatchFiles(string filepath, string[] patches)
+        {
+            FilePatcher.Restore(filepath);
+
             foreach (var patch in patches)
             {
                 if (!FilePatcher.Run(filepath, patch))
