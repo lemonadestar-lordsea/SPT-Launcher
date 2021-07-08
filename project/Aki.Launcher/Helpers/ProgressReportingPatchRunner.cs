@@ -41,11 +41,13 @@ namespace Aki.Launcher.Helpers
 
         private void FilePatcher_PatchProgress(object sender, (int, string) e)
         {
-            RaiseSubProcessChanged(e.Item1, e.Item2);
+            //Update our progress dialog's sub progress bar whenever the file patcher updates it's progress
+            RaiseSubProgressChanged(e.Item1, e.Item2);
         }
 
         private void PatchManager_PatchProgress(object sender, (int, string) e)
         {
+            //update our progress dialog's main progress bar whenever the patch manager updates it's progress
             RaiseProgressChanged(e.Item1, e.Item2);
         }
 
@@ -62,7 +64,7 @@ namespace Aki.Launcher.Helpers
         }
 
         public event EventHandler<(int, string)> SubProgressChanged;
-        protected virtual void RaiseSubProcessChanged(int Percentage, string Message)
+        protected virtual void RaiseSubProgressChanged(int Percentage, string Message)
         {
             SubProgressChanged?.Invoke(this, (Percentage, Message));
         }
