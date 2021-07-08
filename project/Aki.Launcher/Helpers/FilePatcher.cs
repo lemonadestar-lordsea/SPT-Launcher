@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Aki.ByteBanger;
 using Aki.Launcher.MiniCommon;
 
@@ -6,6 +7,12 @@ namespace Aki.Launcher.Helpers
 {
     public static class FilePatcher
     {
+        public static event EventHandler<(int, string)> PatchProgress;
+        private static void RaisePatchProgress(int Percentage, string Message)
+        {
+            PatchProgress?.Invoke(null, (Percentage, Message));
+        }
+
         public static bool Patch(string targetfile, string patchfile)
         {
             byte[] target = VFS.ReadFile(targetfile);
@@ -34,6 +41,13 @@ namespace Aki.Launcher.Helpers
         {
             DirectoryInfo di = new DirectoryInfo(patchpath);
 
+            //TODO - Simply file iteration
+            //I feel like we could simplify this to not iterate over all the files, but I'm having a brain fart and can't think.
+            //Basically, the only issue is we need to be able to get the target file path. I'll look at this again later if no one else does. Brain is being dumb... -waffle
+            int countfiles = di.GetFiles("*.bpf", SearchOption.AllDirectories).Length;
+
+            int processed = 0;
+
             foreach (FileInfo file in di.GetFiles())
             {
                 FileInfo target;
@@ -43,6 +57,9 @@ namespace Aki.Launcher.Helpers
                     // patch
                     case ".bpf":
                         {
+                            int progress = (int)Math.Floor((double)processed / countfiles * 100);
+                            RaisePatchProgress(progress, $"{LocalizationProvider.Instance.patching} {file.Name} ...");
+
                             target = new FileInfo(VFS.Combine(targetpath, file.Name.Replace(".bpf", "")));
 
                             if (!Patch(target.FullName, file.FullName))
@@ -50,6 +67,8 @@ namespace Aki.Launcher.Helpers
                                 // patch failed
                                 return false;
                             }
+
+                            processed++;
                         }
                         break;
 
@@ -70,6 +89,8 @@ namespace Aki.Launcher.Helpers
                 // remove empty folders
                 di.Delete();
             }
+
+            RaisePatchProgress(100, LocalizationProvider.Instance.ok);
 
             return true;
         }

@@ -29,6 +29,10 @@ waffle.lord
             <RowDefinition Height="AUTO"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="AUTO"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="AUTO"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="AUTO"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
@@ -42,6 +46,17 @@ waffle.lord
                      Background="{StaticResource AKI_Background_DarkGrayBlue}"
                      BorderBrush="{StaticResource AKI_Background_DarkGrayBlue}"
                      BorderThickness="0"
+                     />
+
+        <Label x:Name="SubInfoText_Label" Grid.Row="6" Grid.Column="1"
+               />
+        <ProgressBar x:Name="SubProgress_Bar" Grid.Row="8" Grid.Column="1"
+                     Height="10"
+                     Foreground="{StaticResource AKI_Background_Yellow}"
+                     Background="{StaticResource AKI_Background_DarkGrayBlue}"
+                     BorderBrush="{StaticResource AKI_Background_DarkGrayBlue}"
+                     BorderThickness="0"
+                     Visibility="Hidden"
                      />
     </Grid>
 </UserControl>

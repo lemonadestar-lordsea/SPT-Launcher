@@ -6,8 +6,8 @@
  * Merijn Hendriks
  */
 
+using System;
 using System.Collections.Generic;
-using System.IO;
 using Aki.Launcher.Helpers;
 using Aki.Launcher.MiniCommon;
 
@@ -15,6 +15,12 @@ namespace Aki.Launcher
 {
     public static class PatchManager
     {
+        public static event EventHandler<(int, string)> PatchProgress;
+        private static void RaisePatchProgressChanged(int Percenatage, string Text)
+        {
+            PatchProgress?.Invoke(null, (Percenatage, Text));
+        }
+
         public static bool ApplyPatches(string filepath)
         {
             var patches = new List<string>();
@@ -57,14 +63,20 @@ namespace Aki.Launcher
         {
             FilePatcher.Restore(filepath);
 
+            int processed = 0;
+
             foreach (var patch in patches)
             {
+                int percentage = (int)Math.Floor((double)processed / patches.Length * 100);
+                RaisePatchProgressChanged(percentage, LocalizationProvider.Instance.patching);
+
                 if (!FilePatcher.Run(filepath, patch))
                 {
                     return false;
                 }
             }
 
+            RaisePatchProgressChanged(100, LocalizationProvider.Instance.ok);
             return true;
         }
     }
