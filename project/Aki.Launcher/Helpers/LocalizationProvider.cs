@@ -149,6 +149,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.nickname = "Nickname";
             englishLocale.side = "Side";
             englishLocale.level = "Level";
+            englishLocale.game_path = "Patching";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -1220,6 +1221,22 @@ namespace Aki.Launcher.Helpers
                 {
                     _level = value;
                     RaisePropertyChanged(nameof(level));
+                }
+            }
+        }
+        #endregion
+
+        #region patching
+        private string _patching;
+        public string patching
+        {
+            get => _patching;
+            set
+            {
+                if(_patching != value)
+                {
+                    _patching = value;
+                    RaisePropertyChanged(nameof(patching));
                 }
             }
         }

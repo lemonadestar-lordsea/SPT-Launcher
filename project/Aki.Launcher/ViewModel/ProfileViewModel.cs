@@ -81,7 +81,7 @@ namespace Aki.Launcher.ViewModel
 
             LauncherSettingsProvider.Instance.GameRunning = true;
 
-            GameStarterResult gameStartResult = gameStarter.LaunchGame(ServerManager.SelectedServer, AccountManager.SelectedAccount);
+            GameStarterResult gameStartResult = await gameStarter.LaunchGame(ServerManager.SelectedServer, AccountManager.SelectedAccount);
 
             if (gameStartResult.Succeeded)
             {
@@ -105,6 +105,7 @@ namespace Aki.Launcher.ViewModel
             else
             {
                 navigationViewModel.NotificationQueue.Enqueue(gameStartResult.Message);
+                LauncherSettingsProvider.Instance.GameRunning = false;
             }
         }
 

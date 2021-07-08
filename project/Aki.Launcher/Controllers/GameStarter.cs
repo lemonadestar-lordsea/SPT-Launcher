@@ -9,6 +9,8 @@
  */
 
 
+using Aki.Launcher.Custom_Controls;
+using Aki.Launcher.Custom_Controls.Dialogs;
 using Aki.Launcher.Helpers;
 using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Models.Launcher;
@@ -16,6 +18,7 @@ using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Aki.Launcher
 {
@@ -24,7 +27,7 @@ namespace Aki.Launcher
         const string registeryInstall = @"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov";
         const string registerySettings = @"Software\Battlestate Games\EscapeFromTarkov";
 
-        public GameStarterResult LaunchGame(ServerInfo server, AccountInfo account)
+        public async Task<GameStarterResult> LaunchGame(ServerInfo server, AccountInfo account)
         {
             var gamepath = $@"{LauncherSettingsProvider.Instance.GamePath}\" ?? Environment.CurrentDirectory;
 
@@ -48,9 +51,13 @@ namespace Aki.Launcher
             }
 
             // apply patches
-            if (!PatchManager.ApplyPatches(gamepath))
+            ProgressReportingPatchRunner patchRunner = new ProgressReportingPatchRunner(gamepath);
+            ProgressDialog pDialog = new ProgressDialog(patchRunner);
+            var result = await DialogHost.ShowDialog(pDialog);
+
+            if(result != null && result is string s)
             {
-                // patching failed
+                //show the error? I need to make a dialog for messages -waffle.nerd
                 return GameStarterResult.FromError(-4);
             }
 
