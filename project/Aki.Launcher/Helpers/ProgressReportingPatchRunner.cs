@@ -28,7 +28,7 @@ namespace Aki.Launcher.Helpers
                     RaiseTaskCancelled("Patching Failed"); // the reason doesn't really matter in this case since gamestarter returns a result of it's own.
                 }
             }
-            catch(Exception ex)
+            catch
             {
             }
             finally

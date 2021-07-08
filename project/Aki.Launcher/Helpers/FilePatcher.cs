@@ -32,7 +32,7 @@ namespace Aki.Launcher.Helpers
             switch (result.Result)
             {
                 case PatchResultType.Success:
-                    File.Copy(file.FullName, $"{file.FullName}.bak");
+                    File.Copy(targetfile, $"{targetfile}.bak");
                     VFS.WriteFile(targetfile, result.PatchedData);
                     return true;
 
