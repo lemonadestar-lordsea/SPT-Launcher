@@ -4,6 +4,7 @@
  * Copyright: Merijn Hendriks
  * AUTHORS:
  * Merijn Hendriks
+ * waffle.lord
  */
 
 using System;

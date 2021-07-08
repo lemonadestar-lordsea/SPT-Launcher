@@ -1,4 +1,13 @@
-﻿using System;
+﻿/* FilePatcher.cs
+ * License: NCSA Open Source License
+ * 
+ * Copyright: Merijn Hendriks
+ * AUTHORS:
+ * Merijn Hendriks
+ * waffle.lord
+ */
+
+using System;
 using System.IO;
 using Aki.ByteBanger;
 using Aki.Launcher.MiniCommon;

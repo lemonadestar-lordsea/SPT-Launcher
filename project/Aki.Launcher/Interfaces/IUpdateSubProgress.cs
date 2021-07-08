@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* IUpdateSubProgress.cs
+ * License: NCSA Open Source License
+ * 
+ * Copyright: Merijn Hendriks
+ * AUTHORS:
+ * waffle.lord
+ */
+
+using System;
 
 namespace Aki.Launcher.Interfaces
 {
