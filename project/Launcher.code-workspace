@@ -10,7 +10,7 @@
 			{
 				"label": "build",
 				"type": "shell",
-				"command": "Shared/Build.ps1",
+				"command": "Shared/Scripts/VSCode.ps1",
 				"group": {
 					"kind": "build",
 					"isDefault": true

@@ -1,4 +1,4 @@
-# Build.ps1
+# VSCode.ps1
 # Copyright: © SPT-AKI 2021
 # License: NCSA
 # Authors:
