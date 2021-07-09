@@ -69,4 +69,8 @@
     <Resource Include="Resources\icon.ico" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="powershell.exe -ExecutionPolicy Unrestricted $(SolutionDir)\Shared\Scripts\VS2019.ps1" />
+  </Target>
+
 </Project>
