@@ -7,6 +7,7 @@
  */
 
 using Aki.Launcher.Interfaces;
+using Aki.Launcher.Models.Launcher;
 using System;
 
 namespace Aki.Launcher.Helpers
@@ -39,22 +40,23 @@ namespace Aki.Launcher.Helpers
             }
         }
 
-        private void FilePatcher_PatchProgress(object sender, (int, string) e)
+        private void FilePatcher_PatchProgress(object sender, ProgressInfo e)
         {
             //Update our progress dialog's sub progress bar whenever the file patcher updates it's progress
-            RaiseSubProgressChanged(e.Item1, e.Item2);
+            RaiseSubProgressChanged(e.Percentage, e.Message);
         }
 
-        private void PatchManager_PatchProgress(object sender, (int, string) e)
+        private void PatchManager_PatchProgress(object sender, ProgressInfo e)
         {
             //update our progress dialog's main progress bar whenever the patch manager updates it's progress
-            RaiseProgressChanged(e.Item1, e.Item2);
+            RaiseProgressChanged(e.Percentage, e.Message);
         }
 
-        public event EventHandler<(int, string)> ProgressChanged;
+        //Change main progress bar
+        public event EventHandler<ProgressInfo> ProgressChanged;
         protected virtual void RaiseProgressChanged(int Percentage, string Text)
         {
-            ProgressChanged?.Invoke(this, (Percentage, Text));
+            ProgressChanged?.Invoke(this, new ProgressInfo(Percentage, Text));
         }
 
         public event EventHandler<string> TaskCancelled;
@@ -63,10 +65,11 @@ namespace Aki.Launcher.Helpers
             TaskCancelled?.Invoke(this, Reason);
         }
 
-        public event EventHandler<(int, string)> SubProgressChanged;
+        //Change sub progress bar
+        public event EventHandler<ProgressInfo> SubProgressChanged;
         protected virtual void RaiseSubProgressChanged(int Percentage, string Message)
         {
-            SubProgressChanged?.Invoke(this, (Percentage, Message));
+            SubProgressChanged?.Invoke(this, new ProgressInfo(Percentage, Message));
         }
 
         public ProgressReportingPatchRunner(string GamePath)

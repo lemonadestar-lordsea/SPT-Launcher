@@ -41,6 +41,9 @@ namespace Aki.Launcher.Models.Launcher
                 case -6:
                     Message = LocalizationProvider.Instance.eft_exe_not_found_warning;
                     break;
+                case -7:
+                    Message = LocalizationProvider.Instance.nlog_modify_failed;
+                    break;
                 default:
                     Message = LocalizationProvider.Instance.login_failed;
                     break;

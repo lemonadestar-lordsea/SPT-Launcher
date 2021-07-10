@@ -11,15 +11,16 @@ using System;
 using System.Collections.Generic;
 using Aki.Launcher.Helpers;
 using Aki.Launcher.MiniCommon;
+using Aki.Launcher.Models.Launcher;
 
 namespace Aki.Launcher
 {
     public static class PatchManager
     {
-        public static event EventHandler<(int, string)> PatchProgress;
+        public static event EventHandler<ProgressInfo> PatchProgress;
         private static void RaisePatchProgressChanged(int Percenatage, string Text)
         {
-            PatchProgress?.Invoke(null, (Percenatage, Text));
+            PatchProgress?.Invoke(null, new ProgressInfo(Percenatage, Text));
         }
 
         public static bool ApplyPatches(string filepath)
