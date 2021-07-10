@@ -65,5 +65,6 @@
     "nickname": "Nickname",
     "side": "Side",
     "level": "Level",
-    "patching": "Patching"
+    "patching": "Patching",
+    "nlog_modify_failed": "NLog could not be modified"
 }

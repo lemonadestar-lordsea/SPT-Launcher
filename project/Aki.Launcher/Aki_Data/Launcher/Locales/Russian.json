@@ -65,5 +65,6 @@
     "nickname": "Никнейм",
     "side": "Сторона",
     "level": "Уровень",
-    "patching": "Patching"
+    "patching": "Patching",
+    "nlog_modify_failed": "NLog could not be modified"
 }
