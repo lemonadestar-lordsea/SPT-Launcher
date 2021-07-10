@@ -70,7 +70,7 @@ namespace Aki.Launcher.Helpers
             if (!BackupConfig()) return false;
 
 
-            string akiloader = "<target name=\"Aki.Loader\"xsi:type=\"Aki.Loader\"/>";
+            string akiloader = "<target name=\"Aki.Loader\" xsi:type=\"Aki.Loader\" />";
             string nlogData = "";
 
             try
