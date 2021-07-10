@@ -6,8 +6,8 @@
 # - waffle.lord
 
 #setup variables
-$buildDir = "Build/"
-$launcherData = "./Aki.Launcher/Aki_Data/"
+$buildDir = "../Build/"
+$launcherData = "./Aki_Data/"
 
 # build the project
 Write-Host "Cleaning previous builds ..." -ForegroundColor Cyan
@@ -18,12 +18,10 @@ if (Test-Path $buildDir)
     Remove-Item $buildDir -Recurse -Force
 }
 
-Remove-Item "$($buildDir)\Launcher.pdb"
-Remove-Item "$($buildDir)\Aki.ByteBanger.pdb"
-
 #copy aki_data folder
 Write-Host "`nCopying Aki_Data folder ... " -NoNewLine
 
+#todo: copy Launcher.exe
 Copy-Item -Path $launcherData -Destination "./${buildDir}/Aki_Data" -Recurse -Force -ErrorAction SilentlyContinue
 
 if (Test-Path "$($buildDir)/Aki_Data") 
