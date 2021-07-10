@@ -15,7 +15,7 @@ namespace Aki.Launcher.Helpers
 {
     public static class NLogModifier
     {
-        public static string NLogConfigPath = VFS.Combine(LauncherSettingsProvider.Instance.GamePath, "/NLog/NLog.config");
+        public static string NLogConfigPath = VFS.Combine(LauncherSettingsProvider.Instance.GamePath, "NLog/NLog.config");
         public static string NLogConfigBakPath = NLogConfigPath + ".bak";
 
         private static bool ProcessFileOp(string Source, string Destination, bool Overwrite = false)
@@ -97,7 +97,7 @@ namespace Aki.Launcher.Helpers
 
                     if (index > -1)
                     {
-                        nlogData = nlogData.Insert(index + targetsNode.Length, $"{Environment.NewLine}<Testing>{Environment.NewLine}");
+                        nlogData = nlogData.Insert(index + targetsNode.Length, $"{Environment.NewLine}{akiloader}{Environment.NewLine}");
                     }
                 }
             }
