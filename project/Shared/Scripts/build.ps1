@@ -5,9 +5,21 @@
 # - Merijn Hendriks
 # - waffle.lord
 
+param ([switch]$VSBuilt)
+
 #setup variables
 $buildDir = "Build/"
 $launcherData = "./Aki.Launcher/Aki_Data/"
+$publishArgs = "publish --nologo --verbosity minimal --runtime win10-x64 --configuration Release -p:PublishSingleFile=true --no-self-contained"
+
+if($VSBuilt) {
+    Write-Host "Running from VS with NoBuild" -ForegroundColor Cyan
+    $buildDir = "../Build"
+    $launcherData = "./Aki_Data"
+    $publishArgs += " --no-build"
+}
+
+$publishArgs += " --output ${buildDir}"
 
 #removes the Obj and Bin directories and their contents
 function CleanBuild 
@@ -31,15 +43,19 @@ if (Test-Path $buildDir)
 }
 
 #make sure bin and obj don't exist before cleaning or errors may occur from previous builds ran from VS
-CleanBuild
+if(-not $VSBuilt)
+{
+    CleanBuild
 
-$cleanProcess = Start-Process "dotnet" -PassThru -NoNewWindow -ArgumentList "clean --nologo --verbosity quiet --runtime win10-x64"
-Wait-Process -InputObject $cleanProcess
-$cleanProcess.Dispose()
+    $cleanProcess = Start-Process "dotnet" -PassThru -NoNewWindow -ArgumentList "clean --nologo --verbosity quiet --runtime win10-x64"
+    Wait-Process -InputObject $cleanProcess
+    $cleanProcess.Dispose()
+}
+
 Write-Host "`nDone" -ForegroundColor Cyan
 
 Write-Host "`nBuilding launcher ..." -ForegroundColor Cyan
-$publishProcess = Start-Process "dotnet" -PassThru -NoNewWindow -ArgumentList "publish --nologo --verbosity minimal --runtime win10-x64 --configuration Release -p:PublishSingleFile=true --no-self-contained --output ${buildDir}"
+$publishProcess = Start-Process "dotnet" -PassThru -NoNewWindow -ArgumentList $publishArgs
 Wait-Process -InputObject $publishProcess
 $publishProcess.Dispose()
 Write-Host "`nDone" -ForegroundColor Cyan
