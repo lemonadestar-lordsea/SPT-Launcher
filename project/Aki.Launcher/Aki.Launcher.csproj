@@ -13,6 +13,7 @@
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <Platforms>AnyCPU;x64</Platforms>
+    <SelfContained>false</SelfContained>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -69,8 +70,8 @@
     <Resource Include="Resources\icon.ico" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="powershell.exe -ExecutionPolicy Unrestricted $(SolutionDir)\Shared\Scripts\VS2019.ps1" />
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(BuildingInsideVisualStudio)' == 'true'">
+    <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;Release&quot; (&#xD;&#xA;powershell.exe -ExecutionPolicy Unrestricted -File $(SolutionDir)\Shared\Scripts\build.ps1 -VSBuilt&#xD;&#xA;) else (&#xD;&#xA;echo NOTICE: Build with Release configuration to run build script&#xD;&#xA;)" />
   </Target>
 
 </Project>
