@@ -1,4 +1,12 @@
-﻿namespace Aki.Launcher.Models.Launcher
+﻿/* ProgressInfo.cs
+ * License: NCSA Open Source License
+ * 
+ * Copyright: Merijn Hendriks
+ * AUTHORS:
+ * waffle.lord
+ */
+
+namespace Aki.Launcher.Models.Launcher
 {
     public class ProgressInfo
     {

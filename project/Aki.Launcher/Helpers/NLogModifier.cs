@@ -1,4 +1,12 @@
-﻿using Aki.Launcher.MiniCommon;
+﻿/* NLogModifier.cs
+ * License: NCSA Open Source License
+ * 
+ * Copyright: Merijn Hendriks
+ * AUTHORS:
+ * waffle.lord
+ */
+
+using Aki.Launcher.MiniCommon;
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
