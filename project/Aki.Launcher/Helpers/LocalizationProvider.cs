@@ -150,6 +150,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.side = "Side";
             englishLocale.level = "Level";
             englishLocale.game_path = "Patching";
+            englishLocale.nlog_modify_failed = "NLog could not be modified";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -1237,6 +1238,22 @@ namespace Aki.Launcher.Helpers
                 {
                     _patching = value;
                     RaisePropertyChanged(nameof(patching));
+                }
+            }
+        }
+        #endregion
+
+        #region
+        private string _nlog_modify_failed;
+        public string nlog_modify_failed
+        {
+            get => _nlog_modify_failed;
+            set
+            {
+                if(_nlog_modify_failed != value)
+                {
+                    _nlog_modify_failed = value;
+                    RaisePropertyChanged(nameof(nlog_modify_failed));
                 }
             }
         }

@@ -6,6 +6,7 @@
  * waffle.lord
  */
 
+using Aki.Launcher.Models.Launcher;
 using System;
 
 namespace Aki.Launcher.Interfaces
@@ -16,6 +17,6 @@ namespace Aki.Launcher.Interfaces
         /// The <see cref="Custom_Controls.Dialogs.ProgressDialog"/> will subscribe to this event to update it's sub progress bar (bottom progress bar)
         /// </summary>
         /// <remarks>The sub progress bar is not visible if a class does not implement this interface</remarks>
-        public event EventHandler<(int, string)> SubProgressChanged;
+        public event EventHandler<ProgressInfo> SubProgressChanged;
     }
 }

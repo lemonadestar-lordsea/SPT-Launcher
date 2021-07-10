@@ -7,6 +7,7 @@
  */
 
 using Aki.Launcher.Interfaces;
+using Aki.Launcher.Models.Launcher;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -36,10 +37,9 @@ namespace Aki.Launcher.Custom_Controls.Dialogs
             }
         }
 
-        private void SubProgressInfo_SubProgressChanged(object sender, (int, string) e)
+        private void SubProgressInfo_SubProgressChanged(object sender, ProgressInfo e)
         {
-            //Item 1 is progress, Item2 is the message to show (can be empty to not update the message)
-            UpdateProgress(SubProgress_Bar, SubInfoText_Label, e.Item1, e.Item2);
+            UpdateProgress(SubProgress_Bar, SubInfoText_Label, e.Percentage, e.Message);
         }
 
         private void TaskInfo_TaskCancelled(object sender, string e)
@@ -47,10 +47,9 @@ namespace Aki.Launcher.Custom_Controls.Dialogs
             RaiseResultsReady(e);
         }
 
-        private void TaskInfo_ProgressChanged(object sender, (int, string) e)
+        private void TaskInfo_ProgressChanged(object sender, ProgressInfo e)
         {
-            //Item 1 is progress, Item2 is the message to show (can be empty to not update the message)
-            UpdateProgress(Progress_Bar, InfoText_Label, e.Item1, e.Item2);
+            UpdateProgress(Progress_Bar, InfoText_Label, e.Percentage, e.Message);
         }
 
         /// <summary>

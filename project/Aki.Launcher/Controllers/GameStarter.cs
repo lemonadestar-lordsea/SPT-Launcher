@@ -50,6 +50,12 @@ namespace Aki.Launcher
                 CleanTempFiles();
             }
 
+            //modify nlog.config
+            if(!NLogModifier.ModifyConfig())
+            {
+                return GameStarterResult.FromError(-7);
+            }
+
             // apply patches
             ProgressReportingPatchRunner patchRunner = new ProgressReportingPatchRunner(gamepath);
             ProgressDialog pDialog = new ProgressDialog(patchRunner);
