@@ -24,19 +24,13 @@ namespace Aki.Launcher.Helpers
 
         public static bool Create()
         {
-            if(VFS.Exists(NLogFilePath))
+            if (VFS.Exists(NLogFilePath))
             {
                 return true;
             }
 
             VFS.WriteFile(NLogFilePath, nlogFileContents, false, Encoding.UTF8);
-
-            if(VFS.Exists(NLogFilePath))
-            {
-                return true;
-            }
-
-            return false;
+            return VFS.Exists(NLogFilePath);
         }
     }
 }
