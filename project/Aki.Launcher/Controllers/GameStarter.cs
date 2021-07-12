@@ -50,8 +50,8 @@ namespace Aki.Launcher
                 CleanTempFiles();
             }
 
-            //modify nlog.config
-            if(!NLogModifier.ModifyConfig())
+            //create nlog.dll.nlog
+            if(!NLogCreator.Create())
             {
                 return GameStarterResult.FromError(-7);
             }
