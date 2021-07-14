@@ -10,7 +10,7 @@
 			{
 				"label": "build",
 				"type": "shell",
-				"command": "Shared/Scripts/build.ps1",
+				"command": "Aki.Build/build.ps1",
 				"group": {
 					"kind": "build",
 					"isDefault": true
