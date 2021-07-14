@@ -10,16 +10,19 @@ param ([switch]$VSBuilt)
 #setup variables
 $buildDir = "Build/"
 $launcherData = "./Aki.Launcher/Aki_Data/"
-$publishArgs = "publish --nologo --verbosity minimal --runtime win10-x64 --configuration Release -p:PublishSingleFile=true --no-self-contained"
+$publishSwitches = "--nologo --verbosity minimal --runtime win10-x64 --configuration Release -p:PublishSingleFile=true --no-self-contained"
+$publishArgs = "publish ./Aki.Launcher/Aki.Launcher.csproj "
 
 if($VSBuilt) {
     Write-Host "Running from VS with NoBuild" -ForegroundColor Cyan
     $buildDir = "../Build"
-    $launcherData = "./Aki_Data"
-    $publishArgs += " --no-build"
+    $launcherData = "../Aki.Launcher/Aki_Data"
+    $publishArgs = "publish ../Aki.Launcher/Aki.Launcher.csproj "
+    $publishSwitches += " --no-build"
 }
 
-$publishArgs += " --output ${buildDir}"
+$publishSwitches += " --output ${buildDir}"
+$publishArgs += $publishSwitches
 
 #removes the Obj and Bin directories and their contents
 function CleanBuild 
