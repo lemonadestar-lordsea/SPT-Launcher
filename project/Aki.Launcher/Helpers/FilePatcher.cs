@@ -23,7 +23,7 @@ namespace Aki.Launcher.Helpers
             PatchProgress?.Invoke(null, new ProgressInfo(Percentage, Message));
         }
 
-        public static bool Patch(string targetfile, string patchfile)
+        public static PatchResultInfo Patch(string targetfile, string patchfile, bool IgnoreInputHashMismatch = false)
         {
             byte[] target = VFS.ReadFile(targetfile);
             byte[] patch = VFS.ReadFile(patchfile);
@@ -35,20 +35,21 @@ namespace Aki.Launcher.Helpers
                 case PatchResultType.Success:
                     File.Copy(targetfile, $"{targetfile}.bak");
                     VFS.WriteFile(targetfile, result.PatchedData);
-                    return true;
+                    return PatchResultInfo.FromSuccess(result.Result);
 
                 case PatchResultType.AlreadyPatched:
-                case PatchResultType.InputChecksumMismatch:
-                case PatchResultType.InputLengthMismatch:
-                    return true;
+                    return PatchResultInfo.FromSuccess(result.Result);
 
-                case PatchResultType.OutputChecksumMismatch:
+                case PatchResultType.InputChecksumMismatch:
+                    if (IgnoreInputHashMismatch) return PatchResultInfo.FromSuccess(result.Result);
+                    return PatchResultInfo.FromError(result.Result);
+
                 default:
-                    return false;
+                    return PatchResultInfo.FromError(result.Result);
             }
         }
 
-        private static bool PatchAll(string targetpath, string patchpath)
+        private static PatchResultInfo PatchAll(string targetpath, string patchpath, bool IgnoreInputHashMismatch = false)
         {
             DirectoryInfo di = new DirectoryInfo(patchpath);
 
@@ -73,10 +74,12 @@ namespace Aki.Launcher.Helpers
 
                             target = new FileInfo(VFS.Combine(targetpath, file.Name.Replace(".bpf", "")));
 
-                            if (!Patch(target.FullName, file.FullName))
+                            PatchResultInfo result = Patch(targetpath, patchpath, IgnoreInputHashMismatch);
+
+                            if (!result.OK)
                             {
                                 // patch failed
-                                return false;
+                                return result;
                             }
 
                             processed++;
@@ -103,12 +106,12 @@ namespace Aki.Launcher.Helpers
 
             RaisePatchProgress(100, LocalizationProvider.Instance.ok);
 
-            return true;
+            return PatchResultInfo.FromSuccess(PatchResultType.Success);
         }
 
-        public static bool Run(string targetPath, string patchPath)
+        public static PatchResultInfo Run(string targetPath, string patchPath, bool IgnoreInputHashMismatch = false)
         {
-            return PatchAll(targetPath, patchPath);
+            return PatchAll(targetPath, patchPath, IgnoreInputHashMismatch);
         }
 
         public static void Restore(string filepath)

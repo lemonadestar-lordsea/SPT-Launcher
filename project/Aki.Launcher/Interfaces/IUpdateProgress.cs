@@ -21,7 +21,7 @@ namespace Aki.Launcher.Interfaces
         /// <summary>
         /// Cancel the ProgressableTask with a reason.
         /// </summary>
-        public event EventHandler<string> TaskCancelled;
+        public event EventHandler<object> TaskCancelled;
 
         /// <summary>
         /// The <see cref="Custom_Controls.Dialogs.ProgressDialog"/> will subscribe to this event to update its main progress bar (top bar)

@@ -7,26 +7,47 @@
  */
 
 using Aki.Launcher.Interfaces;
+using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Models.Launcher;
 using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Aki.Launcher.Helpers
 {
     public class ProgressReportingPatchRunner : IUpdateProgress, IUpdateSubProgress
     {
         private string GamePath = "";
+        private List<string> Patches = new List<string>();
+        private bool SetPatches = false;
+        private bool IgnoreInputHashMismatch = false;
 
         public Action ProgressableTask => RunPatcher;
 
+        public bool CheckPath => File.Exists(GamePath);
+
         private void RunPatcher()
         {
+            if (!SetPatches)
+            {
+                Patches.AddRange(GetCorePatches());
+                Patches.AddRange(GetModPatches());
+            }
+
+            if (Patches.Count <= 0)
+            {
+                RaiseTaskCancelled("No Patches to apply"); //TODO - add localization
+            }
+
             try
             {
                 FilePatcher.PatchProgress += FilePatcher_PatchProgress;
-                PatchManager.PatchProgress += PatchManager_PatchProgress;
-                if (!PatchManager.ApplyPatches(GamePath))
+
+                PatchResultInfo result = PatchFiles();
+
+                if (!result.OK)
                 {
-                    RaiseTaskCancelled("Patching Failed"); // the reason doesn't really matter in this case since gamestarter returns a result of it's own.
+                    RaiseTaskCancelled(PatchResultInfo.FromError(result.Status, Patches.ToArray()));
                 }
             }
             catch
@@ -35,21 +56,71 @@ namespace Aki.Launcher.Helpers
             finally
             {
                 //Static events can be super not cool if they don't get unsubscribed. Adding unsubscribe in finally to ensure class instance is collected by GC.
-                PatchManager.PatchProgress -= PatchManager_PatchProgress;
                 FilePatcher.PatchProgress -= FilePatcher_PatchProgress;
             }
         }
 
+        private PatchResultInfo PatchFiles()
+        {
+            FilePatcher.Restore(GamePath);
+
+            int processed = 0;
+
+            var _patches = Patches.ToArray();
+            foreach (var patch in _patches)
+            {
+                int percentage = (int)Math.Floor((double)processed / Patches.Count * 100);
+                RaiseProgressChanged(percentage, LocalizationProvider.Instance.patching);
+
+                PatchResultInfo result = FilePatcher.Run(GamePath, patch);
+
+                if (!result.OK)
+                {
+                    return result;
+                }
+
+                Patches.Remove(patch);
+            }
+
+            RaiseProgressChanged(100, LocalizationProvider.Instance.ok);
+            return PatchResultInfo.FromSuccess(ByteBanger.PatchResultType.Success);
+        }
+
+        private string[] GetCorePatches()
+        {
+            return VFS.GetDirectories(VFS.Combine(GamePath, "Aki_Data/Launcher/Patches/"));
+        }
+
+        private string[] GetModPatches()
+        {
+            var basepath = "user/mods/";
+
+            if (!VFS.Exists(basepath))
+            {
+                return new string[0];
+            }
+
+            var result = new List<string>();
+            var mods = VFS.GetDirectories(VFS.Combine(GamePath, basepath));
+
+            foreach (var mod in mods)
+            {
+                var modPatch = VFS.Combine(GamePath, string.Format("{0}{1}/patches/", basepath, mod));
+
+                if (VFS.Exists(modPatch))
+                {
+                    result.Add(modPatch);
+                }
+            }
+
+            return result.ToArray();
+        }
+
+        #region EventHandlers
         private void FilePatcher_PatchProgress(object sender, ProgressInfo e)
         {
             //Update our progress dialog's sub progress bar whenever the file patcher updates it's progress
             RaiseSubProgressChanged(e.Percentage, e.Message);
-        }
-
-        private void PatchManager_PatchProgress(object sender, ProgressInfo e)
-        {
-            //update our progress dialog's main progress bar whenever the patch manager updates it's progress
-            RaiseProgressChanged(e.Percentage, e.Message);
         }
 
         //Change main progress bar
@@ -59,10 +130,10 @@ namespace Aki.Launcher.Helpers
             ProgressChanged?.Invoke(this, new ProgressInfo(Percentage, Text));
         }
 
-        public event EventHandler<string> TaskCancelled;
-        protected virtual void RaiseTaskCancelled(string Reason)
+        public event EventHandler<object> TaskCancelled;
+        protected virtual void RaiseTaskCancelled(object Data)
         {
-            TaskCancelled?.Invoke(this, Reason);
+            TaskCancelled?.Invoke(this, Data);
         }
 
         //Change sub progress bar
@@ -71,10 +142,17 @@ namespace Aki.Launcher.Helpers
         {
             SubProgressChanged?.Invoke(this, new ProgressInfo(Percentage, Message));
         }
+        #endregion
 
-        public ProgressReportingPatchRunner(string GamePath)
+        public ProgressReportingPatchRunner(string GamePath, string[] Patches = null, bool IgnoreInputHashMismatch = false)
         {
             this.GamePath = GamePath;
+            this.IgnoreInputHashMismatch = IgnoreInputHashMismatch;
+
+            if(Patches != null && Patches.Length > 0)
+            {
+                this.Patches = new List<string>(Patches);
+            }
         }
     }
 }

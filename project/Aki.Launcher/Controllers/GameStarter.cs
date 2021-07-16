@@ -61,9 +61,36 @@ namespace Aki.Launcher
             ProgressDialog pDialog = new ProgressDialog(patchRunner);
             var result = await DialogHost.ShowDialog(pDialog);
 
-            if(result != null && result is string s)
+            if(result != null)
             {
-                //show the error? I need to make a dialog for messages -waffle.nerd
+                if(result is PatchResultInfo pri)
+                {
+                    switch(pri.Status)
+                    {
+                        case ByteBanger.PatchResultType.InputChecksumMismatch:
+                            //TODO - localize this
+                            ConfirmationDialog confirmContinuePatching = new ConfirmationDialog("The input file hash doesn't match the expected hash\n\nDo you want to continue?\n\nIf you aren't sure, just click 'No'",
+                                                                         "Yes", "No");
+
+                            var confirmResult = await DialogHost.ShowDialog(confirmContinuePatching);
+
+                            if(confirmResult != null && confirmResult is bool proceed && proceed)
+                            {
+                                ProgressReportingPatchRunner continuePatcher = new ProgressReportingPatchRunner(gamepath, pri.RemainingPatches);
+                                ProgressDialog continueDialog = new ProgressDialog(continuePatcher);
+
+                                var continuedPatchResult = await DialogHost.ShowDialog(continueDialog);
+
+                                if(continuedPatchResult != null)
+                                {
+                                    return GameStarterResult.FromError(-4);
+                                }
+                            }
+                            break;
+                            
+                    }
+                }
+
                 return GameStarterResult.FromError(-4);
             }
 
