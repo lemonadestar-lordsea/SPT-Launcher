@@ -35,6 +35,9 @@ namespace Aki.Launcher.Custom_Controls
         //a property to coordinate when results have been returned from our dialog window.
         private static bool ResultsReady = false;
 
+
+        private static bool CanOpenNextDialog = true;
+
         private static void SetDialogPosistion(Window dialog)
         {
             //set the position of the dialog window to be centered in our mainwindow.
@@ -82,7 +85,7 @@ namespace Aki.Launcher.Custom_Controls
             }
 
             //run the backdrop open animation
-            OpenDialogHost(host);
+            await OpenDialogHost(host);
 
             //subscribe to the needed event handlers to keep the dialog window centered during main window move / main window resize
             Application.Current.MainWindow.LocationChanged += MainWindow_LocationChanged;
@@ -178,8 +181,17 @@ namespace Aki.Launcher.Custom_Controls
             ResultsReady = true;
         }
 
-        private static void OpenDialogHost(DialogHost host)
+        private static async Task OpenDialogHost(DialogHost host)
         {
+            await Task.Run(() =>
+            {
+                do
+                {
+
+                }
+                while (!CanOpenNextDialog);
+            });
+
             host.backdrop.Opacity = 0;
             host.backdrop.Visibility = Visibility.Visible;
             DoubleAnimation doubleAnimation = new DoubleAnimation(.7, TimeSpan.FromMilliseconds(250));
@@ -194,8 +206,10 @@ namespace Aki.Launcher.Custom_Controls
             doubleAnimation.Completed += (s, e) =>
             {
                 host.backdrop.Visibility = Visibility.Hidden;
+                CanOpenNextDialog = true;
             };
 
+            CanOpenNextDialog = false;
             host.backdrop.BeginAnimation(OpacityProperty, doubleAnimation);
         }
     }

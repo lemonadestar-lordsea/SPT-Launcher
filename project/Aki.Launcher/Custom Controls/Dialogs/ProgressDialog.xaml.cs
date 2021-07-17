@@ -42,7 +42,7 @@ namespace Aki.Launcher.Custom_Controls.Dialogs
             UpdateProgress(SubProgress_Bar, SubInfoText_Label, e.Percentage, e.Message);
         }
 
-        private void TaskInfo_TaskCancelled(object sender, string e)
+        private void TaskInfo_TaskCancelled(object sender, object e)
         {
             RaiseResultsReady(e);
         }

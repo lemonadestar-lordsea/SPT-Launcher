@@ -56,25 +56,59 @@ namespace Aki.Launcher
                 return GameStarterResult.FromError(-7);
             }
 
+
+            // check game path
+            var clientExecutable = $@"{gamepath}EscapeFromTarkov.exe";
+
+            if (!File.Exists(clientExecutable))
+            {
+                return GameStarterResult.FromError(-6);
+            }
+
+
             // apply patches
             ProgressReportingPatchRunner patchRunner = new ProgressReportingPatchRunner(gamepath);
             ProgressDialog pDialog = new ProgressDialog(patchRunner);
             var result = await DialogHost.ShowDialog(pDialog);
 
-            if(result != null && result is string s)
+            if (result != null)
             {
-                //show the error? I need to make a dialog for messages -waffle.nerd
-                return GameStarterResult.FromError(-4);
+                bool handled = false;
+
+                if (result is PatchResultInfo pri && pri.Status == ByteBanger.PatchResultType.InputChecksumMismatch)
+                {
+                    ConfirmationDialog confirmContinuePatching = new ConfirmationDialog(LocalizationProvider.Instance.file_mismatch_dialog_message, LocalizationProvider.Instance.yes, LocalizationProvider.Instance.no);
+
+                    var confirmResult = await DialogHost.ShowDialog(confirmContinuePatching);
+
+                    if (confirmResult != null && confirmResult is bool proceed && proceed)
+                    {
+                        ProgressReportingPatchRunner continuePatcher = new ProgressReportingPatchRunner(gamepath, pri.RemainingPatches, true);
+                        ProgressDialog continueDialog = new ProgressDialog(continuePatcher);
+
+                        var continuedPatchResult = await DialogHost.ShowDialog(continueDialog);
+
+                        if (continuedPatchResult != null)
+                        {
+                            return GameStarterResult.FromError(-4);
+                        }
+
+                        handled = true;
+                    }
+                }
+                
+                if(!handled && result is Exception ex)
+                {
+                    //show error message
+                    MessageDialog msgDialgo = new MessageDialog(ex.Message);
+                    await DialogHost.ShowDialog(msgDialgo);
+                    return GameStarterResult.FromError(-4);
+                }
+
+                if (!handled) return GameStarterResult.FromError(-4);
             }
 
-            // start game
-            var clientExecutable = $@"{gamepath}EscapeFromTarkov.exe";
-
-            if (!File.Exists(clientExecutable))
-            {
-                return GameStarterResult.FromError(-4);
-            }
-
+            //start game
             var clientProcess = new ProcessStartInfo(clientExecutable)
             {
                 Arguments = $"-force-gfx-jobs native -token={account.id} -config={Json.Serialize(new ClientConfig(server.backendUrl))}",

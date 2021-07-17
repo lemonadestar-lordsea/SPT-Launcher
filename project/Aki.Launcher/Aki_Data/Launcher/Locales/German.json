@@ -66,5 +66,8 @@
     "side": "Side",
     "level": "Level",
     "patching": "Patching",
-    "nlog_modify_failed": "NLog could not be modified"
+    "nlog_modify_failed": "NLog could not be modified",
+    "file_mismatch_dialog_message": "The input file hash doesn't match the expected hash. You may be using the wrong version\nof AKI for your client files.\n\nDo you want to continue?",
+    "yes": "Yes",
+    "no": "No"
 }

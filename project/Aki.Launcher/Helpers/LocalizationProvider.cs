@@ -151,6 +151,9 @@ namespace Aki.Launcher.Helpers
             englishLocale.level = "Level";
             englishLocale.game_path = "Patching";
             englishLocale.nlog_modify_failed = "NLog could not be modified";
+            englishLocale.file_mismatch_dialog_message = "The input file hash doesn't match the expected hash. You may be using the wrong version\nof AKI for your client files.\n\nDo you want to continue?";
+            englishLocale.yes = "Yes";
+            englishLocale.no = "No";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -1243,7 +1246,7 @@ namespace Aki.Launcher.Helpers
         }
         #endregion
 
-        #region
+        #region nlog_modify_failed
         private string _nlog_modify_failed;
         public string nlog_modify_failed
         {
@@ -1254,6 +1257,54 @@ namespace Aki.Launcher.Helpers
                 {
                     _nlog_modify_failed = value;
                     RaisePropertyChanged(nameof(nlog_modify_failed));
+                }
+            }
+        }
+        #endregion
+
+        #region file_mismatch_dialog_message
+        private string _file_mismatch_dialog_message;
+        public string file_mismatch_dialog_message
+        {
+            get => _file_mismatch_dialog_message;
+            set
+            {
+                if(_file_mismatch_dialog_message != value)
+                {
+                    _file_mismatch_dialog_message = value;
+                    RaisePropertyChanged(nameof(file_mismatch_dialog_message));
+                }
+            }
+        }
+        #endregion
+
+        #region yes
+        private string _yes;
+        public string yes
+        {
+            get => _yes;
+            set
+            {
+                if(_yes != value)
+                {
+                    _yes = value;
+                    RaisePropertyChanged(nameof(yes));
+                }
+            }
+        }
+        #endregion
+
+        #region no
+        private string _no;
+        public string no
+        {
+            get => _no;
+            set
+            {
+                if(_no != value)
+                {
+                    _no = value;
+                    RaisePropertyChanged(nameof(no));
                 }
             }
         }
