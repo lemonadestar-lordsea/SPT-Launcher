@@ -65,9 +65,9 @@
     "nickname": "Никнейм",
     "side": "Сторона",
     "level": "Уровень",
-    "patching": "Patching",
-    "nlog_modify_failed": "NLog could not be modified",
-    "file_mismatch_dialog_message": "The input file hash doesn't match the expected hash. You may be using the wrong version\nof AKI for your client files.\n\nDo you want to continue?",
+    "patching": "Патчинг",
+    "nlog_modify_failed": "NLog не может быть модифицирован",
+    "file_mismatch_dialog_message": "Хеш-сумма исходного файла не соотвествует требуемому.\nВозможно используется несовместимая версия клиента.\n\nВы хотите продолжить?",
     "yes": "Да",
     "no": "Нет"
 }
