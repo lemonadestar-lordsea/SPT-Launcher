@@ -77,9 +77,7 @@ namespace Aki.Launcher
 
                 if (result is PatchResultInfo pri && pri.Status == ByteBanger.PatchResultType.InputChecksumMismatch)
                 {
-                    //TODO - localize this
-                    ConfirmationDialog confirmContinuePatching = new ConfirmationDialog("The input file hash doesn't match the expected hash. You may be using the wrong version\nof AKI for your client files.\n\nDo you want to continue?",
-                                                                 "Yes", "No");
+                    ConfirmationDialog confirmContinuePatching = new ConfirmationDialog(LocalizationProvider.Instance.file_mismatch_dialog_message, LocalizationProvider.Instance.yes, LocalizationProvider.Instance.no);
 
                     var confirmResult = await DialogHost.ShowDialog(confirmContinuePatching);
 
