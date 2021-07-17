@@ -36,7 +36,8 @@ namespace Aki.Launcher.Helpers
 
             if (Patches.Count <= 0)
             {
-                RaiseTaskCancelled("No Patches to apply"); //TODO - add localization
+                //no patches to apply. Should probably raisetaskcancelled, but for now this is probably fine.
+                RaiseProgressChanged(100, LocalizationProvider.Instance.ok);
             }
 
             try
@@ -72,7 +73,7 @@ namespace Aki.Launcher.Helpers
                 int percentage = (int)Math.Floor((double)processed / Patches.Count * 100);
                 RaiseProgressChanged(percentage, LocalizationProvider.Instance.patching);
 
-                PatchResultInfo result = FilePatcher.Run(GamePath, patch);
+                PatchResultInfo result = FilePatcher.Run(GamePath, patch, IgnoreInputHashMismatch);
 
                 if (!result.OK)
                 {
