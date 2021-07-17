@@ -56,6 +56,16 @@ namespace Aki.Launcher
                 return GameStarterResult.FromError(-7);
             }
 
+
+            // check game path
+            var clientExecutable = $@"{gamepath}EscapeFromTarkov.exe";
+
+            if (!File.Exists(clientExecutable))
+            {
+                return GameStarterResult.FromError(-6);
+            }
+
+
             // apply patches
             ProgressReportingPatchRunner patchRunner = new ProgressReportingPatchRunner(gamepath);
             ProgressDialog pDialog = new ProgressDialog(patchRunner);
@@ -68,7 +78,7 @@ namespace Aki.Launcher
                 if (result is PatchResultInfo pri && pri.Status == ByteBanger.PatchResultType.InputChecksumMismatch)
                 {
                     //TODO - localize this
-                    ConfirmationDialog confirmContinuePatching = new ConfirmationDialog("The input file hash doesn't match the expected hash\n\nDo you want to continue?\nIf you aren't sure, just click 'No'",
+                    ConfirmationDialog confirmContinuePatching = new ConfirmationDialog("The input file hash doesn't match the expected hash. You may be using the wrong version\nof AKI for your client files.\n\nDo you want to continue?",
                                                                  "Yes", "No");
 
                     var confirmResult = await DialogHost.ShowDialog(confirmContinuePatching);
@@ -100,14 +110,7 @@ namespace Aki.Launcher
                 if (!handled) return GameStarterResult.FromError(-4);
             }
 
-            // start game
-            var clientExecutable = $@"{gamepath}EscapeFromTarkov.exe";
-
-            if (!File.Exists(clientExecutable))
-            {
-                return GameStarterResult.FromError(-4);
-            }
-
+            //start game
             var clientProcess = new ProcessStartInfo(clientExecutable)
             {
                 Arguments = $"-force-gfx-jobs native -token={account.id} -config={Json.Serialize(new ClientConfig(server.backendUrl))}",

@@ -24,8 +24,6 @@ namespace Aki.Launcher.Helpers
 
         public Action ProgressableTask => RunPatcher;
 
-        public bool CheckPath => File.Exists(GamePath);
-
         private void RunPatcher()
         {
             if (!SetPatches)
