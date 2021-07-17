@@ -51,8 +51,9 @@ namespace Aki.Launcher.Helpers
                     RaiseTaskCancelled(PatchResultInfo.FromError(result.Status, Patches.ToArray()));
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                RaiseTaskCancelled(ex);
             }
             finally
             {

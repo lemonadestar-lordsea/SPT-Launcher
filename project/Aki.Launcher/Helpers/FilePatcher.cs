@@ -74,7 +74,7 @@ namespace Aki.Launcher.Helpers
 
                             target = new FileInfo(VFS.Combine(targetpath, file.Name.Replace(".bpf", "")));
 
-                            PatchResultInfo result = Patch(targetpath, patchpath, IgnoreInputHashMismatch);
+                            PatchResultInfo result = Patch(target.FullName, file.FullName, IgnoreInputHashMismatch);
 
                             if (!result.OK)
                             {
@@ -93,7 +93,12 @@ namespace Aki.Launcher.Helpers
 
             foreach (DirectoryInfo directory in di.GetDirectories())
             {
-                PatchAll(VFS.Combine(targetpath, directory.Name), directory.FullName);
+                var result = PatchAll(VFS.Combine(targetpath, directory.Name), directory.FullName, IgnoreInputHashMismatch);
+
+                if(result != null && !result.OK)
+                {
+                    return result;
+                }
             }
 
             di.Refresh();
