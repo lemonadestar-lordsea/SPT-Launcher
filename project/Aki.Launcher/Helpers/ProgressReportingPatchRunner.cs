@@ -65,11 +65,12 @@ namespace Aki.Launcher.Helpers
             FilePatcher.Restore(GamePath);
 
             int processed = 0;
+            int countpatches = Patches.Count;
 
             var _patches = Patches.ToArray();
             foreach (var patch in _patches)
             {
-                int percentage = (int)Math.Floor((double)processed / Patches.Count * 100);
+                int percentage = (int)Math.Floor((double)processed / countpatches * 100);
                 RaiseProgressChanged(percentage, LocalizationProvider.Instance.patching);
 
                 PatchResultInfo result = FilePatcher.Run(GamePath, patch, IgnoreInputHashMismatch);
@@ -80,6 +81,8 @@ namespace Aki.Launcher.Helpers
                 }
 
                 Patches.Remove(patch);
+
+                processed++;
             }
 
             RaiseProgressChanged(100, LocalizationProvider.Instance.ok);

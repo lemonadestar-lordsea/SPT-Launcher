@@ -64,8 +64,8 @@ namespace Aki.Launcher.Custom_Controls.Dialogs
 
             Application.Current.Dispatcher.Invoke(() => { progressBar.Value = Percentage; });
 
-            //if the percentage is 100%, return our dialog results (to close the dialog)
-            if (Percentage >= 100)
+            //if the main progress bar percentage is 100%, return our dialog results (to close the dialog)
+            if (progressBar == Progress_Bar && Percentage >= 100)
             {
                 RaiseResultsReady(null);
                 return;
