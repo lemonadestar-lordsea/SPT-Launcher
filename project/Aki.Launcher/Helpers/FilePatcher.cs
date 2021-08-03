@@ -53,60 +53,35 @@ namespace Aki.Launcher.Helpers
         {
             DirectoryInfo di = new DirectoryInfo(patchpath);
 
-            //TODO - Simply file iteration
-            //I feel like we could simplify this to not iterate over all the files, but I'm having a brain fart and can't think.
-            //Basically, the only issue is we need to be able to get the target file path. I'll look at this again later if no one else does. Brain is being dumb... -waffle
-            int countfiles = di.GetFiles("*.bpf", SearchOption.AllDirectories).Length;
+            // get all patch files within patchpath and it's sub directories.
+            var patchfiles = di.GetFiles("*.bpf", SearchOption.AllDirectories);
+
+            int countfiles = patchfiles.Length;
 
             int processed = 0;
 
-            foreach (FileInfo file in di.GetFiles())
+            foreach (FileInfo file in patchfiles)
             {
                 FileInfo target;
 
-                switch (file.Extension)
+                int progress = (int)Math.Floor((double)processed / countfiles * 100);
+                RaisePatchProgress(progress, $"{LocalizationProvider.Instance.patching} {file.Name} ...");
+
+                // get the relative portion of the patch file that will be appended to targetpath in order to create an official target file.
+                var relativefile = file.FullName.Substring(patchpath.Length).TrimStart('\\');
+
+                // create a target file from the relative patch file while utilizing targetpath as the root directory.
+                target = new FileInfo(VFS.Combine(targetpath, relativefile.Replace(".bpf", "")));
+
+                PatchResultInfo result = Patch(target.FullName, file.FullName, IgnoreInputHashMismatch);
+
+                if (!result.OK)
                 {
-                    // patch
-                    case ".bpf":
-                        {
-                            int progress = (int)Math.Floor((double)processed / countfiles * 100);
-                            RaisePatchProgress(progress, $"{LocalizationProvider.Instance.patching} {file.Name} ...");
-
-                            target = new FileInfo(VFS.Combine(targetpath, file.Name.Replace(".bpf", "")));
-
-                            PatchResultInfo result = Patch(target.FullName, file.FullName, IgnoreInputHashMismatch);
-
-                            if (!result.OK)
-                            {
-                                // patch failed
-                                return result;
-                            }
-
-                            processed++;
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-
-            foreach (DirectoryInfo directory in di.GetDirectories())
-            {
-                var result = PatchAll(VFS.Combine(targetpath, directory.Name), directory.FullName, IgnoreInputHashMismatch);
-
-                if(result != null && !result.OK)
-                {
+                    // patch failed
                     return result;
                 }
-            }
 
-            di.Refresh();
-
-            if (di.GetFiles().Length == 0 && di.GetDirectories().Length == 0)
-            {
-                // remove empty folders
-                di.Delete();
+                processed++;
             }
 
             RaisePatchProgress(100, LocalizationProvider.Instance.ok);
