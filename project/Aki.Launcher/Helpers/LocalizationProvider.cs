@@ -149,7 +149,8 @@ namespace Aki.Launcher.Helpers
             englishLocale.nickname = "Nickname";
             englishLocale.side = "Side";
             englishLocale.level = "Level";
-            englishLocale.game_path = "Patching";
+            englishLocale.game_path = "Game Path";
+            englishLocale.patching = "Patching";
             englishLocale.nlog_modify_failed = "NLog could not be modified";
             englishLocale.file_mismatch_dialog_message = "The input file hash doesn't match the expected hash. You may be using the wrong version\nof AKI for your client files.\n\nDo you want to continue?";
             englishLocale.yes = "Yes";

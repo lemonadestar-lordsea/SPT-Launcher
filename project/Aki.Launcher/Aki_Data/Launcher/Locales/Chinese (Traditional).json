@@ -29,7 +29,6 @@
     "eft_exe_not_found_warning": "在當前路徑並未能找到 EscapeFromTarkov.exe, 請檢查檔案路徑是否正確",
     "account_exist": "用戶名稱已存在",
     "url": "URL",
-    "default": "預設",
     "default_language": "預設語言",
     "game_path": "遊戲路徑",
     "clear_game_settings": "重置遊戲設定",

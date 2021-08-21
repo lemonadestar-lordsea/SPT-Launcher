@@ -57,10 +57,7 @@ namespace Aki.Launcher.ViewModel
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (LauncherSettingsProvider.Instance.IsEditingSettings)
-            {
-                LauncherSettingsProvider.Instance.SaveSettings();
-            }
+            LauncherSettingsProvider.Instance.SaveSettings();
         }
 
         #region General Use Methods

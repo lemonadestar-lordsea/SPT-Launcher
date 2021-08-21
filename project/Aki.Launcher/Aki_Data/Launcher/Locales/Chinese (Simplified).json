@@ -29,7 +29,6 @@
     "eft_exe_not_found_warning": "在当前路径中找不到EscapeFromTarkov.exe。",
     "account_exist": "该账户已存在",
     "url": "URL",
-    "default": "默认",
     "default_language": "默认语言",
     "game_path": "游戏路径",
     "clear_game_settings": "恢复默认游戏设置",

@@ -29,7 +29,6 @@
     "eft_exe_not_found_warning": "EscapeFromTarkov.exe 게임 파일을 발견할수 없습니다..",
     "account_exist": "계정이 이미 사용중입니다.",
     "url": "주소",
-    "default": "기본",
     "default_language": "기본 언어",
     "game_path": "게임 경로",
     "clear_game_settings": "게임 설정 초기화",
