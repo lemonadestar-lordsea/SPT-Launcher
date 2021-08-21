@@ -98,7 +98,7 @@ namespace Aki.Launcher
 
         public void OnCloseAppCommand(object parameter)
         {
-            Environment.Exit(0);
+            Application.Current.MainWindow.Close();
         }
 
         public void OnMenuItemCommand(object parameter)

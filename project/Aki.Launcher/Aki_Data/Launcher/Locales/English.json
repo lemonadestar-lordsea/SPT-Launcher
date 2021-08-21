@@ -29,7 +29,6 @@
     "eft_exe_not_found_warning": "EscapeFromTarkov.exe not found at game path. Please check that the directory is correct.",
     "account_exist": "Account already exists",
     "url": "URL",
-    "default": "Default",
     "default_language": "Default Language",
     "game_path": "Game Path",
     "clear_game_settings": "Clear Game Settings",

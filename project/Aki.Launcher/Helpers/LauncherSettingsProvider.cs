@@ -49,21 +49,6 @@ namespace Aki.Launcher.Helpers
             }
         }
 
-        private bool _IsEditingSettings;
-        [JsonIgnore]
-        public bool IsEditingSettings
-        {
-            get => _IsEditingSettings;
-            set
-            {
-                if (_IsEditingSettings != value)
-                {
-                    _IsEditingSettings = value;
-                    RaisePropertyChanged(nameof(IsEditingSettings));
-                }
-            }
-        }
-
         private bool _AllowSettings;
         [JsonIgnore]
         public bool AllowSettings

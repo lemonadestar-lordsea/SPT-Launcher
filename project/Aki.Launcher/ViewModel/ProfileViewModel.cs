@@ -152,10 +152,5 @@ namespace Aki.Launcher.ViewModel
 
             UpdateProfileInfo();
         }
-
-        private void TrayIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            Application.Current.MainWindow.Show();
-        }
     }
 }

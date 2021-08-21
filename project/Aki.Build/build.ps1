@@ -5,20 +5,26 @@
 # - Merijn Hendriks
 # - waffle.lord
 
-param ([switch]$VSBuilt)
+param (
+        [switch]$VSBuilt,
+        [string]$config = "Release"
+    )
 
 #setup variables
+Write-Host "Running build for config: $($config)" -ForegroundColor Cyan
 $buildDir = "Build/"
 $launcherData = "./Aki.Launcher/Aki_Data/"
-$publishSwitches = "--nologo --verbosity minimal --runtime win10-x64 --configuration Release -p:PublishSingleFile=true --no-self-contained"
+$publishSwitches = "--nologo --verbosity minimal --runtime win10-x64 --configuration $($config) -p:PublishSingleFile=true --no-self-contained"
 $publishArgs = "publish ./Aki.Launcher/Aki.Launcher.csproj "
 
 if($VSBuilt) {
-    Write-Host "Running from VS with NoBuild" -ForegroundColor Cyan
     $buildDir = "../Build"
     $launcherData = "../Aki.Launcher/Aki_Data"
     $publishArgs = "publish ../Aki.Launcher/Aki.Launcher.csproj "
-    $publishSwitches += " --no-build"
+
+    if($config -eq "Release") {
+        $publishSwitches += " --no-build"
+    }
 }
 
 $publishSwitches += " --output ${buildDir}"
@@ -63,7 +69,10 @@ Wait-Process -InputObject $publishProcess
 $publishProcess.Dispose()
 Write-Host "`nDone" -ForegroundColor Cyan
 
-Remove-Item "$($buildDir)\Launcher.pdb"
+if($config -eq "Release") {
+    Remove-Item "$($buildDir)\Launcher.pdb"
+}
+
 Remove-Item "$($buildDir)\Aki.ByteBanger.pdb"
 
 #copy aki_data folder

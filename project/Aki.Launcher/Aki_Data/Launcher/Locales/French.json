@@ -29,7 +29,6 @@
     "eft_exe_not_found_warning": "EscapeFromTarkov.exe est introuvable dans le répertoire du jeu.",
     "account_exist": "Ce compte existe déjà.",
     "url": "URL",
-    "default": "Par défaut",
     "default_language": "Langue par défaut",
     "game_path": "Répertoire du jeu",
     "clear_game_settings": "Réinitialiser les paramètres du jeu",

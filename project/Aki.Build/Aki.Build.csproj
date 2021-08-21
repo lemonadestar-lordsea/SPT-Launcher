@@ -11,7 +11,7 @@
   </ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(BuildingInsideVisualStudio)' == 'true'">
-		<Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;Release&quot; (&#xD;&#xA;powershell.exe -ExecutionPolicy Unrestricted -File $(SolutionDir)\Aki.Build\build.ps1 -VSBuilt&#xD;&#xA;) else (&#xD;&#xA;echo NOTICE: Build with Release configuration to run build script&#xD;&#xA;)" />
+		<Exec Command="powershell.exe -ExecutionPolicy Unrestricted -File $(SolutionDir)\Aki.Build\build.ps1 -VSBuilt &quot;$(ConfigurationName)&quot;" />
 	</Target>
 
 </Project>
