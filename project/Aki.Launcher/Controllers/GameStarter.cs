@@ -69,6 +69,8 @@ namespace Aki.Launcher
             // apply patches
             ProgressReportingPatchRunner patchRunner = new ProgressReportingPatchRunner(gamepath);
             ProgressDialog pDialog = new ProgressDialog(patchRunner);
+            pDialog.UpdateIndeterminateProgress(true);
+
             var result = await DialogHost.ShowDialog(pDialog);
 
             if (result != null)
