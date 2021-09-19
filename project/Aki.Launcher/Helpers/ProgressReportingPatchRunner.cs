@@ -11,11 +11,10 @@ using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Models.Launcher;
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace Aki.Launcher.Helpers
 {
-    public class ProgressReportingPatchRunner : IUpdateProgress, IUpdateSubProgress
+    public class ProgressReportingPatchRunner : IUpdateProgress
     {
         private string GamePath = "";
         private List<string> Patches = new List<string>();
@@ -29,7 +28,6 @@ namespace Aki.Launcher.Helpers
             if (!SetPatches)
             {
                 Patches.AddRange(GetCorePatches());
-                Patches.AddRange(GetModPatches());
             }
 
             if (Patches.Count <= 0)
@@ -40,8 +38,6 @@ namespace Aki.Launcher.Helpers
 
             try
             {
-                FilePatcher.PatchProgress += FilePatcher_PatchProgress;
-
                 PatchResultInfo result = PatchFiles();
 
                 if (!result.OK)
@@ -52,11 +48,6 @@ namespace Aki.Launcher.Helpers
             catch(Exception ex)
             {
                 RaiseTaskCancelled(ex);
-            }
-            finally
-            {
-                //Static events can be super not cool if they don't get unsubscribed. Adding unsubscribe in finally to ensure class instance is collected by GC.
-                FilePatcher.PatchProgress -= FilePatcher_PatchProgress;
             }
         }
 
@@ -94,38 +85,7 @@ namespace Aki.Launcher.Helpers
             return VFS.GetDirectories(VFS.Combine(GamePath, "Aki_Data/Launcher/Patches/"));
         }
 
-        private string[] GetModPatches()
-        {
-            var basepath = "user/mods/";
-
-            if (!VFS.Exists(basepath))
-            {
-                return new string[0];
-            }
-
-            var result = new List<string>();
-            var mods = VFS.GetDirectories(VFS.Combine(GamePath, basepath));
-
-            foreach (var mod in mods)
-            {
-                var modPatch = VFS.Combine(GamePath, string.Format("{0}{1}/patches/", basepath, mod));
-
-                if (VFS.Exists(modPatch))
-                {
-                    result.Add(modPatch);
-                }
-            }
-
-            return result.ToArray();
-        }
-
         #region EventHandlers
-        private void FilePatcher_PatchProgress(object sender, ProgressInfo e)
-        {
-            //Update our progress dialog's sub progress bar whenever the file patcher updates it's progress
-            RaiseSubProgressChanged(e.Percentage, e.Message);
-        }
-
         //Change main progress bar
         public event EventHandler<ProgressInfo> ProgressChanged;
         protected virtual void RaiseProgressChanged(int Percentage, string Text)
@@ -137,13 +97,6 @@ namespace Aki.Launcher.Helpers
         protected virtual void RaiseTaskCancelled(object Data)
         {
             TaskCancelled?.Invoke(this, Data);
-        }
-
-        //Change sub progress bar
-        public event EventHandler<ProgressInfo> SubProgressChanged;
-        protected virtual void RaiseSubProgressChanged(int Percentage, string Message)
-        {
-            SubProgressChanged?.Invoke(this, new ProgressInfo(Percentage, Message));
         }
         #endregion
 
