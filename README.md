@@ -6,7 +6,7 @@ Custom launcher for Escape From Tarkov to start the game in offline mode
 
 - Escape From Tarkov 0.12.11.2.14290
 - Visual Studio Build Tools (.NET desktop workload)
-- .NET 5.0
+- .NET 5.0.10
 - VSCodium
 
 ## Build
