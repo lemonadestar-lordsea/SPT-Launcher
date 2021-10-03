@@ -13,19 +13,20 @@ namespace Aki.Launcher.Models.Launcher
     public class PatchResultInfo
     {
         public PatchResultType Status { get; }
-        public bool OK { get; }
+        
+        public int NumCompleted { get; }
+        
+        public int NumTotal { get; }
 
-        public bool HasRemainingPatches => RemainingPatches.Length > 0;
-        public string[] RemainingPatches { get; }
+        public bool OK => (Status == PatchResultType.Success) || (Status == PatchResultType.AlreadyPatched);
+        
+        public int PercentComplete => (NumCompleted * 100) / NumTotal;
 
-        protected PatchResultInfo(PatchResultType Status, bool OK, string[] RemainingPatches)
+        public PatchResultInfo(PatchResultType Status, int NumCompleted, int NumTotal)
         {
             this.Status = Status;
-            this.OK = OK;
-            this.RemainingPatches = RemainingPatches;
+            this.NumCompleted = NumCompleted;
+            this.NumTotal = NumTotal;
         }
-
-        public static PatchResultInfo FromSuccess(PatchResultType Status) => new PatchResultInfo(Status, true, null);
-        public static PatchResultInfo FromError(PatchResultType Status, string[] RemainingPatches = null) => new PatchResultInfo(Status, false, RemainingPatches);
     }
 }

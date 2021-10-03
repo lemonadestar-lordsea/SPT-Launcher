@@ -6,78 +6,60 @@
  * waffle.lord
  */
 
-using Aki.Launcher.Interfaces;
 using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Models.Launcher;
-using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Aki.ByteBanger;
 
 namespace Aki.Launcher.Helpers
 {
-    public class ProgressReportingPatchRunner : IUpdateProgress
+    public class ProgressReportingPatchRunner
     {
-        private string GamePath = "";
-        private List<string> Patches = new List<string>();
-        private bool SetPatches = false;
-        private bool IgnoreInputHashMismatch = false;
+        private string GamePath;
+        private string[] Patches;
 
-        public Action ProgressableTask => RunPatcher;
-
-        private void RunPatcher()
-        {
-            if (!SetPatches)
-            {
-                Patches.AddRange(GetCorePatches());
-            }
-
-            if (Patches.Count <= 0)
-            {
-                //no patches to apply. Should probably raisetaskcancelled, but for now this is probably fine.
-                RaiseProgressChanged(100, LocalizationProvider.Instance.ok);
-            }
-
-            try
-            {
-                PatchResultInfo result = PatchFiles();
-
-                if (!result.OK)
-                {
-                    RaiseTaskCancelled(PatchResultInfo.FromError(result.Status, Patches.ToArray()));
-                }
-            }
-            catch(Exception ex)
-            {
-                RaiseTaskCancelled(ex);
-            }
-        }
-
-        private PatchResultInfo PatchFiles()
+        private async IAsyncEnumerable<PatchResultInfo> TryPatchFiles(bool IgnoreInputHashMismatch)
         {
             FilePatcher.Restore(GamePath);
 
             int processed = 0;
-            int countpatches = Patches.Count;
+            int countpatches = Patches.Length;
 
-            var _patches = Patches.ToArray();
+            var _patches = Patches;
             foreach (var patch in _patches)
             {
-                int percentage = (int)Math.Floor((double)processed / countpatches * 100);
-                RaiseProgressChanged(percentage, LocalizationProvider.Instance.patching);
-
-                PatchResultInfo result = FilePatcher.Run(GamePath, patch, IgnoreInputHashMismatch);
-
+                var result =
+                    await Task.Factory.StartNew(() => FilePatcher.Run(GamePath, patch, IgnoreInputHashMismatch));
                 if (!result.OK)
                 {
-                    return result;
+                    yield return new PatchResultInfo(result.Status, processed, countpatches);
+                    yield break;
+                }
+                
+                processed++;
+                var ourResult = new PatchResultInfo(PatchResultType.Success, processed, countpatches);
+                yield return ourResult;
+            }
+        }
+
+        public async IAsyncEnumerable<PatchResultInfo> PatchFiles()
+        {
+            await foreach (var info in TryPatchFiles(false))
+            {
+                yield return info;
+
+                if (info.OK)
+                    continue;
+                
+                // This will run _after_ the caller decides to continue iterating.
+                await foreach (var secondInfo in TryPatchFiles(true))
+                {
+                    yield return secondInfo;
                 }
 
-                Patches.Remove(patch);
-
-                processed++;
+                yield break;
             }
-
-            RaiseProgressChanged(100, LocalizationProvider.Instance.ok);
-            return PatchResultInfo.FromSuccess(ByteBanger.PatchResultType.Success);
         }
 
         private string[] GetCorePatches()
@@ -85,30 +67,10 @@ namespace Aki.Launcher.Helpers
             return VFS.GetDirectories(VFS.Combine(GamePath, "Aki_Data/Launcher/Patches/"));
         }
 
-        #region EventHandlers
-        //Change main progress bar
-        public event EventHandler<ProgressInfo> ProgressChanged;
-        protected virtual void RaiseProgressChanged(int Percentage, string Text)
-        {
-            ProgressChanged?.Invoke(this, new ProgressInfo(Percentage, Text));
-        }
-
-        public event EventHandler<object> TaskCancelled;
-        protected virtual void RaiseTaskCancelled(object Data)
-        {
-            TaskCancelled?.Invoke(this, Data);
-        }
-        #endregion
-
-        public ProgressReportingPatchRunner(string GamePath, string[] Patches = null, bool IgnoreInputHashMismatch = false)
+        public ProgressReportingPatchRunner(string GamePath, string[] Patches = null)
         {
             this.GamePath = GamePath;
-            this.IgnoreInputHashMismatch = IgnoreInputHashMismatch;
-
-            if(Patches != null && Patches.Length > 0)
-            {
-                this.Patches = new List<string>(Patches);
-            }
+            this.Patches = Patches ?? GetCorePatches();
         }
     }
 }

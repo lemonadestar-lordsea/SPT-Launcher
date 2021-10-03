@@ -27,7 +27,7 @@ namespace Aki.Launcher.ViewModel
         public ProfileInfo ProfileInfo { get; set; }
         public AwaitableDelegateCommand StartGameCommand { get; set; }
         private NavigationViewModel navigationViewModel { get; set; }
-        private GameStarter gameStarter = new GameStarter();
+        private GameStarter gameStarter = new GameStarter(new GameStarterFrontend());
 
         private ProcessMonitor monitor { get; set; }
         public ProfileViewModel(NavigationViewModel viewModel)

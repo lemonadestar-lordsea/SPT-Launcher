@@ -38,7 +38,7 @@ namespace Aki.Launcher.ViewModel
         public LocaleCollection Locales { get; set; } = new LocaleCollection();
         private NavigationViewModel navigationViewModel { get; set; }
 
-        private GameStarter gameStarter = new GameStarter();
+        private GameStarter gameStarter = new GameStarter(new GameStarterFrontend());
         public SettingsViewModel(NavigationViewModel viewModel)
         {
             navigationViewModel = viewModel;
