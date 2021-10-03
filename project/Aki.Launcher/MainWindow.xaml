@@ -12,7 +12,7 @@ Merijn Hendriks
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cvt="clr-namespace:Aki.Launcher.Converters"
-        xmlns:helpers="clr-namespace:Aki.Launcher.Helpers"
+        xmlns:helpers="clr-namespace:Aki.Launcher.Helpers;assembly=Aki.Launcher.Base"
         xmlns:cc="clr-namespace:Aki.Launcher.Custom_Controls"
         xmlns:local="clr-namespace:Aki.Launcher"
         mc:Ignorable="d"

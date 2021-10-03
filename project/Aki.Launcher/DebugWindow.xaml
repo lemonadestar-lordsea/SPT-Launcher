@@ -12,7 +12,7 @@ waffle.lord
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Aki.Launcher"
-        xmlns:helpers="clr-namespace:Aki.Launcher.Helpers"
+        xmlns:helpers="clr-namespace:Aki.Launcher.Helpers;assembly=Aki.Launcher.Base"
         mc:Ignorable="d"
         Title="Launcher Mini Debug Log" Height="300" Width="700" Background="DimGray">
     <Grid>
