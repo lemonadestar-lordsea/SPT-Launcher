@@ -50,7 +50,7 @@ namespace Aki.Launcher.Helpers
                 }
 
                 ProgressChanged?.Invoke(this, new ProgressInfo(100, LocalizationProvider.Instance.ok));
-                TaskCancelled?.Invoke(this, new PatchResultInfo(PatchResultType.Success, 0, 0));
+                TaskCancelled?.Invoke(this, new PatchResultInfo(PatchResultType.Success, 1, 1));
             }
 
             private void RunTask()
@@ -77,8 +77,18 @@ namespace Aki.Launcher.Helpers
                 await DialogHost.ShowDialog(msgDialog);
                 throw new TaskCanceledException();
             }
-            
-            return result as PatchResultInfo;
+
+            if (result is PatchResultInfo patchResultInfo)
+            {
+                return patchResultInfo;
+            }
+
+            if (result != null)
+            {
+                throw new Exception("ProgressDialog returned unexpected result");
+            }
+
+            return new PatchResultInfo(PatchResultType.Success, 1, 1);
         }
 
         public async Task CompletePatchTask(IAsyncEnumerable<PatchResultInfo> task)
