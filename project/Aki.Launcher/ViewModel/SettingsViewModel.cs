@@ -154,7 +154,7 @@ namespace Aki.Launcher.ViewModel
                 return true;
             }
 
-            string EFTSettingsFolder = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Escape from Tarkov";
+            string EFTSettingsFolder = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Escape from Tarkov");
             string backupFolderPath = Path.Combine(EFTSettingsFolder, "Backups");
 
             if (Directory.Exists(EFTSettingsFolder))

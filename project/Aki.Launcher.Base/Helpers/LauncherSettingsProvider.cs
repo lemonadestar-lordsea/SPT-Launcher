@@ -19,7 +19,7 @@ namespace Aki.Launcher.Helpers
 {
     public static class LauncherSettingsProvider
     {
-        public static string DefaultSettingsFileLocation = $"{Environment.CurrentDirectory}\\user\\launcher\\config.json";
+        public static string DefaultSettingsFileLocation = Path.Join(Environment.CurrentDirectory, "user", "launcher", "config.json");
         public static Settings Instance { get; } = Json.Load<Settings>(DefaultSettingsFileLocation) ?? new Settings();
     }
 
