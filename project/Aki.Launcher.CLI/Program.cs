@@ -119,12 +119,6 @@ namespace Aki.Launcher.CLI
             rootCommand.AddGlobalOption(new Option<string>(new[] {"--game-dir", "--game-directory"}, "The target game directory"));
             rootCommand.AddGlobalOption(new Option<string>(new[] {"--original-game-dir", "--original-game-directory"},
                 "The directory of Tarkov downloaded from the BSG launcher"));
-            
-            rootCommand.Handler = CommandHandler.Create<string>(async (serverAddress) =>
-            {
-                Console.WriteLine("connecting");
-                await ServerManager.LoadDefaultServerAsync(serverAddress);
-            });
 
             Environment.Exit(rootCommand.Invoke(args));
         }
