@@ -104,7 +104,7 @@ namespace Aki.Launcher.ViewModel
 
         public void OnRemoveRegistryKeysCommand(object parameter)
         {
-            bool regKeysRemoved = gameStarter.RemoveRegisteryKeys();
+            bool regKeysRemoved = gameStarter.RemoveRegistryKeys();
 
             if (regKeysRemoved)
             {

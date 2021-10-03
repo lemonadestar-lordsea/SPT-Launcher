@@ -24,16 +24,16 @@ namespace Aki.Launcher
     public class GameStarter
     {
         private readonly IGameStarterFrontend _frontend;
+        private readonly string _originalGamePath;
         private readonly string _gamePath;
         
-        
-        private const string registryInstall = @"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov";
         private const string registrySettings = @"Software\Battlestate Games\EscapeFromTarkov";
         
-        public GameStarter(IGameStarterFrontend frontend, string gamePath = null)
+        public GameStarter(IGameStarterFrontend frontend, string gamePath = null, string originalGamePath = null)
         {
             _frontend = frontend;
             _gamePath = gamePath ?? LauncherSettingsProvider.Instance.GamePath ?? Environment.CurrentDirectory;
+            _originalGamePath = originalGamePath ?? LauncherSettingsProvider.Instance.OriginalGamePath;
         }
 
         public async Task<GameStarterResult> LaunchGame(ServerInfo server, AccountInfo account)
@@ -53,7 +53,7 @@ namespace Aki.Launcher
 
             if (account.wipe)
             {
-                RemoveRegisteryKeys();
+                RemoveRegistryKeys();
                 CleanTempFiles();
             }
 
@@ -105,18 +105,18 @@ namespace Aki.Launcher
             {
                 var value4 = new FileInfo[]
                 {
-                    new FileInfo(Path.Join(_gamePath, @"Launcher.exe")),
-                    new FileInfo(Path.Combine(_gamePath, @"Server.exe")),
-                    new FileInfo(Path.Combine(_gamePath, @"EscapeFromTarkov_Data\Managed\0Harmony.dll")),
-                    new FileInfo(Path.Combine(_gamePath, @"EscapeFromTarkov_Data\Managed\NLog.dll.nlog")),
-                    new FileInfo(Path.Combine(_gamePath, @"EscapeFromTarkov_Data\Managed\Nlog.Aki.Loader.dll")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"Launcher.exe")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"Server.exe")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\0Harmony.dll")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\NLog.dll.nlog")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\Nlog.Aki.Loader.dll")),
                 };
                 var value5 = new FileInfo[]
                 {
-                    new FileInfo(Path.Combine(_gamePath, @"EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll.bak")),
-                    new FileInfo(Path.Combine(_gamePath, @"EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll.bak")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll")),
                 };
-                var value6 = new DirectoryInfo(Path.Combine(_gamePath, @"Aki_Data"));
+                var value6 = new DirectoryInfo(Path.Combine(_originalGamePath, @"Aki_Data"));
 
                 foreach (var value in value4)
                 {
@@ -177,16 +177,20 @@ namespace Aki.Launcher
         int IsPiratedCopy()
         {
             var value0 = 0;
+            
+            Console.WriteLine(_originalGamePath);
 
             try
             {
                 var value4 = new FileInfo[3]
                 {
-                    new FileInfo(Path.Combine(_gamePath, "Uninstall.exe")),
-                    new FileInfo(Path.Combine(_gamePath, @"BattlEye\BEClient_x64.dll")),
-                    new FileInfo(Path.Combine(_gamePath, @"BattlEye\BEService_x64.dll"))
+                    new FileInfo(Path.Combine(_originalGamePath, "Uninstall.exe")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"BattlEye", "BEClient_x64.dll")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"BattlEye", "BEService_x64.dll"))
                 };
 
+                Console.WriteLine(value4[0].FullName);
+                
                 value0 = value4.Length;
 
                 foreach (var value in value4)
@@ -209,7 +213,7 @@ namespace Aki.Launcher
         /// Remove the registry keys
         /// </summary>
         /// <returns>returns true if the keys were removed. returns false if an exception occured</returns>
-		public bool RemoveRegisteryKeys()
+		public bool RemoveRegistryKeys()
         {
             try
             {
