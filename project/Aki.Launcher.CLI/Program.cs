@@ -58,13 +58,14 @@ namespace Aki.Launcher.CLI
     
     class Program
     {
-        private static async Task<int> Launch(LoginCredentials login, GameOptions gameOptions)
+        private static async Task<int> Launch(LoginCredentials login, GameOptions gameOptions, bool showOnly)
         {
             await login.Login();
 
             var starter = new GameStarter(new GameStarterFrontendCLI(),
                 gamePath: gameOptions.GameDirectory,
-                originalGamePath: gameOptions.OriginalGameDirectory);
+                originalGamePath: gameOptions.OriginalGameDirectory,
+                showOnly: showOnly);
             var result = await starter.LaunchGame(ServerManager.SelectedServer, AccountManager.SelectedAccount);
             if (!result.Succeeded)
             {
@@ -103,7 +104,7 @@ namespace Aki.Launcher.CLI
             {
                 new Option<bool>("--show-only", "Only show the command to run"),
             };
-            launchCommand.Handler = CommandHandler.Create<LoginCredentials, GameOptions>(Launch);
+            launchCommand.Handler = CommandHandler.Create<LoginCredentials, GameOptions, bool>(Launch);
 
             var rootCommand = new RootCommand
             {
@@ -113,7 +114,7 @@ namespace Aki.Launcher.CLI
             rootCommand.AddGlobalOption(new Option<string>(new[] {"-u", "--username"}, "Username to login as"));
             rootCommand.AddGlobalOption(new Option<string>(new[] {"-p", "--password"}, "Password for user to login as"));
             rootCommand.AddGlobalOption(new Option<string>(new[] {"-s", "--server-address"},
-                                                            () => "https://localhost:8443",
+                                                            () => "https://localhost:443",
                                                             "Address to contact Server on"));
             rootCommand.AddGlobalOption(new Option<string>(new[] {"--game-dir", "--game-directory"}, "The target game directory"));
             rootCommand.AddGlobalOption(new Option<string>(new[] {"--original-game-dir", "--original-game-directory"},

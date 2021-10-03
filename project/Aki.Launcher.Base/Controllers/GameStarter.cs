@@ -24,14 +24,17 @@ namespace Aki.Launcher
     public class GameStarter
     {
         private readonly IGameStarterFrontend _frontend;
+        private readonly bool _showOnly;
         private readonly string _originalGamePath;
         private readonly string _gamePath;
         
         private const string registrySettings = @"Software\Battlestate Games\EscapeFromTarkov";
-        
-        public GameStarter(IGameStarterFrontend frontend, string gamePath = null, string originalGamePath = null)
+
+        public GameStarter(IGameStarterFrontend frontend, string gamePath = null, string originalGamePath = null,
+            bool showOnly = false)
         {
             _frontend = frontend;
+            _showOnly = showOnly;
             _gamePath = gamePath ?? LauncherSettingsProvider.Instance.GamePath ?? Environment.CurrentDirectory;
             _originalGamePath = originalGamePath ?? LauncherSettingsProvider.Instance.OriginalGamePath;
         }
@@ -84,16 +87,27 @@ namespace Aki.Launcher
             {
                 return GameStarterResult.FromError(-4);
             }
-
+            
             //start game
-            var clientProcess = new ProcessStartInfo(clientExecutable)
-            {
-                Arguments = $"-force-gfx-jobs native -token={account.id} -config={Json.Serialize(new ClientConfig(server.backendUrl))}",
-                UseShellExecute = false,
-                WorkingDirectory = _gamePath,
-            };
+            var args =
+                $"-force-gfx-jobs native -token={account.id} -config={Json.Serialize(new ClientConfig(server.backendUrl))}";
 
-            Process.Start(clientProcess);
+            if (_showOnly)
+            {
+                Console.WriteLine($"{clientExecutable} {args}");
+            }
+            else
+            {
+                var clientProcess = new ProcessStartInfo(clientExecutable)
+                {
+                    Arguments = args,
+                    UseShellExecute = false,
+                    WorkingDirectory = _gamePath,
+                };
+
+                Process.Start(clientProcess);
+            }
+
             return GameStarterResult.FromSuccess();
         }
 
@@ -178,8 +192,6 @@ namespace Aki.Launcher
         {
             var value0 = 0;
             
-            Console.WriteLine(_originalGamePath);
-
             try
             {
                 var value4 = new FileInfo[3]
@@ -189,8 +201,6 @@ namespace Aki.Launcher
                     new FileInfo(Path.Combine(_originalGamePath, @"BattlEye", "BEService_x64.dll"))
                 };
 
-                Console.WriteLine(value4[0].FullName);
-                
                 value0 = value4.Length;
 
                 foreach (var value in value4)
