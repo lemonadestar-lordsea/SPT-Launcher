@@ -55,6 +55,8 @@ namespace Aki.Launcher.Helpers
 
             private void RunTask()
             {
+                ProgressChanged?.Invoke(this, new ProgressInfo(0, LocalizationProvider.Instance.patching));
+
                 RunAsync()
                     .ContinueWith(task =>
                     {
