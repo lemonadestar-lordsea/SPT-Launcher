@@ -194,7 +194,11 @@ namespace Aki.Launcher
 
             ServerSetting DefaultServer = LauncherSettingsProvider.Instance.Server;
 
-            DefaultServer.AutoLoginCreds.Username = username;
+            if (DefaultServer.AutoLoginCreds != null)
+            {
+                DefaultServer.AutoLoginCreds.Username = username;
+            }
+
             SelectedAccount.username = username;
             LauncherSettingsProvider.Instance.SaveSettings();
 
@@ -229,7 +233,11 @@ namespace Aki.Launcher
 
             ServerSetting DefaultServer = LauncherSettingsProvider.Instance.Server;
 
-            DefaultServer.AutoLoginCreds.Password = password;
+            if (DefaultServer.AutoLoginCreds != null)
+            {
+                DefaultServer.AutoLoginCreds.Password = password;
+            }
+
             SelectedAccount.password = password;
             LauncherSettingsProvider.Instance.SaveSettings();
 
