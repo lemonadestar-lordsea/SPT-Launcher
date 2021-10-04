@@ -15,12 +15,12 @@ Write-Host "Running build for config: $($config)" -ForegroundColor Cyan
 $buildDir = "Build/"
 $launcherData = "./Aki.Launcher/Aki_Data/"
 $publishSwitches = "--nologo --verbosity minimal --runtime win10-x64 --configuration $($config) -p:PublishSingleFile=true --no-self-contained"
-$publishArgs = "publish ./Aki.Launcher/Aki.Launcher.csproj "
+$pathPrefix = "./"
 
 if($VSBuilt) {
     $buildDir = "../Build"
     $launcherData = "../Aki.Launcher/Aki_Data"
-    $publishArgs = "publish ../Aki.Launcher/Aki.Launcher.csproj "
+    $pathPrefix = "../"
 
     if($config -eq "Release") {
         $publishSwitches += " --no-build"
@@ -28,7 +28,8 @@ if($VSBuilt) {
 }
 
 $publishSwitches += " --output ${buildDir}"
-$publishArgs += $publishSwitches
+$publishArgs = "publish " + $pathPrefix + "Aki.Launcher/Aki.Launcher.csproj " + $publishSwitches
+$publishCLIArgs = "publish " + $pathPrefix + "Aki.Launcher.CLI/Aki.Launcher.CLI.csproj " + $publishSwitches
 
 #removes the Obj and Bin directories and their contents
 function CleanBuild 
@@ -69,11 +70,19 @@ Wait-Process -InputObject $publishProcess
 $publishProcess.Dispose()
 Write-Host "`nDone" -ForegroundColor Cyan
 
+Write-Host "`nBuilding launcher CLI..." -ForegroundColor Cyan
+$publishProcess = Start-Process "dotnet" -PassThru -NoNewWindow -ArgumentList $publishCLIArgs
+Wait-Process -InputObject $publishProcess
+$publishProcess.Dispose()
+Write-Host "`nDone" -ForegroundColor Cyan
+
 if($config -eq "Release") {
     Remove-Item "$($buildDir)\Launcher.pdb"
+    Remove-Item "$($buildDir)\LauncherCLI.pdb"
 }
 
 Remove-Item "$($buildDir)\Aki.ByteBanger.pdb"
+Remove-Item "$($buildDir)\Aki.Launcher.Base.pdb"
 
 #copy aki_data folder
 Write-Host "`nCopying Aki_Data folder ... " -NoNewLine
