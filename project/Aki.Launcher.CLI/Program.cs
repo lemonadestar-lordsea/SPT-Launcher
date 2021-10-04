@@ -3,6 +3,7 @@ using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.Threading.Tasks;
 using Aki.Launcher.CLI.Helpers;
+using Aki.Launcher.Helpers;
 
 namespace Aki.Launcher.CLI
 {
@@ -16,7 +17,8 @@ namespace Aki.Launcher.CLI
         {
             if (ServerManager.SelectedServer?.backendUrl == ServerAddress)
                 return;
-            
+
+            LauncherSettingsProvider.Instance.Server.Url = ServerAddress;
             await ServerManager.LoadDefaultServerAsync(ServerAddress);
         }
 
@@ -25,7 +27,7 @@ namespace Aki.Launcher.CLI
             await Connect();
 
             Prompt();
-            
+
             var result = await AccountManager.LoginAsync(Username, Password);
             if (result < 0)
             {
@@ -55,7 +57,7 @@ namespace Aki.Launcher.CLI
         public string OriginalGameDirectory { get; set; }
         public string GameDirectory { get; set; }
     }
-    
+
     class Program
     {
         private static async Task<int> Launch(LoginCredentials login, GameOptions gameOptions, bool showOnly)
@@ -71,7 +73,7 @@ namespace Aki.Launcher.CLI
             {
                 Console.WriteLine($"Failed to launch game: {result.Message}");
             }
-            
+
             return 0;
         }
 
@@ -111,13 +113,15 @@ namespace Aki.Launcher.CLI
                 registerCommand,
                 launchCommand,
             };
-            rootCommand.AddGlobalOption(new Option<string>(new[] {"-u", "--username"}, "Username to login as"));
-            rootCommand.AddGlobalOption(new Option<string>(new[] {"-p", "--password"}, "Password for user to login as"));
-            rootCommand.AddGlobalOption(new Option<string>(new[] {"-s", "--server-address"},
-                                                            () => "https://127.0.0.1:443",
-                                                            "Address to contact Server on"));
-            rootCommand.AddGlobalOption(new Option<string>(new[] {"--game-dir", "--game-directory"}, "The target game directory"));
-            rootCommand.AddGlobalOption(new Option<string>(new[] {"--original-game-dir", "--original-game-directory"},
+            rootCommand.AddGlobalOption(new Option<string>(new[] { "-u", "--username" }, "Username to login as"));
+            rootCommand.AddGlobalOption(new Option<string>(new[] { "-p", "--password" },
+                "Password for user to login as"));
+            rootCommand.AddGlobalOption(new Option<string>(new[] { "-s", "--server-address" },
+                () => "https://127.0.0.1:443",
+                "Address to contact Server on"));
+            rootCommand.AddGlobalOption(new Option<string>(new[] { "--game-dir", "--game-directory" },
+                "The target game directory"));
+            rootCommand.AddGlobalOption(new Option<string>(new[] { "--original-game-dir", "--original-game-directory" },
                 "The directory of Tarkov downloaded from the BSG launcher"));
 
             Environment.Exit(rootCommand.Invoke(args));
