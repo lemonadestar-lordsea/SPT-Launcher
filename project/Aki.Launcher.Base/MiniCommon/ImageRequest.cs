@@ -48,8 +48,9 @@ namespace Aki.Launcher.MiniCommon
             s.CopyTo(ms);
 
             if (ms.Length == 0) return;
-            
+
             using FileStream fs = File.Create(filePath);
+            ms.Seek(0, SeekOrigin.Begin);
             ms.CopyTo(fs);
 
             CachedRoutes.Add(route);
