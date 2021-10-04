@@ -78,6 +78,7 @@ Write-Host "`nDone" -ForegroundColor Cyan
 
 if($config -eq "Release") {
     Remove-Item "$($buildDir)\Launcher.pdb"
+    Remove-Item "$($buildDir)\LauncherCLI.pdb"
 }
 
 Remove-Item "$($buildDir)\Aki.ByteBanger.pdb"
