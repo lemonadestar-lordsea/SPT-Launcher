@@ -22,7 +22,7 @@ namespace Aki.Launcher.Helpers
 {
     public static class LocalizationProvider
     {
-        public static string DefaultLocaleFolderPath = $"{Environment.CurrentDirectory}\\Aki_Data\\Launcher\\Locales";
+        public static string DefaultLocaleFolderPath = Path.Join(Environment.CurrentDirectory, "Aki_Data", "Launcher", "Locales");
 
         public static Dictionary<string, string> LocaleNameDictionary = GetLocaleDictionary();
 
@@ -35,7 +35,7 @@ namespace Aki.Launcher.Helpers
                 localeRomanName = localeName;
             }
 
-            LocaleData newLocale = Json.LoadClassWithoutSaving<LocaleData>($"{DefaultLocaleFolderPath}\\{localeRomanName}.json");
+            LocaleData newLocale = Json.LoadClassWithoutSaving<LocaleData>(Path.Join(DefaultLocaleFolderPath, $"{localeRomanName}.json"));
 
             if (newLocale != null)
             {
@@ -160,7 +160,7 @@ namespace Aki.Launcher.Helpers
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
             LauncherSettingsProvider.Instance.DefaultLocale = "English";
             LauncherSettingsProvider.Instance.SaveSettings();
-            Json.SaveWithFormatting($"{LocalizationProvider.DefaultLocaleFolderPath}\\English.json", englishLocale, Newtonsoft.Json.Formatting.Indented);
+            Json.SaveWithFormatting(Path.Join(LocalizationProvider.DefaultLocaleFolderPath, "English.json"), englishLocale, Newtonsoft.Json.Formatting.Indented);
 
             return englishLocale;
         }
@@ -182,7 +182,7 @@ namespace Aki.Launcher.Helpers
             return new ObservableCollection<string>(LocaleNameDictionary.Values);
         }
 
-        public static LocaleData Instance { get; private set; } = Json.LoadClassWithoutSaving<LocaleData>($"{DefaultLocaleFolderPath}\\{LauncherSettingsProvider.Instance.DefaultLocale}.json") ?? GenerateEnglishLocale();
+        public static LocaleData Instance { get; private set; } = Json.LoadClassWithoutSaving<LocaleData>(Path.Join(DefaultLocaleFolderPath, $"{LauncherSettingsProvider.Instance.DefaultLocale}.json")) ?? GenerateEnglishLocale();
     }
 
     public class LocaleData : INotifyPropertyChanged

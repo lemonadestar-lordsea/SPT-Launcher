@@ -9,6 +9,7 @@
 
 using System;
 using System.IO;
+using System.Reflection.Metadata.Ecma335;
 using Aki.ByteBanger;
 using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Models.Launcher;
@@ -35,18 +36,15 @@ namespace Aki.Launcher.Helpers
                 case PatchResultType.Success:
                     File.Copy(targetfile, $"{targetfile}.bak");
                     VFS.WriteFile(targetfile, result.PatchedData);
-                    return PatchResultInfo.FromSuccess(result.Result);
-
-                case PatchResultType.AlreadyPatched:
-                    return PatchResultInfo.FromSuccess(result.Result);
+                    break;
 
                 case PatchResultType.InputChecksumMismatch:
-                    if (IgnoreInputHashMismatch) return PatchResultInfo.FromSuccess(result.Result);
-                    return PatchResultInfo.FromError(result.Result);
-
-                default:
-                    return PatchResultInfo.FromError(result.Result);
+                    if (IgnoreInputHashMismatch)
+                        return new PatchResultInfo(PatchResultType.Success, 1, 1);
+                    break;
             }
+            
+            return new PatchResultInfo(result.Result, 1, 1);
         }
 
         private static PatchResultInfo PatchAll(string targetpath, string patchpath, bool IgnoreInputHashMismatch = false)
@@ -68,7 +66,7 @@ namespace Aki.Launcher.Helpers
                 RaisePatchProgress(progress, $"{LocalizationProvider.Instance.patching} {file.Name} ...");
 
                 // get the relative portion of the patch file that will be appended to targetpath in order to create an official target file.
-                var relativefile = file.FullName.Substring(patchpath.Length).TrimStart('\\');
+                var relativefile = file.FullName.Substring(patchpath.Length).TrimStart('\\', '/');
 
                 // create a target file from the relative patch file while utilizing targetpath as the root directory.
                 target = new FileInfo(VFS.Combine(targetpath, relativefile.Replace(".bpf", "")));
@@ -86,7 +84,7 @@ namespace Aki.Launcher.Helpers
 
             RaisePatchProgress(100, LocalizationProvider.Instance.ok);
 
-            return PatchResultInfo.FromSuccess(PatchResultType.Success);
+            return new PatchResultInfo(PatchResultType.Success, processed, countfiles);
         }
 
         public static PatchResultInfo Run(string targetPath, string patchPath, bool IgnoreInputHashMismatch = false)

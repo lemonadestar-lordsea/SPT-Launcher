@@ -14,10 +14,10 @@ Merijn Hendriks
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:cc="clr-namespace:Aki.Launcher.Custom_Controls"
-             xmlns:helpers="clr-namespace:Aki.Launcher.Helpers"
+             xmlns:helpers="clr-namespace:Aki.Launcher.Helpers;assembly=Aki.Launcher.Base"
              xmlns:ext="clr-namespace:Aki.Launcher.Extensions"
              xmlns:cvt="clr-namespace:Aki.Launcher.Converters"
-             xmlns:model="clr-namespace:Aki.Launcher.Models.Launcher"
+             xmlns:model="clr-namespace:Aki.Launcher.Models.Launcher;assembly=Aki.Launcher.Base"
              xmlns:local="clr-namespace:Aki.Launcher.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">

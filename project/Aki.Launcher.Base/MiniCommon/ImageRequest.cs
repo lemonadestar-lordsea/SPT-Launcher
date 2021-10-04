@@ -17,7 +17,7 @@ namespace Aki.Launcher.MiniCommon
 
     public static class ImageRequest
     {
-        public static string ImageCacheFolder = $"{LauncherSettingsProvider.Instance.GamePath}\\Aki_Data\\Launcher\\Image_Cache";
+        public static string ImageCacheFolder = Path.Join(LauncherSettingsProvider.Instance.GamePath, "Aki_Data", "Launcher", "Image_Cache");
 
         private static List<string> CachedRoutes = new List<string>();
 
@@ -49,9 +49,9 @@ namespace Aki.Launcher.MiniCommon
 
             if (ms.Length == 0) return;
 
-            using Image image = Image.FromStream(ms);
-
-            image.Save(filePath);
+            using FileStream fs = File.Create(filePath);
+            ms.Seek(0, SeekOrigin.Begin);
+            ms.CopyTo(fs);
 
             CachedRoutes.Add(route);
         }

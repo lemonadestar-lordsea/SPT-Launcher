@@ -38,7 +38,7 @@ namespace Aki.Launcher.ViewModel
         public LocaleCollection Locales { get; set; } = new LocaleCollection();
         private NavigationViewModel navigationViewModel { get; set; }
 
-        private GameStarter gameStarter = new GameStarter();
+        private GameStarter gameStarter = new GameStarter(new GameStarterFrontend());
         public SettingsViewModel(NavigationViewModel viewModel)
         {
             navigationViewModel = viewModel;
@@ -104,7 +104,7 @@ namespace Aki.Launcher.ViewModel
 
         public void OnRemoveRegistryKeysCommand(object parameter)
         {
-            bool regKeysRemoved = gameStarter.RemoveRegisteryKeys();
+            bool regKeysRemoved = gameStarter.RemoveRegistryKeys();
 
             if (regKeysRemoved)
             {
@@ -154,7 +154,7 @@ namespace Aki.Launcher.ViewModel
                 return true;
             }
 
-            string EFTSettingsFolder = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Escape from Tarkov";
+            string EFTSettingsFolder = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Escape from Tarkov");
             string backupFolderPath = Path.Combine(EFTSettingsFolder, "Backups");
 
             if (Directory.Exists(EFTSettingsFolder))
