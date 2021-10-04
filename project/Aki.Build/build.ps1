@@ -82,6 +82,7 @@ if($config -eq "Release") {
 }
 
 Remove-Item "$($buildDir)\Aki.ByteBanger.pdb"
+Remove-Item "$($buildDir)\Aki.Launcher.Base.pdb"
 
 #copy aki_data folder
 Write-Host "`nCopying Aki_Data folder ... " -NoNewLine
