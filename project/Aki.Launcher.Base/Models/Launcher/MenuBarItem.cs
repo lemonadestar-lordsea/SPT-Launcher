@@ -8,6 +8,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace Aki.Launcher.Models.Launcher
 {
@@ -55,7 +56,7 @@ namespace Aki.Launcher.Models.Launcher
             }
         }
 
-        public Func<bool> CanUseAction = () => true;
+        public Func<Task<bool>> CanUseAction = async () => await Task.FromResult(true);
 
         public Action OnFailedToUseAction = null;
 
