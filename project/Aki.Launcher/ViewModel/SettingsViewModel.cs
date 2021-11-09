@@ -15,6 +15,7 @@ using Aki.Launcher.Generics.AsyncCommand;
 using Aki.Launcher.Helpers;
 using Aki.Launcher.Models.Launcher;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,6 +33,7 @@ namespace Aki.Launcher.ViewModel
         public GenericICommand ShowServerListCommand { get; set; }
         public GenericICommand CleanTempFilesCommand { get; set; }
         public GenericICommand SelectGameFolderCommand { get; set; }
+        public GenericICommand OpenGameFolderCommand { get; set; }
         public GenericICommand RemoveRegistryKeysCommand { get; set; }
         public AwaitableDelegateCommand ClearGameSettingsCommand { get; set; }
         public GenericICommand ReApplyPatchCommand { get; set; }
@@ -47,6 +49,7 @@ namespace Aki.Launcher.ViewModel
             //BackCommand = new GenericICommand(OnBackCommand);
             CleanTempFilesCommand = new GenericICommand(OnCleanTempFilesCommand);
             SelectGameFolderCommand = new GenericICommand(OnSelectGameFolderCommand);
+            OpenGameFolderCommand = new GenericICommand(OnOpenGameFolderCommand);
             RemoveRegistryKeysCommand = new GenericICommand(OnRemoveRegistryKeysCommand);
             ClearGameSettingsCommand = new AwaitableDelegateCommand(OnClearGameSettingsCommand);
             ReApplyPatchCommand = new GenericICommand(OnReApplyPatchCommand);
@@ -195,6 +198,16 @@ namespace Aki.Launcher.ViewModel
             {
                 LauncherSettingsProvider.Instance.GamePath = path;
             }
+        }
+
+        public void OnOpenGameFolderCommand(object parameter)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = Path.EndsInDirectorySeparator(LauncherSettingsProvider.Instance.GamePath) ? LauncherSettingsProvider.Instance.GamePath : LauncherSettingsProvider.Instance.GamePath + Path.DirectorySeparatorChar,
+                UseShellExecute = true,
+                Verb = "open"
+            });
         }
         #endregion
     }

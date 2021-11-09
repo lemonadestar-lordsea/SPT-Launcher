@@ -121,6 +121,7 @@ Merijn Hendriks
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="AUTO"/>
+                            <ColumnDefinition Width="AUTO"/>
                         </Grid.ColumnDefinitions>
                         <TextBox Text="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance},
                                 Path=GamePath}"
@@ -129,10 +130,19 @@ Merijn Hendriks
                          />
                         <Button x:Name="folderButton" Grid.Column="1" Style="{StaticResource IconButtonStyle}"
                         Command="{Binding SelectGameFolderCommand}" Margin="0 0 0 0"
+                        VerticalAlignment="Top"
                         ToolTip="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
                                   Path=select_folder}">
-                            <Path Data="{StaticResource FolderWithPlus}" 
+                            <Path Data="{StaticResource FolderWithPlus}"
                           Fill="{Binding ElementName=folderButton, Path=Foreground}"/>
+                        </Button>
+                        <Button x:Name="openFolderButton" Grid.Column="2" Style="{StaticResource IconButtonStyle}"
+                        Command="{Binding OpenGameFolderCommand}" Margin="0 3 0 0"
+                        VerticalAlignment="Top"
+                        ToolTip="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
+                                  Path=open_folder}">
+                            <Path Data="{StaticResource OpenFolder}"
+                          Fill="{Binding ElementName=openFolderButton, Path=Foreground}"/>
                         </Button>
                     </Grid>
                 </StackPanel>

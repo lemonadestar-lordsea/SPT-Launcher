@@ -68,5 +68,6 @@
     "nlog_modify_failed": "无法修改NLog",
     "file_mismatch_dialog_message": "输入文件哈希与预期哈希不匹配。您的客户端文件可能使用了错误的AKI版本。\n\n是否继续？",
     "yes": "确定",
-    "no": "取消"
+    "no": "取消",
+    "open_folder": "Open Folder"
 }

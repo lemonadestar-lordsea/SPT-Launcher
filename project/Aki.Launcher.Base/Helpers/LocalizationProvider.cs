@@ -155,6 +155,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.file_mismatch_dialog_message = "The input file hash doesn't match the expected hash. You may be using the wrong version\nof AKI for your client files.\n\nDo you want to continue?";
             englishLocale.yes = "Yes";
             englishLocale.no = "No";
+            englishLocale.open_folder = "Open Folder";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -1306,6 +1307,22 @@ namespace Aki.Launcher.Helpers
                 {
                     _no = value;
                     RaisePropertyChanged(nameof(no));
+                }
+            }
+        }
+        #endregion
+
+        #region open_folder
+        private string _open_folder;
+        public string open_folder
+        {
+            get => _open_folder;
+            set
+            {
+                if(_open_folder != value)
+                {
+                    _open_folder = value;
+                    RaisePropertyChanged(nameof(open_folder));
                 }
             }
         }
