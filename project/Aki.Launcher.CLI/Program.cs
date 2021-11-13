@@ -192,7 +192,7 @@ namespace Aki.Launcher.CLI
             rootCommand.AddGlobalOption(new Option<string>(new[] { "-p", "--password" },
                 "Password for user to login as"));
             rootCommand.AddGlobalOption(new Option<string>(new[] { "-s", "--server-address" },
-                () => "https://127.0.0.1:443",
+                () => "http://127.0.0.1:6969",
                 "Address to contact Server on"));
             rootCommand.AddGlobalOption(new Option<string>(new[] { "--game-dir", "--game-directory" },
                 "The target game directory"));
