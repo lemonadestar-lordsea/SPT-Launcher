@@ -16,7 +16,7 @@ namespace Aki.Launcher
 
         public ClientConfig()
         {
-            BackendUrl = "https://127.0.0.1";
+            BackendUrl = "http://127.0.0.1:6969";
             Version = "live";
         }
 

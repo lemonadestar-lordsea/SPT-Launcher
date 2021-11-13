@@ -21,3 +21,4 @@ Custom launcher for Escape From Tarkov to start the game in offline mode
 - waffle.lord
 - reider123
 - ricky26
+- Bepis
