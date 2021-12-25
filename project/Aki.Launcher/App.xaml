@@ -123,10 +123,10 @@ Merijn Hendriks
             <Setter Property="Background" Value="{StaticResource AKI_Background_Dark}"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="MinWidth" Value="40"/>
-            <Setter Property="MinHeight" Value="25"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="MinWidth" Value="45"/>
+            <Setter Property="MinHeight" Value="29"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="10"/>
         </Style>
 
         <!-- Styles for controls -->
