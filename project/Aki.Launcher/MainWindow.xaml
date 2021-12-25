@@ -72,14 +72,14 @@ Merijn Hendriks
             />
 
         <!-- App buttons (close and minimize) -->
-        <Button Grid.Column="1" Content="-" HorizontalAlignment="Right" VerticalAlignment="Top"
+        <Button Grid.Column="1" Content="&#xE949;" HorizontalAlignment="Right" VerticalAlignment="Top"
                 Style="{StaticResource AppButtonStyle}"
                 Command="{Binding MinimizeAppCommand,
                                   RelativeSource={
                                   RelativeSource AncestorType=Window}}"
                 />
 
-        <Button Grid.Column="2" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top"
+        <Button Grid.Column="2" Content="&#xE106;" HorizontalAlignment="Right" VerticalAlignment="Top"
                 Style="{StaticResource AppCloseButtonStyle}"
                 Command="{Binding CloseAppCommand,
                                   RelativeSource={
