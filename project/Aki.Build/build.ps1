@@ -92,22 +92,22 @@ Copy-Item -Path $launcherData -Destination "./${buildDir}/Aki_Data" -Recurse -Fo
 if (Test-Path "$($buildDir)/Aki_Data") 
 {
     Write-host "OK" -ForegroundColor Green
-    
-	#Additionally copy the license file into the build folder
-	Write-Host "`nCopying license file ... "
-    $LicenseFilePath = "$($buildDir)/../../LICENSE.md"
-    if (Test-Path $LicenseFilePath)
-    {
-        Copy-Item -Path $LicenseFilePath -Destination "$($buildDir)/LICENSE-Launcher.txt" -Force -ErrorAction SilentlyContinue
-    }
-    else
-    {
-        Write-Warning "LICENSE.md file not found. If you're making a release, please don't forget to include the license file!"
-    }
 }
 else 
 {
     Write-host "Folder doesn't appear to have been copied.`nError: $($Error[0])" -ForegroundColor Red
+}
+
+#Additionally copy the license file into the build folder
+Write-Host "`nCopying license file ... "
+$LicenseFilePath = "$($buildDir)/../../LICENSE.md"
+if (Test-Path $LicenseFilePath)
+{
+    Copy-Item -Path $LicenseFilePath -Destination "$($buildDir)/LICENSE-Launcher.txt" -Force -ErrorAction SilentlyContinue
+}
+else
+{
+    Write-Warning "LICENSE.md file not found. If you're making a release, please don't forget to include the license file!"
 }
 
 # delete build waste
