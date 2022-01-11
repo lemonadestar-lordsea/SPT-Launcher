@@ -104,6 +104,16 @@ $LicenseFilePath = "$($buildDir)/../../LICENSE.md"
 if (Test-Path $LicenseFilePath)
 {
     Copy-Item -Path $LicenseFilePath -Destination "$($buildDir)/LICENSE-Launcher.txt" -Force -ErrorAction SilentlyContinue
+
+    #check license has been copied
+    if (Test-Path "$($buildDir)/LICENSE-Launcher.txt")
+    {
+        Write-host "OK" -ForegroundColor Green
+    }
+    else 
+    {
+        Write-host "Failed to copy license file" -ForegroundColor Red
+    }
 }
 else
 {
