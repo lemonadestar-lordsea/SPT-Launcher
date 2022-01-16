@@ -7,25 +7,29 @@
 
 param (
         [switch]$VSBuilt,
-        [string]$config = "Release"
+        [string]$Config = "Release"
     )
 
 #setup variables
-Write-Host "Running build for config: $($config)" -ForegroundColor Cyan
+Write-Host "Running build for config: $($Config)" -ForegroundColor Cyan
 $buildDir = "Build/"
+$debugDir = "./Aki.Launcher/bin/Debug/net6.0/win10-x64"
 $launcherData = "./Aki.Launcher/Aki_Data/"
-$publishSwitches = "--nologo --verbosity minimal --runtime win10-x64 --configuration $($config) -p:PublishSingleFile=true --no-self-contained"
+$publishSwitches = "--nologo --verbosity minimal --runtime win10-x64 --configuration $($Config) -p:PublishSingleFile=true --no-self-contained"
 $pathPrefix = "./"
 
 if($VSBuilt) {
     $buildDir = "../Build"
     $launcherData = "../Aki.Launcher/Aki_Data"
+    $debugDir = "../Aki.Launcher/bin/Debug/net6.0/win10-x64"
     $pathPrefix = "../"
 
-    if($config -eq "Release") {
+    if($Config -eq "Release") {
         $publishSwitches += " --no-build"
     }
 }
+
+#$debugDir = Resolve-Path $debugDir
 
 $publishSwitches += " --output ${buildDir}"
 $publishArgs = "publish " + $pathPrefix + "Aki.Launcher/Aki.Launcher.csproj " + $publishSwitches
@@ -39,7 +43,9 @@ function CleanBuild
     foreach ($path in $delPaths)
     {
         Write-Host "  Delete: $($path)"
-        Remove-Item $path -Force -Recurse
+
+        #Remove the ErrorAction if you suspect something isn't being removed properly
+        Remove-Item $path -Force -Recurse -ErrorAction SilentlyContinue
     }
 }
 
@@ -76,16 +82,41 @@ Wait-Process -InputObject $publishProcess
 $publishProcess.Dispose()
 Write-Host "`nDone" -ForegroundColor Cyan
 
-if($config -eq "Release") {
-    Remove-Item "$($buildDir)\Launcher.pdb"
+if($Config -eq "Release") 
+{
+    Remove-Item "$($buildDir)\Aki.Launcher.pdb"
     Remove-Item "$($buildDir)\LauncherCLI.pdb"
 }
 
 Remove-Item "$($buildDir)\Aki.ByteBanger.pdb"
 Remove-Item "$($buildDir)\Aki.Launcher.Base.pdb"
 
-#copy aki_data folder
-Write-Host "`nCopying Aki_Data folder ... " -NoNewLine
+#copy aki_data folder for debugging
+if($Config -eq "Debug") 
+{
+    Write-Host "`nCopying Aki_Data folder to debug ... " -NoNewLine
+
+    if($debugDir -eq $null) 
+    {
+        Write-Host "Output path is null" -ForegroundColor Red
+        break
+    }
+
+    $debugAkiDataDir = "$($debugDir)\Aki_Data"
+
+    Copy-Item -Path $launcherData -Destination $debugAkiDataDir -Recurse -Force -ErrorAction SilentlyContinue
+
+    if(Test-Path $debugAkiDataDir) 
+    {
+        Write-Host "OK" -ForegroundColor Green
+    }
+    else {
+        Write-Host "Failed to copy Aki_Data to debug" -ForegroundColor Red
+    }
+}
+
+#copy aki_data folder to Build
+Write-Host "`nCopying Aki_Data folder to build ... " -NoNewLine
 
 Copy-Item -Path $launcherData -Destination "./${buildDir}/Aki_Data" -Recurse -Force -ErrorAction SilentlyContinue
 
@@ -120,9 +151,13 @@ else
     Write-Warning "LICENSE.md file not found. If you're making a release, please don't forget to include the license file!"
 }
 
-# delete build waste
-Write-Host "`nCleaning garbage produced by build..." -ForegroundColor Cyan
+# delete build waste if not debug
 
-CleanBuild
+if($Config -ne "Debug") 
+{
+    Write-Host "`nCleaning garbage produced by build..." -ForegroundColor Cyan
 
-Write-Host "`nDone" -ForegroundColor Cyan
+    CleanBuild
+
+    Write-Host "`nDone" -ForegroundColor Cyan
+}

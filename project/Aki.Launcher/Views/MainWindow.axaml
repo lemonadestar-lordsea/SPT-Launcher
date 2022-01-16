@@ -1,0 +1,38 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Aki.Launcher.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cc="using:Aki.Launcher.CustomControls"
+        xmlns:rxui="using:Avalonia.ReactiveUI"
+        mc:Ignorable="d" d:DesignWidth="750" d:DesignHeight="450"
+        x:Class="Aki.Launcher.Views.MainWindow"
+        Icon="/Assets/icon.ico"
+        Title="Aki.Launcher"
+        Height="450" Width="750"
+        WindowStartupLocation="CenterScreen"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        Background="{StaticResource AKI_Background_Light}">
+
+  <Window.Styles>
+    <StyleInclude Source="/Assets/Styles.axaml"/>
+  </Window.Styles>
+
+  <Design.DataContext>
+      <vm:MainWindowViewModel/>
+  </Design.DataContext>
+
+  <Grid RowDefinitions="AUTO,*">
+
+    <cc:TitleBar Title="SPT Launcher"
+					       XButtonCommand="{Binding CloseCommand}"
+                 MinButtonCommand="{Binding MinimizeCommand}"
+                 />
+
+    <rxui:RoutedViewHost Router="{Binding Router}" Grid.Row="1" />
+
+  </Grid>
+
+</Window>
