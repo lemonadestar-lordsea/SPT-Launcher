@@ -98,6 +98,28 @@ else
     Write-host "Folder doesn't appear to have been copied.`nError: $($Error[0])" -ForegroundColor Red
 }
 
+#Additionally copy the license file into the build folder
+Write-Host "`nCopying license file ... " -NoNewLine
+$LicenseFilePath = "$($buildDir)/../../LICENSE.md"
+if (Test-Path $LicenseFilePath)
+{
+    Copy-Item -Path $LicenseFilePath -Destination "$($buildDir)/LICENSE-Launcher.txt" -Force -ErrorAction SilentlyContinue
+
+    #check license has been copied
+    if (Test-Path "$($buildDir)/LICENSE-Launcher.txt")
+    {
+        Write-host "OK" -ForegroundColor Green
+    }
+    else 
+    {
+        Write-host "Failed to copy license file" -ForegroundColor Red
+    }
+}
+else
+{
+    Write-Warning "LICENSE.md file not found. If you're making a release, please don't forget to include the license file!"
+}
+
 # delete build waste
 Write-Host "`nCleaning garbage produced by build..." -ForegroundColor Cyan
 
