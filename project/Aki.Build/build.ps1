@@ -99,7 +99,7 @@ else
 }
 
 #Additionally copy the license file into the build folder
-Write-Host "`nCopying license file ... "
+Write-Host "`nCopying license file ... " -NoNewLine
 $LicenseFilePath = "$($buildDir)/../../LICENSE.md"
 if (Test-Path $LicenseFilePath)
 {
