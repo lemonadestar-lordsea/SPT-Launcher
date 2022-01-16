@@ -29,7 +29,7 @@ if($VSBuilt) {
     }
 }
 
-#$debugDir = Resolve-Path $debugDir
+$debugDir = Resolve-Path $debugDir
 
 $publishSwitches += " --output ${buildDir}"
 $publishArgs = "publish " + $pathPrefix + "Aki.Launcher/Aki.Launcher.csproj " + $publishSwitches

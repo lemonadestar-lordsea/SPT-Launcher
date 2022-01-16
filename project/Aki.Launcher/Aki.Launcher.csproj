@@ -11,6 +11,7 @@
     <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
     <AvaloniaResource Remove="Assets\Styles.axaml" />
+    <Folder Include="Properties\PublishProfiles\" />
     <None Remove=".gitignore" />
     <None Remove="Assets\aki-logo.png" />
     <None Remove="Assets\icon.ico" />
