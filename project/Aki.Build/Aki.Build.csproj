@@ -13,7 +13,7 @@
   </ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(BuildingInsideVisualStudio)' == 'true'">
-		<Exec Command="powershell.exe -ExecutionPolicy Unrestricted -File $(SolutionDir)\Aki.Build\build.ps1 -VSBuilt &quot;$(ConfigurationName)&quot;" />
+		<Exec Command="dotnet-cake.exe &quot;../build.cake&quot; --config=&quot;$(ConfigurationName)&quot; --vsbuilt=true" />
 	</Target>
 
 </Project>
