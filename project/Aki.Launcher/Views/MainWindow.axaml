@@ -31,6 +31,7 @@
                  MinButtonCommand="{Binding MinimizeCommand}"
                  />
 
+    <!--<Image Source=""-->
     <rxui:RoutedViewHost Router="{Binding Router}" Grid.Row="1" />
 
   </Grid>

@@ -26,6 +26,8 @@ namespace Aki.Launcher.ViewModels
             return this;
         }
 
+        //TODO - update navigate methods to check for NavigationPreConditions
+
         /// <summary>
         /// Navigate to another viewmodel after a delay
         /// </summary>

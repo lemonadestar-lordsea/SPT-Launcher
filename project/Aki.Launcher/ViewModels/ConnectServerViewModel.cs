@@ -1,11 +1,6 @@
 ﻿using Aki.Launcher.Helpers;
 using Aki.Launcher.Models.Launcher;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Aki.Launcher.ViewModels
 {
