@@ -74,5 +74,10 @@ namespace Aki.Launcher
         {
             return request.PostJson("/launcher/profile/change/wipe", Json.Serialize(data));
         }
+
+        public static string SendPing()
+        {
+            return request.GetJson("/launcher/ping");
+        }
     }
 }
