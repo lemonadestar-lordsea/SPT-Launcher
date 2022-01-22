@@ -24,5 +24,6 @@
     <SolidColorBrush x:Key="AKI_Background_Dark" Color="{StaticResource AKI_DarkGray}"/>
     <SolidColorBrush x:Key="AKI_Brush_Yellow" Color="{StaticResource AKI_Yellow}"/>
     <SolidColorBrush x:Key="AKI_Brush_DarkGrayBlue" Color="{StaticResource AKI_DarkGrayBlue}"/>
+    <SolidColorBrush x:Key="AKI_Brush_Lighter" Color="Gainsboro"/>
   </Application.Resources>
 </Application>

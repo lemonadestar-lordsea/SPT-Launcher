@@ -1,0 +1,48 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:helpers="using:Aki.Launcher.Helpers"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Aki.Launcher.Views.RegisterView">
+  <Grid ColumnDefinitions="4*,2*" RowDefinitions="AUTO,*">
+    <Rectangle Fill="{StaticResource AKI_Background_Dark}"
+               Grid.Column="2" Grid.RowSpan="2"
+               Opacity=".7"
+               />
+
+    <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=settings_menu}"
+            Grid.Column="2" HorizontalAlignment="Right"
+            Margin="10"
+            FontSize="12"
+            Command="{Binding GoToSettingsCommand}"
+            Classes="link"
+            />
+
+    <Grid Grid.Column="2" Grid.Row="1" RowDefinitions="*,AUTO,7,AUTO,*,AUTO,10"
+                          ColumnDefinitions="10,*,10">
+
+
+      <TextBox Watermark="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=username}"
+               Grid.Row="1" Grid.Column="1"
+               Text="{Binding Login.Username}"
+               />
+
+      <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=register}"
+              Grid.Row="3" Grid.Column="1"
+              HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+              />
+
+      <StackPanel Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center">
+        <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=have_an_account}"
+               HorizontalAlignment="Center"
+               />
+        <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=go_to_login}"
+                HorizontalAlignment="Center"
+                Command="{Binding GoToLoginCommand}"
+                Classes="link"
+                />
+      </StackPanel>
+    </Grid>
+  </Grid>
+</UserControl>

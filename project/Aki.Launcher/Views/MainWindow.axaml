@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cc="using:Aki.Launcher.CustomControls"
         xmlns:rxui="using:Avalonia.ReactiveUI"
+        xmlns:helpers="using:Aki.Launcher.Helpers"
+        xmlns:cvt="using:Aki.Launcher.Converters"
         mc:Ignorable="d" d:DesignWidth="750" d:DesignHeight="450"
         x:Class="Aki.Launcher.Views.MainWindow"
         Icon="/Assets/icon.ico"
@@ -15,6 +17,10 @@
         ExtendClientAreaChromeHints="NoChrome"
         ExtendClientAreaTitleBarHeightHint="-1"
         Background="{StaticResource AKI_Background_Light}">
+
+  <Window.Resources>
+    <cvt:ImageSourceConverter x:Key="imageSourceCvt"/>
+  </Window.Resources>
 
   <Window.Styles>
     <StyleInclude Source="/Assets/Styles.axaml"/>
@@ -30,8 +36,13 @@
 					       XButtonCommand="{Binding CloseCommand}"
                  MinButtonCommand="{Binding MinimizeCommand}"
                  />
+    
+    <Image Source="{Binding Background.Path, Converter={StaticResource imageSourceCvt}}" 
+           Stretch="Fill" RenderOptions.BitmapInterpolationMode="HighQuality"
+           Grid.Row="1"
+           />
+    
 
-    <!--<Image Source=""-->
     <rxui:RoutedViewHost Router="{Binding Router}" Grid.Row="1" />
 
   </Grid>
