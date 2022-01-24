@@ -20,11 +20,10 @@ namespace Aki.Launcher.ViewModels
 
         public MainWindowViewModel()
         {
-            Locator.CurrentMutable.RegisterConstant<ImageHelper>(Background);
+            Locator.CurrentMutable.RegisterConstant<ImageHelper>(Background, "bgimage");
 
             this.WhenActivated((CompositeDisposable disposables) =>
             {
-
                 Router.Navigate.Execute(new ConnectServerViewModel(this));
             });
         }

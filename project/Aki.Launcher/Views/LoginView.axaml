@@ -31,18 +31,9 @@
       <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=login}"
               Grid.Row="3" Grid.Column="1"
               HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+              Command="{Binding LoginCommand}"
+              IsEnabled="{Binding !IsLoggingIn}"
               />
-
-      <StackPanel Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center">
-        <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=need_an_account}"
-               HorizontalAlignment="Center"
-               />
-        <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=go_to_register}"
-                HorizontalAlignment="Center"
-                Command="{Binding GoToRegisterCommand}"
-                Classes="link"
-                />
-      </StackPanel>
     </Grid>
   </Grid>
 </UserControl>

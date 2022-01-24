@@ -1,12 +1,19 @@
-﻿namespace Aki.Launcher.Attributes
+﻿using Aki.Launcher.Helpers;
+using Aki.Launcher.Models;
+using Aki.Launcher.ViewModels;
+using ReactiveUI;
+
+namespace Aki.Launcher.Attributes
 {
     public class RequireLoggedIn : NavigationPreCondition
     {
-        public override bool TestPreCondition()
+        public override NavigationPreConditionResult TestPreCondition(IScreen Host)
         {
-            int status = AccountManager.Login(AccountManager.SelectedAccount.username, AccountManager.SelectedAccount.password);
+            AccountStatus status = AccountManager.Login(AccountManager.SelectedAccount.username, AccountManager.SelectedAccount.password);
 
-            return status == 1;
+            if (status == AccountStatus.OK) return NavigationPreConditionResult.FromSuccess();
+
+            return NavigationPreConditionResult.FromError(LocalizationProvider.Instance.login_failed, new ConnectServerViewModel(Host));
         }
     }
 }

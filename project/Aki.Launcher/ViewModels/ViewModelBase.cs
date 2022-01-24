@@ -1,3 +1,5 @@
+using Aki.Launcher.Attributes;
+using Aki.Launcher.Models;
 using Avalonia.Threading;
 using ReactiveUI;
 using System;
@@ -26,7 +28,48 @@ namespace Aki.Launcher.ViewModels
             return this;
         }
 
-        //TODO - update navigate methods to check for NavigationPreConditions
+        /// <summary>
+        /// Tests all preconditions of a viewmodel
+        /// </summary>
+        /// <param name="ViewModel"></param>
+        /// <returns>The first failed precondition or a successful precondition if all tests pass</returns>
+        /// <remarks>Execution of preconditions stops at the first failed condition</remarks>
+        private NavigationPreConditionResult TestPreConditions(ViewModelBase ViewModel)
+        {
+            var attribs = ViewModel.GetType().GetCustomAttributes(typeof(NavigationPreCondition), true);
+
+            foreach(var attrib in attribs)
+            {
+                if(attrib is NavigationPreCondition condition)
+                {
+                    NavigationPreConditionResult result = condition.TestPreCondition(HostScreen);
+
+                    if(!result.Succeeded)
+                    {
+                        return result;
+                    }
+                }
+            }
+
+            return NavigationPreConditionResult.FromSuccess();
+        }
+
+        /// <summary>
+        /// Process the results of the precondition tests
+        /// </summary>
+        /// <param name="ViewModel"></param>
+        /// <returns>The viewmodel that should be loaded</returns>
+        private ViewModelBase ProcessViewModelResults(ViewModelBase ViewModel)
+        {
+            NavigationPreConditionResult result = TestPreConditions(ViewModel);
+
+            if (!result.Succeeded)
+            {
+                ViewModel = result.ViewModel;
+            }
+
+            return ViewModel;
+        }
 
         /// <summary>
         /// Navigate to another viewmodel after a delay
@@ -36,6 +79,10 @@ namespace Aki.Launcher.ViewModels
         /// <returns></returns>
         public async Task NavigateToWithDelay(ViewModelBase ViewModel, int Milliseconds)
         {
+            ViewModel = ProcessViewModelResults(ViewModel);
+
+            if (ViewModel == null) return;
+
             await Dispatcher.UIThread.InvokeAsync(async () =>
             {
                 HostScreen.Router.Navigate.Execute(await ViewModel.WithDelay(Milliseconds));
@@ -48,6 +95,10 @@ namespace Aki.Launcher.ViewModels
         /// <param name="ViewModel"></param>
         public void NavigateTo(ViewModelBase ViewModel)
         {
+            ViewModel = ProcessViewModelResults(ViewModel);
+
+            if (ViewModel == null) return;
+
             Dispatcher.UIThread.InvokeAsync(() =>
             {
                 HostScreen.Router.Navigate.Execute(ViewModel);
@@ -59,6 +110,24 @@ namespace Aki.Launcher.ViewModels
         /// </summary>
         public void NavigateBack()
         {
+            var ViewModel = HostScreen.Router.NavigationStack[HostScreen.Router.NavigationStack.Count - 2];
+
+            if(ViewModel is ViewModelBase vmBase)
+            {
+                var result = TestPreConditions(vmBase);
+
+                if (!result.Succeeded)
+                {
+                    Dispatcher.UIThread.InvokeAsync(() =>
+                    {
+                        if (result.ViewModel == null) return;
+
+                        HostScreen.Router.Navigate.Execute(result.ViewModel);
+                        return;
+                    });
+                }
+            }
+
             Dispatcher.UIThread.InvokeAsync(() =>
             {
                 HostScreen.Router.NavigateBack.Execute();
