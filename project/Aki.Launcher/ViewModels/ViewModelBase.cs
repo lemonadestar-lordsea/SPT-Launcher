@@ -1,7 +1,9 @@
 using Aki.Launcher.Attributes;
 using Aki.Launcher.Models;
+using Avalonia.Controls.Notifications;
 using Avalonia.Threading;
 using ReactiveUI;
+using Splat;
 using System;
 using System.Threading.Tasks;
 
@@ -10,6 +12,8 @@ namespace Aki.Launcher.ViewModels
     public class ViewModelBase : ReactiveObject, IActivatableViewModel, IRoutableViewModel
     {
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
+
+        protected WindowNotificationManager NotificationManager => Locator.Current.GetService<WindowNotificationManager>();
 
         public string? UrlPathSegment => Guid.NewGuid().ToString().Substring(0, 7);
 

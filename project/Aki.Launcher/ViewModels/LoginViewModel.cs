@@ -33,6 +33,7 @@ namespace Aki.Launcher.ViewModels
                         }
                     case AccountStatus.LoginFailed:
                         {
+                            NotificationManager.Show(new Avalonia.Controls.Notifications.Notification("", "Login failed", Avalonia.Controls.Notifications.NotificationType.Error));
                             //TODO - profile doesn't exist, ask to add it.
                             break;
                         }

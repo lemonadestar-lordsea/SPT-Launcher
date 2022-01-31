@@ -1,7 +1,10 @@
 using Aki.Launcher.ViewModels;
 using Avalonia;
+using Avalonia.Controls.Notifications;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using Avalonia.ReactiveUI;
+using Splat;
 
 namespace Aki.Launcher.Views
 {
@@ -13,6 +16,14 @@ namespace Aki.Launcher.Views
 #if DEBUG
             this.AttachDevTools();
 #endif
+
+            WindowNotificationManager notificationManager = new WindowNotificationManager(this);
+
+            notificationManager.Position = NotificationPosition.BottomRight;
+
+            notificationManager.MaxItems = 3;
+
+            Locator.CurrentMutable.RegisterConstant(notificationManager);
         }
 
         private void InitializeComponent()
