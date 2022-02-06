@@ -5,35 +5,42 @@
              xmlns:helpers="using:Aki.Launcher.Helpers"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Aki.Launcher.Views.LoginView">
-  <Grid ColumnDefinitions="4*,2*" RowDefinitions="AUTO,*">
-    <Rectangle Fill="{StaticResource AKI_Background_Dark}"
-               Grid.Column="2" Grid.RowSpan="2"
-               Opacity=".7"
-               />
-    
-    <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=settings_menu}"
-            Grid.Column="2" HorizontalAlignment="Right"
-            Margin="10"
-            FontSize="12"
-            Command="{Binding GoToSettingsCommand}"
-            Classes="link"
+  
+  <Grid RowDefinitions="20,*,AUTO,*,20" ColumnDefinitions="20,4*,2*,20">
+
+    <!-- Control backdrop -->
+    <Border CornerRadius="5" 
+            Grid.Row="2" Grid.Column="2"
+            BorderBrush="{StaticResource AKI_Background_Dark}"
+            BorderThickness="2"
+            Background="{StaticResource AKI_Background_Dark}"
+            Opacity=".7"
+            >
+      <Rectangle Fill="{StaticResource AKI_Background_Dark}" />
+    </Border>
+            
+
+
+      <StackPanel Spacing="10" Margin="10" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch">
+        <!-- Setting button -->
+        <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=settings_menu}"
+                HorizontalAlignment="Right"
+                FontSize="12"
+                Command="{Binding GoToSettingsCommand}"
+                Classes="link"
             />
 
-    <Grid Grid.Column="2" Grid.Row="1" RowDefinitions="*,AUTO,7,AUTO,*,AUTO,10"
-                          ColumnDefinitions="10,*,10">
-      
-      
-      <TextBox Watermark="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=username}"
-               Grid.Row="1" Grid.Column="1"
-               Text="{Binding Login.Username}"
+        <!-- Username box -->
+        <TextBox Watermark="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=username}"
+                   Text="{Binding Login.Username}"
                />
-      
-      <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=login}"
-              Grid.Row="3" Grid.Column="1"
-              HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-              Command="{Binding LoginCommand}"
-              IsEnabled="{Binding !IsLoggingIn}"
+
+        <!-- Login button -->
+        <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=login}"
+                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                  Command="{Binding LoginCommand}"
+                  IsEnabled="{Binding !IsLoggingIn}"
               />
+      </StackPanel>
     </Grid>
-  </Grid>
 </UserControl>

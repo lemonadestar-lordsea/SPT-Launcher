@@ -3,8 +3,11 @@ using Aki.Launcher.Helpers;
 using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Models;
 using Aki.Launcher.Models.Launcher;
+using Aki.Launcher.ViewModels.Dialogs;
+using Avalonia.Controls.Notifications;
 using ReactiveUI;
 using Splat;
+using System;
 using System.Reactive;
 using System.Threading.Tasks;
 
@@ -28,13 +31,51 @@ namespace Aki.Launcher.ViewModels
                 {
                     case AccountStatus.OK:
                         {
-                            //TODO - navigate to profile viewmodel
+                            NavigateTo(new ProfileViewModel(HostScreen, Login));
                             break;
                         }
                     case AccountStatus.LoginFailed:
                         {
-                            NotificationManager.Show(new Avalonia.Controls.Notifications.Notification("", "Login failed", Avalonia.Controls.Notifications.NotificationType.Error));
-                            //TODO - profile doesn't exist, ask to add it.
+                            // Create account if it doesn't exist
+                            if (!string.IsNullOrWhiteSpace(Login.Username))
+                            {
+                                var result = await ShowDialog(new RegisterDialogViewModel(HostScreen, Login.Username));
+
+                                if(result != null && result is string edition)
+                                {
+                                    AccountStatus registerResult = await AccountManager.RegisterAsync(Login.Username, Login.Password, edition);
+
+                                    switch(registerResult)
+                                    {
+                                        case AccountStatus.OK:
+                                            {
+                                                SendNotification(LocalizationProvider.Instance.profile_created, Login.Username, NotificationType.Success);
+                                                NavigateTo(new ProfileViewModel(HostScreen, Login));
+                                                break;
+                                            }
+                                        case AccountStatus.RegisterFailed:
+                                            {
+                                                SendNotification("", LocalizationProvider.Instance.registration_failed, NotificationType.Error);
+                                                break;
+                                            }
+                                        case AccountStatus.NoConnection:
+                                            {
+                                                NavigateTo(new ConnectServerViewModel(HostScreen));
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                SendNotification("", registerResult.ToString(), NotificationType.Error);
+                                                break;
+                                            }
+                                    }
+
+                                    return;
+                                }
+                            }
+
+                            SendNotification("", LocalizationProvider.Instance.login_failed, NotificationType.Error);
+
                             break;
                         }
                     case AccountStatus.NoConnection:

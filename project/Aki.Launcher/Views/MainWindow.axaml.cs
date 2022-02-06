@@ -19,10 +19,6 @@ namespace Aki.Launcher.Views
 
             WindowNotificationManager notificationManager = new WindowNotificationManager(this);
 
-            notificationManager.Position = NotificationPosition.BottomRight;
-
-            notificationManager.MaxItems = 3;
-
             Locator.CurrentMutable.RegisterConstant(notificationManager);
         }
 

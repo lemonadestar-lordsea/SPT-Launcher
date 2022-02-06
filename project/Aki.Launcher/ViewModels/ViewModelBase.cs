@@ -1,11 +1,13 @@
 using Aki.Launcher.Attributes;
 using Aki.Launcher.Models;
+using Aki.Launcher.ViewModels.Notifications;
 using Avalonia.Controls.Notifications;
 using Avalonia.Threading;
 using ReactiveUI;
 using Splat;
 using System;
 using System.Threading.Tasks;
+using dialogHost = DialogHost.DialogHost;
 
 namespace Aki.Launcher.ViewModels
 {
@@ -136,6 +138,27 @@ namespace Aki.Launcher.ViewModels
             {
                 HostScreen.Router.NavigateBack.Execute();
             });
+        }
+
+        /// <summary>
+        /// A convenience method for sending notifications
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <param name="Message"></param>
+        /// <param name="Type"></param>
+        public void SendNotification(string Title, string Message, NotificationType Type = NotificationType.Information)
+        {
+            NotificationManager.Show(new AkiNotificationViewModel(HostScreen, Title, Message, Type));
+        }
+
+        /// <summary>
+        /// A convenience method for showing dialogs
+        /// </summary>
+        /// <param name="ViewModel"></param>
+        /// <returns></returns>
+        public async Task<object?> ShowDialog(object ViewModel)
+        {
+            return await dialogHost.Show(ViewModel);
         }
 
         public ViewModelBase(IScreen Host)

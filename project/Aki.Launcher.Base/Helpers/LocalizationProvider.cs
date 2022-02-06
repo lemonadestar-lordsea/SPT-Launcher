@@ -99,6 +99,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.register = "Register";
             englishLocale.go_to_register = "Go to Register";
             englishLocale.registration_failed = "Registration Failed.";
+            englishLocale.registration_question_format_1 = "Profile '{0}' does not exist.\n\nWould you like to create it?";
             englishLocale.login = "Login";
             englishLocale.go_to_login = "Go to Login";
             englishLocale.login_automatically = "Login Automatically";
@@ -156,6 +157,8 @@ namespace Aki.Launcher.Helpers
             englishLocale.yes = "Yes";
             englishLocale.no = "No";
             englishLocale.open_folder = "Open Folder";
+            englishLocale.select_edition = "Select Edition";
+            englishLocale.profile_created = "Profile Created";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -896,6 +899,22 @@ namespace Aki.Launcher.Helpers
         }
         #endregion
 
+        #region registration_question_format_1
+        private string _registration_question_format_1;
+        public string registration_question_format_1
+        {
+            get => _registration_question_format_1;
+            set
+            {
+                if(_registration_question_format_1 != value)
+                {
+                    _registration_question_format_1 = value;
+                    RaisePropertyChanged(nameof(registration_question_format_1));
+                }
+            }
+        }
+        #endregion
+
         #region minimize_action
         private string _minimize_action;
         public string minimize_action
@@ -1312,6 +1331,22 @@ namespace Aki.Launcher.Helpers
         }
         #endregion
 
+        #region profile_created
+        private string _profile_created;
+        public string profile_created
+        {
+            get => _profile_created;
+            set
+            {
+                if(_profile_created != value)
+                {
+                    _profile_created = value;
+                    RaisePropertyChanged(nameof(profile_created));
+                }
+            }
+        }
+        #endregion
+
         #region open_folder
         private string _open_folder;
         public string open_folder
@@ -1323,6 +1358,22 @@ namespace Aki.Launcher.Helpers
                 {
                     _open_folder = value;
                     RaisePropertyChanged(nameof(open_folder));
+                }
+            }
+        }
+        #endregion
+
+        #region select_edition
+        private string _select_edition;
+        public string select_edition
+        {
+            get => _select_edition;
+            set
+            {
+                if(_select_edition != value)
+                {
+                    _select_edition = value;
+                    RaisePropertyChanged(nameof(select_edition));
                 }
             }
         }
