@@ -40,13 +40,16 @@ namespace Aki.Launcher.ViewModels
             }
         }
 
-        public async Task RetryCommand()
+        public void RetryCommand()
         {
             connectModel.InfoText = LocalizationProvider.Instance.server_connecting;
 
             connectModel.ConnectionFailed = false;
 
-            await ConnectServer();
+            Task.Run(async () =>
+            {
+                await ConnectServer();
+            });
         }
     }
 }

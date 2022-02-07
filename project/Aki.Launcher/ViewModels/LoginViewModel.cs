@@ -31,7 +31,7 @@ namespace Aki.Launcher.ViewModels
                 {
                     case AccountStatus.OK:
                         {
-                            NavigateTo(new ProfileViewModel(HostScreen, Login));
+                            NavigateTo(new ProfileViewModel(HostScreen));
                             break;
                         }
                     case AccountStatus.LoginFailed:
@@ -50,7 +50,7 @@ namespace Aki.Launcher.ViewModels
                                         case AccountStatus.OK:
                                             {
                                                 SendNotification(LocalizationProvider.Instance.profile_created, Login.Username, NotificationType.Success);
-                                                NavigateTo(new ProfileViewModel(HostScreen, Login));
+                                                NavigateTo(new ProfileViewModel(HostScreen));
                                                 break;
                                             }
                                         case AccountStatus.RegisterFailed:
