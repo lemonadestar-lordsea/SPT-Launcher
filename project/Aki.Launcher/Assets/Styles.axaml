@@ -226,9 +226,6 @@
 
   <Style Selector="Button.link:pointerover /template/ ContentPresenter">
     <Setter Property="TextBlock.Foreground" Value="{StaticResource AKI_Brush_Yellow}"/>
-  </Style>
-
-  <Style Selector="Button.link:pointerover /template/ ContentPresenter">
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
     <Setter Property="BorderThickness" Value="0"/>
@@ -238,6 +235,27 @@
     <Setter Property="TextBlock.Foreground" Value="{StaticResource AKI_Brush_DarkGrayBlue}"/>
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="0"/>
+  </Style>
+
+  <!-- Button Bordered Link Style -->
+  <Style Selector="Button.borderedlink">
+    <Setter Property="Foreground" Value="{StaticResource AKI_Brush_Lighter}"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="{StaticResource AKI_Brush_Lighter}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+  </Style>
+
+  <Style Selector="Button.borderedlink:pointerover /template/ ContentPresenter">
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource AKI_Brush_Yellow}"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="{StaticResource AKI_Brush_Yellow}"/>
+  </Style>
+
+  <Style Selector="Button.borderedlink:pressed /template/ ContentPresenter">
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource AKI_Brush_DarkGrayBlue}"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="{StaticResource AKI_Brush_DarkGrayBlue}"/>
     <Setter Property="BorderThickness" Value="0"/>
   </Style>
 

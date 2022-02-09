@@ -29,6 +29,7 @@
               Command="{Binding ButtonCommand}"
               CommandParameter="True"
               IsEnabled="{Binding Editions.HasSelection}"
+              IsDefault="True"
             />
       <Button Content="{Binding CancelButtonText}"
               Command="{Binding ButtonCommand}"

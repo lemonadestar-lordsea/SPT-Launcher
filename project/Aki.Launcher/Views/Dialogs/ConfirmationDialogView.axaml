@@ -17,6 +17,7 @@
       <Button Content="{Binding ConfirmButtonText}"
               Command="{Binding ButtonCommand}"
               CommandParameter="True"
+              IsDefault="True"
             />
       <Button Content="{Binding DenyButtonText}"
               Command="{Binding ButtonCommand}"

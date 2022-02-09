@@ -37,10 +37,11 @@
 
         <!-- Login button -->
         <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=login}"
-                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                  Command="{Binding LoginCommand}"
-                  IsEnabled="{Binding !IsLoggingIn}"
-              />
+                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                Command="{Binding LoginCommand}"
+                IsEnabled="{Binding !IsLoggingIn}"
+                IsDefault="True"
+                />
       </StackPanel>
     </Grid>
 </UserControl>

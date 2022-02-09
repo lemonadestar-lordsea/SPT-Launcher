@@ -39,7 +39,7 @@ namespace Aki.Launcher.ViewModels
                             // Create account if it doesn't exist
                             if (!string.IsNullOrWhiteSpace(Login.Username))
                             {
-                                var result = await ShowDialog(new RegisterDialogViewModel(HostScreen, Login.Username));
+                                var result = await ShowDialog(new RegisterDialogViewModel(null, Login.Username));
 
                                 if(result != null && result is string edition)
                                 {

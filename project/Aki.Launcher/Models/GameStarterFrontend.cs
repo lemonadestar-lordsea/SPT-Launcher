@@ -16,7 +16,7 @@ namespace Aki.Launcher.Models
 
         public async Task CompletePatchTask(IAsyncEnumerable<PatchResultInfo> task)
         {
-            notificationManager.Show(new AkiNotificationViewModel(null, "", LocalizationProvider.Instance.patching));
+            notificationManager.Show(new AkiNotificationViewModel(null, "", $"{LocalizationProvider.Instance.patching} ..."));
 
             var iter = task.GetAsyncEnumerator();
             while (await iter.MoveNextAsync())
