@@ -9,7 +9,6 @@
 using Aki.Launcher.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 
 namespace Aki.Launcher.MiniCommon

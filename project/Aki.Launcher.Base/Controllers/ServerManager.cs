@@ -16,6 +16,24 @@ namespace Aki.Launcher
     {
         public static ServerInfo SelectedServer { get; private set; } = null;
 
+        public static bool PingServer()
+        {
+            string json = "";
+
+            try
+            {
+                json = RequestHandler.SendPing();
+
+                if(json != null) return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+            return false;
+        }
+
         public static void LoadServer(string backendUrl)
         {
             string json = "";
