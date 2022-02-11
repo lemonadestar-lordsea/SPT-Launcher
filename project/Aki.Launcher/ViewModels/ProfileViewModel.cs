@@ -4,13 +4,9 @@ using Aki.Launcher.Models;
 using Aki.Launcher.Models.Launcher;
 using Avalonia;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Aki.Launcher.Attributes;
+using Aki.Launcher.ViewModels.Dialogs;
 
 namespace Aki.Launcher.ViewModels
 {
@@ -19,7 +15,12 @@ namespace Aki.Launcher.ViewModels
     {
         public string CurrentUsername { get; set; }
 
-        public string CurrentEdition { get; set; }
+        private string _CurrentEdition;
+        public string CurrentEdition
+        {
+            get => _CurrentEdition;
+            set => this.RaiseAndSetIfChanged(ref _CurrentEdition, value);
+        }
 
         public string CurrentID { get; set; }
 
@@ -50,9 +51,16 @@ namespace Aki.Launcher.ViewModels
             CurrentID = AccountManager.SelectedAccount.id;
         }
 
+        public void LogoutCommand()
+        {
+            AccountManager.Logout();
+
+            NavigateTo(new ConnectServerViewModel(HostScreen, true));
+        }
+
         public void ChangeWindowState(Avalonia.Controls.WindowState? State, bool Close = false)
         {
-            if(Application.Current.ApplicationLifetime is Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
+            if (Application.Current.ApplicationLifetime is Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
             {
                 if (Close)
                 {
@@ -110,12 +118,51 @@ namespace Aki.Launcher.ViewModels
             }
         }
 
+        public async Task ChangeEditionCommand()
+        {
+            var result = await ShowDialog(new ChangeEditionDialogViewModel(null));
+
+            if(result != null && result is string edition)
+            {
+                AccountStatus status = await AccountManager.WipeAsync(edition);
+
+                switch (status)
+                {
+                    case AccountStatus.OK:
+                        {
+                            CurrentEdition = AccountManager.SelectedAccount.edition;
+                            SendNotification("", LocalizationProvider.Instance.account_updated);
+                            break;
+                        }
+                    case AccountStatus.NoConnection:
+                        {
+                            NavigateTo(new ConnectServerViewModel(HostScreen));
+                            break;
+                        }
+                    default:
+                        {
+                            SendNotification("", LocalizationProvider.Instance.edit_account_update_error);
+                            break;
+                        }
+                }
+            }
+        }
+
+        public async Task CopyCommand(object parameter)
+        {
+            if(Application.Current.Clipboard != null && parameter != null && parameter is string text)
+            {
+                await Application.Current.Clipboard.SetTextAsync(text);
+                SendNotification("", $"{text} {LocalizationProvider.Instance.copied}", Avalonia.Controls.Notifications.NotificationType.Success);
+            }
+        }
+
         private void UpdateProfileInfo()
         {
             AccountManager.UpdateProfileInfo();
             ImageRequest.CacheSideImage(AccountManager.SelectedProfileInfo.Side);
             ProfileInfo.UpdateDisplayedProfile(AccountManager.SelectedProfileInfo);
-            if(ProfileInfo.SideImage != SideImage.Path)
+            if (ProfileInfo.SideImage != SideImage.Path)
             {
                 SideImage.Path = ProfileInfo.SideImage;
                 SideImage.Touch();

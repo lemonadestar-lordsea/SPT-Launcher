@@ -14,7 +14,6 @@
             BorderBrush="{StaticResource AKI_Background_Dark}"
             BorderThickness="2"
             Background="{StaticResource AKI_Background_Dark}"
-            Opacity=".7"
             >
       <Rectangle Fill="{StaticResource AKI_Background_Dark}" />
     </Border>
@@ -42,6 +41,8 @@
                 IsEnabled="{Binding !IsLoggingIn}"
                 IsDefault="True"
                 />
+        <CheckBox Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=login_automatically}"
+                  IsChecked="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance}, Path=UseAutoLogin}"/>
       </StackPanel>
     </Grid>
 </UserControl>

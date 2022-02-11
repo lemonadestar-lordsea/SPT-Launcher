@@ -49,8 +49,6 @@
   "on_game_start": "登录器在启动游戏后",
   "game": "游戏",
   "new_password": "新密码",
-  "wipe_warning": "擦除您的个人资料将重置游戏进度。您确定要擦除您的配置文件吗？",
-  "wipe_warning_format_2": "更改帐户版本需要清除个人资料。\n'{0}'->'{1}'\n您确定要清除个人资料吗?",
   "cancel": "取消",
   "need_an_account": "还没有账号吗？",
   "have_an_account": "已经有账号了？",
@@ -72,5 +70,8 @@
   "open_folder": "Open Folder",
   "select_edition": "Select Edition",
   "profile_created": "Profile Created",
-  "registration_question_format_1": "Profile '{0}' does not exist.\n\nWould you like to create it?"
+  "registration_question_format_1": "Profile '{0}' does not exist.\n\nWould you like to create it?",
+  "next_level_in": "Next level in",
+  "wipe_warning": "Changing your account edition requires a profile wipe. This will reset your game prgrogess.",
+  "copied": "Copied"
 }

@@ -22,18 +22,5 @@ namespace Aki.Launcher.ViewModels.Dialogs
             this.ConfirmButtonText = ConfirmButtonText ?? LocalizationProvider.Instance.yes;
             this.DenyButtonText = DenyButtonText ?? LocalizationProvider.Instance.no;
         }
-
-        public void ButtonCommand(object parameter)
-        {
-            bool result;
-
-            if (parameter is string s && bool.TryParse(s, out result))
-            {
-                DialogHost.DialogHost.Close("mainHost", result);
-                return;
-            }
-
-            DialogHost.DialogHost.Close("mainHost", false);
-        }
     }
 }

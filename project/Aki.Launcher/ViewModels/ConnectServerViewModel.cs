@@ -8,13 +8,17 @@ namespace Aki.Launcher.ViewModels
 {
     public class ConnectServerViewModel : ViewModelBase
     {
+        private bool noAutoLogin = false;
+
         public ConnectServerModel connectModel { get; set; } = new ConnectServerModel()
         {
             InfoText = LocalizationProvider.Instance.server_connecting
         };
 
-        public ConnectServerViewModel(IScreen Host) : base(Host)
+        public ConnectServerViewModel(IScreen Host, bool NoAutoLogin = false) : base(Host)
         {
+            noAutoLogin = NoAutoLogin;
+
             this.WhenActivated((CompositeDisposable disposables) =>
             {
                 Task.Run(async () =>
@@ -36,7 +40,7 @@ namespace Aki.Launcher.ViewModels
 
             if (connected)
             {
-                NavigateTo(new LoginViewModel(HostScreen));
+                NavigateTo(new LoginViewModel(HostScreen, noAutoLogin));
             }
         }
 

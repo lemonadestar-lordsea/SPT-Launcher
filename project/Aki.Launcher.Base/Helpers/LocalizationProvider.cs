@@ -135,8 +135,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.on_game_start = "On Game Start";
             englishLocale.game = "Game";
             englishLocale.new_password = "New Password";
-            englishLocale.wipe_warning = "Wiping your profile will reset your game progress. Are you sure you want to wipe your profile?";
-            englishLocale.wipe_warning_format_2 = "Changing your account edition requires a profile wipe.\n'{0}' -> '{1}'\nAre you sure you want to wipe your profile?";
+            englishLocale.wipe_warning = "Changing your account edition requires a profile wipe. This will reset your game prgrogess.";
             englishLocale.cancel = "Cancel";
             englishLocale.need_an_account = "Don't have an account yet?";
             englishLocale.have_an_account = "Already have an account?";
@@ -159,6 +158,8 @@ namespace Aki.Launcher.Helpers
             englishLocale.open_folder = "Open Folder";
             englishLocale.select_edition = "Select Edition";
             englishLocale.profile_created = "Profile Created";
+            englishLocale.next_level_in = "Next level in";
+            englishLocale.copied = "Copied";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -1027,22 +1028,6 @@ namespace Aki.Launcher.Helpers
         }
         #endregion
 
-        #region wipe_warning_format_2
-        private string _wipe_warning_format_1;
-        public string wipe_warning_format_2
-        {
-            get => _wipe_warning_format_1;
-            set
-            {
-                if (_wipe_warning_format_1 != value)
-                {
-                    _wipe_warning_format_1 = value;
-                    RaisePropertyChanged(nameof(wipe_warning_format_2));
-                }
-            }
-        }
-        #endregion
-
         #region cancel
         private string _cancel;
         public string cancel
@@ -1374,6 +1359,38 @@ namespace Aki.Launcher.Helpers
                 {
                     _select_edition = value;
                     RaisePropertyChanged(nameof(select_edition));
+                }
+            }
+        }
+        #endregion
+
+        #region copied
+        private string _copied;
+        public string copied
+        {
+            get => _copied;
+            set
+            {
+                if(_copied != value)
+                {
+                    _copied = value;
+                    RaisePropertyChanged(nameof(copied));
+                }
+            }
+        }
+        #endregion
+
+        #region next_level_in
+        private string _next_level_in;
+        public string next_level_in
+        {
+            get => _next_level_in;
+            set
+            {
+                if(_next_level_in != value)
+                {
+                    _next_level_in = value;
+                    RaisePropertyChanged(nameof(next_level_in));
                 }
             }
         }
