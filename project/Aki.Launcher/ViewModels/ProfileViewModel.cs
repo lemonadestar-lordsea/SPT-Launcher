@@ -7,6 +7,7 @@ using ReactiveUI;
 using System.Threading.Tasks;
 using Aki.Launcher.Attributes;
 using Aki.Launcher.ViewModels.Dialogs;
+using Avalonia.Threading;
 
 namespace Aki.Launcher.ViewModels
 {
@@ -60,18 +61,21 @@ namespace Aki.Launcher.ViewModels
 
         public void ChangeWindowState(Avalonia.Controls.WindowState? State, bool Close = false)
         {
-            if (Application.Current.ApplicationLifetime is Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
+            Dispatcher.UIThread.InvokeAsync(() =>
             {
-                if (Close)
+                if (Application.Current.ApplicationLifetime is Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
                 {
-                    desktop.ShutdownMode = Avalonia.Controls.ShutdownMode.OnMainWindowClose;
-                    desktop.Shutdown();
+                    if (Close)
+                    {
+                        desktop.ShutdownMode = Avalonia.Controls.ShutdownMode.OnMainWindowClose;
+                        desktop.Shutdown();
+                    }
+                    else
+                    {
+                        desktop.MainWindow.WindowState = State ?? Avalonia.Controls.WindowState.Normal;
+                    }
                 }
-                else
-                {
-                    desktop.MainWindow.WindowState = State ?? Avalonia.Controls.WindowState.Normal;
-                }
-            }
+            });
         }
 
         public async Task StartGameCommand()
