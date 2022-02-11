@@ -18,14 +18,7 @@
             BorderBrush="{StaticResource AKI_Background_Dark}"
             BorderThickness="5">
       <StackPanel Background="{StaticResource AKI_Background_Dark}">
-        <StackPanel Orientation="Horizontal">
-          <Label Content="{Binding CurrentUsername}" Margin="5 0"/>
-          <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=logout}"
-                  Command="{Binding LogoutCommand}"
-                  Classes="link"
-                  HorizontalAlignment="Right"
-                  />
-        </StackPanel>
+        <Label Content="{Binding CurrentUsername}" Margin="5 0"/>
         <Button Content="{Binding CurrentID}" Classes="link"
                 Command="{Binding CopyCommand}"
                 CommandParameter="{Binding CurrentID}"/>
@@ -65,6 +58,7 @@
           </StackPanel>
         </StackPanel>
 
+
         <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=start_game}"
                 HorizontalAlignment="Right"
                 VerticalContentAlignment="Center"
@@ -72,7 +66,17 @@
                 DockPanel.Dock="Right"
                 Command="{Binding StartGameCommand}"
                 IsEnabled="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance}, Path=!GameRunning}"
-              />
+                Classes="yellow"
+                />
+        
+        <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=logout}"
+                  Command="{Binding LogoutCommand}"
+                  Margin="10 0"
+                  Classes="link"
+                  DockPanel.Dock="Right"
+                  HorizontalAlignment="Right"
+                  />
+        
       </DockPanel>
     </Border>
   </Grid>

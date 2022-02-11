@@ -31,10 +31,11 @@
               CommandParameter="{Binding Editions.SelectedEdition}"
               IsEnabled="{Binding Editions.HasSelection}"
               IsDefault="True"
-            />
+              Classes="yellow"
+              />
       <Button Content="{Binding CancelButtonText}"
               Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=dialogHost:DialogHost}, Path=CloseDialogCommand}"
-            />
+              />
     </StackPanel>
     
   </Grid>
