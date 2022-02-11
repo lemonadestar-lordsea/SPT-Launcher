@@ -58,11 +58,7 @@ Task("CopyDebugData")
     .WithCriteria(config == "Debug")
     .Does(() => 
     {
-        DeleteDirectory($"{launcherDebugFolder}/Aki_Data", new DeleteDirectorySettings 
-        {
-            Recursive = true,
-            Force = true
-        });
+        EnsureDirectoryDoesNotExist($"{launcherDebugFolder}/Aki_Data");
 
         CopyDirectory(akiData, $"{launcherDebugFolder}/Aki_Data");
     });
