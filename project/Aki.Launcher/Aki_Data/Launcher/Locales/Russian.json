@@ -49,8 +49,6 @@
   "on_game_start": "Запуск игры через лаунчер",
   "game": "Игра",
   "new_password": "Новый пароль",
-  "wipe_warning": "Вайп профиля обнулит ваш прогресс. Вы действительно хотите это сделать?",
-  "wipe_warning_format_2": "Изменить тип издания можно только с обнулением профиля.\n'{0}' > '{1}'\n Хотите обнулить профиль?",
   "cancel": "Отмена",
   "need_an_account": "Еще нет профиля?",
   "have_an_account": "Уже есть профиль?",
@@ -72,5 +70,8 @@
   "open_folder": "Открыть папку",
   "select_edition": "Select Edition",
   "profile_created": "Profile Created",
-  "registration_question_format_1": "Profile '{0}' does not exist.\n\nWould you like to create it?"
+  "registration_question_format_1": "Profile '{0}' does not exist.\n\nWould you like to create it?",
+  "next_level_in": "Next level in",
+  "wipe_warning": "Changing your account edition requires a profile wipe. This will reset your game prgrogess.",
+  "copied": "Copied"
 }

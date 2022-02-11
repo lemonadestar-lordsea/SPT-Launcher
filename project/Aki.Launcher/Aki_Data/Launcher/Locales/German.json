@@ -49,8 +49,6 @@
   "on_game_start": "Bei Spielstart",
   "game": "Spiel",
   "new_password": "Neues Passwort",
-  "wipe_warning": "Wiping your profile will reset your game progress. Are you sure you want to wipe your profile?",
-  "wipe_warning_format_2": "Das Ändern der Spieledition erfordert ein Löschen des Profils.\n'{0}' -> '{1}'\nSicher, dass das Profil gelöscht werden soll?",
   "cancel": "Abbrechen",
   "need_an_account": "Noch kein eigenes Konto?",
   "have_an_account": "Schon ein eigenes Konto?",
@@ -72,5 +70,8 @@
   "open_folder": "Open Folder",
   "select_edition": "Select Edition",
   "profile_created": "Profile Created",
-  "registration_question_format_1": "Profile '{0}' does not exist.\n\nWould you like to create it?"
+  "registration_question_format_1": "Profile '{0}' does not exist.\n\nWould you like to create it?",
+  "next_level_in": "Next level in",
+  "wipe_warning": "Changing your account edition requires a profile wipe. This will reset your game prgrogess.",
+  "copied": "Copied"
 }

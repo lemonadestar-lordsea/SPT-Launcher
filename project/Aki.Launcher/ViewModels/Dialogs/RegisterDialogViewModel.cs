@@ -1,9 +1,6 @@
 ﻿using Aki.Launcher.Helpers;
 using Aki.Launcher.Models.Launcher;
-using Avalonia.Metadata;
 using ReactiveUI;
-using System.Reactive;
-using System.Reactive.Linq;
 
 namespace Aki.Launcher.ViewModels.Dialogs
 {
@@ -29,22 +26,6 @@ namespace Aki.Launcher.ViewModels.Dialogs
             CancelButtonText = LocalizationProvider.Instance.cancel;
 
             ComboBoxPlaceholderText = LocalizationProvider.Instance.select_edition;
-        }
-
-        public void ButtonCommand(object parameter)
-        {
-            bool confirmation;
-
-            if (parameter is string s && bool.TryParse(s, out confirmation))
-            {
-                if (confirmation)
-                {
-                    DialogHost.DialogHost.Close("mainHost", Editions.SelectedEdition);
-                    return;
-                }
-
-                DialogHost.DialogHost.Close("mainHost", null);
-            }
         }
     }
 }

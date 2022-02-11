@@ -7,7 +7,6 @@ using Aki.Launcher.ViewModels.Dialogs;
 using Avalonia.Controls.Notifications;
 using ReactiveUI;
 using Splat;
-using System;
 using System.Reactive;
 using System.Threading.Tasks;
 
@@ -20,7 +19,7 @@ namespace Aki.Launcher.ViewModels
 
         public ReactiveCommand<Unit, Unit> LoginCommand { get; set; }
 
-        public LoginViewModel(IScreen Host) : base(Host)
+        public LoginViewModel(IScreen Host, bool NoAutoLogin = false) : base(Host)
         {
             //setup reactive commands
             LoginCommand = ReactiveCommand.CreateFromTask(async () =>
@@ -31,6 +30,12 @@ namespace Aki.Launcher.ViewModels
                 {
                     case AccountStatus.OK:
                         {
+                            if (LauncherSettingsProvider.Instance.UseAutoLogin && LauncherSettingsProvider.Instance.Server.AutoLoginCreds != Login)
+                            {
+                                LauncherSettingsProvider.Instance.Server.AutoLoginCreds = Login;
+                            }
+
+                            LauncherSettingsProvider.Instance.SaveSettings();
                             NavigateTo(new ProfileViewModel(HostScreen));
                             break;
                         }
@@ -49,6 +54,12 @@ namespace Aki.Launcher.ViewModels
                                     {
                                         case AccountStatus.OK:
                                             {
+                                                if (LauncherSettingsProvider.Instance.UseAutoLogin && LauncherSettingsProvider.Instance.Server.AutoLoginCreds != Login)
+                                                {
+                                                    LauncherSettingsProvider.Instance.Server.AutoLoginCreds = Login;
+                                                }
+
+                                                LauncherSettingsProvider.Instance.SaveSettings();
                                                 SendNotification(LocalizationProvider.Instance.profile_created, Login.Username, NotificationType.Success);
                                                 NavigateTo(new ProfileViewModel(HostScreen));
                                                 break;
@@ -94,7 +105,7 @@ namespace Aki.Launcher.ViewModels
             backgroundImage.Touch();
 
             //handle auto-login
-            if(LauncherSettingsProvider.Instance.UseAutoLogin && LauncherSettingsProvider.Instance.Server.AutoLoginCreds != null)
+            if(LauncherSettingsProvider.Instance.UseAutoLogin && LauncherSettingsProvider.Instance.Server.AutoLoginCreds != null && !NoAutoLogin)
             {
                 Task.Run(() =>
                 {

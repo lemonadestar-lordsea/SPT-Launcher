@@ -49,8 +49,6 @@
   "on_game_start": "於遊戲啟動後",
   "game": "遊戲",
   "new_password": "新密碼",
-  "wipe_warning": "Wiping your profile will reset your game progress. Are you sure you want to wipe your profile?",
-  "wipe_warning_format_2": "更改帳戶版本將刪除遊戲存檔。\n'{0}'->'{1}'\n您是否確定刪除遊戲存檔?",
   "cancel": "取消",
   "need_an_account": "沒有帳號?",
   "have_an_account": "已有帳號?",
@@ -72,5 +70,8 @@
   "open_folder": "Open Folder",
   "select_edition": "Select Edition",
   "profile_created": "Profile Created",
-  "registration_question_format_1": "Profile '{0}' does not exist.\n\nWould you like to create it?"
+  "registration_question_format_1": "Profile '{0}' does not exist.\n\nWould you like to create it?",
+  "next_level_in": "Next level in",
+  "wipe_warning": "Changing your account edition requires a profile wipe. This will reset your game prgrogess.",
+  "copied": "Copied"
 }
