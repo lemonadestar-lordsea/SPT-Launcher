@@ -10,6 +10,7 @@ namespace Aki.Launcher.Models.Aki
 {
     public class ServerProfileInfo
     {
+        public string username { get; set; }
         public string nickname { get; set; }
         public string side { get; set; }
         public int currlvl { get; set; }

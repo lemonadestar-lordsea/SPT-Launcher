@@ -16,6 +16,20 @@ namespace Aki.Launcher.Models.Launcher
 {
     public class ProfileInfo : INotifyPropertyChanged
     {
+        private string _Username;
+        public string Username
+        {
+            get => _Username;
+            set
+            {
+                if(_Username != value)
+                {
+                    _Username = value;
+                    RaisePropertyChanged(nameof(Username));
+                }
+            }
+        }
+
         private string _Nickname;
         public string Nickname
         {
@@ -159,6 +173,7 @@ namespace Aki.Launcher.Models.Launcher
 
         public ProfileInfo(ServerProfileInfo serverProfileInfo)
         {
+            Username = serverProfileInfo.username;
             Nickname = serverProfileInfo.nickname;
             Side = serverProfileInfo.side;
 
