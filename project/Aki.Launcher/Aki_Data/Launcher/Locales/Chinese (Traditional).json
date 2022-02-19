@@ -73,5 +73,6 @@
   "registration_question_format_1": "Profile '{0}' does not exist.\n\nWould you like to create it?",
   "next_level_in": "Next level in",
   "wipe_warning": "Changing your account edition requires a profile wipe. This will reset your game prgrogess.",
-  "copied": "Copied"
+  "copied": "Copied",
+  "no_profile_data": "No profile data"
 }

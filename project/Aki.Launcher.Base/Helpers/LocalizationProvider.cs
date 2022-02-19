@@ -160,6 +160,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.profile_created = "Profile Created";
             englishLocale.next_level_in = "Next level in";
             englishLocale.copied = "Copied";
+            englishLocale.no_profile_data = "No profile data";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -1391,6 +1392,22 @@ namespace Aki.Launcher.Helpers
                 {
                     _next_level_in = value;
                     RaisePropertyChanged(nameof(next_level_in));
+                }
+            }
+        }
+        #endregion
+
+        #region no_profile_data
+        private string _no_profile_data;
+        public string no_profile_data
+        {
+            get => _no_profile_data;
+            set
+            {
+                if (_no_profile_data != value)
+                {
+                    _no_profile_data = value;
+                    RaisePropertyChanged(nameof(no_profile_data));
                 }
             }
         }

@@ -92,6 +92,23 @@ namespace Aki.Launcher
             }
         }
 
+        public static ServerProfileInfo[] GetExistingProfiles()
+        {
+            string profileJsonArray = RequestHandler.RequestExistingProfiles();
+
+            if(profileJsonArray != null)
+            {
+                ServerProfileInfo[] miniProfiles = Json.Deserialize<ServerProfileInfo[]>(profileJsonArray);
+
+                if (miniProfiles != null && miniProfiles.Length > 0)
+                {
+                    return miniProfiles;
+                }
+            }
+
+            return new ServerProfileInfo[0];
+        }
+
         public static async Task<AccountStatus> RegisterAsync(string username, string password, string edition)
         {
             return await Task.Run(() =>
@@ -246,6 +263,7 @@ namespace Aki.Launcher
                 return Wipe(edition);
             });
         }
+
         public static AccountStatus Wipe(string edition)
         {
             RegisterRequestData data = new RegisterRequestData(SelectedAccount.username, SelectedAccount.password, edition);
