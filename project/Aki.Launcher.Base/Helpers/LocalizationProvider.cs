@@ -161,6 +161,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.next_level_in = "Next level in";
             englishLocale.copied = "Copied";
             englishLocale.no_profile_data = "No profile data";
+            englishLocale.profile_version_mismath = "Your profile was made using a different version of aki and may have issues";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -1408,6 +1409,22 @@ namespace Aki.Launcher.Helpers
                 {
                     _no_profile_data = value;
                     RaisePropertyChanged(nameof(no_profile_data));
+                }
+            }
+        }
+        #endregion
+
+        #region profile_version_mismatch
+        private string _profile_version_mismath;
+        public string profile_version_mismath
+        {
+            get => _profile_version_mismath;
+            set
+            {
+                if(_profile_version_mismath != value)
+                {
+                    _profile_version_mismath = value;
+                    RaisePropertyChanged(nameof(profile_version_mismath));
                 }
             }
         }

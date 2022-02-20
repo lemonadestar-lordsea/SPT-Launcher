@@ -18,5 +18,6 @@ namespace Aki.Launcher.Models.Aki
         public long prevexp { get; set; }
         public long nextlvl { get; set; }
         public int maxlvl { get; set; }
+        public AkiData akiData { get; set; }
     }
 }

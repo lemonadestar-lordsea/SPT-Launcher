@@ -84,5 +84,10 @@ namespace Aki.Launcher
         {
             return request.GetJson("/launcher/ping");
         }
+
+        public static string RequestServerVersion()
+        {
+            return request.GetJson("/launcher/server/version");
+        }
     }
 }

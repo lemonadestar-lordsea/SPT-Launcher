@@ -18,7 +18,24 @@
             BorderBrush="{StaticResource AKI_Background_Dark}"
             BorderThickness="5">
       <StackPanel Background="{StaticResource AKI_Background_Dark}">
-        <Label Content="{Binding CurrentUsername}" Margin="5 0"/>
+		  <StackPanel Orientation="Horizontal">
+			  <Label Content="{Binding CurrentUsername}" Margin="5 0"/>
+			  
+			  <Label x:Name="akiVersion"
+					 Grid.Row="1" Grid.Column="4"
+					 Background="Transparent"
+					 ToolTip.Tip="{Binding ProfileInfo.MismatchMessage}"
+					 Classes.versionMismatch="{Binding ProfileInfo.VersionMismatch}"
+									   >
+				  <StackPanel Orientation="Horizontal" Background="Transparent">
+					  <TextBlock Text="{Binding ProfileInfo.Aki.version}"/>
+					  <Path Data="{StaticResource Alert}" Fill="{Binding ElementName=akiVersion, Path=Foreground}"
+							Margin="10 0"
+							IsVisible="{Binding ProfileInfo.VersionMismatch}"
+											  />
+				  </StackPanel>
+			  </Label>
+		  </StackPanel>
         <Button Content="{Binding CurrentID}" Classes="link"
                 Command="{Binding CopyCommand}"
                 CommandParameter="{Binding CurrentID}"/>

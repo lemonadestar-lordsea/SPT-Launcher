@@ -136,6 +136,10 @@
 		<Setter Property="Foreground" Value="DimGray"/>
 	</Style>
 
+	<Style Selector="Label.versionMismatch">
+		<Setter Property="Foreground" Value="OrangeRed"/>
+	</Style>
+
 	<!-- ProgressBar Styles -->
 	<!-- SourceRef: https://github.com/AvaloniaUI/Avalonia/blob/master/src/Avalonia.Themes.Fluent/Controls/ProgressBar.xaml -->
 	<Style Selector="ProgressBar">
