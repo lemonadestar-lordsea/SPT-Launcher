@@ -33,6 +33,22 @@
 								<Label Content="{Binding Username}" Grid.Row="1" Grid.Column="2"
 								   />
 
+								<!-- aki version -->
+								<Label x:Name="akiVersion"
+									   Grid.Row="1" Grid.Column="4"
+									   Background="Transparent"
+									   ToolTip.Tip="{Binding MismatchMessage}"
+									   Classes.versionMismatch="{Binding VersionMismatch}"
+									   >
+									<StackPanel Orientation="Horizontal"> 
+										<TextBlock Text="{Binding Aki.version}"/>
+										<Path Data="{StaticResource Alert}" Fill="{Binding ElementName=akiVersion, Path=Foreground}"
+											  Margin="10 0"
+											  IsVisible="{Binding VersionMismatch}"
+											  />
+									</StackPanel>
+								</Label>
+
 								<!-- no data label -->
 								<Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
 								   Path=no_profile_data}"

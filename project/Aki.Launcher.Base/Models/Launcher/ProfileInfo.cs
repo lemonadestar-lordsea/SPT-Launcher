@@ -6,6 +6,7 @@
  * waffle.lord
  */
 
+using Aki.Launcher.Helpers;
 using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Models.Aki;
 using System;
@@ -156,6 +157,36 @@ namespace Aki.Launcher.Models.Launcher
             }
         }
 
+        public string MismatchMessage => VersionMismatch ? LocalizationProvider.Instance.profile_version_mismath : null;
+
+        private bool _VersionMismatch;
+        public bool VersionMismatch
+        {
+            get => _VersionMismatch;
+            set
+            {
+                if(_VersionMismatch != value)
+                {
+                    _VersionMismatch = value;
+                    RaisePropertyChanged(nameof(VersionMismatch));
+                }
+            }
+        }
+
+        private AkiData _Aki;
+        public AkiData Aki
+        {
+            get => _Aki;
+            set
+            {
+                if(_Aki != value)
+                {
+                    _Aki = value;
+                    RaisePropertyChanged(nameof(Aki));
+                }
+            }
+        }
+
         public void UpdateDisplayedProfile(ProfileInfo PInfo)
         {
             if (PInfo.Side == null || string.IsNullOrWhiteSpace(PInfo.Side) || PInfo.Side == "unknown") return;
@@ -169,6 +200,29 @@ namespace Aki.Launcher.Models.Launcher
             NextLvlExp = PInfo.NextLvlExp;
             RemainingExp = PInfo.RemainingExp;
             XPLevelProgress = PInfo.XPLevelProgress;
+
+            Aki = PInfo.Aki;
+        }
+
+        /// <summary>
+        /// Checks if the aki versions are compatible (non-major changes)
+        /// </summary>
+        /// <param name="CurrentVersion"></param>
+        /// <param name="ExpectedVersion"></param>
+        /// <returns></returns>
+        private bool CompareVersions(string CurrentVersion, string ExpectedVersion)
+        {
+            Version v1 = new Version(CurrentVersion);
+            Version v2 = new Version(ExpectedVersion);
+
+            // check 'X'.x.x
+            if (v1.Major != v2.Major) return false;
+
+            // check x.'X'.x
+            if(v1.Minor != v2.Minor) return false;
+
+            //otherwise probably good
+            return true;
         }
 
         public ProfileInfo(ServerProfileInfo serverProfileInfo)
@@ -176,6 +230,13 @@ namespace Aki.Launcher.Models.Launcher
             Username = serverProfileInfo.username;
             Nickname = serverProfileInfo.nickname;
             Side = serverProfileInfo.side;
+
+            Aki = serverProfileInfo.akiData;
+
+            if (Aki != null)
+            {
+                VersionMismatch = !CompareVersions(Aki.version, ServerManager.GetVersion());
+            }
 
             SideImage = Path.Combine(ImageRequest.ImageCacheFolder, $"side_{Side.ToLower()}.png");
 

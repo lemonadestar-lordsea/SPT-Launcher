@@ -34,6 +34,20 @@ namespace Aki.Launcher
             return false;
         }
 
+        public static string GetVersion()
+        {
+            try
+            {
+                string json = RequestHandler.RequestServerVersion();
+
+                return Json.Deserialize<string>(json);
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
         public static void LoadServer(string backendUrl)
         {
             string json = "";
