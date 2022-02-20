@@ -75,5 +75,8 @@
   "wipe_warning": "Changing your account edition requires a profile wipe. This will reset your game prgrogess.",
   "copied": "Copied",
   "no_profile_data": "No profile data",
-  "profile_version_mismath": "Your profile was made using a different version of aki and may have issues"
+  "profile_version_mismath": "Your profile was made using a different version of aki and may have issues",
+  "profile_removed": "Profile removed",
+  "profile_removal_failed": "Failed to remove profile",
+  "profile_remove_question_format_1": "Permanently remove profile '{0}'?"
 }

@@ -162,6 +162,9 @@ namespace Aki.Launcher.Helpers
             englishLocale.copied = "Copied";
             englishLocale.no_profile_data = "No profile data";
             englishLocale.profile_version_mismath = "Your profile was made using a different version of aki and may have issues";
+            englishLocale.profile_removed = "Profile removed";
+            englishLocale.profile_removal_failed = "Failed to remove profile";
+            englishLocale.profile_remove_question_format_1 = "Permanently remove profile '{0}'?";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -1425,6 +1428,54 @@ namespace Aki.Launcher.Helpers
                 {
                     _profile_version_mismath = value;
                     RaisePropertyChanged(nameof(profile_version_mismath));
+                }
+            }
+        }
+        #endregion
+
+        #region profile_removed
+        private string _profile_removed;
+        public string profile_removed
+        {
+            get => _profile_removed;
+            set
+            {
+                if(_profile_removed != value)
+                {
+                    _profile_removed = value;
+                    RaisePropertyChanged(nameof(profile_removed));
+                }
+            }
+        }
+        #endregion
+
+        #region profile_removal_failed
+        private string _profile_removal_failed;
+        public string profile_removal_failed
+        {
+            get => _profile_removal_failed;
+            set
+            {
+                if(_profile_removal_failed != value)
+                {
+                    _profile_removal_failed = value;
+                    RaisePropertyChanged(nameof(profile_removal_failed));
+                }
+            }
+        }
+        #endregion
+
+        #region profile_remove_question_format_1
+        private string _profile_remove_question_format_1;
+        public string profile_remove_question_format_1
+        {
+            get => _profile_remove_question_format_1;
+            set
+            {
+                if(_profile_remove_question_format_1 != value)
+                {
+                    _profile_remove_question_format_1 = value;
+                    RaisePropertyChanged(nameof(profile_remove_question_format_1));
                 }
             }
         }

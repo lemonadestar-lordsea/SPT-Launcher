@@ -154,10 +154,47 @@ namespace Aki.Launcher.ViewModels
 
         public async Task CopyCommand(object parameter)
         {
-            if(Application.Current.Clipboard != null && parameter != null && parameter is string text)
+            if (Application.Current.Clipboard != null && parameter != null && parameter is string text)
             {
                 await Application.Current.Clipboard.SetTextAsync(text);
                 SendNotification("", $"{text} {LocalizationProvider.Instance.copied}", Avalonia.Controls.Notifications.NotificationType.Success);
+            }
+        }
+
+        public async Task RemoveProfileCommand()
+        {
+            ConfirmationDialogViewModel confirmation = new ConfirmationDialogViewModel(null, string.Format(LocalizationProvider.Instance.profile_remove_question_format_1, AccountManager.SelectedAccount.username));
+
+            var result = await ShowDialog(confirmation);
+
+            if (result is bool b && !b) return;
+
+            AccountStatus status = await AccountManager.RemoveAsync();
+
+            switch(status)
+            {
+                case AccountStatus.OK:
+                    {
+                        SendNotification("", LocalizationProvider.Instance.profile_removed);
+
+                        LauncherSettingsProvider.Instance.Server.AutoLoginCreds = null;
+
+                        LauncherSettingsProvider.Instance.SaveSettings();
+
+                        NavigateTo(new ConnectServerViewModel(HostScreen));
+                        break;
+                    }
+                case AccountStatus.UpdateFailed:
+                    {
+                        SendNotification("", LocalizationProvider.Instance.profile_removal_failed);
+                        break;
+                    }
+                case AccountStatus.NoConnection:
+                    {
+                        SendNotification("", LocalizationProvider.Instance.no_servers_available);
+                        NavigateTo(new ConnectServerViewModel(HostScreen));
+                        break;
+                    }
             }
         }
 
