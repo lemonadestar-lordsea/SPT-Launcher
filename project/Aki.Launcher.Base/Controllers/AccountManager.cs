@@ -140,7 +140,7 @@ namespace Aki.Launcher
         }
 
         //only added incase wanted for future use.
-        public static async Task<int> RemoveAsync()
+        public static async Task<AccountStatus> RemoveAsync()
         {
             return await Task.Run(() =>
             {
@@ -148,33 +148,29 @@ namespace Aki.Launcher
             });
         }
 
-        public static int Remove()
+        public static AccountStatus Remove()
         {
             LoginRequestData data = new LoginRequestData(SelectedAccount.username, SelectedAccount.password);
-            string json = STATUS_FAILED;
 
             try
             {
-                json = RequestHandler.RequestAccount(data);
+                string json = RequestHandler.RequestRemove(data);
 
-                if (json != STATUS_OK)
+                if(Json.Deserialize<bool>(json))
                 {
-                    return -1;
+                    SelectedAccount = null;
+
+                    return AccountStatus.OK;
+                }
+                else
+                {
+                    return AccountStatus.UpdateFailed;
                 }
             }
             catch
             {
-                return -1;
+                return AccountStatus.NoConnection;
             }
-
-            SelectedAccount = null;
-
-
-            // Left in for future, incase needed for reference
-            //launcherConfig.Username = "";
-            //launcherConfig.Password = "";
-            //JsonHandler.SaveLauncherConfig(launcherConfig);
-            return 1;
         }
 
         public static async Task<AccountStatus> ChangeUsernameAsync(string username)

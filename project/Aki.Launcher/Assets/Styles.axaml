@@ -270,6 +270,15 @@
 		<Setter Property="BorderBrush" Value="{StaticResource AKI_Background_Dark}"/>
 	</Style>
 
+	<Style Selector="Button.icon">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+	</Style>
+
+	<Style Selector="Button.icon:pointerover">
+		<Setter Property="Background" Value="{StaticResource AKI_Brush_DarkGrayBlue}"/>
+	</Style>
+
     <!-- Checkbox styles -->
 	<!-- SourceRef: https://github.com/AvaloniaUI/Avalonia/blob/master/src/Avalonia.Themes.Fluent/Controls/CheckBox.xaml -->
 	<Style Selector="CheckBox">
