@@ -6,6 +6,7 @@
  * waffle.lord
  */
 
+using Aki.Launch.Models.Aki;
 using Aki.Launcher.Helpers;
 using Aki.Launcher.MiniCommon;
 using Aki.Launcher.Models.Aki;
@@ -212,8 +213,8 @@ namespace Aki.Launcher.Models.Launcher
         /// <returns></returns>
         private bool CompareVersions(string CurrentVersion, string ExpectedVersion)
         {
-            Version v1 = new Version(CurrentVersion);
-            Version v2 = new Version(ExpectedVersion);
+            AkiVersion v1 = new AkiVersion(CurrentVersion);
+            AkiVersion v2 = new AkiVersion(ExpectedVersion);
 
             // check 'X'.x.x
             if (v1.Major != v2.Major) return false;
