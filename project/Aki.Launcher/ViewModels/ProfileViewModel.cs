@@ -72,22 +72,9 @@ namespace Aki.Launcher.ViewModels
             if (compatibleGameVersion == "") return;
 
             // get the product version of the exe
-            string unformattedGameVersion = FileVersionInfo.GetVersionInfo(Path.Join(LauncherSettingsProvider.Instance.GamePath, "EscapeFromTarkov.exe")).ProductVersion;
+            string gameVersion = FileVersionInfo.GetVersionInfo(Path.Join(LauncherSettingsProvider.Instance.GamePath, "EscapeFromTarkov.exe")).FileVersion;
 
-            if (unformattedGameVersion == null) return;
-
-            // split the string by . and -
-            string[] splitGameVersion = unformattedGameVersion.Split('.', '-');
-
-            // we need the first 5, so if it's less than 5, something isn't right
-            if (splitGameVersion.Length < 6) return;
-
-            // fix the version number
-            List<string> fixedGameVersion = splitGameVersion[0..3].ToList();
-
-            fixedGameVersion.Add(splitGameVersion[4]);
-
-            string gameVersion = string.Join('.', fixedGameVersion);
+            if (gameVersion == null) return;
 
             // if the compatible version isn't the same as the game version show a warning dialog
             if(compatibleGameVersion != gameVersion)
