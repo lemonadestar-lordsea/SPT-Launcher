@@ -89,5 +89,10 @@ namespace Aki.Launcher
         {
             return request.GetJson("/launcher/server/version");
         }
+
+        public static string RequestCompatibleGameVersion()
+        {
+            return request.GetJson("/launcher/profile/compatibleTarkovVersion");
+        }
     }
 }

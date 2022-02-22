@@ -52,7 +52,7 @@
 								<!-- no data label -->
 								<Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance},
 								   Path=no_profile_data}"
-									   Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="4"
+									   Grid.Row="1" Grid.RowSpan="2" Grid.Column="5"
 									   HorizontalAlignment="Center"
 									   VerticalAlignment="Center"
 									   FontWeight="SemiBold"
@@ -112,13 +112,6 @@
 		</Border>
 
 		<StackPanel Spacing="10" Margin="10" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch">
-			<!-- Setting button -->
-			<Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=settings_menu}"
-					HorizontalAlignment="Right"
-					FontSize="12"
-					Command="{Binding GoToSettingsCommand}"
-					Classes="link"
-            />
 
 			<!-- Username box -->
 			<TextBox Watermark="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=username}"

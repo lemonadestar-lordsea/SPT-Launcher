@@ -1,6 +1,7 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:cc="using:Aki.Launcher.CustomControls"
+        xmlns:rxui="using:Avalonia.ReactiveUI"
         >
 	<Design.PreviewWith>
 		<Border Padding="20" Background="DimGray">
@@ -88,6 +89,11 @@
 		<Setter Property="ButtonForeground" Value="{StaticResource AKI_Brush_DarkGrayBlue}"/>
 	</Style>
 
+	<Style Selector="cc|TitleBar.versiontag">
+		<Setter Property="BorderBrush" Value="{StaticResource AKI_Brush_Yellow}"/>
+		<Setter Property="BorderThickness" Value="0 0 0 2"/>
+	</Style>
+		   
 	<!-- TextBox Styles -->
 	<!-- SourceRef: https://github.com/AvaloniaUI/Avalonia/blob/master/src/Avalonia.Themes.Fluent/Controls/TextBox.xaml -->
 	<Style Selector="TextBox">

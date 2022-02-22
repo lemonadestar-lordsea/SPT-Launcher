@@ -5,11 +5,13 @@ using Aki.Launcher.Models;
 using Aki.Launcher.MiniCommon;
 using System.IO;
 using Splat;
+using Aki.Launch.Models.Aki;
 
 namespace Aki.Launcher.ViewModels
 {
     public class MainWindowViewModel : ReactiveObject, IActivatableViewModel, IScreen
     {
+        public AkiVersion VersionInfo { get; set; } = new AkiVersion();
         public RoutingState Router { get; } = new RoutingState();
         public ViewModelActivator Activator { get; } = new ViewModelActivator();
 
@@ -21,6 +23,8 @@ namespace Aki.Launcher.ViewModels
         public MainWindowViewModel()
         {
             Locator.CurrentMutable.RegisterConstant<ImageHelper>(Background, "bgimage");
+
+            Locator.CurrentMutable.RegisterConstant<AkiVersion>(VersionInfo, "akiversion");
 
             this.WhenActivated((CompositeDisposable disposables) =>
             {
@@ -42,6 +46,11 @@ namespace Aki.Launcher.ViewModels
             {
                 desktopApp.MainWindow.WindowState = Avalonia.Controls.WindowState.Minimized;
             }
+        }
+
+        public void GoToSettingsCommand()
+        {
+            Router.Navigate.Execute(new SettingsViewModel(this));
         }
     }
 }

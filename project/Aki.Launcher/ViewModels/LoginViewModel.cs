@@ -161,10 +161,5 @@ namespace Aki.Launcher.ViewModels
                 }
             }
         }
-
-        public void GoToSettingsCommand()
-        {
-            NavigateTo(new SettingsViewModel(HostScreen));
-        }
     }
 }

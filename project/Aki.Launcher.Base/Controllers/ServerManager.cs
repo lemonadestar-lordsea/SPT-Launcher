@@ -48,6 +48,20 @@ namespace Aki.Launcher
             }
         }
 
+        public static string GetCompatibleGameVersion()
+        {
+            try
+            {
+                string json = RequestHandler.RequestCompatibleGameVersion();
+
+                return Json.Deserialize<string>(json);
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
         public static void LoadServer(string backendUrl)
         {
             string json = "";
