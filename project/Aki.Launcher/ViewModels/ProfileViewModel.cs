@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 using Aki.Launcher.Attributes;
 using Aki.Launcher.ViewModels.Dialogs;
 using Avalonia.Threading;
+using System.Reactive.Disposables;
+using System.Diagnostics;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Aki.Launcher.ViewModels
 {
@@ -35,6 +40,14 @@ namespace Aki.Launcher.ViewModels
 
         public ProfileViewModel(IScreen Host) : base(Host)
         {
+            this.WhenActivated((CompositeDisposable disposables) =>
+            {
+                Task.Run(() =>
+                {
+                    GameVersionCheck();
+                });
+            });
+
             // cache and load side image if profile has a side
             if(AccountManager.SelectedProfileInfo != null && AccountManager.SelectedProfileInfo.Side != null)
             {
@@ -50,6 +63,43 @@ namespace Aki.Launcher.ViewModels
             CurrentEdition = AccountManager.SelectedAccount.edition;
 
             CurrentID = AccountManager.SelectedAccount.id;
+        }
+
+        private async Task GameVersionCheck()
+        {
+            string compatibleGameVersion = ServerManager.GetCompatibleGameVersion();
+
+            if (compatibleGameVersion == "") return;
+
+            // get the product version of the exe
+            string unformattedGameVersion = FileVersionInfo.GetVersionInfo(Path.Join(LauncherSettingsProvider.Instance.GamePath, "EscapeFromTarkov.exe")).ProductVersion;
+
+            if (unformattedGameVersion == null) return;
+
+            // split the string by . and -
+            string[] splitGameVersion = unformattedGameVersion.Split('.', '-');
+
+            // we need the first 5, so if it's less than 5, something isn't right
+            if (splitGameVersion.Length < 6) return;
+
+            // fix the version number
+            List<string> fixedGameVersion = splitGameVersion[0..3].ToList();
+
+            fixedGameVersion.Add(splitGameVersion[4]);
+
+            string gameVersion = string.Join('.', fixedGameVersion);
+
+            // if the compatible version isn't the same as the game version show a warning dialog
+            if(compatibleGameVersion != gameVersion)
+            {
+                WarningDialogViewModel warning = new WarningDialogViewModel(null,
+                                                     string.Format(LocalizationProvider.Instance.game_version_mismatch_format_2, gameVersion, compatibleGameVersion),
+                                                     LocalizationProvider.Instance.i_understand);
+                Dispatcher.UIThread.InvokeAsync(async() =>
+                {
+                    await ShowDialog(warning);
+                });
+            }
         }
 
         public void LogoutCommand()

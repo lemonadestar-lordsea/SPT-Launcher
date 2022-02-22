@@ -23,13 +23,19 @@
 			     />
 
 		<!-- Setting button -->
-		<Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=settings_menu}"
+		<Button x:Name="stb"
 				Grid.Column="2"
 				FontSize="12"
 				Command="{Binding SettingsButtonCommand, RelativeSource={
 			              RelativeSource AncestorType=UserControl}}"
 				Classes="link"
-            />
+            >
+			<StackPanel Orientation="Horizontal">
+				<Path Data="{StaticResource Gear}" Fill="{Binding ElementName=stb, Path=Foreground}"
+					  Margin="2"/>
+				<TextBlock Text="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=settings_menu}"/>
+			</StackPanel>
+		</Button>
 
 		<!-- Minimize (-) Button -->
 		<Button Content="&#xE949;" Grid.Column="4"

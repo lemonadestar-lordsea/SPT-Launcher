@@ -165,6 +165,8 @@ namespace Aki.Launcher.Helpers
             englishLocale.profile_removed = "Profile removed";
             englishLocale.profile_removal_failed = "Failed to remove profile";
             englishLocale.profile_remove_question_format_1 = "Permanently remove profile '{0}'?";
+            englishLocale.i_understand = "I Understand";
+            englishLocale.game_version_mismatch_format_2 = "Your game version is '{0}' and the compatible version is '{1}'.\n\nYour game may not run correctly or at all.";
             #endregion
 
             Directory.CreateDirectory(LocalizationProvider.DefaultLocaleFolderPath);
@@ -1476,6 +1478,38 @@ namespace Aki.Launcher.Helpers
                 {
                     _profile_remove_question_format_1 = value;
                     RaisePropertyChanged(nameof(profile_remove_question_format_1));
+                }
+            }
+        }
+        #endregion
+
+        #region i_understand
+        private string _i_understand;
+        public string i_understand
+        {
+            get => _i_understand;
+            set
+            {
+                if(_i_understand != value)
+                {
+                    _i_understand = value;
+                    RaisePropertyChanged(nameof(i_understand));
+                }
+            }
+        }
+        #endregion
+
+        #region game_version_mismatch_format_2
+        private string _game_version_mismatch_format_2;
+        public string game_version_mismatch_format_2
+        {
+            get => _game_version_mismatch_format_2;
+            set
+            {
+                if(_game_version_mismatch_format_2 != value)
+                {
+                    _game_version_mismatch_format_2 = value;
+                    RaisePropertyChanged(nameof(game_version_mismatch_format_2));
                 }
             }
         }
