@@ -73,5 +73,15 @@ namespace Aki.Launcher.CustomControls
             get => GetValue(MinButtonCommandProperty);
             set => SetValue(MinButtonCommandProperty, value);
         }
+
+        //Setting Button Command Property
+        public static readonly StyledProperty<ICommand> SettingsButtonCommandProperty =
+            AvaloniaProperty.Register<TitleBar, ICommand>(nameof(SettingsButtonCommand));
+
+        public ICommand SettingsButtonCommand
+        {
+            get => GetValue(SettingsButtonCommandProperty);
+            set => SetValue(SettingsButtonCommandProperty, value);
+        }
     }
 }

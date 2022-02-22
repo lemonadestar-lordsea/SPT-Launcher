@@ -34,8 +34,9 @@
 	<Grid RowDefinitions="AUTO,AUTO,*">
 
 		<cc:TitleBar Title="SPT Launcher"
-							   XButtonCommand="{Binding CloseCommand}"
+				     XButtonCommand="{Binding CloseCommand}"
 					 MinButtonCommand="{Binding MinimizeCommand}"
+					 SettingsButtonCommand="{Binding GoToSettingsCommand}"
 					 Classes.versiontag="{Binding VersionInfo.HasTag}"
                  />
 

@@ -47,5 +47,10 @@ namespace Aki.Launcher.ViewModels
                 desktopApp.MainWindow.WindowState = Avalonia.Controls.WindowState.Minimized;
             }
         }
+
+        public void GoToSettingsCommand()
+        {
+            Router.Navigate.Execute(new SettingsViewModel(this));
+        }
     }
 }
