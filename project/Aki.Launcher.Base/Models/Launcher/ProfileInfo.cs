@@ -213,6 +213,8 @@ namespace Aki.Launcher.Models.Launcher
         /// <returns></returns>
         private bool CompareVersions(string CurrentVersion, string ExpectedVersion)
         {
+            if (ExpectedVersion == "") return false;
+
             AkiVersion v1 = new AkiVersion(CurrentVersion);
             AkiVersion v2 = new AkiVersion(ExpectedVersion);
 

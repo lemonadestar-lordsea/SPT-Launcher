@@ -1,4 +1,5 @@
-﻿using Aki.Launcher.Helpers;
+﻿using Aki.Launch.Models.Aki;
+using Aki.Launcher.Helpers;
 using Aki.Launcher.Models.Launcher;
 using ReactiveUI;
 using Splat;
@@ -41,9 +42,9 @@ namespace Aki.Launcher.ViewModels
 
             if (connected)
             {
-                string version = Locator.Current.GetService<string>("ServerVersion");
+                AkiVersion version = Locator.Current.GetService<AkiVersion>("akiversion");
 
-                version = ServerManager.GetVersion();
+                version.ParseVersionInfo(ServerManager.GetVersion());
 
                 NavigateTo(new LoginViewModel(HostScreen, noAutoLogin));
             }
