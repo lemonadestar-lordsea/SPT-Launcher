@@ -6,6 +6,7 @@ using Aki.Launcher.MiniCommon;
 using System.IO;
 using Splat;
 using Aki.Launch.Models.Aki;
+using Aki.Launcher.Helpers;
 
 namespace Aki.Launcher.ViewModels
 {
@@ -25,6 +26,8 @@ namespace Aki.Launcher.ViewModels
             Locator.CurrentMutable.RegisterConstant<ImageHelper>(Background, "bgimage");
 
             Locator.CurrentMutable.RegisterConstant<AkiVersion>(VersionInfo, "akiversion");
+
+            LauncherSettingsProvider.Instance.AllowSettings = true;
 
             this.WhenActivated((CompositeDisposable disposables) =>
             {
@@ -50,6 +53,8 @@ namespace Aki.Launcher.ViewModels
 
         public void GoToSettingsCommand()
         {
+            LauncherSettingsProvider.Instance.AllowSettings = false;
+
             Router.Navigate.Execute(new SettingsViewModel(this));
         }
     }
