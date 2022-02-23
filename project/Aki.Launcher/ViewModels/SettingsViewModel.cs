@@ -39,6 +39,7 @@ namespace Aki.Launcher.ViewModels
                 desktop.MainWindow.Closing -= MainWindow_Closing;
             }
 
+            LauncherSettingsProvider.Instance.AllowSettings = true;
             LauncherSettingsProvider.Instance.SaveSettings();
 
             NavigateBack();
