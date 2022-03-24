@@ -13,7 +13,7 @@
   "edit_account_update_error": "更新存档时出现了一些问题。",
   "register": "注册",
   "go_to_register": "去注册",
-  "login": "登录",
+  "login_or_register": "登录 / 注册",
   "go_to_login": "去登录",
   "login_automatically": "自动登录",
   "incorrect_login": "邮箱或密码不正确",

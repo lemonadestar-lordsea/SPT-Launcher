@@ -13,7 +13,7 @@
   "edit_account_update_error": "Произошла ошибка при обновлении профиля.",
   "register": "Регистрация",
   "go_to_register": "Перейти к регистриции",
-  "login": "Вход",
+  "login_or_register": "Вход / Регистрация",
   "go_to_login": "Перейти ко входу",
   "login_automatically": "Войти автоматически",
   "incorrect_login": "Неверное имя пользователя или пароль",

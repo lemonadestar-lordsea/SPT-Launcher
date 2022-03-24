@@ -13,7 +13,7 @@
   "edit_account_update_error": "An issue occurred while updating your profile.",
   "register": "Register",
   "go_to_register": "Go to Register",
-  "login": "Login",
+  "login_or_register": "Login / Register",
   "go_to_login": "Go to Login",
   "login_automatically": "Login Automatically",
   "incorrect_login": "Username or password is incorrect.",
