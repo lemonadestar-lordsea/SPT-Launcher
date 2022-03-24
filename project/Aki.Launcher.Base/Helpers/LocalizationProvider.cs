@@ -100,7 +100,7 @@ namespace Aki.Launcher.Helpers
             englishLocale.go_to_register = "Go to Register";
             englishLocale.registration_failed = "Registration Failed.";
             englishLocale.registration_question_format_1 = "Profile '{0}' does not exist.\n\nWould you like to create it?";
-            englishLocale.login = "Login";
+            englishLocale.login_or_register = "Login / Register";
             englishLocale.go_to_login = "Go to Login";
             englishLocale.login_automatically = "Login Automatically";
             englishLocale.incorrect_login = "Username or password is incorrect";
@@ -427,17 +427,17 @@ namespace Aki.Launcher.Helpers
         }
         #endregion
 
-        #region login
-        private string _login;
-        public string login
+        #region login_or_register
+        private string _login_or_register;
+        public string login_or_register
         {
-            get => _login;
+            get => _login_or_register;
             set
             {
-                if (_login != value)
+                if (_login_or_register != value)
                 {
-                    _login = value;
-                    RaisePropertyChanged(nameof(login));
+                    _login_or_register = value;
+                    RaisePropertyChanged(nameof(login_or_register));
                 }
             }
         }

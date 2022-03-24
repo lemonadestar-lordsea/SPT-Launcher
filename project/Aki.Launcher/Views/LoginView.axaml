@@ -119,7 +119,7 @@
                />
 
 			<!-- Login button -->
-			<Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=login}"
+			<Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=login_or_register}"
 					HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
 					Command="{Binding LoginCommand}"
 					IsEnabled="{Binding !IsLoggingIn}"
