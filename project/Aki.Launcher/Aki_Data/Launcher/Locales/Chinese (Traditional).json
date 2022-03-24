@@ -13,7 +13,7 @@
   "edit_account_update_error": "更新存檔過程中發生錯誤",
   "register": "登錄",
   "go_to_register": "前往登錄",
-  "login": "登入",
+  "login_or_register": "登入 / 登錄",
   "go_to_login": "前往登入",
   "login_automatically": "自動登入",
   "incorrect_login": "用戶名稱或密碼不正確",

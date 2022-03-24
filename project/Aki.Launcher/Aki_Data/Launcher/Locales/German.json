@@ -13,7 +13,7 @@
   "edit_account_update_error": "Das Profil konnte aufgrund eines Fehlers nicht aktualisiert werden.",
   "register": "Registrieren",
   "go_to_register": "Zur Registrierung gehen",
-  "login": "Anmelden",
+  "login_or_register": "Anmelden / Registrieren",
   "go_to_login": "Zum Login gehen",
   "login_automatically": "Automatisch anmelden",
   "incorrect_login": "Die E-Mail-Adresse und das Passwort stimmen nicht überein.",

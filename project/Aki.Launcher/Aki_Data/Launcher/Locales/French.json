@@ -13,7 +13,7 @@
   "edit_account_update_error": "Une erreur est survenue pendant la mise à jour de votre compte.",
   "register": "Inscription",
   "go_to_register": "S'inscrire",
-  "login": "Connexion",
+  "login_or_register": "Connexion / Inscription",
   "go_to_login": "Se connecter",
   "login_automatically": "Se connecter automatiquement",
   "incorrect_login": "Nom d'utilisateur ou mot de passe invalide.",

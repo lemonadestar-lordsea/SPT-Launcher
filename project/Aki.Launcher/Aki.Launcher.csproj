@@ -9,8 +9,11 @@
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
+    <AvaloniaXaml Remove="Properties\**" />
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
     <AvaloniaResource Remove="Assets\Styles.axaml" />
-    <Folder Include="Properties\PublishProfiles\" />
     <None Remove=".gitignore" />
     <None Remove="Assets\aki-logo.png" />
     <None Remove="Assets\icon.ico" />
