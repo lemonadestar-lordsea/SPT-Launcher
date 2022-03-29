@@ -18,7 +18,7 @@ namespace Aki.Launcher
 
             RxApp.DefaultExceptionHandler = Observer.Create<Exception>((exception) =>
             {
-                LogManager.Instance.Error(exception.Message);
+                LogManager.Instance.Exception(exception);
             });
         }
 
