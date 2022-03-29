@@ -1,4 +1,5 @@
-﻿using Aki.Launcher.Helpers;
+﻿using Aki.Launcher.Controllers;
+using Aki.Launcher.Helpers;
 using Aki.Launcher.Models;
 using Aki.Launcher.Models.Launcher;
 using Aki.Launcher.ViewModels.Dialogs;
@@ -78,29 +79,36 @@ namespace Aki.Launcher.ViewModels
 
             bool BackupAndRemove(string backupFolderPath, FileInfo file)
             {
-                file.Refresh();
-
-                //if for some reason the file no longer exists /shrug
-                if (!file.Exists)
+                try
                 {
-                    return false;
+                    file.Refresh();
+
+                    //if for some reason the file no longer exists /shrug
+                    if (!file.Exists)
+                    {
+                        return false;
+                    }
+
+                    //create backup dir and copy file
+                    Directory.CreateDirectory(backupFolderPath);
+
+                    string newFilePath = Path.Combine(backupFolderPath, $"{file.Name}_{DateTime.Now.ToString("MM-dd-yyyy_hh-mm-ss-tt")}.bak");
+
+                    File.Copy(file.FullName, newFilePath);
+
+                    //copy check
+                    if (!File.Exists(newFilePath))
+                    {
+                        return false;
+                    }
+
+                    //delete old file
+                    file.Delete();
                 }
-
-                //create backup dir and copy file
-                Directory.CreateDirectory(backupFolderPath);
-
-                string newFilePath = Path.Combine(backupFolderPath, $"{file.Name}_{DateTime.Now.ToString("MM-dd-yyyy_hh-mm-ss-tt")}.bak");
-
-                File.Copy(file.FullName, newFilePath);
-
-                //copy check
-                if (!File.Exists(newFilePath))
+                catch (Exception ex)
                 {
-                    return false;
+                    LogManager.Instance.Exception(ex);
                 }
-
-                //delete old file
-                file.Delete();
 
                 //delete check
                 if (file.Exists)
@@ -156,7 +164,6 @@ namespace Aki.Launcher.ViewModels
 
         public async Task SelectGameFolderCommand()
         {
-            
             OpenFolderDialog dialog = new OpenFolderDialog();
 
             dialog.Directory = Assembly.GetExecutingAssembly().Location;

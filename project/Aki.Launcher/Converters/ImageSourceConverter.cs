@@ -6,6 +6,7 @@
  * waffle.lord
  */
 
+using Aki.Launcher.Controllers;
 using Avalonia.Data.Converters;
 using Avalonia.Media.Imaging;
 using System;
@@ -30,7 +31,10 @@ namespace Aki.Launcher.Converters
 
                 return null;
             }
-            catch { return null; }
+            catch
+            {
+                return null;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

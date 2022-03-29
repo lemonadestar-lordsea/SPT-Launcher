@@ -1,4 +1,5 @@
 using Aki.Launcher.Attributes;
+using Aki.Launcher.Controllers;
 using Aki.Launcher.Models;
 using Aki.Launcher.ViewModels.Notifications;
 using Avalonia.Controls.Notifications;
@@ -52,6 +53,9 @@ namespace Aki.Launcher.ViewModels
 
                     if(!result.Succeeded)
                     {
+                        var vmTypeName = ViewModel.GetType().Name;
+
+                        LogManager.Instance.Warning($"[{vmTypeName}] Failed pre-condition check: {attrib.GetType().Name}");
                         return result;
                     }
                 }
