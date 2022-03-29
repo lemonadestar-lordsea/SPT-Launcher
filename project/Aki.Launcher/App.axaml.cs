@@ -1,8 +1,12 @@
+using Aki.Launcher.Controllers;
 using Aki.Launcher.ViewModels;
 using Aki.Launcher.Views;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using ReactiveUI;
+using System;
+using System.Reactive;
 
 namespace Aki.Launcher
 {
@@ -11,6 +15,11 @@ namespace Aki.Launcher
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
+
+            RxApp.DefaultExceptionHandler = Observer.Create<Exception>((exception) =>
+            {
+                LogManager.Instance.Error(exception.Message);
+            });
         }
 
         public override void OnFrameworkInitializationCompleted()

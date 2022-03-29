@@ -11,8 +11,6 @@ using Avalonia.Threading;
 using System.Reactive.Disposables;
 using System.Diagnostics;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Aki.Launcher.ViewModels
 {

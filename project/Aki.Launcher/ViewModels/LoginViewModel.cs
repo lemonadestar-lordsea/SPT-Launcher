@@ -50,11 +50,11 @@ namespace Aki.Launcher.ViewModels
                             {
                                 var result = await ShowDialog(new RegisterDialogViewModel(null, Login.Username));
 
-                                if(result != null && result is string edition)
+                                if (result != null && result is string edition)
                                 {
                                     AccountStatus registerResult = await AccountManager.RegisterAsync(Login.Username, Login.Password, edition);
 
-                                    switch(registerResult)
+                                    switch (registerResult)
                                     {
                                         case AccountStatus.OK:
                                             {
@@ -109,7 +109,7 @@ namespace Aki.Launcher.ViewModels
             backgroundImage.Touch();
 
             //handle auto-login
-            if(LauncherSettingsProvider.Instance.UseAutoLogin && LauncherSettingsProvider.Instance.Server.AutoLoginCreds != null && !NoAutoLogin)
+            if (LauncherSettingsProvider.Instance.UseAutoLogin && LauncherSettingsProvider.Instance.Server.AutoLoginCreds != null && !NoAutoLogin)
             {
                 Task.Run(() =>
                 {

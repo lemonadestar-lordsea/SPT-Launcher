@@ -48,6 +48,7 @@ namespace Aki.Launcher
             // setup directories
             if (IsInstalledInLive())
             {
+                LogManager.Instance.Warning("Failed installed in live check");
                 return GameStarterResult.FromError(-1);
             }
 
@@ -55,6 +56,7 @@ namespace Aki.Launcher
 
             if (IsPiratedCopy() > 1)
             {
+                LogManager.Instance.Warning("Failed Piracy Check");
                 return GameStarterResult.FromError(-2);
             }
 
@@ -67,6 +69,7 @@ namespace Aki.Launcher
             //create nlog.dll.nlog
             if(!NLogCreator.Create())
             {
+                LogManager.Instance.Warning("NLogCreator failed to setup nlog");
                 return GameStarterResult.FromError(-7);
             }
 
@@ -76,6 +79,7 @@ namespace Aki.Launcher
 
             if (!File.Exists(clientExecutable))
             {
+                LogManager.Instance.Warning($"Could not find {clientExecutable}");
                 return GameStarterResult.FromError(-6);
             }
 
@@ -89,6 +93,7 @@ namespace Aki.Launcher
             }
             catch (TaskCanceledException)
             {
+                LogManager.Instance.Warning("Failed to apply assembly patch");
                 return GameStarterResult.FromError(-4);
             }
             
@@ -123,7 +128,7 @@ namespace Aki.Launcher
             {
                 var value4 = new FileInfo[]
                 {
-                    new FileInfo(Path.Combine(_originalGamePath, @"Launcher.exe")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"Aki.Launcher.exe")),
                     new FileInfo(Path.Combine(_originalGamePath, @"Server.exe")),
                     new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\0Harmony.dll")),
                     new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\NLog.dll.nlog")),
@@ -158,8 +163,9 @@ namespace Aki.Launcher
                     value0 = true;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                LogManager.Instance.Exception(ex);
             }
 
             return value0;
@@ -254,8 +260,9 @@ namespace Aki.Launcher
                     key.DeleteValue(value);
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                LogManager.Instance.Exception(ex);
                 return false;
             }
 
@@ -305,8 +312,9 @@ namespace Aki.Launcher
                 // remove directory
                 basedir.Delete();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogManager.Instance.Exception(ex);
                 return false;
             }
 
