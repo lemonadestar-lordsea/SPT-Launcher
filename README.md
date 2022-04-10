@@ -2,6 +2,13 @@
 
 Custom launcher for Escape From Tarkov to start the game in offline mode
 
+**Project**        | **Function**
+------------------ | --------------------------------------------
+Aki.Build          | Build script
+Aki.ByteBanger     | Assembly-CSharp.dll patcher
+Aki.Launcher       | Launcher frontend
+Aki.Launcher.Base  | Launcher backend
+
 ## Requirements
 
 - .NET 6 SDK
