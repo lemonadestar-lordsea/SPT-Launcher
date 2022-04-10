@@ -151,7 +151,6 @@ namespace Aki.Launcher.Helpers
             englishLocale.level = "Level";
             englishLocale.game_path = "Game Path";
             englishLocale.patching = "Patching";
-            englishLocale.nlog_modify_failed = "NLog could not be modified";
             englishLocale.file_mismatch_dialog_message = "The input file hash doesn't match the expected hash. You may be using the wrong version\nof AKI for your client files.\n\nDo you want to continue?";
             englishLocale.yes = "Yes";
             englishLocale.no = "No";
@@ -1254,22 +1253,6 @@ namespace Aki.Launcher.Helpers
                 {
                     _patching = value;
                     RaisePropertyChanged(nameof(patching));
-                }
-            }
-        }
-        #endregion
-
-        #region nlog_modify_failed
-        private string _nlog_modify_failed;
-        public string nlog_modify_failed
-        {
-            get => _nlog_modify_failed;
-            set
-            {
-                if(_nlog_modify_failed != value)
-                {
-                    _nlog_modify_failed = value;
-                    RaisePropertyChanged(nameof(nlog_modify_failed));
                 }
             }
         }
