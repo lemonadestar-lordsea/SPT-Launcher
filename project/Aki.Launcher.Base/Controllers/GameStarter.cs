@@ -56,7 +56,7 @@ namespace Aki.Launcher
 
             if (!ValidationUtil.Validate())
             {
-                LogManager.Instance.Warning("Failed Piracy Check");
+                LogManager.Instance.Warning("Failed validation check");
                 return GameStarterResult.FromError(-2);
             }
 
