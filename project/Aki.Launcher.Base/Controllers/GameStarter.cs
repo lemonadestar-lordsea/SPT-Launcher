@@ -54,9 +54,9 @@ namespace Aki.Launcher
 
             SetupGameFiles();
 
-            if (IsPiratedCopy() > 1)
+            if (!ValidationUtil.Validate())
             {
-                LogManager.Instance.Warning("Failed Piracy Check");
+                LogManager.Instance.Warning("Failed validation check");
                 return GameStarterResult.FromError(-2);
             }
 
@@ -74,7 +74,6 @@ namespace Aki.Launcher
                 LogManager.Instance.Warning($"Could not find {clientExecutable}");
                 return GameStarterResult.FromError(-6);
             }
-
 
             // apply patches
             ProgressReportingPatchRunner patchRunner = new ProgressReportingPatchRunner(_gamePath);
@@ -122,7 +121,7 @@ namespace Aki.Launcher
                 {
                     // aki files
                     new FileInfo(Path.Combine(_originalGamePath, @"Aki.Launcher.exe")),
-                    new FileInfo(Path.Combine(_originalGamePath, @"Server.exe")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"Aki.Server.exe")),
                     new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\Aki.Build.dll")),
                     new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\Aki.Common.dll")),
                     new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\Aki.Reflection.dll")),
@@ -211,37 +210,6 @@ namespace Aki.Launcher
             }
             
             return Path.Combine(_gamePath, fileName);
-        }
-
-        int IsPiratedCopy()
-        {
-            var value0 = 0;
-            
-            try
-            {
-                var value4 = new FileInfo[3]
-                {
-                    new FileInfo(Path.Combine(_originalGamePath, "Uninstall.exe")),
-                    new FileInfo(Path.Combine(_originalGamePath, @"BattlEye", "BEClient_x64.dll")),
-                    new FileInfo(Path.Combine(_originalGamePath, @"BattlEye", "BEService_x64.dll"))
-                };
-
-                value0 = value4.Length;
-
-                foreach (var value in value4)
-                {
-                    if (File.Exists(value.FullName))
-                    {
-                        --value0;
-                    }
-                }
-            }
-            catch
-            {
-                value0 = 5;
-            }
-
-            return value0;
         }
 
         /// <summary>
