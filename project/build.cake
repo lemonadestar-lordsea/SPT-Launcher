@@ -5,7 +5,7 @@ bool VSBuilt = Argument<bool>("vsbuilt", false);
 // Cake API Reference: https://cakebuild.net/dsl/
 // setup variables
 var buildDir = "./Build";
-var csprojPaths = GetFiles("./**/Aki.*(Launcher|Launcher.CLI).csproj");
+var csprojPaths = GetFiles("./**/Aki.*(Launcher).csproj");
 var delPaths = GetDirectories("./**/*(obj|bin)");
 var akiData = "./Aki.Launcher/Aki_Data";
 var licenseFile = "../LICENSE.md";
