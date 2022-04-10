@@ -12,7 +12,7 @@ Aki.Launcher.Base  | Launcher backend
 ## Requirements
 
 - .NET 6 SDK
-- VSCode
+- Visual Studio Code
 
 ### For UI Development
 
@@ -21,6 +21,6 @@ Aki.Launcher.Base  | Launcher backend
 
 ## Build
 
-1. Open Launcher.code-workspace in VSCode.
+1. Open Launcher.code-workspace in Visual Studio Code.
 2. Run the build task: (top toolbar) Terminal -> Run Build Task...
 3. Copy-paste all files inside `Build` into `game root directory`, overwrite when prompted.
