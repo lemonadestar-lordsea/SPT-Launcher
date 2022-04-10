@@ -66,14 +66,6 @@ namespace Aki.Launcher
                 CleanTempFiles();
             }
 
-            //create nlog.dll.nlog
-            if(!NLogCreator.Create())
-            {
-                LogManager.Instance.Warning("NLogCreator failed to setup nlog");
-                return GameStarterResult.FromError(-7);
-            }
-
-
             // check game path
             var clientExecutable = Path.Join(_gamePath, "EscapeFromTarkov.exe");
 
