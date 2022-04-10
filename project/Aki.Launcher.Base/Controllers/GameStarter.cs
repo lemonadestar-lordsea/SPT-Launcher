@@ -122,7 +122,7 @@ namespace Aki.Launcher
                     // aki files
                     new FileInfo(Path.Combine(_originalGamePath, @"Aki.Launcher.exe")),
                     new FileInfo(Path.Combine(_originalGamePath, @"LauncherCLI.exe")),
-                    new FileInfo(Path.Combine(_originalGamePath, @"Server.exe")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"Aki.Server.exe")),
                     new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\Aki.Build.dll")),
                     new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\Aki.Common.dll")),
                     new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\Aki.Reflection.dll")),
