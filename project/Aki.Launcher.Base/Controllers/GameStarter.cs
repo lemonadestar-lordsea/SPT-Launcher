@@ -122,45 +122,53 @@ namespace Aki.Launcher
 
         bool IsInstalledInLive()
         {
-            var value0 = false;
+            var isInstalledInLive = false;
 
             try
             {
-                var value4 = new FileInfo[]
+                var files = new FileInfo[]
                 {
+                    // aki files
                     new FileInfo(Path.Combine(_originalGamePath, @"Aki.Launcher.exe")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"LauncherCLI.exe")),
                     new FileInfo(Path.Combine(_originalGamePath, @"Server.exe")),
-                    new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\0Harmony.dll")),
-                    new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\NLog.dll.nlog")),
-                    new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\Nlog.Aki.Loader.dll")),
-                };
-                var value5 = new FileInfo[]
-                {
-                    new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll.bak")),
-                    new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll")),
-                };
-                var value6 = new DirectoryInfo(Path.Combine(_originalGamePath, @"Aki_Data"));
+                    new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data/Managed/Aki.Build.dll")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data/Managed/Aki.Common.dll")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"EscapeFromTarkov_Data/Managed/Aki.Reflection.dll")),
 
-                foreach (var value in value4)
+                    // bepinex files
+                    new FileInfo(Path.Combine(_originalGamePath, @"doorstep_config.ini")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"winhttp.dll")),
+
+                    // licenses
+                    new FileInfo(Path.Combine(_originalGamePath, @"LICENSE-BEPINEX.txt")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"LICENSE-ConfigurationManager.txt")),                                    
+                    new FileInfo(Path.Combine(_originalGamePath, @"LICENSE-Launcher.txt")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"LICENSE-Modules.txt")),
+                    new FileInfo(Path.Combine(_originalGamePath, @"LICENSE-Server.txt"))
+                };
+                var directories = new DirectoryInfo[]
                 {
-                    if (File.Exists(value.FullName))
+                    new DirectoryInfo(Path.Combine(_originalGamePath, @"Aki_Data")),
+                    new DirectoryInfo(Path.Combine(_originalGamePath, @"BepInEx"))
+                };
+
+                foreach (var file in files)
+                {
+                    if (File.Exists(file.FullName))
                     {
-                        File.Delete(value.FullName);
-                        value0 = true;
+                        File.Delete(file.FullName);
+                        isInstalledInLive = true;
                     }
                 }
 
-                if (File.Exists(value5[0].FullName))
+                foreach (var directory in directories)
                 {
-                    File.Delete(value5[1].FullName);
-                    File.Move(value5[0].FullName, value5[1].FullName);
-                    value0 = true;
-                }
-
-                if (Directory.Exists(value6.FullName))
-                {
-                    RemoveFilesRecurse(value6);
-                    value0 = true;
+                    if (Directory.Exists(directory.FullName))
+                    {
+                        RemoveFilesRecurse(directory);
+                        isInstalledInLive = true;
+                    }
                 }
             }
             catch (Exception ex)
@@ -168,7 +176,7 @@ namespace Aki.Launcher
                 LogManager.Instance.Exception(ex);
             }
 
-            return value0;
+            return isInstalledInLive;
         }
 
         void SetupGameFiles()
