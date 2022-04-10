@@ -2,27 +2,25 @@
 
 Custom launcher for Escape From Tarkov to start the game in offline mode
 
+**Project**        | **Function**
+------------------ | --------------------------------------------
+Aki.Build          | Build script
+Aki.ByteBanger     | Assembly-CSharp.dll patcher
+Aki.Launcher       | Launcher frontend
+Aki.Launcher.Base  | Launcher backend
+
 ## Requirements
 
-- Escape From Tarkov 0.12.12.15.16909
-- Visual Studio Build Tools (.NET desktop workload)
-- .NET 6
-- VSCodium
+- .NET 6 SDK
+- Visual Studio Code
 
-## Recommended
+### For UI Development
 
-- Avalonia Visual Studio Extension (For UI Development)
+- Visual Studio Community 2022 (.NET desktop workload)
+- Avalonia Visual Studio Extension
 
 ## Build
 
-1. Open Launcher.code-workspace with VSCodium.
+1. Open Launcher.code-workspace in Visual Studio Code.
 2. Run the build task: (top toolbar) Terminal -> Run Build Task...
 3. Copy-paste all files inside `Build` into `game root directory`, overwrite when prompted.
-
-## Authors
-
-- Senko-san
-- waffle.lord
-- reider123
-- ricky26
-- Bepis
