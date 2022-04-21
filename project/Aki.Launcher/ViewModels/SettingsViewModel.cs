@@ -134,7 +134,6 @@ namespace Aki.Launcher.ViewModels
 
                 if (confirmation is bool proceed && !proceed)
                 {
-                    SendNotification("", LocalizationProvider.Instance.clear_game_settings_failed, Avalonia.Controls.Notifications.NotificationType.Error);
                     return;
                 }
 
