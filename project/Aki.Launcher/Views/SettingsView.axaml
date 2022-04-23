@@ -3,10 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:helpers="using:Aki.Launcher.Helpers"
-             xmlns:ext="using:Aki.Launcher.Extensions"
+			 xmlns:cc="using:Aki.Launcher.CustomControls"
              xmlns:model="using:Aki.Launcher.Models.Launcher"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Aki.Launcher.Views.SettingsView">
+	
   <Grid RowDefinitions="10,AUTO,AUTO,AUTO,*,10" ColumnDefinitions="10,2*,2*,10">
 
     <!-- Backdrop -->
@@ -14,7 +15,6 @@
                Grid.RowSpan="6" Grid.ColumnSpan="4"
                Opacity=".7"
                />
-
     <StackPanel Spacing="10" Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
       <Button Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=remove_registry_keys}"
               Command="{Binding RemoveRegistryKeysCommand}"
@@ -53,9 +53,7 @@
     <StackPanel Grid.Row="2" Grid.Column="2">
       <Label Content="{Binding Source={x:Static helpers:LocalizationProvider.Instance}, Path=on_game_start}"
              />
-      <ComboBox Items="{Binding Source={ext:EnumBindingSource {x:Type model:LauncherAction}}}" MinWidth="200"
-                SelectedItem="{Binding Source={x:Static helpers:LauncherSettingsProvider.Instance}, Path=LauncherStartGameAction}"
-                />
+      <cc:LocalizedLauncherActionSelector />
     </StackPanel>
 
     <!-- Game Path -->
