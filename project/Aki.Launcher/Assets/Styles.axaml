@@ -4,10 +4,11 @@
         xmlns:rxui="using:Avalonia.ReactiveUI"
         >
 	<Design.PreviewWith>
-		<Border Padding="20" Background="DimGray">
-			<!-- Add Controls for Previewer Here -->
-			<Button Classes="link" Content="Link me daddy"/>
-		</Border>
+		<StackPanel Spacing="5" Background="{StaticResource AKI_Background_Dark}">
+			<Button Content="Blah"/>
+			<TextBox Text="Some cool text here" Margin="5"/>
+			<TextBox Watermark="This is a watermark" Margin="5"/>
+		</StackPanel>
 	</Design.PreviewWith>
 
 	<!-- Add Styles Here -->
@@ -99,6 +100,7 @@
 	<Style Selector="TextBox">
 		<Setter Property="Background" Value="{StaticResource AKI_Background_Light}"/>
 		<Setter Property="FontWeight" Value="SemiBold"/>
+		<Setter Property="Foreground" Value="{StaticResource AKI_Brush_Lighter}"/>
 	</Style>
 
 	<Style Selector="TextBox:focus">
@@ -120,6 +122,10 @@
 
 	<Style Selector="TextBox:focus /template/ TextBlock#PART_Watermark, TextBox:focus /template/ TextBlock#PART_FloatingWatermark">
 		<Setter Property="Foreground" Value="DimGray"/>
+	</Style>
+
+	<Style Selector="TextBox /template/ TextBlock#PART_Watermark, TextBox:focus /template/ TextBlock#PART_FloatingWatermark">
+		<Setter Property="Foreground" Value="White"/>
 	</Style>
 
 	<Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
