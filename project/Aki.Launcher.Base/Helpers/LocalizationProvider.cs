@@ -26,6 +26,8 @@ namespace Aki.Launcher.Helpers
 
         public static Dictionary<string, string> LocaleNameDictionary = GetLocaleDictionary();
 
+        public static event EventHandler LocaleChanged = delegate { };
+
         public static void LoadLocaleFromFile(string localeName)
         {
             string localeRomanName = LocaleNameDictionary.GetKeyByValue(localeName);
@@ -46,6 +48,8 @@ namespace Aki.Launcher.Helpers
 
                 LauncherSettingsProvider.Instance.DefaultLocale = localeRomanName;
                 LauncherSettingsProvider.Instance.SaveSettings();
+
+                LocaleChanged(null, EventArgs.Empty);
             }
 
             //could possibly raise an event here to say why the local wasn't changed.
