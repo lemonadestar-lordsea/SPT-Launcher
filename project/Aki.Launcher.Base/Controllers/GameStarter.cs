@@ -20,6 +20,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Aki.Launcher.Controllers;
 using Aki.Launcher.Interfaces;
+using System.Runtime.InteropServices;
 
 namespace Aki.Launcher
 {
@@ -30,6 +31,7 @@ namespace Aki.Launcher
         private readonly string _originalGamePath;
         private readonly string _gamePath;
         private readonly string[] _excludeFromCleanup;
+        private const string registryInstall = @"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov";
 
         private const string registrySettings = @"Software\Battlestate Games\EscapeFromTarkov";
 
@@ -39,8 +41,20 @@ namespace Aki.Launcher
             _frontend = frontend;
             _showOnly = showOnly;
             _gamePath = gamePath ?? LauncherSettingsProvider.Instance.GamePath ?? Environment.CurrentDirectory;
-            _originalGamePath = originalGamePath ?? LauncherSettingsProvider.Instance.OriginalGamePath;
+            _originalGamePath = originalGamePath ??= DetectOriginalGamePath();
             _excludeFromCleanup = excludeFromCleanup ?? LauncherSettingsProvider.Instance.ExcludeFromCleanup;
+        }
+
+        private static string DetectOriginalGamePath()
+        {
+            // We can't detect the installed path on non-Windows
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                return null;
+
+            var uninstallStringValue = Registry.LocalMachine.OpenSubKey(registryInstall, false)
+                ?.GetValue("UninstallString");
+            var info = (uninstallStringValue is string key) ? new FileInfo(key) : null;
+            return info?.DirectoryName;
         }
 
         public async Task<GameStarterResult> LaunchGame(ServerInfo server, AccountInfo account)
