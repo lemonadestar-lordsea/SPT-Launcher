@@ -11,7 +11,7 @@ Aki.Launcher.Base  | Launcher backend
 
 ## Requirements
 
-- Escape From Tarkov 19047
+- Escape From Tarkov 19078
 - .NET 6 SDK
 - Visual Studio Code
 
