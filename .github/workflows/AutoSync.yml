@@ -17,7 +17,7 @@ jobs:
       with:
         persist-credentials: false
     - name: repo-sync
-      uses: repo-sync/github-sync@v2
+      uses: repo-sync/github-sync@v2.3.0
       with:
         source_repo: "https://dev.sp-tarkov.com/SPT-AKI/Launcher.git"
         source_branch: "*"
