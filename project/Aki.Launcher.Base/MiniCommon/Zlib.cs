@@ -55,7 +55,7 @@ namespace Aki.Launcher.MiniCommon
 			return false;
 		}
 
-		private byte[] Run(byte[] data, bool compress, ZlibCompression level = ZlibCompression.Store)
+        private byte[] Run(byte[] data, bool compress, ZlibCompression level = ZlibCompression.Store)
         {
             using (var msOut = new MemoryStream())
             {
@@ -76,8 +76,8 @@ namespace Aki.Launcher.MiniCommon
         }
 
         /// <summary>
-		/// Deflate data.
-		/// </summary>
+        /// Deflate data.
+        /// </summary>
         public byte[] Compress(byte[] data, ZlibCompression level)
         {
             return Run(data, true, level);
