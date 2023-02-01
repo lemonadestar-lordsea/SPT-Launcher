@@ -32,18 +32,6 @@ namespace Aki.Launcher.ViewModels
 
         public async Task ConnectServer()
         {
-            //Launcher starts server on boot if it's not already running.
-            if (System.IO.File.Exists("Aki.Server.exe")) 
-                    {
-                        System.Diagnostics.Process[] processes = System.Diagnostics.Process.GetProcessesByName("Aki.Server");
-                            if (processes.Length == 0){
-                            //Not running
-                             System.Diagnostics.Process.Start("Aki.Server.exe");
-                    }
-            else{
-                //Running
-            }
-                    }
             await ServerManager.LoadDefaultServerAsync(LauncherSettingsProvider.Instance.Server.Url);
 
             bool connected = ServerManager.PingServer();
@@ -64,12 +52,6 @@ namespace Aki.Launcher.ViewModels
 
         public void RetryCommand()
         {
-            //Start server from retry command when failing to connect to it.
-            if (System.IO.File.Exists("Aki.Server.exe")) 
-                    {
-                        System.Diagnostics.Process.Start("Aki.Server.exe");
-                    }
-            
             connectModel.InfoText = LocalizationProvider.Instance.server_connecting;
 
             connectModel.ConnectionFailed = false;
